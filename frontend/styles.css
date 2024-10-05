@@ -130,7 +130,7 @@ body, html {
 
 /* Desktop Area */
 .desktop-area {
-    background-image: url('assets/backgrounds/windows-background.jpeg'); /* FIX THIS */
+    background-image: url('assets/backgrounds/windows-background.png'); /* FIX THIS */
     background-size: cover;
     background-position: center;
     height: 100%;
