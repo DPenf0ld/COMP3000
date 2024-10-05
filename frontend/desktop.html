@@ -8,22 +8,45 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="desktop">
-        <h1>Welcome to Your Virtual Desktop</h1>
-        <p>This is where phishing emails, malware simulations, and other training activities will be displayed.</p>
-
-        <div class="email-app">
-            <h2>Email Application</h2>
-            <ul>
-                <li><a href="#" class="phishing-link">Phishing Email 1</a></li>
-                <li><a href="#" class="phishing-link">Phishing Email 2</a></li>
-                <li><a href="#" class="phishing-link">Phishing Email 3</a></li>
-            </ul>
+    <!-- Desktop area -->
+    <div class="desktop-area">
+        <!-- Icons on the desktop -->
+        <div class="icon">
+            <img src="assets/icons/email-icon.png" alt="Email App" class="icon-img">
+            <p>Email</p>
         </div>
+        <div class="icon">
+            <img src="assets/icons/web-icon.png" alt="Web Browser" class="icon-img">
+            <p>Browser</p>
+        </div>
+        <div class="icon">
+            <img src="assets/icons/folder-icon.png" alt="Files" class="icon-img">
+            <p>Files</p>
+        </div>
+        <!-- Add more icons as needed -->
+    </div>
 
-        <!-- Simulated desktop icons and applications can go here -->
+    <!-- Taskbar at the bottom -->
+    <div class="taskbar">
+        <div class="start-menu">
+            <img src="assets/icons/start-icon.png" alt="Start">
+            <p>Start</p>
+        </div>
+        <div class="taskbar-item">
+            <img src="assets/icons/web-icon.png" alt="Browser" class="taskbar-icon">
+        </div>
+        <div class="taskbar-item">
+            <img src="assets/icons/email-icon.png" alt="Email" class="taskbar-icon">
+        </div>
+        <div class="taskbar-item">
+            <img src="assets/icons/folder-icon.png" alt="Folder" class="taskbar-icon">
+        </div>
+        <!-- You can add more taskbar items as necessary -->
+        <div class="clock">12:00 PM</div>
     </div>
 
     <script src="app.js"></script>
 </body>
 </html>
+
+
