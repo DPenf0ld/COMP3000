@@ -1,4 +1,3 @@
-<!-- desktop.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +6,12 @@
     <title>Virtual Desktop</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <!-- Desktop area -->
-    <div class="desktop-area">
+    <!-- Desktop Area -->
+    <div class="desktop-area" id="desktop-area">
         <!-- Icons on the desktop -->
-        <div class="icon">
+        <div class="icon" id="email-icon">
             <img src="assets/icons/email-icon.png" alt="Email App" class="icon-img">
             <p>Email</p>
         </div>
@@ -23,7 +23,26 @@
             <img src="assets/icons/folder-icon.png" alt="Files" class="icon-img">
             <p>Files</p>
         </div>
-        <!-- Add more icons as needed -->
+    </div>
+
+    <!-- Email Inbox (Hidden by default) -->
+    <div class="inbox-container" id="inbox-container" style="display: none;">
+        <h1>Inbox</h1>
+        <button id="back-to-desktop">Back to Desktop</button>
+        <ul class="email-list">
+            <li class="email-item phishing-email">
+                <strong>Subject:</strong> Urgent: Your Account Has Been Suspended!<br>
+                <a href="#" class="phishing-link">Click here to verify your account</a>
+            </li>
+            <li class="email-item phishing-email">
+                <strong>Subject:</strong> You've won a prize!<br>
+                <a href="#" class="phishing-link">Claim your prize now!</a>
+            </li>
+            <li class="email-item normal-email">
+                <strong>Subject:</strong> Meeting at 3:00 PM<br>
+                <p>No action needed.</p>
+            </li>
+        </ul>
     </div>
 
     <!-- Taskbar at the bottom -->
@@ -32,19 +51,19 @@
             <img src="assets/icons/start-icon.png" alt="Start">
             <p>Start</p>
         </div>
-        <div class="taskbar-item">
+        <div class="taskbar-item" id="taskbar-web">
             <img src="assets/icons/web-icon.png" alt="Browser" class="taskbar-icon">
         </div>
-        <div class="taskbar-item">
+        <div class="taskbar-item" id="taskbar-email">
             <img src="assets/icons/email-icon.png" alt="Email" class="taskbar-icon">
         </div>
-        <div class="taskbar-item">
+        <div class="taskbar-item" id="taskbar-folder">
             <img src="assets/icons/folder-icon.png" alt="Folder" class="taskbar-icon">
         </div>
-        <!-- You can add more taskbar items as necessary -->
         <div class="clock">12:00 PM</div>
     </div>
 
+    <!-- Link to external JS file -->
     <script src="app.js"></script>
 </body>
 </html>
