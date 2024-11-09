@@ -9,6 +9,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());  // Middleware to parse JSON bodies
 app.use(express.static(path.join(__dirname, 'public')));  // Serve static files from 'public' folder
+app.use(express.static(path.join(__dirname, 'frontend')));
 
 // MongoDB connection
 const uri = process.env.MONGODB_URI;
