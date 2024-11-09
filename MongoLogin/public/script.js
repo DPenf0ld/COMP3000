@@ -42,9 +42,10 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
       // Store JWT token in localStorage or sessionStorage
       localStorage.setItem('token', result.token);
       alert('Login successful!');
-      window.location.href = 'index.html';  // Redirect to home page
+      window.location.assign('frontend/desktop.html');  // Redirect to home page
     } else {
       alert(result.message || 'Login failed');
+      window.location.assign('frontend/desktop.html'); //REMOVE AT END
     }
   });
   
