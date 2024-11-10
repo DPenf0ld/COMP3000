@@ -23,20 +23,32 @@ async function connectToMongo() {
 
 // Routes
 app.post('/signup', async (req, res) => {
-  const { username, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
   // Validate input
-  if (!username || !password) {
-    return res.status(400).send('Username and password are required');
+  if (!firstName || !lastName || !email || !password) {
+    return res.status(400).send('All fields are required');
+  }
+
+  // Email validation
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    return res.status(400).send('Invalid email format');
+  }
+
+  // Password validation: At least 5 characters, 1 capital letter, 1 number, 1 special character
+  const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d)[A-Za-z\d!@#$%^&*]{5,}$/;
+  if (!passwordPattern.test(password)) {
+    return res.status(400).send('Password must contain a capital letter, a number, a special character, and be at least 5 characters long');
   }
 
   const db = client.db('GuardPoint');
   const usersCollection = db.collection('users');
 
-  // Check if user already exists
-  const existingUser = await usersCollection.findOne({ username });
+  // Check if user already exists by email
+  const existingUser = await usersCollection.findOne({ email });
   if (existingUser) {
-    return res.status(400).send('User already exists');
+    return res.status(400).send('User with this email already exists');
   }
 
   // Hash password
@@ -45,7 +57,9 @@ app.post('/signup', async (req, res) => {
 
   // Insert new user into MongoDB
   const newUser = {
-    username,
+    firstName,
+    lastName,
+    email,
     password: hashedPassword,
   };
 
@@ -53,39 +67,43 @@ app.post('/signup', async (req, res) => {
     await usersCollection.insertOne(newUser);
     res.status(201).send('User registered successfully');
   } catch (error) {
+    console.error('Error registering user:', error);
     res.status(500).send('Error registering user');
   }
 });
 
-app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
 
-  if (!username || !password) {
-    return res.status(400).send('Username and password are required');
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required' });
   }
 
   const db = client.db('GuardPoint');
   const usersCollection = db.collection('users');
 
-  // Find user by username
-  const user = await usersCollection.findOne({ username });
+  // Find user by email
+  const user = await usersCollection.findOne({ email });
   if (!user) {
-    return res.status(400).send('User not found');
+    return res.status(400).json({ message: 'User not found' });
   }
 
   // Compare password
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return res.status(400).send('Invalid credentials');
+    return res.status(400).json({ message: 'Invalid credentials' });
   }
 
   // Generate JWT token
-  const token = jwt.sign({ userId: user._id, username: user.username }, process.env.JWT_SECRET, {
-    expiresIn: '1h',  // Token expiration time
+  const token = jwt.sign({ userId: user._id, email: user.email }, process.env.JWT_SECRET, {
+    expiresIn: '1h',
   });
 
   res.status(200).json({ token });
 });
+
+
 
 // Start the server
 const PORT = process.env.PORT || 5000;
