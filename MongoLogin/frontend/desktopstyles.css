@@ -62,8 +62,11 @@ body, html {
     padding: 0 10px;
 }
 
-/* Clock (Change to real time) */
+/* Clock with real time */
 .clock {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 20px;
     color: white;
     font-size: 14px;
 }
