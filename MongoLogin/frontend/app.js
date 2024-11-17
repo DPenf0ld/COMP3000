@@ -54,13 +54,12 @@ setInterval(updateClock, 1000);
 // Call the function once to show the initial time immediately
 updateClock();
 
-document.addEventListener('DOMContentLoaded', () => {
-    const userEmail = localStorage.getItem('userEmail'); // Retrieve the email from localStorage
-  
-    if (userEmail) {
-      const emailElement = document.getElementById('email');
-      emailElement.innerText = userEmail; // Set the email to the div
-    } else {
-      console.log('User email not found');
-    }
-  });
+
+const userEmail = localStorage.getItem('userEmail'); // Retrieve the email from localStorage
+
+        if (userEmail) {
+            const emailElement = document.getElementById('email');
+            emailElement.innerText = userEmail; // Set the email to the div
+        } else {
+            console.log('User email not found');
+        }
