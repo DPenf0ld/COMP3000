@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const emailIconTaskbar = document.getElementById('taskbar-email');     // Icon for email on taskbar
     const desktopArea = document.getElementById('desktop-area');           // Desktop area
     const inboxContainer = document.getElementById('inbox-container');     // Inbox container
-    const backToDesktop = document.getElementById('back-to-desktop');      // Button or link to return to desktop
+    const backToDesktop = document.getElementById('close-inbox');      // Button or link to return to desktop
 
     // Function to toggle inbox view
     function toggleInbox() {
@@ -29,12 +29,4 @@ document.addEventListener('DOMContentLoaded', function() {
         desktopArea.style.display = 'flex';
     });
 
-    // Handle phishing link clicks
-    const phishingLinks = document.querySelectorAll('.phishing-link');
-    phishingLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            alert("You've been phished! Sensitive data has been 'leaked'.");
-        });
-    });
 });

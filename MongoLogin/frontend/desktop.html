@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,29 +28,44 @@
 
     <!-- Email Inbox (Hidden by default) -->
     <div class="inbox-container" id="inbox-container" style="display: none;">
-        <h1>Inbox</h1>
-        <button id="back-to-desktop">Back to Desktop</button>
-        <ul class="email-list">
-            <li class="email-item phishing-email">
-                <strong>Subject:</strong> Urgent: Your Account Has Been Suspended!<br>
-                <a href="#" class="phishing-link">Click here to verify your account</a>
-            </li>
-            <li class="email-item phishing-email">
-                <strong>Subject:</strong> You've won a prize!<br>
-                <a href="#" class="phishing-link">Claim your prize now!</a>
-            </li>
-            <li class="email-item normal-email">
-                <strong>Subject:</strong> Meeting at 3:00 PM<br>
-                <p>No action needed.</p>
-            </li>
-        </ul>
+        <button id="close-inbox" aria-label="Close Inbox">&times;</button> <!-- Close button -->
+        <!-- Email Interface -->
+        <div class="email-interface">
+            <!-- Left Sidebar -->
+            <div class="email-sidebar">
+                <div class="sidebar-item active">Inbox 📥</div>
+                <div class="sidebar-item">Junk Email 🚫</div>
+                <div class="sidebar-item">Drafts ✏️</div>
+                <div class="sidebar-item">Sent Items 📨</div>
+                <div class="sidebar-item">Deleted Items 🗑️</div>
+                <div class="sidebar-item">Archive 📦</div>
+            </div>
+
+            <!-- Email List -->
+            <div class="email-list">
+                <div class="email-list-item"></div>
+                <div class="email-list-item"></div>
+                <div class="email-list-item"></div>
+                <div class="email-list-item"></div>
+                <div class="email-list-item"></div>
+                <div class="email-list-item"></div>
+            </div>
+
+            <!-- Email Content -->
+            <div class="email-content">
+                <div class="email-header">
+                    <span class="email-sender">DP</span>
+                    <div class="email-subject-line">______________________________________</div>
+                </div>
+                <div class="email-body"></div>
+            </div>
+        </div>
     </div>
 
     <!-- Taskbar at the bottom -->
     <div class="taskbar">
-        <div class="start-menu">
-            <img src="assets/icons/start-icon.png" alt="Start">
-            <p>Start</p>
+        <div class="taskbar-item" id="taskbar-web">
+            <img src="assets/icons/start-icon.png" alt="Start" class="taskbar-icon">
         </div>
         <div class="taskbar-item" id="taskbar-web">
             <img src="assets/icons/web-icon.png" alt="Browser" class="taskbar-icon">
@@ -60,12 +76,11 @@
         <div class="taskbar-item" id="taskbar-folder">
             <img src="assets/icons/folder-icon.png" alt="Folder" class="taskbar-icon">
         </div>
-        <div class="clock">12:00 PM</div>
+        <div class="clock">12:00 PM</div> <!-- Change to display real time -->
     </div>
 
     <!-- Link to external JS file -->
     <script src="app.js"></script>
 </body>
+
 </html>
-
-
