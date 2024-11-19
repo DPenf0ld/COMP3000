@@ -4,6 +4,16 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
+/* Main content layout */
+main {
+    display: flex; /* Create a horizontal layout */
+    justify-content: space-between; /* Space between form and info */
+    align-items: stretch; /* Align both sections to the top */
+    gap: 20px; /* Add some space between the two sections */
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px; /* Optional: Restrict maximum width */
+}
 
 body {
     background-color: #f4f4f4;
@@ -44,21 +54,25 @@ nav ul li a:hover {
 .hero {
     background: #004c8c;
     color: white;
-    padding: 100px 0;
+    padding: 100px 20px;
     text-align: center;
+    width: 100%;
 }
 
 .hero-content {
-    max-width: 600px;
-    margin: 0 auto;
+    margin: 0 20px;
+    width: 100%;
 }
 
 .hero-content h2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
+    width: 100%;
 }
 
 .hero-content p {
+    width: 100%;
     margin: 20px 0;
+    font-size: 1.25rem; /* Adjust font size for readability */
 }
 
 .btn {
@@ -81,19 +95,34 @@ footer {
     color: white;
     text-align: center;
     padding: 10px 0;
-    margin-top: 20px;
+    margin-top: auto;
 }
 
-/* Styles for the login and signup forms */
-.auth-form {
-    background-color: white;
-    padding: 50px 20px;
-    margin-top: 40px;
+/* Common properties for both .info and .auth-form */
+.common-box {
+    width: 45%; /* Same width for both */
+    padding: 40px;
     border-radius: 8px;
-    max-width: 400px;
-    margin: 0 auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
+
+.info {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.auth-form {
+    background-color: #0073e6;
+    color: white;
+}
+
+.form-container {
+    flex: 1; /* Allow form to grow and fill space */
+}
+
 
 .auth-form h2 {
     margin-bottom: 20px;
