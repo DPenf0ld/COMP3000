@@ -23,10 +23,10 @@ async function connectToMongo() {
 
 // Routes
 app.post('/signup', async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, dob } = req.body;
 
   // Validate input
-  if (!firstName || !lastName || !email || !password) {
+  if (!firstName || !lastName || !email || !password || !dob) {
     return res.status(400).send('All fields are required');
   }
 
@@ -34,6 +34,12 @@ app.post('/signup', async (req, res) => {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailPattern.test(email)) {
     return res.status(400).send('Invalid email format');
+  }
+
+  // Validate Date of Birth (example: ensure it's not in the future)
+  const userDob = new Date(dob);
+  if (isNaN(userDob.getTime()) || userDob > new Date()) {
+    return res.status(400).send('Invalid date of birth');
   }
 
   // Password validation: At least 5 characters, 1 capital letter, 1 number, 1 special character
@@ -61,6 +67,7 @@ app.post('/signup', async (req, res) => {
     lastName,
     email,
     password: hashedPassword,
+    dob: userDob.toISOString(), // Save DOB in ISO string format
   };
 
   try {

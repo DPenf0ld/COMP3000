@@ -8,6 +8,7 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value;
   const confirmPassword = document.getElementById('confirmPassword').value;
+  const dob = document.getElementById('dob').value;
 
   // Validate email
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,13 +30,19 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
     return;
   }
 
+  // Validate date of birth
+  if (!dob) {
+    alert('Date of birth is required.');
+    return;
+  }
+
   // Send signup request to server
   const response = await fetch('/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ firstName, lastName, email, password }),
+    body: JSON.stringify({ firstName, lastName, email, password, dob }),
   });
 
   const result = await response.text();
