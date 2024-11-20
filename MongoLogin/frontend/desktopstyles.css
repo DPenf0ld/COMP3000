@@ -210,6 +210,82 @@ body, html {
     flex-grow: 1;
 }
 
+/* Instructions styles */
+.instructions {
+    position: fixed;
+    top: 30%;       
+    left: 50%;       
+    transform: translate(-50%, -50%); /* Moves the element back by 50% of its own width and height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    max-width: 500px;
+    background-color: #e97c7c; /*same colour as inbox*/
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 11; /*appears on top*/
+}
+
+
+.instructions-content {
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+p {
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+/* Button styling */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Aligns buttons vertically */
+    width: 100%; /* Takes full width of the container */
+}
+
+.nav-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    min-width: 100px; 
+    text-align: center;
+}
+
+.nav-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.nav-button.hidden {
+    display: none;
+}
+
+#prev-button {
+    order: 1; /* Forces Previous to always be first */
+    margin-right: auto; 
+}
+
+#next-button {
+    order: 2; /* Forces Next to always be last */
+    margin-left: auto; 
+}
+
+#confirm-button {
+    order: 3; /* Place Confirm in sequence after Next */
+}
+
 
 
 

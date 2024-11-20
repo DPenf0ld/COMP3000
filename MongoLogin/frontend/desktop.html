@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,45 +26,69 @@
         </div>
     </div>
 
+     <!-- Instruction Model -->
+    <div id="instructions-email" class="instructions" style="display: none;">
+        <div class="instructions-content">
+            <h2 id="page-title">Welcome to the Email Inbox</h2>
+            <p id="page-content">
+                Phishing emails are fraudulent attempts to steal sensitive information, such as passwords or financial      <!-- Manually load first info page -->
+                details, by pretending to be a trustworthy entity.
+                These emails often contain suspicious links or attachments designed to trick you.
+            </p>
+            <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
+                <button id="prev-button" class="nav-button hidden">Previous</button>
+                <button id="next-button" class="nav-button">Next</button>
+                <button id="confirm-button" class="nav-button hidden">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+
+
     <!-- Email Inbox (Hidden by default) -->
     <div class="inbox-container" id="inbox-container" style="display: none;">
         <button id="close-inbox" aria-label="Close Inbox">&times;</button> <!-- Close button -->
         <!-- Email Interface -->
-         <div class="email-interface">
-             <!-- Left Sidebar -->
-              <div class="email-sidebar">
-            <div class="sidebar-item active">Inbox 📥</div>
-            <div class="sidebar-item">Junk Email 🚫</div>
-            <div class="sidebar-item">Drafts ✏️</div>
-            <div class="sidebar-item">Sent Items 📨</div>
-            <div class="sidebar-item">Deleted Items 🗑️</div>
-            <div class="sidebar-item">Archive 📦</div>
-        </div>
-
-        <!-- Email List -->
-        <div class="email-list">
-            <div class="email-list-item"></div>
-            <div class="email-list-item"></div>
-            <div class="email-list-item"></div>
-            <div class="email-list-item"></div>
-            <div class="email-list-item"></div>
-            <div class="email-list-item"></div>
-        </div>
-
-        <!-- Email Content -->
-        <div class="email-content">
-            <div class="email-header">
-                <span class="email-sender">DP</span>
-                <div class="email-subject-line">______________________________________</div>
+        <div class="email-interface">
+            <!-- Left Sidebar -->
+            <div class="email-sidebar">
+                <div class="sidebar-item active">Inbox 📥</div>
+                <div class="sidebar-item">Junk Email 🚫</div>
+                <div class="sidebar-item">Drafts ✏️</div>
+                <div class="sidebar-item">Sent Items 📨</div>
+                <div class="sidebar-item">Deleted Items 🗑️</div>
+                <div class="sidebar-item">Archive 📦</div>
             </div>
-            <div class="email-body"></div>
+
+            <!-- Email List -->
+            <div class="email-list">
+                <div class="email-list-item"></div>
+                <div class="email-list-item"></div>
+                <div class="email-list-item"></div>
+                <div class="email-list-item"></div>
+                <div class="email-list-item"></div>
+                <div class="email-list-item"></div>
+            </div>
+
+            <!-- Email Content -->
+            <div class="email-content">
+                <div class="email-header">
+                    <span class="email-sender">DP</span>
+                    <div class="email-subject-line">______________________________________</div>
+                </div>
+                <div class="email-body"></div>
+            </div>
         </div>
-         </div>
     </div>
+
+
+
+
+
 
     <!-- Taskbar at the bottom -->
     <div class="taskbar">
-        <div  class="taskbar-item" id="taskbar-start">
+        <div class="taskbar-item" id="taskbar-start">
             <img src="assets/icons/Profile.png" alt="Start" class="taskbar-icon">
             <div id="email" class="taskbar-user-name">email</div>
         </div>
@@ -76,12 +101,11 @@
         <div class="taskbar-item" id="taskbar-folder">
             <img src="assets/icons/folder-icon.png" alt="Folder" class="taskbar-icon">
         </div>
-        <div class="clock" id="clock"></div>  
+        <div class="clock" id="clock"></div>
     </div>
 
     <!-- Link to external JS file -->
     <script src="app.js"></script>
 </body>
+
 </html>
-
-
