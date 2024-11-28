@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
+
     //Code to display emails
     let currentEmailIndex = 0;
 
@@ -135,6 +136,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+
+
+
+
     function showNextEmail() {
         if (currentEmailIndex < emails.length - 1) {
             currentEmailIndex++;
@@ -153,6 +158,75 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add the button to the email content area
     document.querySelector('.email-content').appendChild(start);
+
+    //Highlight phishing words code
+
+    //suspicious words to check for highlighting
+    const suspiciousWords = ["urgent", "password", "verify", "click", "attachment", "free", "secure"];
+    const emailBodyElement = document.querySelector('.email-body');
+    const submitButton = document.getElementById('submit-highlight');
+
+    // Allows highlighting of any words
+    emailBodyElement.addEventListener('mouseup', () => {
+        const selection = window.getSelection(); // Get the current text selection
+        const range = selection.getRangeAt(0);  // Get the range of the selection
+
+        // Checks to see if there is a range
+        if (range && !range.collapsed) {
+            const selectedText = selection.toString().trim(); // Get the selected text as a string
+
+            // Checks if there is text
+            if (selectedText) {
+                const span = document.createElement('span'); // Create span
+                span.classList.add('highlighted'); // Styles for span
+                span.style.backgroundColor = 'yellow'; // highlight colour to yellow
+                range.surroundContents(span); // Wrap the selected text with the span
+                selection.removeAllRanges(); // Clear the selection ready for next
+            }
+        }
+    });
+
+    // Handle submission when the submit button is clicked
+    submitButton.addEventListener('click', () => {
+        // Get all elements that have been highlighted
+        const highlightedElements = emailBodyElement.querySelectorAll('.highlighted');
+        let correctCount = 0; // Counter for correct
+        let missedCount = 0; // Counter for missed
+
+        // Check each highlighted element to see if it matches a suspicious word
+        highlightedElements.forEach(span => {
+            const word = span.textContent.trim().toLowerCase(); // convert to lowercase
+            if (suspiciousWords.includes(word)) { 
+                span.style.backgroundColor = 'green'; // Change the highlight colour to green 
+                correctCount++; 
+            } else {
+                span.style.backgroundColor = 'red'; // Change the highlight colour to red
+            }
+        });
+
+        // Check for any suspicious words that were not highlighted
+        suspiciousWords.forEach(word => {
+            if (!Array.from(highlightedElements).some(span => span.textContent.trim().toLowerCase() === word)) {
+                missedCount++; 
+                highlightMissedWord(word); // Call function to highlight 
+            }
+        });
+    });
+
+    //highlight missed suspicious word
+    function highlightMissedWord(word) {
+        // g means all words can be looked through and i means ignore cap sens
+        const regex = new RegExp(word, 'gi');
+
+        // Replace with orange highlight
+        emailBodyElement.innerHTML = emailBodyElement.innerHTML.replace(regex, match =>
+            `<span class="missed" style="background-color: orange;">${match}</span>`
+        );
+    }
+
+
+
+
 });
 
 function updateClock() {

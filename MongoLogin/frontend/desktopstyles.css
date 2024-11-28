@@ -309,6 +309,27 @@ p {
     order: 3; /* Place Confirm in sequence after Next */
 }
 
+/*Styles for phishing highlights are correct*/
+
+.highlighted {
+    background-color: yellow;
+}
+
+.highlighted.correct {
+    background-color: green;
+}
+
+.highlighted.incorrect {
+    background-color: red;
+}
+
+.missed {
+    background-color: orange;
+}
+
+
+
+
 
 
 
