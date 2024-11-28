@@ -1,4 +1,3 @@
-// Function to toggle between desktop and inbox view
 document.addEventListener('DOMContentLoaded', function () {
     const emailIconDesktop = document.getElementById('email-icon');        // Icon for email on desktop
     const emailIconTaskbar = document.getElementById('taskbar-email');     // Icon for email on taskbar
@@ -7,10 +6,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const backToDesktop = document.getElementById('close-inbox');      // Button or link to return to desktop
 
     const instructionModel = document.getElementById('instructions-email'); // Instruction model
-    const nextButton = document.getElementById('next-button');          
-    const prevButton = document.getElementById('prev-button');               
-    const confirmButton = document.getElementById('confirm-button');  
+    const nextButton = document.getElementById('next-button');
+    const prevButton = document.getElementById('prev-button');
+    const confirmButton = document.getElementById('confirm-button');
 
+
+    //Phishing information code
     let isFirstOpen = true; // Track if inbox is opened for the first time
     let currentPage = 0; // Track the current page of the model
 
@@ -72,9 +73,9 @@ document.addEventListener('DOMContentLoaded', function () {
         instructionModel.style.display = 'none';
         console.log("User confirmed and is ready to start the exercise.");
     });
-    
 
-    // Function to toggle inbox view
+
+    // Toggle inbox code
     function toggleInbox() {
         if (inboxContainer.style.display === 'block') {
             // If inbox is currently displayed, hide it and show desktop
@@ -93,16 +94,65 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Add event listeners to email icons on desktop and taskbar
+    // Toggle inbox on desktop and taskbar
     emailIconDesktop.addEventListener('click', toggleInbox);
     emailIconTaskbar.addEventListener('click', toggleInbox);
 
-    // Go back to the desktop from the inbox using the back-to-desktop button
+    // Go back to the desktop
     backToDesktop.addEventListener('click', function () {
         inboxContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
     });
 
+
+    //Code to display emails
+    let currentEmailIndex = 0;
+
+    const emails = [
+        {
+            sender: "Alice",
+            subject: "Welcome to GuardPoint",
+            body: "Hi there! Welcome to your GuardPoint inbox. Stay vigilant!"
+        },
+        {
+            sender: "Bob",
+            subject: "Important Security Update",
+            body: "Please update your software to the latest version to stay secure."
+        },
+        {
+            sender: "Charlie",
+            subject: "Reminder",
+            body: "Don't forget to complete your phishing training by the end of this week."
+        }
+    ];
+
+    function displayEmail(index) {
+        const email = emails[index];
+        if (email) {
+            document.querySelector('.email-sender').textContent = email.sender[0]; // First letter only
+            document.querySelector('.email-subject-line').textContent = email.subject;
+            document.querySelector('.email-body').textContent = email.body;
+        }
+    }
+
+    function showNextEmail() {
+        if (currentEmailIndex < emails.length - 1) {
+            currentEmailIndex++;
+            displayEmail(currentEmailIndex);
+        }
+    }
+
+    // Initial display
+    displayEmail(currentEmailIndex);
+
+    // Add listener to Start button
+    const start = document.createElement('button');
+    start.textContent = "Start";
+    start.classList.add('nav-button');
+    start.addEventListener('click', showNextEmail);
+
+    // Add the button to the email content area
+    document.querySelector('.email-content').appendChild(start);
 });
 
 function updateClock() {
@@ -118,14 +168,14 @@ function updateClock() {
     // Display time
     const timeString = `${formattedHours}:${formattedMinutes} ${ampm}`;
 
-    // Update  clock with current time
+    // Update clock with current time
     document.getElementById('clock').textContent = timeString;
 }
 
 // Update the clock every second
 setInterval(updateClock, 1000);
 
-// Call the function once to show the initial time immediately
+// Call the function once to show the initial time
 updateClock();
 
 
