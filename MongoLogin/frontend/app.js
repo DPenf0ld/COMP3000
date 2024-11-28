@@ -106,33 +106,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    //Code to display emails
+    //display emails
     let currentEmailIndex = 0;
 
     const emails = [
         {
             sender: "Alice",
-            subject: "Welcome to GuardPoint",
-            body: "Hi there! Welcome to your GuardPoint inbox. Stay vigilant!"
+            subject: "Urgent Account Update Required",
+            body: `Dear Customer,<br><br>
+                   Your account has been temporarily suspended due to suspicious activity. 
+                   To restore access, you must verify your identity immediately. 
+                   Please click the link below and enter your login credentials.<br><br>
+                   <a href="http://suspicious-link.com">Verify Your Account Now</a><br><br>
+                   Failure to act within 24 hours will result in permanent account suspension.<br><br>
+                   Regards,<br>
+                   The Support Team`
         },
         {
             sender: "Bob",
             subject: "Important Security Update",
-            body: "Please update your software to the latest version to stay secure."
+            body: `Dear User,<br><br>
+                   Your account is at risk due to outdated software. Please click the link below to immediately update your system to the latest version.<br><br>
+                   <a href="http://malicious-update.com">Update Now</a><br><br>
+                   This update is critical for your account's security. Failure to do so will leave your account vulnerable.<br><br>
+                   Best regards,<br>
+                   The Security Team`
         },
         {
             sender: "Charlie",
-            subject: "Reminder",
-            body: "Don't forget to complete your phishing training by the end of this week."
+            subject: "Reminder: Action Required to Secure Your Account",
+            body: `Dear User,<br><br>
+                   We have detected unusual activity in your account. To secure your account, please log in immediately by clicking the link below.<br><br>
+                   <a href="http://phishing-login.com">Login Now</a><br><br>
+                   If you do not act now, your account will be locked.<br><br>
+                   Regards,<br>
+                   The Account Security Team`
         }
     ];
+    
 
     function displayEmail(index) {
         const email = emails[index];
         if (email) {
             document.querySelector('.email-sender').textContent = email.sender[0]; // First letter only
             document.querySelector('.email-subject-line').textContent = email.subject;
-            document.querySelector('.email-body').textContent = email.body;
+            document.querySelector('.email-body').innerHTML = email.body; //inner HTML to allow for line breaks
         }
     }
 
@@ -162,7 +180,16 @@ document.addEventListener('DOMContentLoaded', function () {
     //Highlight phishing words code
 
     //suspicious words to check for highlighting
-    const suspiciousWords = ["urgent", "password", "verify", "click", "attachment", "free", "secure"];
+    const suspiciousWords = [
+        "urgent", "verify", "suspended", "immediate", "click", "update", 
+        "account", "security", "warning", "important", "failure", 
+        "verify your identity", "suspicious activity", "login", "click here", 
+        "claim", "free", "risk", "action required", "update your system", 
+        "change your password", "secure your account", "account locked", 
+        "confirm your email", "unauthorized access", "important notice", 
+        "last chance", "act now", "report", "limited time"
+    ];
+    
     const emailBodyElement = document.querySelector('.email-body');
     const submitButton = document.getElementById('submit-highlight');
 
