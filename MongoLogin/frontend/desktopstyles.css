@@ -243,7 +243,7 @@ body, html {
     justify-content: center;
     align-items: center;
     width: 80%;
-    max-width: 500px;
+    max-width: 800px;
     background-color: #e97c7c; /*same colour as inbox*/
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -253,7 +253,7 @@ body, html {
 
 
 .instructions-content {
-    text-align: center;
+    text-align: left;
 }
 
 h2 {
