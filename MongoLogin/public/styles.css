@@ -4,15 +4,18 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
+
+
 /* Main content layout */
 main {
-    display: flex; /* Create a horizontal layout */
-    justify-content: space-between; /* Space between form and info */
-    align-items: stretch; /* Align both sections to the top */
+    display: flex; 
+    justify-content: space-between; 
+    align-items: stretch; 
     gap: 20px; /* Add some space between the two sections */
     padding: 20px;
     margin: 0 auto;
-    max-width: 1200px; /* Optional: Restrict maximum width */
+    max-width: 1200px; 
+    height: 80vh;
 }
 
 body {
@@ -21,9 +24,13 @@ body {
 }
 
 nav {
-    background-color: #004c8c;
-    color: #fff;
-    padding: 1rem;
+    display: flex;
+    padding: auto;
+    justify-content: center; 
+    align-items: center; 
+    background-color: #004c8c; 
+    color: white; /* Text color */
+    text-align: center; /* Center-align text inside */
 }
 
 nav .container {
@@ -57,14 +64,18 @@ nav ul li a:hover {
     padding: 100px 20px;
     text-align: center;
     width: 100%;
+    border-radius: 15px; 
+
 }
 
 .hero-content {
+
     margin: 0 20px;
     width: 100%;
 }
 
 .hero-content h2 {
+    font-weight: bold;
     font-size: 3rem;
     width: 100%;
 }
@@ -91,16 +102,21 @@ nav ul li a:hover {
 }
 
 footer {
+    position: fixed; 
+    bottom: 0;     
+    left: 0;       
+    width: 100%;    
     background-color: #333;
     color: white;
     text-align: center;
     padding: 10px 0;
-    margin-top: auto;
+    margin-bottom: 10px;
 }
 
-/* Common properties for both .info and .auth-form */
+/* keeping same properties*/
 .common-box {
     width: 45%; /* Same width for both */
+    height: 100%; 
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -162,6 +178,7 @@ footer {
 }
 
 
+/*animated background*/
 
 .animated-background {
     position: absolute; /* Position it at the back */
