@@ -8,6 +8,7 @@ body, html {
     /* background-image: url('assets/backgrounds/Desktop Background.jpg');  */
 }
 
+/*animated background*/
 .animated-background {
     position: absolute; /* Position it at the back */
     height: 100vh;
@@ -233,6 +234,13 @@ body, html {
     flex-grow: 1;
 }
 
+.email-hover-text{
+    position: relative;
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline; 
+}
+
 /* Instructions styles */
 .instructions {
     position: fixed;
@@ -309,6 +317,8 @@ p {
     order: 3; /* Place Confirm in sequence after Next */
 }
 
+
+
 /*Styles for phishing highlights are correct*/
 
 .highlighted {
@@ -326,7 +336,6 @@ p {
 .missed {
     background-color: orange;
 }
-
 
 
 
