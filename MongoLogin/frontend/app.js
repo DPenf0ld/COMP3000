@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const prevButton = document.getElementById('prev-button');
     const confirmButton = document.getElementById('confirm-button');
 
+    let instructionsConfirmed = false; //used to display example email instructions
+
 
     //Phishing information code
     let isFirstOpen = true; // Track if inbox is opened for the first time
@@ -102,9 +104,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+
+
     confirmButton.addEventListener('click', () => {
         instructionModel.style.display = 'none';
-        console.log("User confirmed and is ready to start the exercise.");
+        instructionsConfirmed = true; // listener to display instructions once user confirms
+        displayEmail(currentEmailIndex);
     });
 
 
@@ -144,10 +149,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const emails = [
         {
-            hover: "billing-securepay@securepaysolutions-support.com",
+            hover: "billing-securepay@securepaysolutions-support.com", //example email
             sender: "SecurePay Solutions",
             subject: "Urgent Account Update Required EXAMPLE",
-            body: `Dear [Recipient Name],<br><br>
+            body: `Dear Customer,<br><br>
                    Your invoice #[12345] is now ready.<br><br>
                    Please find the attached invoice for your review. Kindly make the payment at your earliest convenience to avoid service disruptions.<br><br>
                    <br><br>
@@ -196,8 +201,33 @@ document.addEventListener('DOMContentLoaded', function () {
             emailSenderElement.setAttribute('title', email.hover); // using tooltip
             document.querySelector('.email-subject-line').textContent = email.subject;
             document.querySelector('.email-body').innerHTML = email.body; //inner HTML to allow for line breaks
+            if (index===0 && instructionsConfirmed) {
+                // Create an instruction box
+                const instructionBox = document.createElement('div');
+                instructionBox.className = 'instruction-box';
+                instructionBox.innerHTML = `
+                    <strong>Instructions:</strong>
+                    <p>Hover over the sender to see their true email address.</p>
+                    <p>Notice the subject uses urgency to create panic.</p>
+                    <p>The body is informal and uses the generic term "Customer."</p>
+                    <button id="close-instruction" class="close-button">Close</button>
+                `;
+    
+                // Append instruction box to the body or a parent container
+                document.body.appendChild(instructionBox);
+    
+                // Add close functionality for the instruction box
+                const closeButton = document.getElementById('close-instruction');
+                closeButton.addEventListener('click', () => {
+                    instructionBox.remove();
+                });
+            }
+
         }
     }
+
+   
+
 
 
 
@@ -222,6 +252,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add the button to the email content area
     document.querySelector('.email-content').appendChild(start);
 
+
+    //hints for example email
     //Highlight phishing words code
 
     //suspicious words to check for highlighting
