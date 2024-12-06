@@ -35,7 +35,9 @@
             <h2 id="page-title">Welcome to the Email Inbox</h2>
             <p id="page-content">
                 <!-- Manually load first info page -->
-                This exercise will help improve your skills in identifying emails that are fraudulent attempts to steal sensitive information. These are known as phishing emails. These emails often contain suspicious links or attachments designed to trick you.
+                This exercise will help improve your skills in identifying emails that are fraudulent attempts to steal
+                sensitive information. These are known as phishing emails. These emails often contain suspicious links
+                or attachments designed to trick you.
             </p>
             <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
                 <button id="prev-button" class="nav-button hidden">Previous</button>
@@ -85,6 +87,19 @@
                 <p><span class="colour-box green"></span> Correct suspicious word</p>
                 <p><span class="colour-box orange"></span> Missed suspicious word</p>
                 <p><span class="colour-box red"></span> Incorrect word identified</p>
+                <!--tickbox for email type -->
+                <div class="radio-section"> <!--radio so only one type can be selected -->
+                    <label>
+                        <input type="radio" name="option" value="correct-suspicious-word"> Deceptive Phishing
+                    </label><br>
+                    <label>
+                        <input type="radio" name="option" value="missed-suspicious-word"> Clone Phishing
+                    </label><br>
+                    <label>
+                        <input type="radio" name="option" value="incorrect-word-identified"> Spear Phishing
+                    </label><br>
+                </div>
+                <button id="tickbox-submit">Submit</button>
                 <button id="information">Email Types Reminder</button>
             </div>
         </div>

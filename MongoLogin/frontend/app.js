@@ -148,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const emails = [
         {
+            type: "1",
             hover: "billing-securepay@securepaysolutions-support.com", //example email
             sender: "SecurePay Solutions",
             subject: "Urgent Account Update Required EXAMPLE",
@@ -168,6 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
                    SecurePay Solutions`
         },
         {
+            type: "1",
             hover: "test2",
             sender: "Bob",
             subject: "Important Security Update",
@@ -179,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
                    The Security Team`
         },
         {
+            type: "1",
             hover: "test3",
             sender: "Charlie",
             subject: "Reminder: Action Required to Secure Your Account",
@@ -223,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add listener to Start button
     const start = document.createElement('button');
-    start.textContent = "Start";
+    start.textContent = "Next Email";
     start.classList.add('nav-button');
     start.addEventListener('click', showNextEmail);
 
