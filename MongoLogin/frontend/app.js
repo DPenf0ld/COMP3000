@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Pages content
     const pages = [
         {
-            title: "Welcome to the Email Inbox!",
+            title: "Welcome to the Email Inbox",
             content: "This exercise will help improve your skills in identifying emails that are fraudulent attempts to steal sensitive information. These are known as phishing emails. These emails often contain suspicious links or attachments designed to trick you."
         },
         {
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
     start.addEventListener('click', showNextEmail);
 
     // Add the button to the email content area
-    document.querySelector('.email-content').appendChild(start);
+    document.querySelector('.colour-meaning-box').appendChild(start);
 
 
     //Code for exmaple instructions
@@ -265,8 +265,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 content: `<p>Likewise, the real company might use a straightforward email address such as Billing@securepay.com. Instead, when hovering on the profile picture, the true email address is long and suspicious. Try hovering on the profile picture now to see the real address.</p>`
             }
         ];
-        
-        
+
+
 
         // Create the instruction box
         const instructionBox = document.createElement('div');
@@ -338,20 +338,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const suspiciousWords = [
         "urgent", "customer", "earlist"
     ];
-    
+
     const emailBodyElement = document.querySelector('.email-body');
     const emailSubjectElement = document.querySelector('.email-subject-line');
     const submitButton = document.getElementById('submit-highlight');
-    
+
     // Allows highlighting of body elements words
     function enableHighlighting(element) {
         element.addEventListener('mouseup', () => {
             const selection = window.getSelection();
             const range = selection.getRangeAt(0);
-    
+
             if (range && !range.collapsed) {
                 const selectedText = selection.toString().trim();
-    
+
                 if (selectedText) {
                     const span = document.createElement('span');
                     span.classList.add('highlighted');
@@ -362,23 +362,23 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-    
+
     // Enable highlighting for both the email body and subject
     enableHighlighting(emailBodyElement);
     enableHighlighting(emailSubjectElement);
-    
+
     // Handle submission when the submit button is clicked
     submitButton.addEventListener('click', () => {
         let correctCount = 0;
         let missedCount = 0;
-    
+
         // Get all highlighted elements from both body and subject
         const highlightedBodyElements = emailBodyElement.querySelectorAll('.highlighted');
         const highlightedSubjectElements = emailSubjectElement.querySelectorAll('.highlighted');
-        
+
         // Combine the highlighted elements from body and subject
         const allHighlightedElements = [...highlightedBodyElements, ...highlightedSubjectElements];
-    
+
         // Check each highlighted element to see if it matches a suspicious word
         allHighlightedElements.forEach(span => {
             const word = span.textContent.trim().toLowerCase();
@@ -389,12 +389,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 span.style.backgroundColor = 'red';  // Incorrect word - red
             }
         });
-    
+
         // Check for any suspicious words that were not highlighted
         suspiciousWords.forEach(word => {
             const wordFoundInBody = emailBodyElement.innerText.toLowerCase().includes(word);
             const wordFoundInSubject = emailSubjectElement.innerText.toLowerCase().includes(word);
-    
+
             // If the word was found but not highlighted
             if (!Array.from(allHighlightedElements).some(span => span.textContent.trim().toLowerCase() === word)) {
                 missedCount++;
@@ -406,10 +406,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         });
-    
+
         console.log(`Correct: ${correctCount}, Missed: ${missedCount}`);
     });
-    
+
     // Function to highlight missed suspicious word
     function highlightMissedWord(word, element) {
         const regex = new RegExp(word, 'gi');
@@ -417,7 +417,46 @@ document.addEventListener('DOMContentLoaded', function () {
             `<span class="missed" style="background-color: orange;">${match}</span>`
         );
     }
-    
+
+    //function to bring back information
+
+    // Listen for info to be clicked
+    document.getElementById('information').addEventListener('click', information);
+
+    function information() {
+        // Create the info box
+        const information = document.createElement('div');
+        information.className = 'instruction-box';
+
+        const closeButton = document.createElement('button');
+        closeButton.className = 'close-button';
+        closeButton.innerHTML = '&times;'; // The cross symbol
+
+        closeButton.addEventListener('click', () => {
+            information.remove();
+        });
+
+        // Set the inner HTML for the information box with line breaks
+        information.innerHTML = `
+            <strong>Deceptive Phishing</strong><br>
+            Fraudulent emails that impersonate legitimate entities to steal sensitive information like passwords or credit card details.<br><br>
+            
+            <strong>Clone Phishing</strong><br>
+            Replicas of legitimate emails with malicious links or attachments, often using 'resend' or 'updated version' to trick the victim.<br><br>
+            
+            <strong>Spear Phishing</strong><br>
+            Targeted attacks aimed at specific individuals or organizations, often using personal information to craft convincing emails.<br><br>
+        `;
+
+        document.body.appendChild(information);
+        // Append the close button to the info box
+        information.appendChild(closeButton);
+    }
+
+
+
+
+
 
 });
 
