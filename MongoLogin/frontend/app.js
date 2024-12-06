@@ -10,6 +10,46 @@ document.addEventListener('DOMContentLoaded', function () {
     const prevButton = document.getElementById('prev-button');
     const confirmButton = document.getElementById('confirm-button');
 
+    const radiosubmitButton = document.getElementById('tickbox-submit'); // Submit button
+    const emailTypeRadioButtons = document.querySelectorAll('input[name="option"]'); // All radio buttons
+    const feedbackMessage = document.createElement('p'); // Message to show correct/incorrect feedback
+    const emailContainer = document.querySelector('.email-container'); // The container where the email content is displayed
+
+     // Function to handle submission of the radio selection
+     radiosubmitButton.addEventListener('click', function () {
+        // Get the selected radio button value
+        let selectedOption = null;
+        for (let radioButton of emailTypeRadioButtons) {
+            if (radioButton.checked) {
+                selectedOption = radioButton.value;
+                break;
+            }
+        }
+
+        // Check if an option was selected
+        if (selectedOption === null) {
+            alert('Please select an email type.');
+            return;
+        }
+
+        // Compare selected option with the correct email type
+        const email = emails[currentEmailIndex]; // Get the current email being displayed
+        const isCorrect = selectedOption === email.type.toLowerCase().replace(/\s+/g, '-'); // Compare type
+
+        // Display feedback message
+        feedbackMessage.textContent = isCorrect ? "Correct! You identified the correct email type." : "Incorrect. Try again!";
+        feedbackMessage.style.color = isCorrect ? 'green' : 'red';
+        emailContainer.appendChild(feedbackMessage); // Add feedback message to the email container
+
+        // Reset the radio selection for next email
+        emailTypeRadioButtons.forEach(radioButton => radioButton.checked = false);
+    });
+
+
+
+
+
+
     let instructionsConfirmed = false; //used to display example email instructions
 
     //Phishing information code
@@ -148,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const emails = [
         {
-            type: "1",
+            type: "Deceptive Phishing",
             hover: "billing-securepay@securepaysolutions-support.com", //example email
             sender: "SecurePay Solutions",
             subject: "Urgent Account Update Required EXAMPLE",
@@ -169,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
                    SecurePay Solutions`
         },
         {
-            type: "1",
+            type: "Clone Phishing",
             hover: "test2",
             sender: "Bob",
             subject: "Important Security Update",
@@ -181,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function () {
                    The Security Team`
         },
         {
-            type: "1",
+            type: "Spear Phishing",
             hover: "test3",
             sender: "Charlie",
             subject: "Reminder: Action Required to Secure Your Account",
@@ -203,6 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
             emailSenderElement.setAttribute('title', email.hover); // using tooltip
             document.querySelector('.email-subject-line').textContent = email.subject;
             document.querySelector('.email-body').innerHTML = email.body; //inner HTML to allow for line breaks
+            feedbackMessage.textContent = ''; // Clear feedback message when next email is displayed
             if (index === 0 && instructionsConfirmed) {
 
                 exampleInstructions()
@@ -455,6 +496,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Append the close button to the info box
         information.appendChild(closeButton);
     }
+
+
+    
 
 
 
