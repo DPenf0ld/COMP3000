@@ -205,7 +205,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Create an instruction box
                 const instructionBox = document.createElement('div');
                 instructionBox.className = 'instruction-box';
-                instructionBox.innerHTML = `
+                //fix as no display 
+                instructionBox.innerHTML = `  
                     <strong>Instructions:</strong>
                     <p>Hover over the sender to see their true email address.</p>
                     <p>Notice the subject uses urgency to create panic.</p>
@@ -213,10 +214,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     <button id="close-instruction" class="close-button">Close</button>
                 `;
     
-                // Append instruction box to the body or a parent container
+                // Append instruction box 
                 document.body.appendChild(instructionBox);
     
-                // Add close functionality for the instruction box
+                // Add close functionality
                 const closeButton = document.getElementById('close-instruction');
                 closeButton.addEventListener('click', () => {
                     instructionBox.remove();
