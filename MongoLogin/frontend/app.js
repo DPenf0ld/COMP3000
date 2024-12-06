@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let instructionsConfirmed = false; //used to display example email instructions
 
-
     //Phishing information code
     let isFirstOpen = true; // Track if inbox is opened for the first time
     let currentPage = 0; // Track the current page of the model
@@ -201,38 +200,16 @@ document.addEventListener('DOMContentLoaded', function () {
             emailSenderElement.setAttribute('title', email.hover); // using tooltip
             document.querySelector('.email-subject-line').textContent = email.subject;
             document.querySelector('.email-body').innerHTML = email.body; //inner HTML to allow for line breaks
-            if (index===0 && instructionsConfirmed) {
-                // Create an instruction box
-                const instructionBox = document.createElement('div');
-                instructionBox.className = 'instruction-box';
-                //fix as no display 
-                instructionBox.innerHTML = `  
-                    <strong>Instructions:</strong>
-                    <p>Hover over the sender to see their true email address.</p>
-                    <p>Notice the subject uses urgency to create panic.</p>
-                    <p>The body is informal and uses the generic term "Customer."</p>
-                    <button id="close-instruction" class="close-button">Close</button>
-                `;
-    
-                // Append instruction box 
-                document.body.appendChild(instructionBox);
-    
-                // Add close functionality
-                const closeButton = document.getElementById('close-instruction');
-                closeButton.addEventListener('click', () => {
-                    instructionBox.remove();
-                });
+            if (index === 0 && instructionsConfirmed) {
+
+                exampleInstructions()
+
+
+
             }
 
         }
     }
-
-   
-
-
-
-
-
 
     function showNextEmail() {
         if (currentEmailIndex < emails.length - 1) {
@@ -254,9 +231,92 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.email-content').appendChild(start);
 
 
+    //Code for exmaple instructions
+
+    function exampleInstructions() {
+        let currentSlide = 0; // Track the current slide
+        const slides = [
+            {
+                title: "Step 1: Introduction",
+                content: `<p>First, highlight suspicious words by clicking at the start of the word and dragging the cursor over it. Suspicious words are those which indicate the email may be phishing.</p>`
+            },
+            {
+                title: "Step 2: Identifying Suspicious Words",
+                content: `<p>A key indicator of a phishing email is an informal and generic greeting. For example, in this email, they use the term "Customer," which is generic.</p>
+                          <p>Highlight "Customer" as it is a suspicious word.</p>`
+            },
+            {
+                title: "Step 3: Completing the Task",
+                content: `<p>Now that you've identified suspicious words, proceed with marking all such indicators. Once done, click on the "Submit" button to evaluate your highlights.</p>`
+            }
+        ];
+
+        // Create the instruction box
+        const instructionBox = document.createElement('div');
+        instructionBox.className = 'instruction-box';
+        instructionBox.innerHTML = `
+            <strong id="instruction-title"></strong>
+            <div id="instruction-content"></div>
+            <div class="instruction-buttons">
+                <button id="prev-slide" class="nav-button hidden">Previous</button>
+                <button id="next-slide" class="nav-button">Next</button>
+            </div>
+        `;
+
+        // Append instruction box
+        document.body.appendChild(instructionBox);
+
+        // load elments
+        const titleElement = document.getElementById('instruction-title');
+        const contentElement = document.getElementById('instruction-content');
+        const prevButton = document.getElementById('prev-slide');
+        const nextButton = document.getElementById('next-slide');
+
+        // Update slide content
+        function updateSlide() {
+            titleElement.innerHTML = slides[currentSlide].title;
+            contentElement.innerHTML = slides[currentSlide].content;
+
+            // Toggle button visibility
+            prevButton.classList.toggle('hidden', currentSlide === 0); //no previous on slide 1
+            nextButton.textContent = currentSlide === slides.length - 1 ? "Finish" : "Next"; //replace next with finish on last slide
+        }
+
+        // Event listeners for buttons
+        prevButton.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlide();
+            } else {
+                instructionBox.remove(); // Close the instruction box when "Finish" is clicked
+            }
+        });
+
+        // open first slide when function is called
+        updateSlide();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     //hints for example email
     //Highlight phishing words code
-
     //suspicious words to check for highlighting
     const suspiciousWords = [
         "urgent", "verify", "suspended", "immediate", "click", "update",
@@ -267,72 +327,95 @@ document.addEventListener('DOMContentLoaded', function () {
         "confirm your email", "unauthorized access", "important notice",
         "last chance", "act now", "report", "limited time"
     ];
-
+    
     const emailBodyElement = document.querySelector('.email-body');
+    const emailSubjectElement = document.querySelector('.email-subject-line');
     const submitButton = document.getElementById('submit-highlight');
-
-    // Allows highlighting of any words
-    emailBodyElement.addEventListener('mouseup', () => {
-        const selection = window.getSelection(); // Get the current text selection
-        const range = selection.getRangeAt(0);  // Get the range of the selection
-
-        // Checks to see if there is a range
-        if (range && !range.collapsed) {
-            const selectedText = selection.toString().trim(); // Get the selected text as a string
-
-            // Checks if there is text
-            if (selectedText) {
-                const span = document.createElement('span'); // Create span
-                span.classList.add('highlighted'); // Styles for span
-                span.style.backgroundColor = 'yellow'; // highlight colour to yellow
-                range.surroundContents(span); // Wrap the selected text with the span
-                selection.removeAllRanges(); // Clear the selection ready for next
+    
+    // Allows highlighting of body elements words
+    function enableHighlighting(element) {
+        element.addEventListener('mouseup', () => {
+            const selection = window.getSelection();
+            const range = selection.getRangeAt(0);
+    
+            if (range && !range.collapsed) {
+                const selectedText = selection.toString().trim();
+    
+                if (selectedText) {
+                    const span = document.createElement('span');
+                    span.classList.add('highlighted');
+                    span.style.backgroundColor = 'yellow';
+                    range.surroundContents(span);
+                    selection.removeAllRanges();
+                }
             }
-        }
-    });
-
+        });
+    }
+    
+    // Enable highlighting for both the email body and subject
+    enableHighlighting(emailBodyElement);
+    enableHighlighting(emailSubjectElement);
+    
     // Handle submission when the submit button is clicked
     submitButton.addEventListener('click', () => {
-        // Get all elements that have been highlighted
-        const highlightedElements = emailBodyElement.querySelectorAll('.highlighted');
-        let correctCount = 0; // Counter for correct
-        let missedCount = 0; // Counter for missed
-
+        let correctCount = 0;
+        let missedCount = 0;
+    
+        // Get all highlighted elements from both body and subject
+        const highlightedBodyElements = emailBodyElement.querySelectorAll('.highlighted');
+        const highlightedSubjectElements = emailSubjectElement.querySelectorAll('.highlighted');
+        
+        // Combine the highlighted elements from body and subject
+        const allHighlightedElements = [...highlightedBodyElements, ...highlightedSubjectElements];
+    
         // Check each highlighted element to see if it matches a suspicious word
-        highlightedElements.forEach(span => {
-            const word = span.textContent.trim().toLowerCase(); // convert to lowercase
+        allHighlightedElements.forEach(span => {
+            const word = span.textContent.trim().toLowerCase();
             if (suspiciousWords.includes(word)) {
-                span.style.backgroundColor = 'green'; // Change the highlight colour to green 
+                span.style.backgroundColor = 'green';  // Correct word - green
                 correctCount++;
             } else {
-                span.style.backgroundColor = 'red'; // Change the highlight colour to red
+                span.style.backgroundColor = 'red';  // Incorrect word - red
             }
         });
-
+    
         // Check for any suspicious words that were not highlighted
         suspiciousWords.forEach(word => {
-            if (!Array.from(highlightedElements).some(span => span.textContent.trim().toLowerCase() === word)) {
+            const wordFoundInBody = emailBodyElement.innerText.toLowerCase().includes(word);
+            const wordFoundInSubject = emailSubjectElement.innerText.toLowerCase().includes(word);
+    
+            // If the word was found but not highlighted
+            if (!Array.from(allHighlightedElements).some(span => span.textContent.trim().toLowerCase() === word)) {
                 missedCount++;
-                highlightMissedWord(word); // Call function to highlight 
+                if (wordFoundInBody) {
+                    highlightMissedWord(word, emailBodyElement);  // Highlight missed word in body
+                }
+                if (wordFoundInSubject) {
+                    highlightMissedWord(word, emailSubjectElement);  // Highlight missed word in subject
+                }
             }
         });
+    
+        console.log(`Correct: ${correctCount}, Missed: ${missedCount}`);
     });
-
-    //highlight missed suspicious word
-    function highlightMissedWord(word) {
-        // g means all words can be looked through and i means ignore cap sens
+    
+    // Function to highlight missed suspicious word
+    function highlightMissedWord(word, element) {
         const regex = new RegExp(word, 'gi');
-
-        // Replace with orange highlight
-        emailBodyElement.innerHTML = emailBodyElement.innerHTML.replace(regex, match =>
+        element.innerHTML = element.innerHTML.replace(regex, match =>
             `<span class="missed" style="background-color: orange;">${match}</span>`
         );
     }
-
-
-
+    
 
 });
+
+
+
+
+
+
+//Clock Functionality
 
 function updateClock() {
     const now = new Date();

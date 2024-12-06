@@ -342,13 +342,13 @@ p {
 .instruction-box {
     position: fixed;
     top: 20%;
-    left: 50%;
+    left: 30%;
     transform: translate(-50%, -20%);
     background-color: #fff;
     border: 2px solid #007BFF;
     border-radius: 8px;
     padding: 20px;
-    width: 300px;
+    /*width: 300px;*/
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     text-align: center;
@@ -361,6 +361,7 @@ p {
 .instruction-box p {
     font-size: 1rem;
     margin: 10px 0;
+    color: black;
 }
 
 .close-button {
