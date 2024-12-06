@@ -342,14 +342,13 @@ p {
 .instruction-box {
     position: fixed;
     top: 20%;
-    left: 30%;
+    left: 23%;
     transform: translate(-50%, -20%);
     background-color: #fff;
     border: 2px solid #007BFF;
     border-radius: 8px;
     padding: 20px;
-    /*width: 300px;*/
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 600px;
     z-index: 1000;
     text-align: center;
 }
@@ -377,6 +376,39 @@ p {
     background-color: #0056b3;
 }
 
+/* Colours for key*/
+.colour-meaning-box {
+    padding: 10px;
+    width: 250px;
+    font-family: Arial, sans-serif;
+    margin: 20px 0;
+}
+
+.colour-meaning-box p {
+    margin: 5px 0;
+    color:black;
+}
+
+.colour-box {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin-right: 10px;
+    border-radius: 50%;
+
+}
+
+.green {
+    background-color: green;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.red {
+    background-color: red;
+}
 
 
 

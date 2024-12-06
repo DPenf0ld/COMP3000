@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
             subject: "Urgent Account Update Required EXAMPLE",
             body: `Dear Customer,<br><br>
                    Your invoice #[12345] is now ready.<br><br>
-                   Please find the attached invoice for your review. Kindly make the payment at your earliest convenience to avoid service disruptions.<br><br>
+                   Please find the attached invoice for your review. Kindly make the payment at your earlist convenience to avoid service disruptions.<br><br>
                    <br><br>
                    Invoice Amount: $2,540.00 <br><br>
                    Due Date: [Date] <br><br>
@@ -237,19 +237,36 @@ document.addEventListener('DOMContentLoaded', function () {
         let currentSlide = 0; // Track the current slide
         const slides = [
             {
-                title: "Step 1: Introduction",
-                content: `<p>First, highlight suspicious words by clicking at the start of the word and dragging the cursor over it. Suspicious words are those which indicate the email may be phishing.</p>`
+                title: "Introduction",
+                content: `<p>First, we will look at an example phishing email. These instructions will help equip you with appropriate methods to identify phishing emails and even further the types.</p>`
             },
             {
-                title: "Step 2: Identifying Suspicious Words",
-                content: `<p>A key indicator of a phishing email is an informal and generic greeting. For example, in this email, they use the term "Customer," which is generic.</p>
-                          <p>Highlight "Customer" as it is a suspicious word.</p>`
+                title: "Identifying Suspicious Words",
+                content: `<p>Suspicious words are ones which indicate a phishing email. You can highlight the words by clicking at the start of the word and dragging the cursor over it. The next slides will help you identify the ones in this example. Take a moment to read through the example email and highlight any words which you belive could be suspicious</p>`
             },
             {
-                title: "Step 3: Completing the Task",
-                content: `<p>Now that you've identified suspicious words, proceed with marking all such indicators. Once done, click on the "Submit" button to evaluate your highlights.</p>`
+                title: "Step 1: Informal Greeting",
+                content: `<p>A key indicator of a phishing email is an informal and generic greeting. For example, in this email, they use the term "Customer," which is generic and not specific. Furthermore, highlight the word “Customer” to complete this step.</p>`
+            },
+            {
+                title: "Step 2: Time Urgency",
+                content: `<p>Phishing emails often use time urgency to pressure the recipient into acting quickly. Look for phrases like “Immediate action required” or “Act now” to create a sense of urgency. In this example highlight the word “urgent” to complete this step.</p>`
+            },
+            {
+                title: "Step 3: Poor Grammar",
+                content: `<p>A common sign of a phishing email is poor grammar, such as misspellings, incorrect punctuation, or awkward phrasing. In the example email, the word "earlist" instead of "earliest" is an indication of phishing. Highlight the word “earlist” to complete this step.</p>`
+            },
+            {
+                title: "Step 4: Unnecessary Subdomains",
+                content: `<p>The real company might use a simple, professional domain like securepay.com or securepaysolutions.com. However, when hovering on the payment link, the true address is revealed. Try hovering now to reveal the real address.</p>`
+            },
+            {
+                title: "Step 5: Hyphen Usage",
+                content: `<p>Likewise, the real company might use a straightforward email address such as Billing@securepay.com. Instead, when hovering on the profile picture, the true email address is long and suspicious. Try hovering on the profile picture now to see the real address.</p>`
             }
         ];
+        
+        
 
         // Create the instruction box
         const instructionBox = document.createElement('div');
@@ -319,13 +336,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //Highlight phishing words code
     //suspicious words to check for highlighting
     const suspiciousWords = [
-        "urgent", "verify", "suspended", "immediate", "click", "update",
-        "account", "security", "warning", "important", "failure",
-        "verify your identity", "suspicious activity", "login", "click here",
-        "claim", "free", "risk", "action required", "update your system",
-        "change your password", "secure your account", "account locked",
-        "confirm your email", "unauthorized access", "important notice",
-        "last chance", "act now", "report", "limited time"
+        "urgent", "customer", "earlist"
     ];
     
     const emailBodyElement = document.querySelector('.email-body');
