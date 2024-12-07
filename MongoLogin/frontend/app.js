@@ -10,51 +10,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const prevButton = document.getElementById('prev-button');
     const confirmButton = document.getElementById('confirm-button');
 
-    const radiosubmitButton = document.getElementById('tickbox-submit'); // Submit button
-    const emailTypeRadioButtons = document.querySelectorAll('input[name="option"]'); // All radio buttons
-    const feedbackMessage = document.createElement('p'); // Message to show correct/incorrect feedback
-    const emailContainer = document.querySelector('.email-container'); // The container where the email content is displayed
-
-     // Function to handle submission of the radio selection
-     radiosubmitButton.addEventListener('click', function () {
-        // Get the selected radio button value
-        let selectedOption = null;
-        for (let radioButton of emailTypeRadioButtons) {
-            if (radioButton.checked) {
-                selectedOption = radioButton.value;
-                break;
-            }
-        }
-
-        // Check if an option was selected
-        if (selectedOption === null) {
-            alert('Please select an email type.');
-            return;
-        }
-
-        // Compare selected option with the correct email type
-        const email = emails[currentEmailIndex]; // Get the current email being displayed
-        const isCorrect = selectedOption === email.type.toLowerCase().replace(/\s+/g, '-'); // Compare type
-
-        // Display feedback message
-        feedbackMessage.textContent = isCorrect ? "Correct! You identified the correct email type." : "Incorrect. Try again!";
-        feedbackMessage.style.color = isCorrect ? 'green' : 'red';
-        emailContainer.appendChild(feedbackMessage); // Add feedback message to the email container
-
-        // Reset the radio selection for next email
-        emailTypeRadioButtons.forEach(radioButton => radioButton.checked = false);
-    });
-
-
-
-
-
-
     let instructionsConfirmed = false; //used to display example email instructions
 
     //Phishing information code
     let isFirstOpen = true; // Track if inbox is opened for the first time
     let currentPage = 0; // Track the current page of the model
+    let displaynextemailbutton = false; //do not show next email button orginally
 
     // Pages content
     const pages = [
@@ -243,7 +204,6 @@ document.addEventListener('DOMContentLoaded', function () {
             emailSenderElement.setAttribute('title', email.hover); // using tooltip
             document.querySelector('.email-subject-line').textContent = email.subject;
             document.querySelector('.email-body').innerHTML = email.body; //inner HTML to allow for line breaks
-            feedbackMessage.textContent = ''; // Clear feedback message when next email is displayed
             if (index === 0 && instructionsConfirmed) {
 
                 exampleInstructions()
@@ -253,6 +213,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
         }
+        displaynextemailbutton = false;
+        nextemailbutton()
     }
 
     function showNextEmail() {
@@ -265,14 +227,22 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initial display
     displayEmail(currentEmailIndex);
 
-    // Add listener to Start button
-    const start = document.createElement('button');
-    start.textContent = "Next Email";
-    start.classList.add('nav-button');
-    start.addEventListener('click', showNextEmail);
 
-    // Add the button to the email content area
-    document.querySelector('.colour-meaning-box').appendChild(start);
+    function nextemailbutton() {
+        const nextEmailButton = document.getElementById('next-email');
+        if (displaynextemailbutton) { //check if true
+
+            nextEmailButton.style.display = 'block';
+            nextEmailButton.addEventListener('click', showNextEmail);
+
+        } else {
+            nextEmailButton.style.display = 'none';
+            nextEmailButton.removeEventListener('click', showNextEmail);
+        }
+
+    }
+
+
 
 
     //Code for exmaple instructions
@@ -451,7 +421,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
+
         console.log(`Correct: ${correctCount}, Missed: ${missedCount}`);
+
+        displaynextemailbutton = true;
+        
+        nextemailbutton()
+
     });
 
     // Function to highlight missed suspicious word
@@ -496,9 +472,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Append the close button to the info box
         information.appendChild(closeButton);
     }
-
-
-    
 
 
 
