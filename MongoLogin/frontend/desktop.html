@@ -81,6 +81,21 @@
                 </div>
                 <div class="email-body"></div>
                 <button id="next-email" class="nav-button" style="display: none;">Next Email</button>
+                <!--tickbox for email type -->
+                <div class="radio-section"> <!--radio so only one type can be selected -->
+                    <label>
+                        <input type="radio" name="option" value="Deceptive-Phishing"> Deceptive Phishing
+                    </label><br>
+                    <label>
+                        <input type="radio" name="option" value="Clone-Phishing"> Clone Phishing
+                    </label><br>
+                    <label>
+                        <input type="radio" name="option" value="Spear-Phishing"> Spear Phishing
+                    </label><br>
+                    <label>
+                        <input type="radio" name="option" value="Safe-Email"> Safe Email
+                    </label><br>
+                </div>
                 <button id="submit-highlight" class="nav-button">Submit</button>
             </div>
             <!-- Colour meaning -->
@@ -88,19 +103,6 @@
                 <p><span class="colour-box green"></span> Correct suspicious word</p>
                 <p><span class="colour-box orange"></span> Missed suspicious word</p>
                 <p><span class="colour-box red"></span> Incorrect word identified</p>
-                <!--tickbox for email type -->
-                <div class="radio-section"> <!--radio so only one type can be selected -->
-                    <label>
-                        <input type="radio" name="option" value="correct-suspicious-word"> Deceptive Phishing
-                    </label><br>
-                    <label>
-                        <input type="radio" name="option" value="missed-suspicious-word"> Clone Phishing
-                    </label><br>
-                    <label>
-                        <input type="radio" name="option" value="incorrect-word-identified"> Spear Phishing
-                    </label><br>
-                </div>
-                <button id="tickbox-submit">Submit</button>
                 <button id="information">Email Types Reminder</button>
             </div>
         </div>

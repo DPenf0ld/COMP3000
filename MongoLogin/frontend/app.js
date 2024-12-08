@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const emails = [
         {
-            type: "Deceptive Phishing",
+            type: "Deceptive-Phishing",
             hover: "billing-securepay@securepaysolutions-support.com", //example email
             sender: "SecurePay Solutions",
             subject: "Urgent Account Update Required EXAMPLE",
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
                    SecurePay Solutions`
         },
         {
-            type: "Clone Phishing",
+            type: "Clone-Phishing",
             hover: "test2",
             sender: "Bob",
             subject: "Important Security Update",
@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
                    The Security Team`
         },
         {
-            type: "Spear Phishing",
+            type: "Spear-Phishing",
             hover: "test3",
             sender: "Charlie",
             subject: "Reminder: Action Required to Secure Your Account",
@@ -197,6 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     function displayEmail(index) {
+        clearTickboxSelection()
         const email = emails[index];
         if (email) {
             const emailSenderElement = document.querySelector('.email-sender');
@@ -256,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             {
                 title: "Identifying Suspicious Words",
-                content: `<p>Suspicious words are ones which indicate a phishing email. You can highlight the words by clicking at the start of the word and dragging the cursor over it. The next slides will help you identify the ones in this example. Take a moment to read through the example email and highlight any words which you belive could be suspicious</p>`
+                content: `<p>Suspicious words are ones which indicate a phishing email. You can highlight the words by double clicking a word or clicking at the start of the word and dragging the cursor over it. The next slides will help you identify the ones in this example. Take a moment to read through the example email and highlight any words which you belive could be suspicious</p>`
             },
             {
                 title: "Step 1: Informal Greeting",
@@ -383,6 +384,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Handle submission when the submit button is clicked
     submitButton.addEventListener('click', () => {
+        tickboxanswer(currentEmailIndex)
         let correctCount = 0;
         let missedCount = 0;
 
@@ -425,7 +427,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(`Correct: ${correctCount}, Missed: ${missedCount}`);
 
         displaynextemailbutton = true;
-        
+
         nextemailbutton()
 
     });
@@ -474,9 +476,40 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
+    //function to check tickbox answer
+    function tickboxanswer(currentEmailIndex) {
+        // Get the current email type
+        const currentEmailType = emails[currentEmailIndex].type; // Fetch type from the emails array
+        const options = document.getElementsByName("option"); //store all possible options
+        let selectedValue = null;
+
+        // Find the selected radio button value
+        for (const option of options) {
+            if (option.checked) {
+                selectedValue = option.value;
+                break;
+            }
+        }
+
+        // Check if the selected value matches the current email type
+        if (selectedValue === currentEmailType) {
+            alert(`Correct! The answer is ${currentEmailType}.`);
+        } else if (selectedValue) {
+            alert(`Incorrect. You selected: ${selectedValue}. The correct answer is ${currentEmailType}.`);
+        } else {
+            alert("Please select an option before submitting.");
+        }
+    }
 
 
 
+    function clearTickboxSelection() {
+        const options = document.getElementsByName("option");
+        for (const option of options) {
+            option.checked = false; // clearing selection
+        }
+    }
+    
 
 });
 
