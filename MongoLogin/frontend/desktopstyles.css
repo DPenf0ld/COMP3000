@@ -347,9 +347,8 @@ p {
 
 .instruction-box {
     position: fixed;
-    top: 20%;
-    left: 23%;
-    transform: translate(-50%, -20%);
+    bottom: 10%;
+    left: 62%;
     background-color: #fff;
     border: 2px solid #007BFF;
     border-radius: 8px;
@@ -358,6 +357,7 @@ p {
     z-index: 1000;
     text-align: center;
 }
+
 
 .instruction-box strong {
     font-size: 1.2rem;
@@ -405,7 +405,7 @@ p {
     background-color: red;
 }
 
-#information {
+#reminder {
     display: inline-block;
     background-color: #007BFF; /* Blue background */
     color: white; /* White text */
@@ -417,7 +417,7 @@ p {
     text-align: center;
 }
 
-#information:hover {
+#reminder:hover {
     background-color: #0056b3; /* Darker blue when hovered */
 }
 
@@ -438,3 +438,102 @@ p {
     color: red;
 }
 
+
+
+
+/* Styling radio buttons */
+
+
+.radio-section label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+/* Hover effect */
+.radio-section label:hover::before {
+    border-color: #0056b3;
+}
+
+.radio-section label:hover {
+    color: #007bff;
+}
+
+.hidden { /*used to hide tickbox class orginally*/
+    display: none;
+}
+
+
+/*Styles for tickbox class*/
+.multiplechoice-box {
+    position: fixed;
+    bottom: 5%;
+    left: 75%;
+    background-color: #fff;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    padding: 20px;
+    width: 350px;
+    z-index: 1000;
+    text-align: center;
+}
+
+.multiplechoice-box h1 {
+    text-align: left;
+    font-size: 24px;
+    color: #000000;
+}
+
+.multiplechoice-box h2 {
+    text-align: left;
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 20px; /* Added some space before the radio options */
+}
+
+
+.multiplechoice-box strong {
+    font-size: 1.2rem;
+}
+
+.multiplechoice-box p {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: black;
+}
+
+
+/* Background blur effect */
+.blurred {
+    filter: blur(3px);
+}
+
+
+/*Reminder box*/
+
+.reminder-box {
+    position: fixed;
+    bottom: 10%;
+    left: 5%;
+    background-color: #fff;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    padding: 20px;
+    width: 600px;
+    z-index: 1000;
+    text-align: center;
+}
+
+
+.reminder-box strong {
+    font-size: 1.2rem;
+}
+
+.reminder-box p {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: black;
+}

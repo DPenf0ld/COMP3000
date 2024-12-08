@@ -76,6 +76,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //update the model content based on the current page
     function updateModelContent() {
+
+    
         const titleElement = instructionModel.querySelector('h2');
         const contentElement = instructionModel.querySelector('p');
 
@@ -109,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
     confirmButton.addEventListener('click', () => {
         instructionModel.style.display = 'none';
         instructionsConfirmed = true; // listener to display instructions once user confirms
+        inboxContainer.classList.remove('blurred'); // Remove the blur
         displayEmail(currentEmailIndex);
     });
 
@@ -127,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Show instructions if it's the first time opening the inbox
             if (isFirstOpen) {
                 instructionModel.style.display = 'flex'; //working
+                inboxContainer.classList.add('blurred'); // Apply the blur
                 isFirstOpen = false;
             }
         }
@@ -321,6 +325,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 updateSlide();
             } else {
                 instructionBox.remove(); // Close the instruction box when "Finish" is clicked
+                unhideInstructionBox()
             }
         });
 
@@ -436,23 +441,23 @@ document.addEventListener('DOMContentLoaded', function () {
     //function to bring back information
 
     // Listen for info to be clicked
-    document.getElementById('information').addEventListener('click', information);
+    document.getElementById('reminder').addEventListener('click', reminder);
 
-    function information() {
+    function reminder() {
         // Create the info box
-        const information = document.createElement('div');
-        information.className = 'instruction-box';
+        const reminder = document.createElement('div');
+        reminder.className = 'reminder-box';
 
         const closeButton = document.createElement('button');
         closeButton.className = 'close-button';
         closeButton.innerHTML = '&times;'; // The cross symbol
 
         closeButton.addEventListener('click', () => {
-            information.remove();
+            reminder.remove();
         });
 
         // Set the inner HTML for the information box with line breaks
-        information.innerHTML = `
+        reminder.innerHTML = `
             <strong>Deceptive Phishing</strong><br>
             Fraudulent emails that impersonate legitimate entities to steal sensitive information like passwords or credit card details.<br><br>
             
@@ -463,9 +468,9 @@ document.addEventListener('DOMContentLoaded', function () {
             Targeted attacks aimed at specific individuals or organizations, often using personal information to craft convincing emails.<br><br>
         `;
 
-        document.body.appendChild(information);
+        document.body.appendChild(reminder);
         // Append the close button to the info box
-        information.appendChild(closeButton);
+        reminder.appendChild(closeButton);
     }
 
 
@@ -511,6 +516,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const feedbackElement = document.getElementById("feedback");
         feedbackElement.textContent = "";
     }
+
+    // Function to unhide the entire instruction box
+    function unhideInstructionBox() {
+        const multiplechoiceBox = document.querySelector('.multiplechoice-box');
+        multiplechoiceBox.classList.remove('hidden'); // unhide the box by removing hidden
+    }
+
+
 
 
 });

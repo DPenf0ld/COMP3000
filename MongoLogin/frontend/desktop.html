@@ -80,8 +80,20 @@
                     <div class="email-hover"></div>
                 </div>
                 <div class="email-body"></div>
-                <button id="next-email" class="nav-button" style="display: none;">Next Email</button>
+                
+            </div>
+            <!-- Colour meaning -->
+            <div class="colour-meaning-box">
+                <p><span class="colour-box green"></span> Correct suspicious word</p>
+                <p><span class="colour-box orange"></span> Missed suspicious word</p>
+                <p><span class="colour-box red"></span> Incorrect word identified</p>
+                <button id="reminder">Email Types Reminder</button>
+            </div>
+            <div class="multiplechoice-box hidden">
                 <!--tickbox for email type -->
+                <h1>1. Highlight Suspcious words</h1>
+                <h1>2. Select Email type:</h1>
+                <h2>Refer to Email Types Reminder for help!</h2>
                 <div class="radio-section"> <!--radio so only one type can be selected -->
                     <label>
                         <input type="radio" name="option" value="Deceptive-Phishing"> Deceptive Phishing
@@ -97,14 +109,10 @@
                     </label><br>
                 </div>
                 <div id="feedback" style="margin-top: 10px; color: blue;"></div>
-                <button id="submit-highlight" class="nav-button">Submit</button>
-            </div>
-            <!-- Colour meaning -->
-            <div class="colour-meaning-box">
-                <p><span class="colour-box green"></span> Correct suspicious word</p>
-                <p><span class="colour-box orange"></span> Missed suspicious word</p>
-                <p><span class="colour-box red"></span> Incorrect word identified</p>
-                <button id="information">Email Types Reminder</button>
+                <div class="button-container">
+                    <button id="submit-highlight" class="nav-button">Submit</button>
+                    <button id="next-email" class="nav-button" style="display: none;">Next Email</button>
+                </div>
             </div>
         </div>
     </div>
