@@ -206,11 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.email-subject-line').textContent = email.subject;
             document.querySelector('.email-body').innerHTML = email.body; //inner HTML to allow for line breaks
             if (index === 0 && instructionsConfirmed) {
-
                 exampleInstructions()
-
-
-
             }
 
         }
@@ -232,15 +228,12 @@ document.addEventListener('DOMContentLoaded', function () {
     function nextemailbutton() {
         const nextEmailButton = document.getElementById('next-email');
         if (displaynextemailbutton) { //check if true
-
             nextEmailButton.style.display = 'block';
             nextEmailButton.addEventListener('click', showNextEmail);
-
         } else {
             nextEmailButton.style.display = 'none';
             nextEmailButton.removeEventListener('click', showNextEmail);
         }
-
     }
 
 
@@ -491,13 +484,19 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
+        // Feedback container
+        const feedbackElement = document.getElementById("feedback");
+
         // Check if the selected value matches the current email type
         if (selectedValue === currentEmailType) {
-            alert(`Correct! The answer is ${currentEmailType}.`);
+            feedbackElement.textContent = `Correct! The answer is ${currentEmailType}.`;
+            feedbackElement.style.color = "green"; // Change feedback text color for correct answer
         } else if (selectedValue) {
-            alert(`Incorrect. You selected: ${selectedValue}. The correct answer is ${currentEmailType}.`);
+            feedbackElement.textContent = `Incorrect. You selected: ${selectedValue}. The correct answer is ${currentEmailType}.`;
+            feedbackElement.style.color = "red"; // Change feedback text color for incorrect answer
         } else {
-            alert("Please select an option before submitting.");
+            feedbackElement.textContent = "Please select an option before submitting.";
+            feedbackElement.style.color = "orange"; // Change feedback text color for no selection
         }
     }
 
@@ -508,14 +507,13 @@ document.addEventListener('DOMContentLoaded', function () {
         for (const option of options) {
             option.checked = false; // clearing selection
         }
+        // Clear feedback
+        const feedbackElement = document.getElementById("feedback");
+        feedbackElement.textContent = "";
     }
-    
+
 
 });
-
-
-
-
 
 
 //Clock Functionality
