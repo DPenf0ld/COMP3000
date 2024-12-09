@@ -64,12 +64,33 @@
 
             <!-- Email List -->
             <div class="email-list">
-                <div class="email-list-item"></div>
-                <div class="email-list-item"></div>
-                <div class="email-list-item"></div>
-                <div class="email-list-item"></div>
-                <div class="email-list-item"></div>
-                <div class="email-list-item"></div>
+                <div class="email-list-item">Urgent Account Update Required</div>
+                <div class="email-list-item">Important Security Update</div>
+                <div class="email-list-item">Reminder: Action Required to Secure Your Account</div>
+                <div class="multiplechoice-box hidden">
+                    <!--tickbox for email type -->
+                    <h1>1. Highlight Suspcious words</h1>
+                    <h1>2. Select Email type:</h1>
+                    <div class="radio-section"> <!--radio so only one type can be selected -->
+                        <label>
+                            <input type="radio" name="option" value="Deceptive-Phishing"> Deceptive Phishing
+                        </label><br>
+                        <label>
+                            <input type="radio" name="option" value="Clone-Phishing"> Clone Phishing
+                        </label><br>
+                        <label>
+                            <input type="radio" name="option" value="Spear-Phishing"> Spear Phishing
+                        </label><br>
+                        <label>
+                            <input type="radio" name="option" value="Safe-Email"> Safe Email
+                        </label><br>
+                    </div>
+                    <div id="feedback" style="margin-top: 10px; color: blue;"></div>
+                    <div class="button-container">
+                        <button id="submit-highlight" class="nav-button">Submit</button>
+                        <button id="next-email" class="nav-button" style="display: none;">Next</button>
+                    </div>
+                </div>
             </div>
 
             <!-- Email Content -->
@@ -93,31 +114,7 @@
         </div>
     </div>
 
-    <div class="multiplechoice-box hidden">
-        <!--tickbox for email type -->
-        <h1>1. Highlight Suspcious words</h1>
-        <h1>2. Select Email type:</h1>
-        <h2>Refer to Email Types Reminder for help!</h2>
-        <div class="radio-section"> <!--radio so only one type can be selected -->
-            <label>
-                <input type="radio" name="option" value="Deceptive-Phishing"> Deceptive Phishing
-            </label><br>
-            <label>
-                <input type="radio" name="option" value="Clone-Phishing"> Clone Phishing
-            </label><br>
-            <label>
-                <input type="radio" name="option" value="Spear-Phishing"> Spear Phishing
-            </label><br>
-            <label>
-                <input type="radio" name="option" value="Safe-Email"> Safe Email
-            </label><br>
-        </div>
-        <div id="feedback" style="margin-top: 10px; color: blue;"></div>
-        <div class="button-container">
-            <button id="submit-highlight" class="nav-button">Submit</button>
-            <button id="next-email" class="nav-button" style="display: none;">Next Email</button>
-        </div>
-    </div>
+    
 
     <!-- Taskbar at the bottom -->
     <div class="taskbar">

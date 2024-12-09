@@ -181,6 +181,7 @@ body, html {
 
 /* Email List */
 .email-list {
+    font-size: medium;
     width: 30%;
     background-color: #f0f0f0;
     padding: 10px;
@@ -191,6 +192,7 @@ body, html {
 }
 
 .email-list-item {
+    font-size: medium;
     background-color: white;
     padding: 15px;
     border-radius: 5px;
@@ -244,9 +246,9 @@ body, html {
 
 /* Instructions styles */
 .instructions {
-    font-size: small;
+    font-size: medium;
     position: fixed;
-    top: 40%;       
+    top: 50%;       
     left: 50%;       
     transform: translate(-50%, -50%); /* Moves the element back by 50% of its own width and height */
     display: flex;
@@ -348,7 +350,7 @@ p {
 /*Instructions for example email styles*/
 
 .instruction-box {
-    font-size: small;
+    font-size: medium;
     position: fixed;
     bottom: 10%;
     left: 65%;
@@ -367,7 +369,7 @@ p {
 }
 
 .instruction-box p {
-    font-size: small;
+    font-size: medium;
     margin: 10px 0;
     color: black;
 }
@@ -473,20 +475,19 @@ p {
 /*Styles for tickbox class*/
 .multiplechoice-box {
     position: fixed;
-    bottom: 10%;
-    left: 75%;
+    bottom: 0%;
     background-color: #fff;
     border: 2px solid #007BFF;
     border-radius: 8px;
     padding: 20px;
-    width: 20%;
+    width: 17%;
     z-index: 1000;
     text-align: center;
 }
 
 .multiplechoice-box h1 {
     text-align: left;
-    font-size: medium;
+    font-size: small;
     color: #000000;
 }
 
@@ -516,26 +517,28 @@ p {
 
 /*Reminder box*/
 
+
 .reminder-box {
+    font-size: medium;
     position: fixed;
     bottom: 10%;
-    left: 5%;
+    left: 65%;
     background-color: #fff;
     border: 2px solid #007BFF;
     border-radius: 8px;
     padding: 20px;
-    width: 600px;
+    width: 400px;
     z-index: 1000;
     text-align: center;
 }
 
 
 .reminder-box strong {
-    font-size: 1.2rem;
+    font-size: medium;
 }
 
 .reminder-box p {
-    font-size: 1rem;
+    font-size: medium;
     margin: 10px 0;
     color: black;
 }
