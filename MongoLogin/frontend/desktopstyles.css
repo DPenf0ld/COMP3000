@@ -135,7 +135,7 @@ body, html {
 /* Email Inbox Styles */
 .inbox-container {
     width: 95%;
-    height: 90%;
+    height: 85%;
     position: fixed;
     top: 2%;
     left: 50%; /* This moves the containers left edge to center and then offsets for center*/
@@ -230,6 +230,7 @@ body, html {
 }
 
 .email-body {
+    font-size: small;
     margin-top: 20px;
     flex-grow: 1;
 }
@@ -243,8 +244,9 @@ body, html {
 
 /* Instructions styles */
 .instructions {
+    font-size: small;
     position: fixed;
-    top: 30%;       
+    top: 40%;       
     left: 50%;       
     transform: translate(-50%, -50%); /* Moves the element back by 50% of its own width and height */
     display: flex;
@@ -346,25 +348,26 @@ p {
 /*Instructions for example email styles*/
 
 .instruction-box {
+    font-size: small;
     position: fixed;
     bottom: 10%;
-    left: 62%;
+    left: 65%;
     background-color: #fff;
     border: 2px solid #007BFF;
     border-radius: 8px;
     padding: 20px;
-    width: 600px;
+    width: 400px;
     z-index: 1000;
     text-align: center;
 }
 
 
 .instruction-box strong {
-    font-size: 1.2rem;
+    font-size: medium;
 }
 
 .instruction-box p {
-    font-size: 1rem;
+    font-size: small;
     margin: 10px 0;
     color: black;
 }
@@ -375,6 +378,7 @@ p {
 .colour-meaning-box {
     padding: 10px;
     width: 250px;
+    font-size: small;
     font-family: Arial, sans-serif;
     margin: 20px 0;
 }
@@ -413,7 +417,7 @@ p {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: small;
     text-align: center;
 }
 
@@ -447,9 +451,8 @@ p {
 .radio-section label {
     display: flex;
     align-items: center;
-    font-size: 16px;
+    font-size: small;
     color: #000000;
-    margin-bottom: 10px;
     cursor: pointer;
 }
 
@@ -470,37 +473,36 @@ p {
 /*Styles for tickbox class*/
 .multiplechoice-box {
     position: fixed;
-    bottom: 5%;
+    bottom: 10%;
     left: 75%;
     background-color: #fff;
     border: 2px solid #007BFF;
     border-radius: 8px;
     padding: 20px;
-    width: 350px;
+    width: 20%;
     z-index: 1000;
     text-align: center;
 }
 
 .multiplechoice-box h1 {
     text-align: left;
-    font-size: 24px;
+    font-size: medium;
     color: #000000;
 }
 
 .multiplechoice-box h2 {
     text-align: left;
-    font-size: 16px;
+    font-size: small;
     color: #000000;
-    margin-bottom: 20px; /* Added some space before the radio options */
 }
 
 
 .multiplechoice-box strong {
-    font-size: 1.2rem;
+    font-size: small;
 }
 
 .multiplechoice-box p {
-    font-size: 1rem;
+    font-size: small;
     margin: 10px 0;
     color: black;
 }

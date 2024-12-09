@@ -160,15 +160,11 @@ document.addEventListener('DOMContentLoaded', function () {
             body: `Dear Customer,<br><br>
                    Your invoice #[12345] is now ready.<br><br>
                    Please find the attached invoice for your review. Kindly make the payment at your earlist convenience to avoid service disruptions.<br><br>
-                   <br><br>
                    Invoice Amount: $2,540.00 <br><br>
-                   Due Date: [Date] <br><br>
-                   <br><br>                   
+                   Due Date: [Date] <br><br>                 
                    To view your invoice, click the link below:<br><br>
                    <span class="email-hover-text" title="securepaysolutions-support.com">SecurePay Solutions</span><br><br>
-                   <br><br>
                    Thank you for your prompt attention to this matter.<br><br>
-                   <br><br>
                    Sincerely, <br><br> 
                    Billing Department <br><br>
                    SecurePay Solutions`
