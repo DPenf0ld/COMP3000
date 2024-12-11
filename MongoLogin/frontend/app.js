@@ -560,10 +560,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
     passwordInput.addEventListener('input', function (event) {
         let password = event.target.value;
-        let strength = Math.min(password.length, 12);
-        let degree = strength * 30; // calculate degree value based on password strength
-        let gradientColor = strength <= 4 ? '#ff2c1c' : (strength <= 8 ? '#ff9800' : '#12ff12');
-        let strengthText = strength <= 4 ? 'Weak' : (strength <= 8 ? 'Medium' : 'Strong');
+    
+        // Initialize strength score
+        let strength = 0;
+    
+        // Check for password length
+        if (password.length >= 8) {
+            strength += 1;
+        }
+        if (password.length >= 12) {
+            strength += 1;
+        }
+    
+        // Check for presence of numbers, special characters, and uppercase letters
+        if (/[0-9]/.test(password)) {
+            strength += 1;
+        }
+        if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+            strength += 1;
+        }
+        if (/[A-Z]/.test(password)) {
+            strength += 1;
+        }
+    
+        // Determine the degree and text based on strength score
+        let degree = (strength / 5) * 360; // 5 is the maximum score
+        let gradientColor = strength <= 2 ? '#ff2c1c' : (strength <= 4 ? '#ff9800' : '#12ff12');
+        let strengthText = strength <= 2 ? 'Weak' : (strength <= 4 ? 'Medium' : 'Strong');
     
         passwordStrengths.forEach(passwordStrength => {
             passwordStrength.style.background = `conic-gradient(${gradientColor} ${degree}deg, #1115 ${degree}deg)`;
@@ -572,6 +595,7 @@ document.addEventListener('DOMContentLoaded', function () {
         text.textContent = strengthText;
         text.style.color = gradientColor;
     });
+    
     
 
 
