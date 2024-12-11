@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Desktop</title>
+    <title>Guard Point Desktop</title>
     <link rel="stylesheet" href="desktopstyles.css">
 </head>
 
@@ -125,8 +125,16 @@
 
     <!-- Password Tester (Hidden) -->
     <div class="password-container" id="password-container" style="display: none;">
-        <button id="close-inbox" aria-label="Close Inbox">&times;</button> <!-- Close button -->
-        <h1>Tester</h1>
+        <div class="box">
+            <button id="close-inbox" aria-label="Close Inbox">&times;</button> <!-- Close button -->
+            <h2>Password Strength <span id="text">Check</span></h2>
+            <input type="password" id="password" placeholder="Enter your password">
+            <div class="password-strength"></div>
+            <div class="password-strength"></div>
+            <div class="password-strength"></div>
+            <div class="password-strength"></div>
+          </div>
+          
         
     </div>
 

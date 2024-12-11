@@ -1,15 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
+    //email code
     const emailIconDesktop = document.getElementById('email-icon');        // Icon for email on desktop
     const emailIconTaskbar = document.getElementById('taskbar-email');     // Icon for email on taskbar
     const inboxContainer = document.getElementById('inbox-container');     // Inbox container
     const emailContainer = document.getElementById('email-interface');     // Inbox container
-
-    const passwordIconDesktop = document.getElementById('password-icon');        // Icon for password on desktop
-    const passwordIconTaskbar = document.getElementById('taskbar-password');     // Icon for password on taskbar
-    const passwordContainer = document.getElementById('password-container');
-
-    const desktopArea = document.getElementById('desktop-area');           // Desktop area
-    const backToDesktop = document.getElementById('close-inbox');      // Button or link to return to desktop
 
     const instructionModel = document.getElementById('instructions-email'); // Instruction model
     const nextButton = document.getElementById('next-button');
@@ -22,6 +16,21 @@ document.addEventListener('DOMContentLoaded', function () {
     let isFirstOpen = true; // Track if inbox is opened for the first time
     let currentPage = 0; // Track the current page of the model
     let displaynextemailbutton = false; //do not show next email button orginally
+
+    //password code
+    const passwordIconDesktop = document.getElementById('password-icon');        // Icon for password on desktop
+    const passwordIconTaskbar = document.getElementById('taskbar-password');     // Icon for password on taskbar
+    const passwordContainer = document.getElementById('password-container');
+
+    let passwordInput = document.getElementById('password');
+    let passwordStrengths = document.querySelectorAll('.password-strength')
+
+
+    //Desktop code
+    const desktopArea = document.getElementById('desktop-area');           // Desktop area
+    const backToDesktop = document.getElementById('close-inbox');      // Button or link to return to desktop
+
+
 
 
     //PHISHING EXERCISE CODE 
@@ -92,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //update the model content based on the current page
     function updateModelContent() {
 
-    
+
         const titleElement = instructionModel.querySelector('h2');
         const contentElement = instructionModel.querySelector('p');
 
@@ -548,6 +557,23 @@ document.addEventListener('DOMContentLoaded', function () {
         passwordContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
     });
+
+    passwordInput.addEventListener('input', function (event) {
+        let password = event.target.value;
+        let strength = Math.min(password.length, 12);
+        let degree = strength * 30; // calculate degree value based on password strength
+        let gradientColor = strength <= 4 ? '#ff2c1c' : (strength <= 8 ? '#ff9800' : '#12ff12');
+        let strengthText = strength <= 4 ? 'Weak' : (strength <= 8 ? 'Medium' : 'Strong');
+    
+        passwordStrengths.forEach(passwordStrength => {
+            passwordStrength.style.background = `conic-gradient(${gradientColor} ${degree}deg, #1115 ${degree}deg)`;
+        });
+    
+        text.textContent = strengthText;
+        text.style.color = gradientColor;
+    });
+    
+
 
 
 
