@@ -29,29 +29,34 @@
 
     </div>
 
-    <!-- Instruction Model -->
-    <div id="instructions-email" class="instructions" style="display: none;">
-        <div class="instructions-content">
-            <h2 id="page-title">Welcome to the Email Inbox</h2>
-            <p id="page-content">
-                <!-- Manually load first info page -->
-                This exercise will help improve your skills in identifying emails that are fraudulent attempts to steal
-                sensitive information. These are known as phishing emails. These emails often contain suspicious links
-                or attachments designed to trick you.
-            </p>
-            <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
-                <button id="prev-button" class="nav-button hidden">Previous</button>
-                <button id="next-button" class="nav-button">Next</button>
-                <button id="confirm-button" class="nav-button hidden">Confirm</button>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Email Inbox (Hidden) -->
     <div class="inbox-container" id="inbox-container" style="display: none;">
+
+        <!-- Instruction Model -->
+        <div id="instructions-email" class="instructions" style="display: none;">
+            <div class="instructions-content">
+                <h2 id="page-title">Welcome to the Email Inbox</h2>
+                <p id="page-content">
+                    <!-- Manually load first info page -->
+                    This exercise will help improve your skills in identifying emails that are fraudulent attempts to
+                    steal
+                    sensitive information. These are known as phishing emails. These emails often contain suspicious
+                    links
+                    or attachments designed to trick you.
+                </p>
+                <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
+                    <button id="prev-button" class="nav-button hidden">Previous</button>
+                    <button id="next-button" class="nav-button">Next</button>
+                    <button id="confirm-button" class="nav-button hidden">Confirm</button>
+                </div>
+            </div>
+        </div>
+
         <button id="close-inbox" aria-label="Close Inbox">&times;</button> <!-- Close button -->
         <!-- Email Interface -->
-        <div class="email-interface">
+        <div class="email-interface" id="email-interface">
             <!-- Left Sidebar -->
             <div class="email-sidebar">
                 <div class="sidebar-item active">Inbox 📥</div>
@@ -101,7 +106,7 @@
                     <div class="email-hover"></div>
                 </div>
                 <div class="email-body"></div>
-                
+
             </div>
             <!-- Colour meaning -->
             <div class="colour-meaning-box">
@@ -110,11 +115,11 @@
                 <p><span class="colour-box red"></span> Incorrect word identified</p>
                 <button id="reminder">Email Types Reminder</button>
             </div>
-        
+
         </div>
     </div>
 
-    
+
 
     <!-- Taskbar at the bottom -->
     <div class="taskbar">

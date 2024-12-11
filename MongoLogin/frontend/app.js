@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const emailIconTaskbar = document.getElementById('taskbar-email');     // Icon for email on taskbar
     const desktopArea = document.getElementById('desktop-area');           // Desktop area
     const inboxContainer = document.getElementById('inbox-container');     // Inbox container
+    const emailContainer = document.getElementById('email-interface');     // Inbox container
     const backToDesktop = document.getElementById('close-inbox');      // Button or link to return to desktop
 
     const instructionModel = document.getElementById('instructions-email'); // Instruction model
@@ -111,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
     confirmButton.addEventListener('click', () => {
         instructionModel.style.display = 'none';
         instructionsConfirmed = true; // listener to display instructions once user confirms
-        inboxContainer.classList.remove('blurred'); // Remove the blur
+        emailContainer.classList.remove('blurred'); // Remove the blur
         displayEmail(currentEmailIndex);
     });
 
@@ -130,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Show instructions if it's the first time opening the inbox
             if (isFirstOpen) {
                 instructionModel.style.display = 'flex'; //working
-                inboxContainer.classList.add('blurred'); // Apply the blur
+                emailContainer.classList.add('blurred'); // Apply the blur
                 isFirstOpen = false;
             }
         }
