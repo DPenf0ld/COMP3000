@@ -125,8 +125,14 @@
 
     <!-- Password Tester (Hidden) -->
     <div class="password-container" id="password-container" style="display: none;">
+        <button id="close-password" aria-label="Close Inbox">&times;</button> <!-- Close button -->
         <div class="box">
-            <button id="close-inbox" aria-label="Close Inbox">&times;</button> <!-- Close button -->
+            <ul>
+                <li>Length should be 8 or more characters</li>
+                <li>A special character should be present</li>
+                <li>Numbers should be used</li>
+                <li>Capital letters should be present</li>
+            </ul>
             <h2>Password Strength <span id="text">Check</span></h2>
             <input type="password" id="password" placeholder="Enter your password">
             <div class="password-strength"></div>

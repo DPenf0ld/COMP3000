@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //Desktop code
     const desktopArea = document.getElementById('desktop-area');           // Desktop area
     const backToDesktop = document.getElementById('close-inbox');      // Button or link to return to desktop
+    const backToDesktopPassword = document.getElementById('close-password'); 
 
 
 
@@ -149,6 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             // If inbox is not displayed, show it and hide desktop
             inboxContainer.style.display = 'block';
+            passwordContainer.style.display = 'none'
             desktopArea.style.display = 'none';
 
             // Show instructions if it's the first time opening the inbox
@@ -544,6 +546,7 @@ document.addEventListener('DOMContentLoaded', function () {
             desktopArea.style.display = 'flex';
         } else {
             passwordContainer.style.display = 'block';
+            inboxContainer.style.display = 'none';
             desktopArea.style.display = 'none';
         }
     }
@@ -553,50 +556,50 @@ document.addEventListener('DOMContentLoaded', function () {
     passwordIconTaskbar.addEventListener('click', togglePassword);
 
     // Go back to the desktop
-    backToDesktop.addEventListener('click', function () {
+    backToDesktopPassword.addEventListener('click', function () {
         passwordContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
     });
 
     passwordInput.addEventListener('input', function (event) {
         let password = event.target.value;
-    
-        // Initialize strength score
         let strength = 0;
-    
-        // Check for password length
+
+        // strength improves if password is 8 or more characters
         if (password.length >= 8) {
             strength += 1;
         }
         if (password.length >= 12) {
             strength += 1;
         }
-    
-        // Check for presence of numbers, special characters, and uppercase letters
+
+        // Check for use of numbers, special characters, and uppercase letters
         if (/[0-9]/.test(password)) {
             strength += 1;
         }
+        // Check for use of special characters
         if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
             strength += 1;
         }
+        // Check for use of uppercase letters
         if (/[A-Z]/.test(password)) {
             strength += 1;
         }
-    
+
         // Determine the degree and text based on strength score
         let degree = (strength / 5) * 360; // 5 is the maximum score
         let gradientColor = strength <= 2 ? '#ff2c1c' : (strength <= 4 ? '#ff9800' : '#12ff12');
         let strengthText = strength <= 2 ? 'Weak' : (strength <= 4 ? 'Medium' : 'Strong');
-    
+
         passwordStrengths.forEach(passwordStrength => {
             passwordStrength.style.background = `conic-gradient(${gradientColor} ${degree}deg, #1115 ${degree}deg)`;
         });
-    
+
         text.textContent = strengthText;
         text.style.color = gradientColor;
     });
-    
-    
+
+
 
 
 
