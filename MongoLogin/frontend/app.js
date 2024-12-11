@@ -1,9 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
     const emailIconDesktop = document.getElementById('email-icon');        // Icon for email on desktop
     const emailIconTaskbar = document.getElementById('taskbar-email');     // Icon for email on taskbar
-    const desktopArea = document.getElementById('desktop-area');           // Desktop area
     const inboxContainer = document.getElementById('inbox-container');     // Inbox container
     const emailContainer = document.getElementById('email-interface');     // Inbox container
+
+    const passwordIconDesktop = document.getElementById('password-icon');        // Icon for password on desktop
+    const passwordIconTaskbar = document.getElementById('taskbar-password');     // Icon for password on taskbar
+    const passwordContainer = document.getElementById('password-container');
+
+    const desktopArea = document.getElementById('desktop-area');           // Desktop area
     const backToDesktop = document.getElementById('close-inbox');      // Button or link to return to desktop
 
     const instructionModel = document.getElementById('instructions-email'); // Instruction model
@@ -17,6 +22,15 @@ document.addEventListener('DOMContentLoaded', function () {
     let isFirstOpen = true; // Track if inbox is opened for the first time
     let currentPage = 0; // Track the current page of the model
     let displaynextemailbutton = false; //do not show next email button orginally
+
+
+    //PHISHING EXERCISE CODE 
+    //
+    //
+    //
+    //
+    //
+
 
     // Pages content
     const pages = [
@@ -146,6 +160,8 @@ document.addEventListener('DOMContentLoaded', function () {
         inboxContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
     });
+
+
 
 
 
@@ -330,18 +346,6 @@ document.addEventListener('DOMContentLoaded', function () {
         updateSlide();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     //hints for example email
     //Highlight phishing words code
     //suspicious words to check for highlighting
@@ -502,8 +506,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-
-
     function clearTickboxSelection() {
         const options = document.getElementsByName("option");
         for (const option of options) {
@@ -519,6 +521,33 @@ document.addEventListener('DOMContentLoaded', function () {
         const multiplechoiceBox = document.querySelector('.multiplechoice-box');
         multiplechoiceBox.classList.remove('hidden'); // unhide the box by removing hidden
     }
+
+    //PASSWORD EXERCISE CODE 
+    //
+    //
+    //
+    //
+    //
+
+    function togglePassword() {
+        if (passwordContainer.style.display === 'block') {
+            passwordContainer.style.display = 'none';
+            desktopArea.style.display = 'flex';
+        } else {
+            passwordContainer.style.display = 'block';
+            desktopArea.style.display = 'none';
+        }
+    }
+
+    // Toggle inbox on desktop and taskbar
+    passwordIconDesktop.addEventListener('click', togglePassword);
+    passwordIconTaskbar.addEventListener('click', togglePassword);
+
+    // Go back to the desktop
+    backToDesktop.addEventListener('click', function () {
+        passwordContainer.style.display = 'none';
+        desktopArea.style.display = 'flex';
+    });
 
 
 
