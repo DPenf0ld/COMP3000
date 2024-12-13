@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //Desktop code
     const desktopArea = document.getElementById('desktop-area');           // Desktop area
     const backToDesktop = document.getElementById('close-inbox');      // Button or link to return to desktop
-    const backToDesktopPassword = document.getElementById('close-password'); 
+    const backToDesktopPassword = document.getElementById('close-password');
 
 
 
@@ -597,6 +597,85 @@ document.addEventListener('DOMContentLoaded', function () {
 
         text.textContent = strengthText;
         text.style.color = gradientColor;
+    });
+
+
+    //IMPLEMENTATION OF PWNED API
+
+    // SHA-1 Hashing Function (to hash the password)
+    function encrypt(str) {
+        const utf8 = new TextEncoder().encode(str);
+        return crypto.subtle.digest('SHA-1', utf8).then(hashBuffer => {
+            return Array.from(new Uint8Array(hashBuffer))
+                .map(byte => byte.toString(16).padStart(2, '0'))
+                .join('');
+        });
+    }
+
+    document.getElementById('checkButton').addEventListener('click', async () => {
+        const passwordPWNED = document.getElementById('passwordPWNED').value;
+        const resultElement = document.getElementById('result');
+
+        // Clear previous results
+        resultElement.textContent = "";
+        resultElement.style.color = "";
+
+        if (!passwordPWNED) {
+            resultElement.textContent = "Please enter a password.";
+            resultElement.style.color = "red"; // works
+            return;
+        }
+
+        try {
+            // Hash the password 
+            const hashedPassword = await encrypt(passwordPWNED);
+
+            // Extract the first 5 characters of the hash
+            const hashPrefix = hashedPassword.substring(0, 5);
+            const hashSuffix = hashedPassword.substring(5).toUpperCase();
+
+            // Fetch data from the Pwned Passwords API
+            const response = await fetch(`https://api.pwnedpasswords.com/range/${hashPrefix}`);
+
+            if (!response.ok) {
+                resultElement.textContent = "Error fetching data. Please try again later.";
+                resultElement.style.color = "red"; // works
+                return;
+            }
+
+            const data = await response.text();
+            const breaches = data.split('\n').map(line => {
+                const [suffix, count] = line.split(':');
+                return { suffix, count: parseInt(count) };
+            });
+
+            // Find the match for the password
+            const matchedBreach = breaches.find(breach => breach.suffix === hashSuffix);
+
+            // If the password has been pwned
+            if (matchedBreach) {
+                resultElement.innerHTML = `
+                <p style="color: red;">This password has been pwned! It has appeared in ${matchedBreach.count} breaches.</p>
+                <p style="color: red;"><strong>Why is this a problem?</strong></p>
+                <p style="color: red;">When your password is involved in a breach, attackers can potentially use it to gain unauthorized access to your accounts, putting your personal data at risk. It's recommended to change it immediately.</p>
+                <p style="color: red;"><strong>How to improve your password:</strong></p>
+                <ul>
+                <li style="color: red;">Use a combination of uppercase and lowercase letters, numbers, and special characters.</li>
+                <li style="color: red;">Avoid using easily guessable information like your name, birthdate, or common words.</li>
+                <li style="color: red;">Consider using a password manager to create and store strong, unique passwords for each account.</li>
+                </ul>
+                `;
+            } else {
+                resultElement.innerHTML = `
+                    <p style="color: green;">This password has not been pwned. It appears safe to use.</p>
+                `;
+            }
+
+        } catch (error) {
+            resultElement.textContent = "Error checking password. Please try again later.";
+            resultElement.style.color = "red"; // works
+            console.error(error);
+        }
     });
 
 

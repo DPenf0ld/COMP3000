@@ -126,22 +126,23 @@
     <!-- Password Tester (Hidden) -->
     <div class="password-container" id="password-container" style="display: none;">
         <button id="close-password" aria-label="Close Inbox">&times;</button> <!-- Close button -->
-        <div class="box">
-            <ul>
-                <li>Length should be 8 or more characters</li>
-                <li>A special character should be present</li>
-                <li>Numbers should be used</li>
-                <li>Capital letters should be present</li>
-            </ul>
-            <h2>Password Strength <span id="text">Check</span></h2>
+        <div class="StrengthTest">
+            <h2>Your Password Strength <span id="text">Check</span></h2>
             <input type="password" id="password" placeholder="Enter your password">
             <div class="password-strength"></div>
             <div class="password-strength"></div>
             <div class="password-strength"></div>
             <div class="password-strength"></div>
-          </div>
-          
-        
+        </div>
+        <div class="Pwned">
+            <h2>Check if Your Password Has Been Pwned</h2>
+            <input type="password" id="passwordPWNED" placeholder="Enter your password">
+            <button id="checkButton">Check</button>
+
+        </div>
+        <div class="ResultsPwn">
+            <p id="result"></p>
+        </div>
     </div>
 
 

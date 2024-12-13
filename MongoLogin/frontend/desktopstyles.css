@@ -555,7 +555,7 @@ p {
     top: 2%;
     left: 50%; /* This moves the containers left edge to center and then offsets for center*/
     transform: translateX(-50%);
-    background-color: #f7f7f7;
+    background-color: #ffffff;
     border: 2px solid #e5e5e5;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -564,9 +564,9 @@ p {
     z-index: 10;
 }
 
-.box {
+.StrengthTest {
     position: absolute; /* Set position to absolute to place it relative to .password-container */
-    top: 50%; 
+    top: 30%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
     width: 300px;
@@ -574,7 +574,7 @@ p {
     z-index: 20; 
 }
 
-.box h2
+.StrengthTest h2
 {
     position: absolute;
     top: -60px; /*Move higher above box*/
@@ -590,7 +590,7 @@ p {
 }
 
 
-.box input {
+.StrengthTest input {
     position: absolute;
     inset: 2px;
     z-index: 10;
@@ -601,19 +601,19 @@ p {
     background: #333;
     color: #fff;
 }
-.box .password-strength
+.StrengthTest .password-strength
 {
     position: absolute;
     inset: 0;
     background: #1115;
 }
 
-.box .password-strength:nth-child(3)
+.StrengthTest .password-strength:nth-child(3)
 {
     filter: blur(5px);
 }
 
-.box .password-strength:nth-child(4)
+.StrengthTest .password-strength:nth-child(4)
 {
     filter: blur(10px);
 }
@@ -632,4 +632,65 @@ p {
 
 #close-password:hover {
     color: #e74c3c; /* Red Hover Colour*/
+}
+
+
+/*pwned styles same as strengthTest*/
+
+/* Pwned Password Box */
+.Pwned {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    z-index: 20;
+}
+
+.Pwned h2 {
+    position: relative;
+    margin-bottom: 15px; /* Add spacing below the heading */
+    font-size: 1.25rem;
+    color: #000000;
+    font-weight: 500;
+    text-align: left;
+}
+
+.Pwned input {
+    width: 100%; /* Ensure the input takes up the full width of the container */
+    padding: 10px 15px;
+    margin-bottom: 15px; /* Add space below the input */
+    font-size: 1em;
+    border: none;
+    outline: none;
+    background: #333;
+    color: #fff;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Button Styles */
+#checkButton {
+    width: 100%; /* Full width of the container */
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+#checkButton:hover {
+    background-color: #45a049;
+}
+
+/* Pwned Password Box */
+.ResultsPwn {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 20;
+    text-align: center; /* Center the text horizontally */
 }
