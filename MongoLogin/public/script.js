@@ -17,10 +17,10 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
     return;
   }
 
-  // Validate password
-  const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d)[A-Za-z\d!@#$%^&*]{5,}$/;
+    // Validate password
+  const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d)[A-Za-z\d!@#$%^&*]{12,}$/;
   if (!passwordPattern.test(password)) {
-    alert('Password must be at least 5 characters long, contain a capital letter, a number, and a special character.');
+    alert('Password must be at least 12 characters long, contain a capital letter, a number, and a special character.');
     return;
   }
 
