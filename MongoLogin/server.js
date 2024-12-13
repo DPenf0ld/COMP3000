@@ -8,16 +8,6 @@ require('dotenv').config();
 // Create an Express app
 const app = express();
 
-express.response.setHeader('Access-Control-Allow-Origin', 'http://localhost:5000'); // Adjust the origin to match your setup
-express.response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-express.response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-// Handle preflight (OPTIONS) requests
-if (req.method === 'OPTIONS') {
-  res.writeHead(204); // No Content
-  res.end();
-  return;
-}
 
 app.use(express.json());  // Middleware to parse JSON bodies
 app.use(express.static(path.join(__dirname, 'public')));  // Serve static files from 'public' folder
