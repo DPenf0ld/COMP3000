@@ -627,6 +627,17 @@ p {
     margin-bottom: 15px;
 }
 
+.password-info {
+    margin-top: 20px;
+    font-size: 1em;
+    color: #000000;
+}
+
+#password-interface p {
+    color: #000000; 
+}
+
+
 .StrengthTest {
     position: relative; 
     width: 300px;

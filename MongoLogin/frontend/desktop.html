@@ -163,8 +163,19 @@
 
         <button id="close-password" aria-label="Close Inbox">&times;</button> <!-- Close button -->
         <div class="password-interface" id="password-interface">
-            <div class="left-side">   
-                <h2>Your Password Strength <span id="text">Check</span></h2>
+            <div class="left-side">
+                <h2>Create a secure Password <span id="text">Check</span></h2>
+                <div class="password-info">
+                    <p>Create a password by following the criteria listed below. The stronger your password, the better protected your accounts will be from unauthorized access. Strong passwords are essential in safeguarding your personal and sensitive information from hackers and data breaches. Weak passwords are often the first line of attack for cybercriminals, and they can easily be cracked with simple methods. By following these guidelines, you can significantly reduce the risk of your accounts being compromised and ensure your data stays secure. Remember, it's not just about creating a password but about creating one that will stand up to modern threats.</p>
+                    <h3>Password Strength Criteria</h3>
+                    <ul>
+                        <li><strong>Length:</strong> At least 8 characters (12 or more for better security).</li>
+                        <li><strong>Lowercase Letters:</strong> Include at least one lowercase letter (e.g., a, b, c).</li>
+                        <li><strong>Uppercase Letters:</strong> Include at least one uppercase letter (e.g., A, B, C).</li>
+                        <li><strong>Numbers:</strong> Include at least one number (e.g., 1, 2, 3).</li>
+                        <li><strong>Special Characters:</strong> Include at least one special character (e.g., !, @, #, $, etc.).</li>
+                    </ul>
+                </div>
                 <div class="StrengthTest">
                     <input type="password" id="password" placeholder="Enter your password">
                     <div class="password-strength"></div>
@@ -172,6 +183,10 @@
                     <div class="password-strength"></div>
                     <div class="password-strength"></div>
                 </div>
+                <p><strong>Important:</strong> Now that you've created your password, it's time to test it against a
+                    real-time breach database to see if it's been compromised in any data breaches. Don't worry—your
+                    password is not shared or saved during this process.</p>
+                <p>You can also test any of your current passwords to check for breaches.</p>
             </div>
             <div class="Pwned">
                 <h2>Check if Your Password Has Been Pwned</h2>
