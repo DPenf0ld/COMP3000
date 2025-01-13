@@ -590,16 +590,6 @@ p {
 
 /*Password Tester Styles*/
 
-.StrengthTest, .Pwned {
-    position: absolute;
-    top: 30%; /* Static positioning within the container */
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-
-
-
 .password-container {
     width: 95%;
     height: 85%;
@@ -616,30 +606,35 @@ p {
     z-index: 10;
 }
 
+.password-interface {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* Strength Test - Left Side */
+.left-side {
+    flex: 1; /* Takes up 50% of the container */
+    padding: 20px;
+    background-color: #ffffff  ;
+    border-right: 1px solid #ddd; /* divider */
+    position: relative; 
+}
+
+.left-side h2 {
+    font-size: 1.25rem;
+    color: #000;
+    margin-bottom: 15px;
+}
+
 .StrengthTest {
-    position: absolute; /* Set position to absolute to place it relative to .password-container */
-    top: 30%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
+    position: relative; 
     width: 300px;
     height: 50px;
     z-index: 20; 
 }
 
-.StrengthTest h2
-{
-    position: absolute;
-    top: -60px; /*Move higher above box*/
-    font-size: 1.25rem;
-    color:#000000;
-    font-weight: 500;
-    margin: 0; /* Reset margins for better control */
-    text-align: left; /* Aligns the text to the left */
-    left: 0; /* Position it at the left edge of .box */
 
-
-
-}
 
 
 .StrengthTest input {
@@ -687,25 +682,19 @@ p {
 }
 
 
-/*pwned styles same as strengthTest*/
 
-/* Pwned Password Box */
+
+/* Pwned - Right Side */
 .Pwned {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    z-index: 20;
+    flex: 1; /* Takes up 50% of the container */
+    padding: 20px;
+    background-color: #ffefd5  ;
 }
 
 .Pwned h2 {
-    position: relative;
-    margin-bottom: 15px; /* Add spacing below the heading */
     font-size: 1.25rem;
-    color: #000000;
-    font-weight: 500;
-    text-align: left;
+    color: #000;
+    margin-bottom: 15px;
 }
 
 .Pwned input {
@@ -738,11 +727,8 @@ p {
 
 /* Pwned Password Box */
 .ResultsPwn {
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    z-index: 20;
-    text-align: center; /* Center the text horizontally */
+    margin-top: 20px;
+    text-align: center;
+    color: #333;
+    font-size: 1rem;
 }
