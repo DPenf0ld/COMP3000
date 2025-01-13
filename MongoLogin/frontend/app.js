@@ -2,6 +2,10 @@ document.addEventListener('DOMContentLoaded', function () {
     //email code
     const emailIconDesktop = document.getElementById('email-icon');        // Icon for email on desktop
     const emailIconTaskbar = document.getElementById('taskbar-email');     // Icon for email on taskbar
+    const emailIconProgress = document.getElementById('progress-email');     // Icon for email on progress tracker
+
+
+
     const inboxContainer = document.getElementById('inbox-container');     // Inbox container
     const emailContainer = document.getElementById('email-interface');     // Inbox container
 
@@ -20,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
     //password code
     const passwordIconDesktop = document.getElementById('password-icon');        // Icon for password on desktop
     const passwordIconTaskbar = document.getElementById('taskbar-password');     // Icon for password on taskbar
+    const passwordIconProgress = document.getElementById('progress-password');     // Icon for password on progress tracker
+
     const passwordContainer = document.getElementById('password-container');
 
     let passwordInput = document.getElementById('password');
@@ -165,6 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Toggle inbox on desktop and taskbar
     emailIconDesktop.addEventListener('click', toggleInbox);
     emailIconTaskbar.addEventListener('click', toggleInbox);
+    emailIconProgress.addEventListener('click', toggleInbox);
 
     // Go back to the desktop
     backToDesktop.addEventListener('click', function () {
@@ -554,6 +561,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Toggle inbox on desktop and taskbar
     passwordIconDesktop.addEventListener('click', togglePassword);
     passwordIconTaskbar.addEventListener('click', togglePassword);
+    passwordIconProgress.addEventListener('click', togglePassword);
 
     // Go back to the desktop
     backToDesktopPassword.addEventListener('click', function () {
