@@ -764,8 +764,6 @@ document.addEventListener('DOMContentLoaded', function () {
             taskElement.innerHTML += `
             <div class="next-steps">
                 <p>You can test more passwords or minimize this tab and move on to the next task.</p>
-                <button class="btn-test-more" onclick="testMorePasswords()">Test More Passwords</button>
-                <button class="btn-minimize" onclick="minimizeTab()">Minimize Tab</button>
             </div>
         `;
         } else {
