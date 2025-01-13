@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const emailIconTaskbar = document.getElementById('taskbar-email');     // Icon for email on taskbar
     const emailIconProgress = document.getElementById('progress-email');     // Icon for email on progress tracker
 
-
-
     const inboxContainer = document.getElementById('inbox-container');     // Inbox container
     const emailContainer = document.getElementById('email-interface');     // Inbox container
 
@@ -22,11 +20,17 @@ document.addEventListener('DOMContentLoaded', function () {
     let displaynextemailbutton = false; //do not show next email button orginally
 
     //password code
+    let FirstOpenPassword = true; // Track if password exercise is opened for the first time
     const passwordIconDesktop = document.getElementById('password-icon');        // Icon for password on desktop
     const passwordIconTaskbar = document.getElementById('taskbar-password');     // Icon for password on taskbar
     const passwordIconProgress = document.getElementById('progress-password');     // Icon for password on progress tracker
 
+    const instructionPasswordModel = document.getElementById('instructions-password'); // Instruction model
+    const confirmpasswordButton = document.getElementById('confirm-password-button');
+
+
     const passwordContainer = document.getElementById('password-container');
+    const passwordContainerBlur = document.getElementById('password-interface');     
 
     let passwordInput = document.getElementById('password');
     let passwordStrengths = document.querySelectorAll('.password-strength')
@@ -556,7 +560,24 @@ document.addEventListener('DOMContentLoaded', function () {
             inboxContainer.style.display = 'none';
             desktopArea.style.display = 'none';
         }
+
+        // Show instructions if it's the first time opening
+        if (FirstOpenPassword) {
+            instructionPasswordModel.style.display = 'flex'; //working
+            passwordContainerBlur.classList.add('blurred'); // Apply the blur
+            FirstOpenPassword = false;
+        }
     }
+
+
+    confirmpasswordButton.addEventListener('click', () => {
+        instructionPasswordModel.style.display = 'none';
+        passwordContainerBlur.classList.remove('blurred'); // Remove the blur
+    });
+
+  
+
+
 
     // Toggle inbox on desktop and taskbar
     passwordIconDesktop.addEventListener('click', togglePassword);

@@ -292,7 +292,7 @@ h1 {
 /* Instructions styles */
 .instructions {
     font-size: medium;
-    position: fixed;
+    position: absolute;
     top: 50%;       
     left: 50%;       
     transform: translate(-50%, -50%); /* Moves the element back by 50% of its own width and height */
@@ -305,7 +305,7 @@ h1 {
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    z-index: 11; /*appears on top*/
+    z-index: 100; /*appears on top*/
 }
 
 
@@ -590,13 +590,20 @@ p {
 
 /*Password Tester Styles*/
 
+.StrengthTest, .Pwned {
+    position: absolute;
+    top: 30%; /* Static positioning within the container */
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
 
 
 .password-container {
     width: 95%;
     height: 85%;
-    position: fixed;
+    position: relative;
     top: 2%;
     left: 50%; /* This moves the containers left edge to center and then offsets for center*/
     transform: translateX(-50%);
