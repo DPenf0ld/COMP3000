@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //password code
     let FirstOpenPassword = true; // Track if password exercise is opened for the first time
+
+    let passwordtask1 = false;
+    let passwordtask2 = false;
+    let passwordtask3 = false;
+
     const passwordIconDesktop = document.getElementById('password-icon');        // Icon for password on desktop
     const passwordIconTaskbar = document.getElementById('taskbar-password');     // Icon for password on taskbar
     const passwordIconProgress = document.getElementById('progress-password');     // Icon for password on progress tracker
@@ -30,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     const passwordContainer = document.getElementById('password-container');
-    const passwordContainerBlur = document.getElementById('password-interface');     
+    const passwordContainerBlur = document.getElementById('password-interface');
 
     let passwordInput = document.getElementById('password');
     let passwordStrengths = document.querySelectorAll('.password-strength')
@@ -575,7 +580,7 @@ document.addEventListener('DOMContentLoaded', function () {
         passwordContainerBlur.classList.remove('blurred'); // Remove the blur
     });
 
-  
+
 
 
 
@@ -622,6 +627,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
         passwordStrengths.forEach(passwordStrength => {
             passwordStrength.style.background = `conic-gradient(${gradientColor} ${degree}deg, #1115 ${degree}deg)`;
+            // Check if password strength is "Strong" (green color)
+            if (strengthText === 'Strong') {
+                passwordtask1 = true;
+
+                // Update the task list status for Task 1
+                const task1Status = document.querySelector("#task-1-status");
+                task1Status.textContent = "Complete";
+                task1Status.classList.remove("incomplete");
+                task1Status.classList.add("complete");
+
+                // Call passwordComplete to check all tasks
+                passwordComplete();
+            }
         });
 
         text.textContent = strengthText;
@@ -694,10 +712,39 @@ document.addEventListener('DOMContentLoaded', function () {
                 <li style="color: red;">Consider using a password manager to create and store strong, unique passwords for each account.</li>
                 </ul>
                 `;
+
+                passwordtask2 = true;
+
+                // Update the task list status
+                document.querySelector("#task-2-status").textContent = "Complete";
+                document.querySelector("#task-2-status").classList.remove("incomplete");
+                document.querySelector("#task-2-status").classList.add("complete");
+
+                passwordComplete()
             } else {
+
+                passwordtask2 = true;
+
+                // Update the task list status
+                document.querySelector("#task-2-status").textContent = "Complete";
+                document.querySelector("#task-2-status").classList.remove("incomplete");
+                document.querySelector("#task-2-status").classList.add("complete");
+
+                passwordtask3 = true;
+
+                // Update the task list status
+                document.querySelector("#task-3-status").textContent = "Complete";
+                document.querySelector("#task-3-status").classList.remove("incomplete");
+                document.querySelector("#task-3-status").classList.add("complete");
+
+
+
+
+
                 resultElement.innerHTML = `
                     <p style="color: green;">This password has not been pwned. It appears safe to use.</p>
                 `;
+                passwordComplete()
             }
 
         } catch (error) {
@@ -706,6 +753,25 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error(error);
         }
     });
+
+
+    // Function to mark tasks as complete
+    function passwordComplete() {
+        // Check if all tasks are complete
+        if (passwordtask1 && passwordtask2 && passwordtask3) {
+            // Add a message at the bottom for next steps
+            const taskElement = document.querySelector(".Task");
+            taskElement.innerHTML += `
+            <div class="next-steps">
+                <p>You can test more passwords or minimize this tab and move on to the next task.</p>
+                <button class="btn-test-more" onclick="testMorePasswords()">Test More Passwords</button>
+                <button class="btn-minimize" onclick="minimizeTab()">Minimize Tab</button>
+            </div>
+        `;
+        } else {
+            console.log("Not all tasks are complete yet.");
+        }
+    }
 
 
 

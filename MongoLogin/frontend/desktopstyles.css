@@ -743,3 +743,61 @@ p {
     color: #333;
     font-size: 1rem;
 }
+
+.Task {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+.Task h2 {
+    font-size: 1.25rem;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.Task ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.Task li {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #495057;
+}
+
+.Task .status {
+    font-size: 12px;
+    color: #6c757d;
+    margin-left: 8px;
+    font-style: italic;
+}
+
+.Task .status.complete {
+    color: #28a745; /* Green for completed */
+    font-weight: bold;
+}
+
+.Task .status.incomplete {
+    color: #dc3545; /* Red for incomplete */
+    font-weight: bold;
+}
+
+.Task .next-steps {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ced4da;
+}
+
+.Task .next-steps p {
+    font-size: 14px;
+    color: #28a745; /* Green text for guidance */
+}
