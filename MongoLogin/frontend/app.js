@@ -1,11 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
-    //email code
+    //desktop code
     const emailIconDesktop = document.getElementById('email-icon');        // Icon for email on desktop
     const emailIconTaskbar = document.getElementById('taskbar-email');     // Icon for email on taskbar
     const emailIconProgress = document.getElementById('progress-email');     // Icon for email on progress tracker
 
+    //email code
     const inboxContainer = document.getElementById('inbox-container');     // Inbox container
     const emailContainer = document.getElementById('email-interface');     // Inbox container
+    const emailContentContainer = document.querySelector('.email-content');
+    const emailListContainer = document.querySelector('.email-list');
+    let emailtypereminder = false;
 
     const instructionModel = document.getElementById('instructions-email'); // Instruction model
     const nextButton = document.getElementById('next-button');
@@ -116,8 +120,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //update the model content based on the current page
     function updateModelContent() {
-
-
         const titleElement = instructionModel.querySelector('h2');
         const contentElement = instructionModel.querySelector('p');
 
@@ -146,15 +148,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
-
     confirmButton.addEventListener('click', () => {
         instructionModel.style.display = 'none';
         instructionsConfirmed = true; // listener to display instructions once user confirms
         emailContainer.classList.remove('blurred'); // Remove the blur
         displayEmail(currentEmailIndex);
     });
-
 
     // Toggle inbox code
     function toggleInbox() {
@@ -187,9 +186,6 @@ document.addEventListener('DOMContentLoaded', function () {
         inboxContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
     });
-
-
-
 
 
     //display emails
@@ -333,7 +329,8 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
 
         // Append instruction box
-        document.body.appendChild(instructionBox);
+        emailContentContainer.appendChild(instructionBox);
+
 
         // load elments
         const titleElement = document.getElementById('instruction-title');
@@ -472,20 +469,18 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('reminder').addEventListener('click', reminder);
 
     function reminder() {
-        // Create the info box
-        const reminder = document.createElement('div');
-        reminder.className = 'reminder-box';
+        if (emailtypereminder != true) {
+            // Create the info box
+            const reminder = document.createElement('div');
+            reminder.className = 'reminder-box';
 
-        const closeButton = document.createElement('button');
-        closeButton.className = 'close-button';
-        closeButton.innerHTML = '&times;'; // The cross symbol
+            const closeButton = document.createElement('button');
+            closeButton.className = 'close-button';
+            closeButton.innerHTML = '&times;'; // The cross symbol
 
-        closeButton.addEventListener('click', () => {
-            reminder.remove();
-        });
 
-        // Set the inner HTML for the information box with line breaks
-        reminder.innerHTML = `
+            // Set the inner HTML for the information box with line breaks
+            reminder.innerHTML = `
             <strong>Deceptive Phishing</strong><br>
             Fraudulent emails that impersonate legitimate entities to steal sensitive information like passwords or credit card details.<br><br>
             
@@ -496,9 +491,18 @@ document.addEventListener('DOMContentLoaded', function () {
             Targeted attacks aimed at specific individuals or organizations, often using personal information to craft convincing emails.<br><br>
         `;
 
-        document.body.appendChild(reminder);
-        // Append the close button to the info box
-        reminder.appendChild(closeButton);
+            emailListContainer.appendChild(reminder);
+            // Append the close button to the info box
+            reminder.appendChild(closeButton);
+            emailtypereminder = true;
+
+            
+            closeButton.addEventListener('click', () => {
+                reminder.remove();
+                emailtypereminder = false;
+            });
+
+        }
     }
 
 

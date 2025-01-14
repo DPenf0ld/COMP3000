@@ -396,9 +396,9 @@ p {
 
 .instruction-box {
     font-size: medium;
-    position: fixed;
-    bottom: 10%;
-    left: 65%;
+    position: relative;
+    bottom: 0;
+    left: 0;
     background-color: #fff;
     border: 2px solid #007BFF;
     border-radius: 8px;
@@ -519,13 +519,13 @@ p {
 
 /*Styles for tickbox class*/
 .multiplechoice-box {
-    position: fixed;
+    position: relative;
     bottom: 0%;
     background-color: #fff;
     border: 2px solid #007BFF;
     border-radius: 8px;
     padding: 20px;
-    width: 17%;
+
     z-index: 1000;
     text-align: center;
 }
@@ -565,9 +565,9 @@ p {
 
 .reminder-box {
     font-size: medium;
-    position: fixed;
-    bottom: 10%;
-    left: 65%;
+    position: relative;
+    top: 0;
+    left: 0;
     background-color: #fff;
     border: 2px solid #007BFF;
     border-radius: 8px;
