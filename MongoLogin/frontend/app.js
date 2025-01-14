@@ -23,6 +23,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentPage = 0; // Track the current page of the model
     let displaynextemailbutton = false; //do not show next email button orginally
 
+    let emailtask1 = false;
+    let emailtask2 = false;
+    let emailtask3 = false;
+
     //password code
     let FirstOpenPassword = true; // Track if password exercise is opened for the first time
 
@@ -528,6 +532,43 @@ document.addEventListener('DOMContentLoaded', function () {
         if (selectedValue === currentEmailType) {
             feedbackElement.textContent = `Correct! The answer is ${currentEmailType}.`;
             feedbackElement.style.color = "green"; // Change feedback text color for correct answer
+            if (currentEmailIndex==0){
+                emailtask1 = true;
+                console.log("Task 1 correct")
+
+                // Update the task list status for Task 1
+                const task1Status = document.querySelector("#email-task-1-status");
+                task1Status.textContent = "Complete";
+                task1Status.classList.remove("incomplete");
+                task1Status.classList.add("complete");
+
+                // Call passwordComplete to check all tasks
+                emailComplete();
+            }
+            else if (currentEmailIndex === 1) {
+                emailtask2 = true;
+                console.log("Task 2 correct")
+                // Update the task list status for Task 2
+                const task2Status = document.querySelector("#email-task-2-status");
+                task2Status.textContent = "Complete";
+                task2Status.classList.remove("incomplete");
+                task2Status.classList.add("complete");
+            
+                // Call emailComplete to check all tasks
+                emailComplete();
+            } else if (currentEmailIndex === 2) {
+                emailtask3 = true;
+                console.log("Task 3 correct")
+            
+                // Update the task list status for Task 3
+                const task3Status = document.querySelector("#email-task-3-status");
+                task3Status.textContent = "Complete";
+                task3Status.classList.remove("incomplete");
+                task3Status.classList.add("complete");
+            
+                // Call emailComplete to check all tasks
+                emailComplete();
+            }
         } else if (selectedValue) {
             feedbackElement.textContent = `Incorrect. You selected: ${selectedValue}. The correct answer is ${currentEmailType}.`;
             feedbackElement.style.color = "red"; // Change feedback text color for incorrect answer
@@ -551,6 +592,23 @@ document.addEventListener('DOMContentLoaded', function () {
     function unhideInstructionBox() {
         const multiplechoiceBox = document.querySelector('.multiplechoice-box');
         multiplechoiceBox.classList.remove('hidden'); // unhide the box by removing hidden
+    }
+
+
+    // Function to mark all email tasks as complete
+    function emailComplete() {
+        // Check if all tasks are complete
+        if (emailtask1 && emailtask2 && emailtask3) {
+            // Add a message at the bottom for next steps
+            const taskElement = document.querySelector(".Taskemail");
+            taskElement.innerHTML += `
+            <div class="next-steps">
+                <p>Task Complete</p>
+            </div>
+        `;
+        } else {
+            console.log("Not all tasks are complete yet.");
+        }
     }
 
     //PASSWORD EXERCISE CODE 
@@ -759,28 +817,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    // Function to mark tasks as complete
+    // Function to mark all password tasks as complete
     function passwordComplete() {
         // Check if all tasks are complete
         if (passwordtask1 && passwordtask2 && passwordtask3) {
             // Add a message at the bottom for next steps
-            const taskElement = document.querySelector(".Task");
-            taskElement.innerHTML += `
+            const taskPasswordElement = document.querySelector(".Taskpassword");
+            taskPasswordElement.innerHTML += `
             <div class="next-steps">
-                <p>You can test more passwords or minimize this tab and move on to the next task.</p>
+                <p>You can test more passwords or minimise this tab and move on to the next task.</p>
             </div>
         `;
         } else {
             console.log("Not all tasks are complete yet.");
         }
     }
-
-
-
-
-
-
-
 });
 
 
