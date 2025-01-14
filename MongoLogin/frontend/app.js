@@ -23,12 +23,14 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentPage = 0; // Track the current page of the model
     let displaynextemailbutton = false; //do not show next email button orginally
 
+    let emailtaskComplete = false;
     let emailtask1 = false;
     let emailtask2 = false;
     let emailtask3 = false;
 
     //password code
     let FirstOpenPassword = true; // Track if password exercise is opened for the first time
+    let passwordtaskComplete = false;
 
     let passwordtask1 = false;
     let passwordtask2 = false;
@@ -598,7 +600,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to mark all email tasks as complete
     function emailComplete() {
         // Check if all tasks are complete
-        if (emailtask1 && emailtask2 && emailtask3) {
+        if (emailtask1 && emailtask2 && emailtask3 && emailtaskComplete!=true) {
+            emailtaskComplete=true;
             // Add a message at the bottom for next steps
             const taskElement = document.querySelector(".Taskemail");
             taskElement.innerHTML += `
@@ -820,7 +823,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to mark all password tasks as complete
     function passwordComplete() {
         // Check if all tasks are complete
-        if (passwordtask1 && passwordtask2 && passwordtask3) {
+        if (passwordtask1 && passwordtask2 && passwordtask3 && passwordtaskComplete!=true) {
+            passwordtaskComplete = true;
             // Add a message at the bottom for next steps
             const taskPasswordElement = document.querySelector(".Taskpassword");
             taskPasswordElement.innerHTML += `
