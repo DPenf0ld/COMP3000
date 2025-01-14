@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let isFirstOpen = true; // Track if inbox is opened for the first time
     let currentPage = 0; // Track the current page of the model
     let displaynextemailbutton = false; //do not show next email button orginally
+    let selectedoption = false;
+    let correctselectedoption= false;
 
     let emailtaskComplete = false;
     let emailtask1 = false;
@@ -244,6 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function displayEmail(index) {
         clearTickboxSelection()
+        displaynextemailbutton = false;
         const email = emails[index];
         if (email) {
             const emailSenderElement = document.querySelector('.email-sender');
@@ -413,52 +416,58 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Handle submission when the submit button is clicked
     submitButton.addEventListener('click', () => {
+
+
         tickboxanswer(currentEmailIndex)
-        let correctCount = 0;
-        let missedCount = 0;
 
-        // Get all highlighted elements from both body and subject
-        const highlightedBodyElements = emailBodyElement.querySelectorAll('.highlighted');
-        const highlightedSubjectElements = emailSubjectElement.querySelectorAll('.highlighted');
 
-        // Combine the highlighted elements from body and subject
-        const allHighlightedElements = [...highlightedBodyElements, ...highlightedSubjectElements];
+        if (selectedoption) {
+            let correctCount = 0;
+            let missedCount = 0;
 
-        // Check each highlighted element to see if it matches a suspicious word
-        allHighlightedElements.forEach(span => {
-            const word = span.textContent.trim().toLowerCase();
-            if (suspiciousWords.includes(word)) {
-                span.style.backgroundColor = 'green';  // Correct word - green
-                correctCount++;
-            } else {
-                span.style.backgroundColor = 'red';  // Incorrect word - red
-            }
-        });
+            // Get all highlighted elements from both body and subject
+            const highlightedBodyElements = emailBodyElement.querySelectorAll('.highlighted');
+            const highlightedSubjectElements = emailSubjectElement.querySelectorAll('.highlighted');
 
-        // Check for any suspicious words that were not highlighted
-        suspiciousWords.forEach(word => {
-            const wordFoundInBody = emailBodyElement.innerText.toLowerCase().includes(word);
-            const wordFoundInSubject = emailSubjectElement.innerText.toLowerCase().includes(word);
+            // Combine the highlighted elements from body and subject
+            const allHighlightedElements = [...highlightedBodyElements, ...highlightedSubjectElements];
 
-            // If the word was found but not highlighted
-            if (!Array.from(allHighlightedElements).some(span => span.textContent.trim().toLowerCase() === word)) {
-                missedCount++;
-                if (wordFoundInBody) {
-                    highlightMissedWord(word, emailBodyElement);  // Highlight missed word in body
+            // Check each highlighted element to see if it matches a suspicious word
+            allHighlightedElements.forEach(span => {
+                const word = span.textContent.trim().toLowerCase();
+                if (suspiciousWords.includes(word)) {
+                    span.style.backgroundColor = 'green';  // Correct word - green
+                    correctCount++;
+                } else {
+                    span.style.backgroundColor = 'red';  // Incorrect word - red
                 }
-                if (wordFoundInSubject) {
-                    highlightMissedWord(word, emailSubjectElement);  // Highlight missed word in subject
+            });
+
+            // Check for any suspicious words that were not highlighted
+            suspiciousWords.forEach(word => {
+                const wordFoundInBody = emailBodyElement.innerText.toLowerCase().includes(word);
+                const wordFoundInSubject = emailSubjectElement.innerText.toLowerCase().includes(word);
+
+                // If the word was found but not highlighted
+                if (!Array.from(allHighlightedElements).some(span => span.textContent.trim().toLowerCase() === word)) {
+                    missedCount++;
+                    if (wordFoundInBody) {
+                        highlightMissedWord(word, emailBodyElement);  // Highlight missed word in body
+                    }
+                    if (wordFoundInSubject) {
+                        highlightMissedWord(word, emailSubjectElement);  // Highlight missed word in subject
+                    }
                 }
+            });
+
+
+            console.log(`Correct: ${correctCount}, Missed: ${missedCount}`);
+
+            if (correctselectedoption) {
+                displaynextemailbutton = true;
+                nextemailbutton()
             }
-        });
-
-
-        console.log(`Correct: ${correctCount}, Missed: ${missedCount}`);
-
-        displaynextemailbutton = true;
-
-        nextemailbutton()
-
+        }
     });
 
     // Function to highlight missed suspicious word
@@ -502,7 +511,7 @@ document.addEventListener('DOMContentLoaded', function () {
             reminder.appendChild(closeButton);
             emailtypereminder = true;
 
-            
+
             closeButton.addEventListener('click', () => {
                 reminder.remove();
                 emailtypereminder = false;
@@ -532,9 +541,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Check if the selected value matches the current email type
         if (selectedValue === currentEmailType) {
+            selectedoption = true;
+            correctselectedoption= true;
             feedbackElement.textContent = `Correct! The answer is ${currentEmailType}.`;
             feedbackElement.style.color = "green"; // Change feedback text color for correct answer
-            if (currentEmailIndex==0){
+            if (currentEmailIndex == 0) {
                 emailtask1 = true;
                 console.log("Task 1 correct")
 
@@ -555,26 +566,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 task2Status.textContent = "Complete";
                 task2Status.classList.remove("incomplete");
                 task2Status.classList.add("complete");
-            
+
                 // Call emailComplete to check all tasks
                 emailComplete();
             } else if (currentEmailIndex === 2) {
                 emailtask3 = true;
                 console.log("Task 3 correct")
-            
+
                 // Update the task list status for Task 3
                 const task3Status = document.querySelector("#email-task-3-status");
                 task3Status.textContent = "Complete";
                 task3Status.classList.remove("incomplete");
                 task3Status.classList.add("complete");
-            
+
                 // Call emailComplete to check all tasks
                 emailComplete();
             }
         } else if (selectedValue) {
+            selectedoption = true;
+            correctselectedoption= false;
             feedbackElement.textContent = `Incorrect. You selected: ${selectedValue}. The correct answer is ${currentEmailType}.`;
             feedbackElement.style.color = "red"; // Change feedback text color for incorrect answer
         } else {
+            selectedoption = false;
+            correctselectedoption= false;
             feedbackElement.textContent = "Please select an option before submitting.";
             feedbackElement.style.color = "orange"; // Change feedback text color for no selection
         }
@@ -600,8 +615,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to mark all email tasks as complete
     function emailComplete() {
         // Check if all tasks are complete
-        if (emailtask1 && emailtask2 && emailtask3 && emailtaskComplete!=true) {
-            emailtaskComplete=true;
+        if (emailtask1 && emailtask2 && emailtask3 && emailtaskComplete != true) {
+            emailtaskComplete = true;
             // Add a message at the bottom for next steps
             const taskElement = document.querySelector(".Taskemail");
             taskElement.innerHTML += `
@@ -823,7 +838,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to mark all password tasks as complete
     function passwordComplete() {
         // Check if all tasks are complete
-        if (passwordtask1 && passwordtask2 && passwordtask3 && passwordtaskComplete!=true) {
+        if (passwordtask1 && passwordtask2 && passwordtask3 && passwordtaskComplete != true) {
             passwordtaskComplete = true;
             // Add a message at the bottom for next steps
             const taskPasswordElement = document.querySelector(".Taskpassword");
