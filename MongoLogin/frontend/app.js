@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentPage = 0; // Track the current page of the model
     let displaynextemailbutton = false; //do not show next email button orginally
     let selectedoption = false;
-    let correctselectedoption= false;
+    let correctselectedoption = false;
 
     let emailtaskComplete = false;
     let emailtask1 = false;
@@ -542,7 +542,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check if the selected value matches the current email type
         if (selectedValue === currentEmailType) {
             selectedoption = true;
-            correctselectedoption= true;
+            correctselectedoption = true;
             feedbackElement.textContent = `Correct! The answer is ${currentEmailType}.`;
             feedbackElement.style.color = "green"; // Change feedback text color for correct answer
             if (currentEmailIndex == 0) {
@@ -584,12 +584,12 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         } else if (selectedValue) {
             selectedoption = true;
-            correctselectedoption= false;
+            correctselectedoption = false;
             feedbackElement.textContent = `Incorrect. You selected: ${selectedValue}. The correct answer is ${currentEmailType}.`;
             feedbackElement.style.color = "red"; // Change feedback text color for incorrect answer
         } else {
             selectedoption = false;
-            correctselectedoption= false;
+            correctselectedoption = false;
             feedbackElement.textContent = "Please select an option before submitting.";
             feedbackElement.style.color = "orange"; // Change feedback text color for no selection
         }
@@ -617,6 +617,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check if all tasks are complete
         if (emailtask1 && emailtask2 && emailtask3 && emailtaskComplete != true) {
             emailtaskComplete = true;
+
+            // Update the icon to show the completed status
+            const emailIcon = document.querySelector("#progress-email img");
+            if (emailIcon) {
+                emailIcon.src = "assets/icons/email-tick-icon.png";
+            }
+
             // Add a message at the bottom for next steps
             const taskElement = document.querySelector(".Taskemail");
             taskElement.innerHTML += `
@@ -840,6 +847,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check if all tasks are complete
         if (passwordtask1 && passwordtask2 && passwordtask3 && passwordtaskComplete != true) {
             passwordtaskComplete = true;
+
+            // Update the icon to show the completed status
+            const passwordIcon = document.querySelector("#progress-password img");
+            if (passwordIcon) {
+                passwordIcon.src = "assets/icons/password-tick-icon.png";
+            }
+
             // Add a message at the bottom for next steps
             const taskPasswordElement = document.querySelector(".Taskpassword");
             taskPasswordElement.innerHTML += `
