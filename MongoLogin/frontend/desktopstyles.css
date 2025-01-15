@@ -852,12 +852,25 @@ p {
     color: #28a745; /* Green text for guidance */
 }
 
+
+/* Code for email instructions */
 .highlight {
     text-decoration: underline;
     text-decoration-color: red;
     text-decoration-thickness: 2px; 
     text-underline-offset: 2px; 
 }
+
+.arrow-icon {
+margin-left: 8px;
+}
+
+.arrow-icon img {
+    width: 20px; 
+    height: auto;
+}
+
+
 
 
 

@@ -406,7 +406,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 highlightText(emailBodyElement, "SecurePay Solutions");
                 console.log("Highlight securepay.com");
             } else if (currentSlide === 6) {
-                highlightWhole(emailSenderElement);
+                highlightText(emailSenderElement, "S");
                 console.log("Highlight Profile Picture");
             } else {
                 console.log("Invalid slide number");
@@ -417,11 +417,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function highlightText(element, word) {
             const regex = new RegExp(`(${word})`, 'gi'); // Case-insensitive match
-            element.innerHTML = element.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+            element.innerHTML = element.innerHTML.replace(regex, (match) => {
+                // Wrap word in a span and add an arrow icon
+
+                return `<span class="highlight">${match}<span class="arrow-icon"><img src="assets/icons/arrow-icon.png" alt="arrow"></span></span>`;
+            });
         }
 
         function highlightWhole(element) {
             element.innerHTML = `<span class="highlight">${element.textContent}</span>`;
+            return `<span class="highlight">${match}<span class="arrow-icon"><img src="assets/icons/arrow-icon.png" alt="arrow"></span></span>`;
         }
 
         // Event listeners for buttons
