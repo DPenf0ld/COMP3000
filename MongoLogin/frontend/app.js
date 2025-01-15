@@ -73,57 +73,68 @@ document.addEventListener('DOMContentLoaded', function () {
     const pages = [
         {
             title: "Welcome to the Email Inbox",
-            content: "This exercise will help improve your skills in identifying emails that are fraudulent attempts to steal sensitive information. These are known as phishing emails. These emails often contain suspicious links or attachments designed to trick you."
+            content: `
+                This exercise will teach you how to identify <strong>phishing emails</strong>—fraudulent messages designed to steal sensitive information.<br><br>
+                Phishing emails often contain suspicious links or attachments meant to trick you. Let's improve your detection skills!
+            `
         },
         {
             title: "What are Phishing Emails?",
-            content: "Phishing emails aim to deceive recipients into believing they are from legitimate sources. They use techniques such as fake sender addresses, urgent language, and malicious links or attachments."
-        },
-        {
-            title: "Types of Phishing Emails",
-            content: "There are many types of phishing emails, but we will look at the most common types. Each has unique methods but shares the goal of extracting sensitive information."
-        },
-        {
-            title: "Deceptive Phishing (Social Engineering attack)",
-            content: "The attacker impersonates a legitimate entity, such as a bank, online service, or company, through fraudulent emails designed to trick individuals into revealing sensitive information like passwords, credit card numbers, or personal details. These emails often exploit human emotions such as trust, fear, or urgency by including messages about account suspensions, fraudulent activities, or limited-time offers. Deceptive phishing often directs victims to fake websites resembling legitimate ones, where their credentials or data can be stolen."
-        },
-        {
-            title: "Clone Phishing",
-            content: "The attacker creates an almost identical replica of a legitimate email the victim has previously received. However, links or attachments are replaced with malicious versions. The email may claim to be a 'resend' or an 'updated version' of the original, leveraging the victim’s familiarity with the initial communication to bypass suspicion. Clone phishing is particularly effective when attackers intercept legitimate email exchanges."
-        },
-        {
-            title: "Spear Phishing",
-            content: "These are highly targeted phishing attacks aimed at a specific individual or organization. Attackers often gather personal information about their target, such as job roles, colleagues, or recent activities, to craft convincing emails. These emails may appear to come from trusted sources like a colleague, manager, or a service the victim uses, often requesting sensitive information or financial transactions."
-        },
-        {
-            title: "Indications of Phishing Emails",
             content: `
-                Be on the lookout for these common signs to protect yourself from phishing attempts:<br><br>
-                • <strong>Typos and Mistakes:</strong> Poor spelling or grammar can be a red flag.<br>
-                • <strong>Strange Email Addresses:</strong> Check if the sender’s email looks unusual or doesn’t match the official domain.<br>
-                • <strong>Unexpected Attachments:</strong> Be cautious of files you weren’t expecting to receive.<br>
-                • <strong>Urgent Requests:</strong> Emails that pressure you to act quickly may be trying to trick you.<br>
-                • <strong>Suspicious Links:</strong> Hover over links to see where they lead before clicking.<br>
-                • <strong>Unusual Greetings:</strong> Generic greetings like "Dear Customer" instead of your name can indicate phishing.<br>
-                • <strong>Too Good to Be True Offers:</strong> Be skeptical of offers that seem overly generous or unrealistic.<br><br>
-                <strong>Always Remember:</strong><br>
-                • <strong>Verify the Sender:</strong> If you're unsure, contact the company or person directly using a trusted method.<br>
-                • <strong>Think Twice Before Clicking:</strong> Take a moment to assess the email’s legitimacy before interacting with any links or attachments.<br>
-                • <strong>Don’t Share Personal Info:</strong> Legitimate organizations won’t ask for sensitive information via email.<br><br>
-                Staying alert and following these tips can help you avoid falling victim to phishing scams!
+                Phishing emails pretend to be from trusted sources but are designed to deceive you.<br><br>
+                They often use:<br>
+                • <strong>Fake sender addresses</strong><br>
+                • <strong>Urgent or alarming language</strong><br>
+                • <strong>Malicious links or attachments</strong><br><br>
+                Their goal? To steal sensitive information like passwords or credit card details.
             `
         },
         {
-            title: "Instructions",
+            title: "Common Types of Phishing",
             content: `
-                Remember, this is a safe environment with no way of causing harm. Your task:<br><br>
-                • <strong>Highlight suspicious words:</strong> Look out for poor spelling, time urgency, and suspicious links.<br>
-                • <strong>Select the type of email:</strong> After highlighting, decide what type of email you believe it could be – remember, it may not always be a phishing email.<br>
-                • <strong>Complete the exercises:</strong> Have a go at the quiz at the end to test your knowledge.<br><br>
-                Not all of these are phishing emails, but the ones used are real-world examples. Let's identify the phishing attempts!
+                Let’s explore three common types of phishing emails:<br><br>
+                1. <strong>Deceptive Phishing:</strong> Impersonates trusted entities (e.g., banks) to steal sensitive data.<br>
+                2. <strong>Clone Phishing:</strong> Copies legitimate emails but replaces links or attachments with malicious ones.<br>
+                3. <strong>Spear Phishing:</strong> Highly targeted attacks using personal details to appear convincing.<br><br>
+                Each type is designed to trick you—stay alert!
+            `
+        },
+        {
+            title: "How to Spot Phishing Emails",
+            content: `
+                Look out for these <strong>red flags</strong>:<br><br>
+                • <strong>Typos or bad grammar</strong><br>
+                • <strong>Strange email addresses</strong><br>
+                • <strong>Unexpected attachments</strong><br>
+                • <strong>Urgent or threatening language</strong><br>
+                • <strong>Suspicious links</strong> (hover to check the real destination)<br>
+                • <strong>Generic greetings</strong> (e.g., "Dear Customer")<br>
+                • <strong>Too-good-to-be-true offers</strong><br><br>
+                <strong>Pro Tip:</strong> If you're unsure, verify the sender or contact the organisation directly. Never share sensitive info via email!
+            `
+        },
+        {
+            title: "Your Task",
+            content: `
+                This is a safe space to practice detecting phishing emails.<br><br>
+                Here's what you'll do:<br>
+                • <strong>Highlight suspicious elements</strong> like poor spelling, urgency, or fake links.<br>
+                • <strong>Classify the email</strong> by type (e.g., phishing or legitimate).<br>
+                • <strong>Test your knowledge</strong> with a quiz at the end.<br><br>
+                Remember: Not all emails are phishing, but they are based on real-world examples. Let's get started!
+            `
+        },
+        {
+            title: "Remember",
+            content: `
+                The key point of this task is to understand not to click on links or attachments from unknown emails.<br><br>
+                • <strong>DO NOT CLICK ON ATTACHMENTS</strong><br>
+                • <strong>DO NOT CLICK ON LINKS</strong><br><br>
             `
         }
     ];
+
+
 
 
     //update the model content based on the current page
@@ -215,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function () {
                    Thank you for your prompt attention to this matter.<br><br>
                    Sincerely, <br><br> 
                    Billing Department <br><br>
-                   SecurePay Solutions`
+                   Secure Pay Solutions Ltd`
         },
         {
             type: "Clone-Phishing",
@@ -295,33 +306,59 @@ document.addEventListener('DOMContentLoaded', function () {
         const slides = [
             {
                 title: "Introduction",
-                content: `<p>First, we will look at an example phishing email. These instructions will help equip you with appropriate methods to identify phishing emails and even further the types.</p>`
+                content: `
+                    <p>First, we’ll review an example phishing email. These instructions will equip you with methods to <strong>identify phishing emails</strong> and understand their types.</p>
+                `
             },
             {
                 title: "Identifying Suspicious Words",
-                content: `<p>Suspicious words are ones which indicate a phishing email. You can highlight the words by double clicking a word or clicking at the start of the word and dragging the cursor over it. The next slides will help you identify the ones in this example. Take a moment to read through the example email and highlight any words which you belive could be suspicious</p>`
+                content: `
+                    <p><strong>Suspicious words</strong> indicate a phishing email. To highlight them:</p>
+                    <ul>
+                        <li>Double-click a word.</li>
+                        <li>Or click at the start of a word and drag your cursor over it.</li>
+                    </ul>
+                    <p>Take a moment to read the example email and <strong>highlight any words</strong> you think could be suspicious.</p>
+                `
             },
             {
                 title: "Step 1: Informal Greeting",
-                content: `<p>A key indicator of a phishing email is an informal and generic greeting. For example, in this email, they use the term "Customer," which is generic and not specific. Furthermore, highlight the word “Customer” to complete this step.</p>`
+                content: `
+                    <p>An informal or generic greeting is a key indicator of a phishing email. For example, this email uses the term <strong>“Customer”</strong>, which is not specific.</p>
+                    <p><strong>Task:</strong> Highlight the word <strong>“Customer”</strong> to complete this step.</p>
+                `
             },
             {
                 title: "Step 2: Time Urgency",
-                content: `<p>Phishing emails often use time urgency to pressure the recipient into acting quickly. Look for phrases like “Immediate action required” or “Act now” to create a sense of urgency. In this example highlight the word “urgent” to complete this step.</p>`
+                content: `
+                    <p>Phishing emails often create pressure with <strong>time urgency</strong>. Phrases like <strong>“Immediate action required”</strong> or <strong>“Act now”</strong> are common.</p>
+                    <p><strong>Task:</strong> In the example email, highlight the word <strong>“urgent”</strong> to complete this step.</p>
+                `
             },
             {
                 title: "Step 3: Poor Grammar",
-                content: `<p>A common sign of a phishing email is poor grammar, such as misspellings, incorrect punctuation, or awkward phrasing. In the example email, the word "earlist" instead of "earliest" is an indication of phishing. Highlight the word “earlist” to complete this step.</p>`
+                content: `
+                    <p>One common sign of a phishing email is <strong>poor grammar</strong>, such as misspellings, incorrect punctuation, or awkward phrasing.</p>
+                    <p>In this example, the word <strong>“earlist”</strong> (instead of <strong>“earliest”</strong>) is a clear indication of phishing.</p>
+                    <p><strong>Task:</strong> Highlight the word <strong>“earlist”</strong> to complete this step.</p>
+                `
             },
             {
                 title: "Step 4: Unnecessary Subdomains",
-                content: `<p>The real company might use a simple, professional domain like securepay.com or securepaysolutions.com. However, when hovering on the payment link, the true address is revealed. Try hovering now to reveal the real address.</p>`
+                content: `
+                    <p>Legitimate companies typically use simple, professional domains, like <strong>securepay.com</strong> or <strong>securepaysolutions.com</strong>. In phishing emails, links often contain unnecessary or suspicious subdomains.</p>
+                    <p><strong>Task:</strong> Hover over the payment link in the example to reveal the real address. DO NOT CLICK THE LINK!</p>
+                `
             },
             {
                 title: "Step 5: Hyphen Usage",
-                content: `<p>Likewise, the real company might use a straightforward email address such as Billing@securepay.com. Instead, when hovering on the profile picture, the true email address is long and suspicious. Try hovering on the profile picture now to see the real address.</p>`
+                content: `
+                    <p>A real company uses straightforward email addresses, such as <strong>Billing@securepay.com</strong>. Phishing emails, however, often use long and suspicious addresses.</p>
+                    <p><strong>Task:</strong> Hover over the profile picture in the example email to see the true email address.</p>
+                `
             }
         ];
+
 
 
 
@@ -351,10 +388,40 @@ document.addEventListener('DOMContentLoaded', function () {
         function updateSlide() {
             titleElement.innerHTML = slides[currentSlide].title;
             contentElement.innerHTML = slides[currentSlide].content;
+            const emailSenderElement = document.querySelector('.email-sender');
 
             // Toggle button visibility
             prevButton.classList.toggle('hidden', currentSlide === 0); //no previous on slide 1
             nextButton.textContent = currentSlide === slides.length - 1 ? "Finish" : "Next"; //replace next with finish on last slide
+            if (currentSlide === 2) {
+                highlightText(emailBodyElement, "Customer");
+                console.log("Highlight Customer");
+            } else if (currentSlide === 3) {
+                highlightText(emailSubjectElement, "urgent");
+                console.log("Highlight Urgent");
+            } else if (currentSlide === 4) {
+                highlightText(emailBodyElement, "earlist");
+                console.log("Highlight Earlist");
+            } else if (currentSlide === 5) {
+                highlightText(emailBodyElement, "SecurePay Solutions");
+                console.log("Highlight securepay.com");
+            } else if (currentSlide === 6) {
+                highlightWhole(emailSenderElement);
+                console.log("Highlight Profile Picture");
+            } else {
+                console.log("Invalid slide number");
+            }
+
+
+        }
+
+        function highlightText(element, word) {
+            const regex = new RegExp(`(${word})`, 'gi'); // Case-insensitive match
+            element.innerHTML = element.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+        }
+
+        function highlightWhole(element) {
+            element.innerHTML = `<span class="highlight">${element.textContent}</span>`;
         }
 
         // Event listeners for buttons

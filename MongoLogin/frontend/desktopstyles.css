@@ -852,5 +852,12 @@ p {
     color: #28a745; /* Green text for guidance */
 }
 
+.highlight {
+    text-decoration: underline;
+    text-decoration-color: red;
+    text-decoration-thickness: 2px; 
+    text-underline-offset: 2px; 
+}
+
 
 
