@@ -214,8 +214,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Go back to the desktop
     backToDesktop.addEventListener('click', function () {
-        inboxContainer.style.display = 'none';
-        desktopArea.style.display = 'flex';
+        if (emailtaskComplete) {
+            inboxContainer.style.display = 'none';
+            desktopArea.style.display = 'flex';
+        }
     });
 
 
@@ -765,8 +767,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Go back to the desktop
     backToDesktopPassword.addEventListener('click', function () {
-        passwordContainer.style.display = 'none';
-        desktopArea.style.display = 'flex';
+        if (passwordtaskComplete){
+            passwordContainer.style.display = 'none';
+            desktopArea.style.display = 'flex';
+        }
     });
 
     passwordInput.addEventListener('input', function (event) {
