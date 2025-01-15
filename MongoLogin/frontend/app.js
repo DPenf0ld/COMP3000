@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const emailContentContainer = document.querySelector('.email-content');
     const emailListContainer = document.querySelector('.email-list');
     let emailtypereminder = false;
+    let emailopen = false;
 
     const instructionModel = document.getElementById('instructions-email'); // Instruction model
     const nextButton = document.getElementById('next-button');
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let displaynextemailbutton = false; //do not show next email button orginally
     let selectedoption = false;
     let correctselectedoption = false;
+    let passwordopen = false;
 
     let emailtaskComplete = false;
     let emailtask1 = false;
@@ -183,11 +185,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Toggle inbox code
     function toggleInbox() {
-        if (inboxContainer.style.display === 'block') {
+        if (inboxContainer.style.display === 'block' && emailtaskComplete == true) {
+            emailopen = false;
             // If inbox is currently displayed, hide it and show desktop
             inboxContainer.style.display = 'none';
             desktopArea.style.display = 'flex';
-        } else {
+        } else if (passwordopen != true || passwordtaskComplete==true) {
+            emailopen = true;
+
             // If inbox is not displayed, show it and hide desktop
             inboxContainer.style.display = 'block';
             passwordContainer.style.display = 'none'
@@ -400,24 +405,24 @@ document.addEventListener('DOMContentLoaded', function () {
             // Toggle button visibility
             prevButton.classList.toggle('hidden', currentSlide === 0); //no previous on slide 1
             nextButton.textContent = currentSlide === slides.length - 1 ? "Finish" : "Next"; //replace next with finish on last slide
-            if (currentSlide === 2 && arrow2==false) {
-                arrow2=true
+            if (currentSlide === 2 && arrow2 == false) {
+                arrow2 = true
                 highlightText(emailBodyElement, "Customer");
                 console.log("Highlight Customer");
-            } else if (currentSlide === 3 && arrow3==false) {
-                arrow3=true
+            } else if (currentSlide === 3 && arrow3 == false) {
+                arrow3 = true
                 highlightText(emailSubjectElement, "urgent");
                 console.log("Highlight Urgent");
-            } else if (currentSlide === 4 && arrow4==false) {
-                arrow4=true
+            } else if (currentSlide === 4 && arrow4 == false) {
+                arrow4 = true
                 highlightText(emailBodyElement, "earlist");
                 console.log("Highlight Earlist");
-            } else if (currentSlide === 5 && arrow5==false) {
-                arrow5=true
+            } else if (currentSlide === 5 && arrow5 == false) {
+                arrow5 = true
                 highlightText(emailBodyElement, "SecurePay Solutions");
                 console.log("Highlight securepay.com");
-            } else if (currentSlide === 6 && arrow6==false) {
-                arrow6=true
+            } else if (currentSlide === 6 && arrow6 == false) {
+                arrow6 = true
                 highlightText(emailSenderElement, "S");
                 console.log("Highlight Profile Picture");
             } else {
@@ -634,7 +639,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 task1Status.classList.remove("incomplete");
                 task1Status.classList.add("complete");
 
-                // Call passwordComplete to check all tasks
+                // Call email Complete to check all tasks
                 emailComplete();
             }
             else if (currentEmailIndex === 1) {
@@ -710,6 +715,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <p>Task Complete</p>
             </div>
         `;
+            emailopen = false;
         } else {
             console.log("Not all tasks are complete yet.");
         }
@@ -723,10 +729,12 @@ document.addEventListener('DOMContentLoaded', function () {
     //
 
     function togglePassword() {
-        if (passwordContainer.style.display === 'block') {
+        if (passwordContainer.style.display === 'block' && passwordtaskComplete == true) {
+            passwordopen = false;
             passwordContainer.style.display = 'none';
             desktopArea.style.display = 'flex';
-        } else {
+        } else if (emailopen != true || emailtaskComplete==true) {
+            passwordopen = true;
             passwordContainer.style.display = 'block';
             inboxContainer.style.display = 'none';
             desktopArea.style.display = 'none';
@@ -940,6 +948,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <p>You can test more passwords or minimise this tab and move on to the next task.</p>
             </div>
         `;
+            passwordopen = false;
         } else {
             console.log("Not all tasks are complete yet.");
         }
