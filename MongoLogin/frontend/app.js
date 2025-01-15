@@ -30,6 +30,13 @@ document.addEventListener('DOMContentLoaded', function () {
     let emailtask2 = false;
     let emailtask3 = false;
 
+    let arrow2 = false;
+    let arrow3 = false;
+    let arrow4 = false;
+    let arrow5 = false;
+    let arrow6 = false;
+
+
     //password code
     let FirstOpenPassword = true; // Track if password exercise is opened for the first time
     let passwordtaskComplete = false;
@@ -393,19 +400,24 @@ document.addEventListener('DOMContentLoaded', function () {
             // Toggle button visibility
             prevButton.classList.toggle('hidden', currentSlide === 0); //no previous on slide 1
             nextButton.textContent = currentSlide === slides.length - 1 ? "Finish" : "Next"; //replace next with finish on last slide
-            if (currentSlide === 2) {
+            if (currentSlide === 2 && arrow2==false) {
+                arrow2=true
                 highlightText(emailBodyElement, "Customer");
                 console.log("Highlight Customer");
-            } else if (currentSlide === 3) {
+            } else if (currentSlide === 3 && arrow3==false) {
+                arrow3=true
                 highlightText(emailSubjectElement, "urgent");
                 console.log("Highlight Urgent");
-            } else if (currentSlide === 4) {
+            } else if (currentSlide === 4 && arrow4==false) {
+                arrow4=true
                 highlightText(emailBodyElement, "earlist");
                 console.log("Highlight Earlist");
-            } else if (currentSlide === 5) {
+            } else if (currentSlide === 5 && arrow5==false) {
+                arrow5=true
                 highlightText(emailBodyElement, "SecurePay Solutions");
                 console.log("Highlight securepay.com");
-            } else if (currentSlide === 6) {
+            } else if (currentSlide === 6 && arrow6==false) {
+                arrow6=true
                 highlightText(emailSenderElement, "S");
                 console.log("Highlight Profile Picture");
             } else {
@@ -422,11 +434,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 return `<span class="highlight">${match}<span class="arrow-icon"><img src="assets/icons/arrow-icon.png" alt="arrow"></span></span>`;
             });
-        }
-
-        function highlightWhole(element) {
-            element.innerHTML = `<span class="highlight">${element.textContent}</span>`;
-            return `<span class="highlight">${match}<span class="arrow-icon"><img src="assets/icons/arrow-icon.png" alt="arrow"></span></span>`;
         }
 
         // Event listeners for buttons
