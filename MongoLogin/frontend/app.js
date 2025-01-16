@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const passwordContainer = document.getElementById('password-container');
     const passwordContainerBlur = document.getElementById('password-interface');
+    const pwnedpasswordContainerBlur = document.getElementById('Pwned');
 
     let passwordInput = document.getElementById('password');
     let passwordStrengths = document.querySelectorAll('.password-strength')
@@ -754,6 +755,7 @@ document.addEventListener('DOMContentLoaded', function () {
     confirmpasswordButton.addEventListener('click', () => {
         instructionPasswordModel.style.display = 'none';
         passwordContainerBlur.classList.remove('blurred'); // Remove the blur
+        pwnedpasswordContainerBlur.classList.add('blurred'); // Apply the to right side
     });
 
 
@@ -814,6 +816,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 task1Status.textContent = "Complete";
                 task1Status.classList.remove("incomplete");
                 task1Status.classList.add("complete");
+                pwnedpasswordContainerBlur.classList.remove('blurred'); // Remove the blur from right side
+
 
                 // Call passwordComplete to check all tasks
                 passwordComplete();
