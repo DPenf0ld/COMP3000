@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let passwordtask2 = false;
     let passwordtask3 = false;
 
+    let passwordblur = true;
+
     const passwordIconDesktop = document.getElementById('password-icon');        // Icon for password on desktop
     const passwordIconTaskbar = document.getElementById('taskbar-password');     // Icon for password on taskbar
     const passwordIconProgress = document.getElementById('progress-password');     // Icon for password on progress tracker
@@ -191,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // If inbox is currently displayed, hide it and show desktop
             inboxContainer.style.display = 'none';
             desktopArea.style.display = 'flex';
-        } else if (passwordopen != true || passwordtaskComplete==true) {
+        } else if (passwordopen != true || passwordtaskComplete == true) {
             emailopen = true;
 
             // If inbox is not displayed, show it and hide desktop
@@ -736,7 +738,7 @@ document.addEventListener('DOMContentLoaded', function () {
             passwordopen = false;
             passwordContainer.style.display = 'none';
             desktopArea.style.display = 'flex';
-        } else if (emailopen != true || emailtaskComplete==true) {
+        } else if (emailopen != true || emailtaskComplete == true) {
             passwordopen = true;
             passwordContainer.style.display = 'block';
             inboxContainer.style.display = 'none';
@@ -748,6 +750,7 @@ document.addEventListener('DOMContentLoaded', function () {
             instructionPasswordModel.style.display = 'flex'; //working
             passwordContainerBlur.classList.add('blurred'); // Apply the blur
             FirstOpenPassword = false;
+            togglePasswordInput();
         }
     }
 
@@ -769,7 +772,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Go back to the desktop
     backToDesktopPassword.addEventListener('click', function () {
-        if (passwordtaskComplete){
+        if (passwordtaskComplete) {
             passwordContainer.style.display = 'none';
             desktopArea.style.display = 'flex';
         }
@@ -817,6 +820,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 task1Status.classList.remove("incomplete");
                 task1Status.classList.add("complete");
                 pwnedpasswordContainerBlur.classList.remove('blurred'); // Remove the blur from right side
+                passwordblur = false;
+
+                togglePasswordInput();
 
 
                 // Call passwordComplete to check all tasks
@@ -830,6 +836,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     //IMPLEMENTATION OF PWNED API
+    // FUNCTION TO TOGGLE INPUT BASED ON PASSWORDBLUR
+    function togglePasswordInput() {
+        const passwordInput = document.getElementById('passwordPWNED');
+        if (passwordblur) {
+            passwordInput.disabled = true; // Disable
+        } else {
+            passwordInput.disabled = false; // Enable
+        }
+    }
+
 
     // SHA-1 Hashing Function (to hash the password)
     function encrypt(str) {
@@ -849,41 +865,47 @@ document.addEventListener('DOMContentLoaded', function () {
         resultElement.textContent = "";
         resultElement.style.color = "";
 
-        if (!passwordPWNED) {
-            resultElement.textContent = "Please enter a password.";
-            resultElement.style.color = "red"; // works
-            return;
-        }
 
-        try {
-            // Hash the password 
-            const hashedPassword = await encrypt(passwordPWNED);
 
-            // Extract the first 5 characters of the hash
-            const hashPrefix = hashedPassword.substring(0, 5);
-            const hashSuffix = hashedPassword.substring(5).toUpperCase();
+        if (passwordblur == false) {
 
-            // Fetch data from the Pwned Passwords API
-            const response = await fetch(`https://api.pwnedpasswords.com/range/${hashPrefix}`);
 
-            if (!response.ok) {
-                resultElement.textContent = "Error fetching data. Please try again later.";
+
+            if (!passwordPWNED) {
+                resultElement.textContent = "Please enter a password.";
                 resultElement.style.color = "red"; // works
                 return;
             }
 
-            const data = await response.text();
-            const breaches = data.split('\n').map(line => {
-                const [suffix, count] = line.split(':');
-                return { suffix, count: parseInt(count) };
-            });
+            try {
+                // Hash the password 
+                const hashedPassword = await encrypt(passwordPWNED);
 
-            // Find the match for the password
-            const matchedBreach = breaches.find(breach => breach.suffix === hashSuffix);
+                // Extract the first 5 characters of the hash
+                const hashPrefix = hashedPassword.substring(0, 5);
+                const hashSuffix = hashedPassword.substring(5).toUpperCase();
 
-            // If the password has been pwned
-            if (matchedBreach) {
-                resultElement.innerHTML = `
+                // Fetch data from the Pwned Passwords API
+                const response = await fetch(`https://api.pwnedpasswords.com/range/${hashPrefix}`);
+
+                if (!response.ok) {
+                    resultElement.textContent = "Error fetching data. Please try again later.";
+                    resultElement.style.color = "red"; // works
+                    return;
+                }
+
+                const data = await response.text();
+                const breaches = data.split('\n').map(line => {
+                    const [suffix, count] = line.split(':');
+                    return { suffix, count: parseInt(count) };
+                });
+
+                // Find the match for the password
+                const matchedBreach = breaches.find(breach => breach.suffix === hashSuffix);
+
+                // If the password has been pwned
+                if (matchedBreach) {
+                    resultElement.innerHTML = `
                 <p style="color: red;">This password has been pwned! It has appeared in ${matchedBreach.count} breaches.</p>
                 <p style="color: red;"><strong>Why is this a problem?</strong></p>
                 <p style="color: red;">When your password is involved in a breach, attackers can potentially use it to gain unauthorized access to your accounts, putting your personal data at risk. It's recommended to change it immediately.</p>
@@ -895,44 +917,46 @@ document.addEventListener('DOMContentLoaded', function () {
                 </ul>
                 `;
 
-                passwordtask2 = true;
+                    passwordtask2 = true;
 
-                // Update the task list status
-                document.querySelector("#task-2-status").textContent = "Complete";
-                document.querySelector("#task-2-status").classList.remove("incomplete");
-                document.querySelector("#task-2-status").classList.add("complete");
+                    // Update the task list status
+                    document.querySelector("#task-2-status").textContent = "Complete";
+                    document.querySelector("#task-2-status").classList.remove("incomplete");
+                    document.querySelector("#task-2-status").classList.add("complete");
 
-                passwordComplete()
-            } else {
+                    passwordComplete()
+                } else {
 
-                passwordtask2 = true;
+                    passwordtask2 = true;
 
-                // Update the task list status
-                document.querySelector("#task-2-status").textContent = "Complete";
-                document.querySelector("#task-2-status").classList.remove("incomplete");
-                document.querySelector("#task-2-status").classList.add("complete");
+                    // Update the task list status
+                    document.querySelector("#task-2-status").textContent = "Complete";
+                    document.querySelector("#task-2-status").classList.remove("incomplete");
+                    document.querySelector("#task-2-status").classList.add("complete");
 
-                passwordtask3 = true;
+                    passwordtask3 = true;
 
-                // Update the task list status
-                document.querySelector("#task-3-status").textContent = "Complete";
-                document.querySelector("#task-3-status").classList.remove("incomplete");
-                document.querySelector("#task-3-status").classList.add("complete");
-
-
+                    // Update the task list status
+                    document.querySelector("#task-3-status").textContent = "Complete";
+                    document.querySelector("#task-3-status").classList.remove("incomplete");
+                    document.querySelector("#task-3-status").classList.add("complete");
 
 
 
-                resultElement.innerHTML = `
+
+
+                    resultElement.innerHTML = `
                     <p style="color: green;">This password has not been pwned. It appears safe to use.</p>
                 `;
-                passwordComplete()
-            }
+                    passwordComplete()
+                }
 
-        } catch (error) {
-            resultElement.textContent = "Error checking password. Please try again later.";
-            resultElement.style.color = "red"; // works
-            console.error(error);
+
+            } catch (error) {
+                resultElement.textContent = "Error checking password. Please try again later.";
+                resultElement.style.color = "red"; // works
+                console.error(error);
+            }
         }
     });
 
