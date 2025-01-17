@@ -206,12 +206,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Toggle inbox code
     function toggleInbox() {
-        if (inboxContainer.style.display === 'block' && emailtaskComplete == true) {
+        if (inboxContainer.style.display === 'block' && emailtaskComplete == true) { //closes inbox
             emailopen = false;
             // If inbox is currently displayed, hide it and show desktop
             inboxContainer.style.display = 'none';
             desktopArea.style.display = 'flex';
-        } else if (passwordopen != true || passwordtaskComplete == true) {
+        } else if ((passwordopen!=true&&webtaskComplete) || (webopen!=true&&passwordtaskComplete)|| (webtaskComplete&&passwordtaskComplete) || (webopen!=true&&passwordopen!=true)) { //opens inbox 
             emailopen = true;
 
             // If inbox is not displayed, show it and hide desktop
@@ -757,7 +757,7 @@ document.addEventListener('DOMContentLoaded', function () {
             passwordopen = false;
             passwordContainer.style.display = 'none';
             desktopArea.style.display = 'flex';
-        } else if (emailopen != true || emailtaskComplete == true) {
+        } else if ((emailopen!=true&&webtaskComplete) || (webopen!=true&&emailtaskComplete)|| (webtaskComplete&&emailtaskComplete) || (webopen!=true&&emailopen!=true)) {
             passwordopen = true;
             passwordContainer.style.display = 'block';
             inboxContainer.style.display = 'none';
@@ -1020,12 +1020,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Toggle web code
     function toggleWeb() {
-        if (webContainer.style.display === 'block') { //add to if statement -  && emailtaskComplete == true
+        if (webContainer.style.display === 'block' && webtaskComplete == true) { 
             webopen = false;
             // If inbox is currently displayed, hide it and show desktop
             webContainer.style.display = 'none';
             desktopArea.style.display = 'flex';
-        } else if (webopen != true) { //add to if statement -  || passwordtaskComplete == true
+        } else if ((passwordopen!=true&&emailtaskComplete) || (emailopen!=true&&passwordtaskComplete)|| (emailtaskComplete&&passwordtaskComplete) || (emailopen!=true&&passwordopen!=true)) {
             webopen = true;
 
             // If inbox is not displayed, show it and hide desktop
@@ -1045,10 +1045,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Go back to the desktop
     backToDesktopWeb.addEventListener('click', function () {
-        //if (emailtaskComplete) {
+        if (webtaskComplete) {
         webContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
-        // }
+         }
     });
 
 
