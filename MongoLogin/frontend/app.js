@@ -70,11 +70,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const webIconDesktop = document.getElementById('web-icon');        // Icon for web on desktop
     const webIconTaskbar = document.getElementById('taskbar-web');     // Icon for web on taskbar
     const webIconProgress = document.getElementById('progress-web');     // Icon for web on progress tracker
-    const webComplete = document.getElementById('CompleteWeb');  
+    const webCompleteButton = document.getElementById('CompleteWeb');  
+    let webtaskComplete = false;
 
     let webtask1 = false;
     let webtask2 = false;
     let webtask3 = false;
+
+
 
 
     //Desktop code
@@ -83,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const backToDesktopPassword = document.getElementById('close-password');
     const backToDesktopWeb = document.getElementById('close-web');
 
-    let webtaskComplete = false;
+
 
 
 
@@ -981,8 +984,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to mark all password tasks as complete
     function passwordComplete() {
         // Check if all tasks are complete
-        if (webtask1 && webtask2 && webtask3 && webtaskComplete != true) {
-            webtaskComplete = true;
+        if (passwordtask1 && passwordtask2 && passwordtask3 && passwordtaskComplete != true) {
+            passwordtaskComplete = true;
 
             // Update the icon to show the completed status
             const passwordIcon = document.querySelector("#progress-password img");
@@ -1049,10 +1052,32 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    webIconProgress.addEventListener('click', webComplete);
+    webCompleteButton.addEventListener('click', webComplete);
 
     // Function to mark all web tasks as complete
     function webComplete() {
+
+        // Update the task list status for Task 1
+        const webtask1Status = document.querySelector("#web-task-1-status");
+        webtask1Status.textContent = "Complete";
+        webtask1Status.classList.remove("incomplete");
+        webtask1Status.classList.add("complete");
+        webtask1 = true;
+
+        // Update the task list status for Task 2
+        const webtask2Status = document.querySelector("#web-task-2-status");
+        webtask2Status.textContent = "Complete";
+        webtask2Status.classList.remove("incomplete");
+        webtask2Status.classList.add("complete");
+        webtask2 = true;
+
+        // Update the task list status for Task 3
+        const webtask3Status = document.querySelector("#web-task-3-status");
+        webtask3Status.textContent = "Complete";
+        webtask3Status.classList.remove("incomplete");
+        webtask3Status.classList.add("complete");
+        webtask3 = true;
+
         // Check if all tasks are complete
         if (webtask1 && webtask2 && webtask3 && webtaskComplete != true) {
             webtaskComplete = true;
@@ -1117,4 +1142,4 @@ if (userEmail) {
     emailElement.innerText = userEmail; // Set the email to the div
 } else {
     console.log('User email not found');
-}
+} 
