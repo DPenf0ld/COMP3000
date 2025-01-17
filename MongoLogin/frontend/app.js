@@ -70,13 +70,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const webIconDesktop = document.getElementById('web-icon');        // Icon for web on desktop
     const webIconTaskbar = document.getElementById('taskbar-web');     // Icon for web on taskbar
     const webIconProgress = document.getElementById('progress-web');     // Icon for web on progress tracker
+    const webComplete = document.getElementById('CompleteWeb');  
+
+    let webtask1 = false;
+    let webtask2 = false;
+    let webtask3 = false;
 
 
     //Desktop code
     const desktopArea = document.getElementById('desktop-area');           // Desktop area
     const backToDesktop = document.getElementById('close-inbox');      // Button or link to return to desktop
     const backToDesktopPassword = document.getElementById('close-password');
-    const backToDesktopWeb = document.getElementById('close-web'); 
+    const backToDesktopWeb = document.getElementById('close-web');
+
+    let webtaskComplete = false;
 
 
 
@@ -974,8 +981,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to mark all password tasks as complete
     function passwordComplete() {
         // Check if all tasks are complete
-        if (passwordtask1 && passwordtask2 && passwordtask3 && passwordtaskComplete != true) {
-            passwordtaskComplete = true;
+        if (webtask1 && webtask2 && webtask3 && webtaskComplete != true) {
+            webtaskComplete = true;
 
             // Update the icon to show the completed status
             const passwordIcon = document.querySelector("#progress-password img");
@@ -1033,13 +1040,41 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-        // Go back to the desktop
-        backToDesktopWeb.addEventListener('click', function () {
-            //if (emailtaskComplete) {
-                webContainer.style.display = 'none';
-                desktopArea.style.display = 'flex';
-           // }
-        });
+    // Go back to the desktop
+    backToDesktopWeb.addEventListener('click', function () {
+        //if (emailtaskComplete) {
+        webContainer.style.display = 'none';
+        desktopArea.style.display = 'flex';
+        // }
+    });
+
+
+    webIconProgress.addEventListener('click', webComplete);
+
+    // Function to mark all web tasks as complete
+    function webComplete() {
+        // Check if all tasks are complete
+        if (webtask1 && webtask2 && webtask3 && webtaskComplete != true) {
+            webtaskComplete = true;
+
+            // Update the icon to show the completed status
+            const webIcon = document.querySelector("#progress-web img");
+            if (webIcon) {
+                webIcon.src = "assets/icons/web-tick-icon.png";
+            }
+
+            // Add a message at the bottom for next steps
+            const taskWebElement = document.querySelector(".Taskweb");
+            taskWebElement.innerHTML += `
+            <div class="next-steps">
+                <p>COMPLETE</p>
+            </div>
+        `;
+            webopen = false;
+        } else {
+            console.log("Not all tasks are complete yet.");
+        }
+    }
 
 
 
