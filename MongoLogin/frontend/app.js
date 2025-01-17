@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-    //desktop code
+    //email code
     const emailIconDesktop = document.getElementById('email-icon');        // Icon for email on desktop
     const emailIconTaskbar = document.getElementById('taskbar-email');     // Icon for email on taskbar
     const emailIconProgress = document.getElementById('progress-email');     // Icon for email on progress tracker
 
-    //email code
     const inboxContainer = document.getElementById('inbox-container');     // Inbox container
     const emailContainer = document.getElementById('email-interface');     // Inbox container
     const emailContentContainer = document.querySelector('.email-content');
@@ -64,11 +63,20 @@ document.addEventListener('DOMContentLoaded', function () {
     let passwordInput = document.getElementById('password');
     let passwordStrengths = document.querySelectorAll('.password-strength')
 
+    //web code
+    const webContainer = document.getElementById('web-container');
+    let webopen = false;
+
+    const webIconDesktop = document.getElementById('web-icon');        // Icon for web on desktop
+    const webIconTaskbar = document.getElementById('taskbar-web');     // Icon for web on taskbar
+    const webIconProgress = document.getElementById('progress-web');     // Icon for web on progress tracker
+
 
     //Desktop code
     const desktopArea = document.getElementById('desktop-area');           // Desktop area
     const backToDesktop = document.getElementById('close-inbox');      // Button or link to return to desktop
     const backToDesktopPassword = document.getElementById('close-password');
+    const backToDesktopWeb = document.getElementById('close-web'); 
 
 
 
@@ -199,6 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // If inbox is not displayed, show it and hide desktop
             inboxContainer.style.display = 'block';
             passwordContainer.style.display = 'none'
+            webContainer.style.display = 'none'
             desktopArea.style.display = 'none';
 
             // Show instructions if it's the first time opening the inbox
@@ -742,6 +751,7 @@ document.addEventListener('DOMContentLoaded', function () {
             passwordopen = true;
             passwordContainer.style.display = 'block';
             inboxContainer.style.display = 'none';
+            webContainer.style.display = 'none'
             desktopArea.style.display = 'none';
         }
 
@@ -985,7 +995,58 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Not all tasks are complete yet.");
         }
     }
+
+    //SAFE WEB BROWSING EXERCISE CODE 
+    //
+    //
+    //
+    //
+    //
+
+    // Toggle inbox on desktop and taskbar
+    webIconDesktop.addEventListener('click', toggleWeb);
+    webIconTaskbar.addEventListener('click', toggleWeb);
+    webIconProgress.addEventListener('click', toggleWeb);
+
+    // Toggle web code
+    function toggleWeb() {
+        if (webContainer.style.display === 'block') { //add to if statement -  && emailtaskComplete == true
+            webopen = false;
+            // If inbox is currently displayed, hide it and show desktop
+            webContainer.style.display = 'none';
+            desktopArea.style.display = 'flex';
+        } else if (webopen != true) { //add to if statement -  || passwordtaskComplete == true
+            webopen = true;
+
+            // If inbox is not displayed, show it and hide desktop
+            webContainer.style.display = 'block';
+            passwordContainer.style.display = 'none'
+            inboxContainer.style.display = 'none'
+            desktopArea.style.display = 'none';
+
+            // Show instructions if it's the first time opening the inbox
+            //   if (isFirstOpen) {
+            //      instructionModel.style.display = 'flex'; //working
+            //     emailContainer.classList.add('blurred'); // Apply the blur
+            //      isFirstOpen = false;
+            //  }
+        }
+    }
+
+        // Go back to the desktop
+        backToDesktopWeb.addEventListener('click', function () {
+            //if (emailtaskComplete) {
+                webContainer.style.display = 'none';
+                desktopArea.style.display = 'flex';
+           // }
+        });
+
+
+
 });
+
+
+
 
 
 //Clock Functionality

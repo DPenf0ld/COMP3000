@@ -22,11 +22,11 @@
             <img src="assets/icons/password-icon.png" alt="Password Tester" class="icon-img">
             <p>Password Tester</p>
         </div>
-        <div class="icon">
+        <div class="icon" id="web-icon">
             <img src="assets/icons/web-icon.png" alt="Web Browser" class="icon-img">
             <p>Browser</p>
         </div>
-        <div class="icon">
+        <div class="icon" id="folder-icon">
             <img src="assets/icons/folder-icon.png" alt="Files" class="icon-img">
             <p>Files</p>
         </div>
@@ -53,7 +53,7 @@
         </div>
 
     </div>
- 
+
 
 
     <!-- Email Inbox (Hidden) -->
@@ -143,7 +143,7 @@
                 <button id="reminder">Email Types Reminder</button>
             </div>
 
-            
+
 
         </div>
         <!-- Task -->
@@ -181,20 +181,27 @@
             </div>
         </div>
 
-        <button id="close-password" aria-label="Close Inbox">&times;</button> <!-- Close button -->
+        <button id="close-password" aria-label="Close Password">&times;</button> <!-- Close button -->
         <div class="password-interface" id="password-interface">
             <div class="left-side">
-                
+
                 <h2>Create a secure Password <span id="text">Check</span></h2>
                 <div class="password-info">
-                    <p>Create a strong password to keep your accounts safe from hackers. Strong passwords protect your personal and sensitive information from being stolen. Weak passwords are easy for cybercriminals to crack, so following these tips can help you keep your data secure and reduce the risk of your accounts being hacked. A strong password isn't just a good idea—it's a necessity in today's world.</p>
+                    <p>Create a strong password to keep your accounts safe from hackers. Strong passwords protect your
+                        personal and sensitive information from being stolen. Weak passwords are easy for cybercriminals
+                        to crack, so following these tips can help you keep your data secure and reduce the risk of your
+                        accounts being hacked. A strong password isn't just a good idea—it's a necessity in today's
+                        world.</p>
                     <h3>Password Strength Tips</h3>
                     <ul>
                         <li><strong>Length:</strong> Use at least 8 characters (12 or more is even better).</li>
-                        <li><strong>Lowercase Letters:</strong> Include at least one lowercase letter (e.g., a, b, c).</li>
-                        <li><strong>Uppercase Letters:</strong> Include at least one uppercase letter (e.g., A, B, C).</li>
+                        <li><strong>Lowercase Letters:</strong> Include at least one lowercase letter (e.g., a, b, c).
+                        </li>
+                        <li><strong>Uppercase Letters:</strong> Include at least one uppercase letter (e.g., A, B, C).
+                        </li>
                         <li><strong>Numbers:</strong> Add at least one number (e.g., 1, 2, 3).</li>
-                        <li><strong>Special Characters:</strong> Use at least one special character (e.g., !, @, #, $).</li>
+                        <li><strong>Special Characters:</strong> Use at least one special character (e.g., !, @, #, $).
+                        </li>
                     </ul>
                 </div>
                 <div class="StrengthTest">
@@ -227,6 +234,27 @@
                         id="task-2-status">Incomplete</span></li>
                 <li><strong>Password must not have appeared in breaches</strong> <span class="status incomplete"
                         id="task-3-status">Incomplete</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Safe Web Browsing (Hidden) -->
+    <div class="web-container" id="web-container" style="display: none;">
+        <!-- Instruction Model -->
+
+
+        <button id="close-web" aria-label="Close Web">&times;</button> <!-- Close button -->
+
+        <div class="web-interface" id="web-interface">
+            <h2>Testing</h2>
+        </div>
+
+        <div class="Taskweb">
+            <h2>Task:</h2>
+            <ul>
+                <li><strong>Web1</strong> <span class="status incomplete" id="web-task-1-status">Incomplete</span></li>
+                <li><strong>Web2</strong> <span class="status incomplete" id="web-task-2-status">Incomplete</span></li>
+                <li><strong>Web3</strong> <span class="status incomplete" id="web-task-3-status">Incomplete</span></li>
             </ul>
         </div>
     </div>
