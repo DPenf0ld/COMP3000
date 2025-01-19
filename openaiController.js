@@ -2,7 +2,6 @@ const { OpenAI } = require('openai');
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors'); // Allow cross-origin requests
-const path = require('path');  // resolving file paths
 const app = express();
 
 const openai = new OpenAI({
@@ -37,10 +36,6 @@ app.post('/generate-answer', async (req, res) => {
     }
 });
 
-// Serve the desktop.html file when accessing the root URL
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'desktop.html'));
-});
 
 // Start the server
 const PORT = 3000; // Change this if needed
