@@ -87,6 +87,44 @@ document.addEventListener('DOMContentLoaded', function () {
     const backToDesktopWeb = document.getElementById('close-web');
 
 
+    //openai code
+    const askButton = document.getElementById('ask-button');
+    const userInput = document.getElementById('user-input');
+    const responseContainer = document.getElementById('response-container');
+
+    askButton.addEventListener('click', async () => {
+        const question = userInput.value.trim();
+        if (!question) {
+            responseContainer.textContent = 'Please enter a question.';
+            return;
+        }
+
+        // Clear previous response and show loading
+        responseContainer.textContent = 'Loading...';
+
+        try {
+            const response = await fetch('http://localhost:3000/generate-answer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userMessage: question }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch the response.');
+            }
+
+            const data = await response.json();
+            responseContainer.textContent = data.answer; // Display the OpenAI response
+        } catch (error) {
+            console.error('Error:', error);
+            responseContainer.textContent = 'Error generating response. Please try again.';
+        }
+    });
+
+
+
 
 
 
