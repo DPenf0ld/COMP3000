@@ -449,7 +449,7 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
 
         // Append instruction box
-        emailContentContainer.appendChild(instructionBox);
+        emailListContainer.appendChild(instructionBox);
 
 
         // load elments

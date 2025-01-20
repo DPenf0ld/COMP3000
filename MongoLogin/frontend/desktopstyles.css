@@ -395,15 +395,12 @@ p {
 /*Instructions for example email styles*/
 
 .instruction-box {
-    font-size: medium;
     position: relative;
-    bottom: 0;
-    left: 0;
+    bottom: 0%;
     background-color: #fff;
     border: 2px solid #007BFF;
     border-radius: 8px;
     padding: 20px;
-    width: 400px;
     z-index: 1000;
     text-align: center;
 }
@@ -525,7 +522,6 @@ p {
     border: 2px solid #007BFF;
     border-radius: 8px;
     padding: 20px;
-
     z-index: 1000;
     text-align: center;
 }
