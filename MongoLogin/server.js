@@ -5,27 +5,15 @@ const { MongoClient } = require('mongodb');
 const path = require('path');  // Import path module
 require('dotenv').config();
 
-const cors = require('cors'); // Allow cross-origin requests
 
-  // Set CORS headers to allow requests from specific origin
-  response.setHeader("Access-Control-Allow-Origin", "http://localhost:5000");
-  response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // Handle OPTIONS method for CORS preflight requests
-  if (method === "OPTIONS") {
-    response.writeHead(204);
-    response.end();
-    return;
-  }
 
 // Create an Express app
 const app = express();
-app.use(cors()); // Enable cross-origin requests
 
 
 app.use(express.json());  // Middleware to parse JSON bodies
-app.use(express.static(path.join(__dirname, 'public')));  //static files from public folder
+app.use(express.static(path.join(__dirname, 'public')));  // Serve static files from public folder
 app.use(express.static(path.join(__dirname, 'frontend')));
 
 // MongoDB connection
