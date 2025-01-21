@@ -22,7 +22,7 @@ app.post('/generate-answer', async (req, res) => {
             messages: [
                 {
                     role: 'user',
-                    content: userMessage
+                    content: `name colours`
                 },
             ],
             max_tokens: 100
