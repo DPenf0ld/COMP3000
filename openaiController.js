@@ -22,7 +22,7 @@ app.post('/generate-answer', async (req, res) => {
             messages: [
                 {
                     role: 'user',
-                    content: `name colours`
+                    content: `I want you to provide search results from this input '${userMessage}'. Your result needs to simulate the internet. Only include 3 fake websites. Do not add any extra feedback and do not number the sites.`
                 },
             ],
             max_tokens: 100
