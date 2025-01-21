@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const webIconDesktop = document.getElementById('web-icon');        // Icon for web on desktop
     const webIconTaskbar = document.getElementById('taskbar-web');     // Icon for web on taskbar
     const webIconProgress = document.getElementById('progress-web');     // Icon for web on progress tracker
-    const webCompleteButton = document.getElementById('CompleteWeb');  
+    const webCompleteButton = document.getElementById('CompleteWeb');
     let webtaskComplete = false;
 
     let webtask1 = false;
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // If inbox is currently displayed, hide it and show desktop
             inboxContainer.style.display = 'none';
             desktopArea.style.display = 'flex';
-        } else if ((passwordopen!=true&&webtaskComplete) || (webopen!=true&&passwordtaskComplete)|| (webtaskComplete&&passwordtaskComplete) || (webopen!=true&&passwordopen!=true)) { //opens inbox 
+        } else if ((passwordopen != true && webtaskComplete) || (webopen != true && passwordtaskComplete) || (webtaskComplete && passwordtaskComplete) || (webopen != true && passwordopen != true)) { //opens inbox 
             emailopen = true;
 
             // If inbox is not displayed, show it and hide desktop
@@ -795,7 +795,7 @@ document.addEventListener('DOMContentLoaded', function () {
             passwordopen = false;
             passwordContainer.style.display = 'none';
             desktopArea.style.display = 'flex';
-        } else if ((emailopen!=true&&webtaskComplete) || (webopen!=true&&emailtaskComplete)|| (webtaskComplete&&emailtaskComplete) || (webopen!=true&&emailopen!=true)) {
+        } else if ((emailopen != true && webtaskComplete) || (webopen != true && emailtaskComplete) || (webtaskComplete && emailtaskComplete) || (webopen != true && emailopen != true)) {
             passwordopen = true;
             passwordContainer.style.display = 'block';
             inboxContainer.style.display = 'none';
@@ -1058,12 +1058,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Toggle web code
     function toggleWeb() {
-        if (webContainer.style.display === 'block' && webtaskComplete == true) { 
+        if (webContainer.style.display === 'block' && webtaskComplete == true) {
             webopen = false;
             // If inbox is currently displayed, hide it and show desktop
             webContainer.style.display = 'none';
             desktopArea.style.display = 'flex';
-        } else if ((passwordopen!=true&&emailtaskComplete) || (emailopen!=true&&passwordtaskComplete)|| (emailtaskComplete&&passwordtaskComplete) || (emailopen!=true&&passwordopen!=true)) {
+        } else if ((passwordopen != true && emailtaskComplete) || (emailopen != true && passwordtaskComplete) || (emailtaskComplete && passwordtaskComplete) || (emailopen != true && passwordopen != true)) {
             webopen = true;
 
             // If inbox is not displayed, show it and hide desktop
@@ -1084,9 +1084,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Go back to the desktop
     backToDesktopWeb.addEventListener('click', function () {
         if (webtaskComplete) {
-        webContainer.style.display = 'none';
-        desktopArea.style.display = 'flex';
-         }
+            webContainer.style.display = 'none';
+            desktopArea.style.display = 'flex';
+        }
     });
 
 

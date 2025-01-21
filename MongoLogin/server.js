@@ -4,13 +4,14 @@ const jwt = require('jsonwebtoken');
 const { MongoClient } = require('mongodb');
 const path = require('path');  // Import path module
 require('dotenv').config();
+const cors = require('cors'); // Allow cross-origin requests
 
 
 
 
 // Create an Express app
 const app = express();
-
+app.use(cors());
 
 app.use(express.json());  // Middleware to parse JSON bodies
 app.use(express.static(path.join(__dirname, 'public')));  // Serve static files from public folder

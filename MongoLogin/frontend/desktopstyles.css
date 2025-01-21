@@ -894,6 +894,7 @@ margin-left: 8px;
 
 /* Styles for the close button */
 #close-web {
+    z-index: 100;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -907,6 +908,7 @@ margin-left: 8px;
 #close-web:hover {
     color: #e74c3c; /* Red Hover Colour*/
 }
+
 
 /* Styles for Web Task */
 .Taskweb {
