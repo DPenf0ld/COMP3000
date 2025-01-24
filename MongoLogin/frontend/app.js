@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const inboxContainer = document.getElementById('inbox-container');     // Inbox container
     const emailContainer = document.getElementById('email-interface');     // Inbox container
-    const emailContentContainer = document.querySelector('.email-content');
+    //const emailContentContainer = document.querySelector('.email-content');
     const emailListContainer = document.querySelector('.email-list');
     let emailtypereminder = false;
     let emailopen = false;
@@ -301,32 +301,30 @@ document.addEventListener('DOMContentLoaded', function () {
                    Sincerely, <br><br> 
                    Billing Department <br><br>
                    Secure Pay Solutions Ltd`
-        },
-        {
-            type: "Clone-Phishing",
-            hover: "test2",
-            sender: "Bob",
-            subject: "Important Security Update",
-            body: `Dear User,<br><br>
-                   Your account is at risk due to outdated software. Please click the link below to immediately update your system to the latest version.<br><br>
-                   <a href="http://malicious-update.com">Update Now</a><br><br>
-                   This update is critical for your account's security. Failure to do so will leave your account vulnerable.<br><br>
-                   Best regards,<br>
-                   The Security Team`
-        },
-        {
-            type: "Spear-Phishing",
-            hover: "test3",
-            sender: "Charlie",
-            subject: "Reminder: Action Required to Secure Your Account",
-            body: `Dear User,<br><br>
-                   We have detected unusual activity in your account. To secure your account, please log in immediately by clicking the link below.<br><br>
-                   <a href="http://phishing-login.com">Login Now</a><br><br>
-                   If you do not act now, your account will be locked.<br><br>
-                   Regards,<br>
-                   The Account Security Team`
         }
     ];
+
+    // Function to fetch generated phishing email and add it to the array
+    async function addGeneratedEmail() {
+        try {
+            const response = await fetch('http://localhost:3000/generate-phishing', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            if (!response.ok) throw new Error('Failed to fetch generated email');
+
+            const generatedEmail = await response.json();
+
+            // Add the generated email to the array
+            emails.push(generatedEmail);
+
+            console.log('Updated Emails Array:', emails);
+        } catch (error) {
+            console.error('Error adding generated email:', error);
+        }
+        displayEmail(currentEmailIndex);
+    }
 
 
     function displayEmail(index) {
@@ -349,10 +347,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showNextEmail() {
-        if (currentEmailIndex < emails.length - 1) {
-            currentEmailIndex++;
-            displayEmail(currentEmailIndex);
-        }
+
+        currentEmailIndex++;
+        addGeneratedEmail();
+
     }
 
     // Initial display
