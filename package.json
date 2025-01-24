@@ -17,5 +17,14 @@
     "mongodb": "^6.12.0",
     "openai": "^4.79.1"
   },
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DPenfold/COMP3000.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DPenfold/COMP3000/issues"
+  },
+  "homepage": "https://github.com/DPenfold/COMP3000#readme"
 }
