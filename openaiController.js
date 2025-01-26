@@ -48,19 +48,19 @@ app.post('/generate-phishing', async (req, res) => {
                 {
                     role: 'user',
                     content: `
-                        Generate a phishing email with the following structure:
-                        - type: The type of phishing attack (e.g., "Deceptive-Phishing", "Clone-Phishing", "Spear-Phishing").
-                        - hover: The email address displayed on hover (e.g., "support@securepay.com").
-                        - sender: The name of the sender (e.g., "SecurePay Solutions").
-                        - subject: The subject line of the email.
-                        - body: The HTML body of the email, with potential phishing indicators such as urgency or links.
-                        Output the response in this JSON format:
+                        Generate a phishing email or safe email. Each part of the email needs to link together, the email must follow the type it is. Use the following structure:
+                        type: Each option must have a 1 in 4 chance of being selected. The type of email it is must either be "Deceptive-Phishing", "Clone-Phishing", "Spear-Phishing" or "Safe-Email".
+                        hover: The email address displayed on hover, if it is a type of phishing then it should be suspicious.
+                        sender: The name of the sender.
+                        subject: The subject line of the email.
+                        body: The HTML body of the email, with phishing indicators (if it is a type of phishing email) such as urgency or links.
+                        Output the response in this JSON format, this is an example. Do not reuse securepay:
                         {
                             "type": "Deceptive-Phishing",
                             "hover": "billing-securepay@securepaysolutions-support.com",
                             "sender": "SecurePay Solutions",
                             "subject": "Urgent Account Update Required",
-                            "body": "<html><body>Your message here</body></html>"
+                            "body": "<html><body>Message Here</body></html>"
                         }
                     `,
                 },
@@ -68,7 +68,7 @@ app.post('/generate-phishing', async (req, res) => {
             max_tokens: 300,
         });
 
-        // Extract and return the JSON email structure
+        // JSON for email structure
         const email = JSON.parse(response.choices[0].message.content);
         res.json(email);
     } catch (error) {

@@ -37,6 +37,13 @@ document.addEventListener('DOMContentLoaded', function () {
     let arrow5 = false;
     let arrow6 = false;
 
+    let deceptivecount = 0;
+    let spearcount = 0;
+    let safecount = 0;
+    let clonecount = 0;
+    let phishingcount = 0;
+
+
 
     //password code
     let FirstOpenPassword = true; // Track if password exercise is opened for the first time
@@ -304,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     ];
 
-    // Function to fetch generated phishing email and add it to the array
+    // ai generated email and add to email array
     async function addGeneratedEmail() {
         try {
             const response = await fetch('http://localhost:3000/generate-phishing', {
@@ -495,7 +502,7 @@ document.addEventListener('DOMContentLoaded', function () {
         function highlightText(element, word) {
             const regex = new RegExp(`(${word})`, 'gi'); // Case-insensitive match
             element.innerHTML = element.innerHTML.replace(regex, (match) => {
-                // Wrap word in a span and add an arrow icon
+                // Wrap in span and add arrow 
 
                 return `<span class="highlight">${match}<span class="arrow-icon"><img src="assets/icons/arrow-icon.png" alt="arrow"></span></span>`;
             });
@@ -611,6 +618,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 displaynextemailbutton = true;
                 nextemailbutton()
             }
+
+            if(correctCount==3){
+                emailtask3 = true;
+                console.log("Task 3 correct")
+
+                // Update the task list status for Task 3
+                const task3Status = document.querySelector("#email-task-3-status");
+                task3Status.textContent = "Complete";
+                task3Status.classList.remove("incomplete");
+                task3Status.classList.add("complete");
+
+                // Call emailComplete to check all tasks
+                emailComplete();
+            }
         }
     });
 
@@ -685,13 +706,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Check if the selected value matches the current email type
         if (selectedValue === currentEmailType) {
+            phishingcount++;
             selectedoption = true;
             correctselectedoption = true;
             feedbackElement.textContent = `Correct! The answer is ${currentEmailType}.`;
             feedbackElement.style.color = "green"; // Change feedback text color for correct answer
             if (currentEmailIndex == 0) {
                 emailtask1 = true;
-                console.log("Task 1 correct")
+                console.log("Example Complete")
 
                 // Update the task list status for Task 1
                 const task1Status = document.querySelector("#email-task-1-status");
@@ -702,7 +724,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Call email Complete to check all tasks
                 emailComplete();
             }
-            else if (currentEmailIndex === 1) {
+            if (phishingcount == 5) {
                 emailtask2 = true;
                 console.log("Task 2 correct")
                 // Update the task list status for Task 2
@@ -713,19 +735,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Call emailComplete to check all tasks
                 emailComplete();
-            } else if (currentEmailIndex === 2) {
-                emailtask3 = true;
-                console.log("Task 3 correct")
-
-                // Update the task list status for Task 3
-                const task3Status = document.querySelector("#email-task-3-status");
-                task3Status.textContent = "Complete";
-                task3Status.classList.remove("incomplete");
-                task3Status.classList.add("complete");
-
-                // Call emailComplete to check all tasks
-                emailComplete();
             }
+
         } else if (selectedValue) {
             selectedoption = true;
             correctselectedoption = false;
