@@ -47,22 +47,27 @@ app.post('/generate-phishing', async (req, res) => {
             messages: [
                 {
                     role: 'user',
-                    content: `
-                        Generate a phishing email or safe email. Each part of the email needs to link together, the email must follow the type it is. Use the following structure:
-                        type: Each option must have a 1 in 4 chance of being selected. The type of email it is must either be "Deceptive-Phishing", "Clone-Phishing", "Spear-Phishing" or "Safe-Email".
-                        hover: The email address displayed on hover, if it is a type of phishing then it should be suspicious.
-                        sender: The name of the sender.
-                        subject: The subject line of the email.
-                        body: The HTML body of the email, with phishing indicators (if it is a type of phishing email) such as urgency or links.
-                        Output the response in this JSON format, this is an example. Do not reuse securepay:
+                    content: `Complete this task with UK spelling:
+                    Generate a phishing email or safe email. Each part of the email needs to link together, the email must follow the type it is. Use the following structure:
+                    type: The type of email ("Deceptive-Phishing", "Clone-Phishing", "Spear-Phishing", "Safe-Email").
+                    hover: The email address displayed on hover. If it is a phishing email, it should be suspicious (e.g., domain mismatches or typosquatting).
+                    sender: The sender's name.
+                    subject: The subject line of the email.
+                    body: The HTML body of the email. For phishing emails, include suspicious indicators (e.g., urgency, grammatical errors, fake links) and embed clickable links or phrases where hovering shows a suspicious address. For safe emails, avoid suspicious indicators.
+
+                    Use the following suspicious words where appropriate for phishing emails:
+                    ["urgent", "customer", "earliest", "verify", "immediately", "action", "login", "failure", "restricted", "confirm", "suspended", "validate", "dispute", "locked", "alert", "refund", "unauthorised", "reset", "identity", "unusual", "warning"].
+
+                        Output the response in this JSON format. Ensure the email content is formatted correctly with HTML line breaks (<br>), this is an example. Do not reuse securepay. There should be a hover for safe emails too:
                         {
                             "type": "Deceptive-Phishing",
                             "hover": "billing-securepay@securepaysolutions-support.com",
                             "sender": "SecurePay Solutions",
                             "subject": "Urgent Account Update Required",
                             "body": "<html><body>Message Here</body></html>"
-                        }
-                    `,
+                        }`
+
+                    ,
                 },
             ],
             max_tokens: 300,

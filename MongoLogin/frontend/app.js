@@ -534,8 +534,15 @@ document.addEventListener('DOMContentLoaded', function () {
     //Highlight phishing words code
     //suspicious words to check for highlighting
     const suspiciousWords = [
-        "urgent", "customer", "earlist"
+        "urgent", "customer", "earlist", "earliest", "verify", "immediately",
+        "action", "login", "failure", 
+        "restricted", "confirm", "suspended", "validate", 
+        "dispute", "locked", "alert", "refund", 
+        "unauthorised", "reset", "identity", "unusual", "warning"
     ];
+    
+    
+    
 
     const emailBodyElement = document.querySelector('.email-body');
     const emailSubjectElement = document.querySelector('.email-subject-line');
@@ -619,7 +626,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 nextemailbutton()
             }
 
-            if(correctCount==3){
+            if(correctCount==10){
                 emailtask3 = true;
                 console.log("Task 3 correct")
 
