@@ -54,14 +54,13 @@ app.post('/generate-phishing', async (req, res) => {
                     sender: The sender's name.
                     subject: The subject line of the email.
                     body: The HTML body of the email. For phishing emails, include suspicious indicators (e.g., urgency, grammatical errors, fake links) and embed clickable links or phrases where hovering shows a suspicious address. For safe emails, avoid suspicious indicators.
+                    Use the following suspicious words where appropriate for phishing emails, and include possible misspellings for variation:
+                    ["urgent", "customer", "earlist", "earliest", "verify", "immediately", "action", "login", "failure", "restricted", "confirm", "suspended", "validate", "dispute", "locked", "alert", "refund", "unauthorised", "reset", "identity", "unusual", "warning", "verrify", "custumer", "logon", "loging", "failur", "restringted", "suspend", "confrm", "valdate", "disput", "alrt", "unautherised", "idnetity", "warnning"].
 
-                    Use the following suspicious words where appropriate for phishing emails:
-                    ["urgent", "customer", "earliest", "verify", "immediately", "action", "login", "failure", "restricted", "confirm", "suspended", "validate", "dispute", "locked", "alert", "refund", "unauthorised", "reset", "identity", "unusual", "warning"].
-
-                        Output the response in this JSON format. Ensure the email content is formatted correctly with HTML line breaks (<br>), this is an example. Do not reuse securepay. There should be a hover for safe emails too:
+                        Output the response in this JSON format. Ensure the email content is formatted correctly with HTML line breaks (<br>), this is an example. There should be a hover for safe emails too. DO NOT CHANGE THE COLOUR, SIZE OR FONT OF THE TEXT:
                         {
                             "type": "Deceptive-Phishing",
-                            "hover": "billing-securepay@securepaysolutions-support.com",
+                            "hover": "SecurePay@example.com",
                             "sender": "SecurePay Solutions",
                             "subject": "Urgent Account Update Required",
                             "body": "<html><body>Message Here</body></html>"

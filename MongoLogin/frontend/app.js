@@ -535,11 +535,14 @@ document.addEventListener('DOMContentLoaded', function () {
     //suspicious words to check for highlighting
     const suspiciousWords = [
         "urgent", "customer", "earlist", "earliest", "verify", "immediately",
-        "action", "login", "failure", 
-        "restricted", "confirm", "suspended", "validate", 
-        "dispute", "locked", "alert", "refund", 
-        "unauthorised", "reset", "identity", "unusual", "warning"
+        "action", "login", "failure", "restricted", "confirm", "suspended", 
+        "validate", "dispute", "locked", "alert", "refund", "unauthorised", 
+        "reset", "identity", "unusual", "warning", "verrify", "custumer", 
+        "earliest", "logon", "loging", "failur", "restringted", "suspend", 
+        "confrm", "valdate", "disput", "alrt", "unautherised", "idnetity", 
+        "warnning"
     ];
+    
     
     
     
