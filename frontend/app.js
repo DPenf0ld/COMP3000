@@ -1,3 +1,6 @@
+import { updateClock } from '../controllers/clockController.js';
+
+
 document.addEventListener('DOMContentLoaded', function () {
     //email code
     const emailIconDesktop = document.getElementById('email-icon');        // Icon for email on desktop
@@ -1162,33 +1165,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-
-
-
-
-//Clock Functionality
-
-function updateClock() {
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-
-    // Format hours and minutes to always show two digits
-    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
-    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
-
-    // Display time
-    const timeString = `${formattedHours}:${formattedMinutes} ${ampm}`;
-
-    // Update clock with current time
-    document.getElementById('clock').textContent = timeString;
-}
-
-// Update the clock every second
+// Call clock function and update every second
 setInterval(updateClock, 1000);
-
-// Call the function once to show the initial time
 updateClock();
 
 

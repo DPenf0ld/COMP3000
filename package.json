@@ -2,11 +2,12 @@
   "name": "comp3000",
   "version": "1.0.0",
   "description": "Comp3000 Final Year Project",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "David Penfold",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
