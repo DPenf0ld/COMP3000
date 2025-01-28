@@ -1,8 +1,11 @@
-const { OpenAI } = require('openai');
-require('dotenv').config();
-const express = require('express');
+import { OpenAI } from 'openai';
+import dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors'; // Allow cross-origin requests
 
-const cors = require('cors'); // Allow cross-origin requests
+// Load environment variables
+dotenv.config();
+
 const app = express();
 
 const openai = new OpenAI({

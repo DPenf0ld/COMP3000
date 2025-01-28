@@ -1,19 +1,25 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const { MongoClient } = require('mongodb');
-const path = require('path');  // Import path module
-require('dotenv').config();
-const cors = require('cors'); // Allow cross-origin requests
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { MongoClient } from 'mongodb';
+import path from 'path';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
+// Load environment variables
+dotenv.config();
 
-
+// Fix __dirname in ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Create an Express app
 const app = express();
 app.use(cors());
-
 app.use(express.json());  // Middleware to parse JSON bodies
+
 app.use(express.static(path.join(__dirname, 'public')));  // Serve static files from public folder
 app.use(express.static(path.join(__dirname, 'frontend')));
 
