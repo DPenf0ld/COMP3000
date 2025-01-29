@@ -1,6 +1,7 @@
 import { updateClock } from '../controllers/clockController.js';
 import { passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, encrypt, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
 import { askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
+import {  } from '../controllers/phishingController.js';
 
 
 
@@ -784,11 +785,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     //PASSWORD EXERCISE CODE 
-    //
-    //
-    //
-    //
-    //
     function togglePassword() {
         if (passwordContainer.style.display === 'block' && passwordtaskComplete == true) {
             passwordopen = false;
@@ -820,14 +816,7 @@ document.addEventListener('DOMContentLoaded', function () {
         checkPasswordStrength(event.target.value);
     });
 
-
-
     //SAFE WEB BROWSING EXERCISE CODE 
-    //
-    //
-    //
-    //
-    //
 
     // Toggle inbox on desktop and taskbar
     webIconDesktop.addEventListener('click', toggleWeb);
@@ -858,25 +847,13 @@ document.addEventListener('DOMContentLoaded', function () {
             //  }
         }
     }
-
-
-
-
-
-
-
-
-
-
 });
 
 // Call clock function and update every second
 setInterval(updateClock, 1000);
 updateClock();
 
-
 const userEmail = localStorage.getItem('userEmail'); // Retrieve the email from localStorage
-
 if (userEmail) {
     const emailElement = document.getElementById('email');
     emailElement.innerText = userEmail; // Set the email to the div
