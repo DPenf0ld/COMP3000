@@ -1,11 +1,18 @@
 import { updateClock } from '../controllers/clockController.js';
-import { passowrdCompleteFunction, checkPasswordStrength, togglePasswordInput, encrypt, checkButtonFunction, confirmpasswordButtonFunction} from '../controllers/passwordController.js';
+import { passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, encrypt, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
+import { askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    let passwordtaskComplete = true; //SET TO TRUE SO ANYTHING CAN BE OPEN, FIX TO GET REAL VARIABLE FROM PASSWORDCONTROLLER.JS
     let passwordopen = false;
     let webopen = false;
     let emailopen = false;
+
+
+
     let FirstOpenPassword = true; // Track if password exercise is opened for the first time
 
     const emailIconDesktop = document.getElementById('email-icon');        // Icon for email on desktop
@@ -28,6 +35,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const checkButton = document.getElementById('checkButton');
     checkButton.addEventListener('click', checkButtonFunction);
+
+    //openai code
+    const askButton = document.getElementById('ask-button');
+    askButton.addEventListener('click', askButtonFunction);
+
+    //password code
+    const instructionPasswordModel = document.getElementById('instructions-password'); // Instruction model
+    const passwordContainer = document.getElementById('password-container');
+    const passwordContainerBlur = document.getElementById('password-interface');
+    let passwordInput = document.getElementById('password');
+
+    //web code
+    const webCompleteButton = document.getElementById('CompleteWeb');
+    webCompleteButton.addEventListener('click', webComplete);
 
 
     //email code
@@ -63,28 +84,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    //password code
-    const instructionPasswordModel = document.getElementById('instructions-password'); // Instruction model
-    
 
-    const passwordContainer = document.getElementById('password-container');
-    const passwordContainerBlur = document.getElementById('password-interface');
-    const pwnedpasswordContainerBlur = document.getElementById('Pwned');
 
-    let passwordInput = document.getElementById('password');
-    let passwordStrengths = document.querySelectorAll('.password-strength')
 
     //web code
     const webContainer = document.getElementById('web-container');
 
 
 
-    const webCompleteButton = document.getElementById('CompleteWeb');
 
 
-    let webtask1 = false;
-    let webtask2 = false;
-    let webtask3 = false;
+
+
 
 
 
@@ -93,45 +104,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const desktopArea = document.getElementById('desktop-area');           // Desktop area
     const backToDesktop = document.getElementById('close-inbox');      // Button or link to return to desktop
     const backToDesktopPassword = document.getElementById('close-password');
-    backToDesktopPassword.addEventListener('click', passowrdCompleteFunction);
+    backToDesktopPassword.addEventListener('click', passwordCompleteFunction);
+    
     const backToDesktopWeb = document.getElementById('close-web');
+    backToDesktopWeb.addEventListener('click', webCompleteFunction);
 
 
-    //openai code
-    const askButton = document.getElementById('ask-button');
-    const userInput = document.getElementById('user-input');
-    const responseContainer = document.getElementById('response-container');
-
-    askButton.addEventListener('click', async () => {
-        const question = userInput.value.trim();
-        if (!question) {
-            responseContainer.textContent = 'Please enter a question.';
-            return;
-        }
-
-        // Clear previous response and show loading
-        responseContainer.textContent = 'Loading...';
-
-        try {
-            const response = await fetch('http://localhost:3000/generate-answer', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ userMessage: question }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch the response.');
-            }
-
-            const data = await response.json();
-            responseContainer.textContent = data.answer; // Display the OpenAI response
-        } catch (error) {
-            console.error('Error:', error);
-            responseContainer.textContent = 'Error generating response. Please try again.';
-        }
-    });
 
 
 
@@ -538,17 +516,17 @@ document.addEventListener('DOMContentLoaded', function () {
     //suspicious words to check for highlighting
     const suspiciousWords = [
         "urgent", "customer", "earlist", "earliest", "verify", "immediately",
-        "action", "login", "failure", "restricted", "confirm", "suspended", 
-        "validate", "dispute", "locked", "alert", "refund", "unauthorised", 
-        "reset", "identity", "unusual", "warning", "verrify", "custumer", 
-        "earliest", "logon", "loging", "failur", "restringted", "suspend", 
-        "confrm", "valdate", "disput", "alrt", "unautherised", "idnetity", 
+        "action", "login", "failure", "restricted", "confirm", "suspended",
+        "validate", "dispute", "locked", "alert", "refund", "unauthorised",
+        "reset", "identity", "unusual", "warning", "verrify", "custumer",
+        "earliest", "logon", "loging", "failur", "restringted", "suspend",
+        "confrm", "valdate", "disput", "alrt", "unautherised", "idnetity",
         "warnning"
     ];
-    
-    
-    
-    
+
+
+
+
 
     const emailBodyElement = document.querySelector('.email-body');
     const emailSubjectElement = document.querySelector('.email-subject-line');
@@ -632,7 +610,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 nextemailbutton()
             }
 
-            if(correctCount==10){
+            if (correctCount == 10) {
                 emailtask3 = true;
                 console.log("Task 3 correct")
 
@@ -823,7 +801,7 @@ document.addEventListener('DOMContentLoaded', function () {
             webContainer.style.display = 'none'
             desktopArea.style.display = 'none';
         }
-    
+
         // Show instructions if it's the first time opening
         if (FirstOpenPassword) {
             instructionPasswordModel.style.display = 'flex'; //working
@@ -839,7 +817,7 @@ document.addEventListener('DOMContentLoaded', function () {
     passwordIconProgress.addEventListener('click', togglePassword);
 
     passwordInput.addEventListener('input', function (event) {
-        checkPasswordStrength(event.target.value); 
+        checkPasswordStrength(event.target.value);
     });
 
 
@@ -881,63 +859,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Go back to the desktop
-    backToDesktopWeb.addEventListener('click', function () {
-        if (webtaskComplete) {
-            webContainer.style.display = 'none';
-            desktopArea.style.display = 'flex';
-        }
-    });
 
 
-    webCompleteButton.addEventListener('click', webComplete);
 
-    // Function to mark all web tasks as complete
-    function webComplete() {
 
-        // Update the task list status for Task 1
-        const webtask1Status = document.querySelector("#web-task-1-status");
-        webtask1Status.textContent = "Complete";
-        webtask1Status.classList.remove("incomplete");
-        webtask1Status.classList.add("complete");
-        webtask1 = true;
 
-        // Update the task list status for Task 2
-        const webtask2Status = document.querySelector("#web-task-2-status");
-        webtask2Status.textContent = "Complete";
-        webtask2Status.classList.remove("incomplete");
-        webtask2Status.classList.add("complete");
-        webtask2 = true;
 
-        // Update the task list status for Task 3
-        const webtask3Status = document.querySelector("#web-task-3-status");
-        webtask3Status.textContent = "Complete";
-        webtask3Status.classList.remove("incomplete");
-        webtask3Status.classList.add("complete");
-        webtask3 = true;
-
-        // Check if all tasks are complete
-        if (webtask1 && webtask2 && webtask3 && webtaskComplete != true) {
-            webtaskComplete = true;
-
-            // Update the icon to show the completed status
-            const webIcon = document.querySelector("#progress-web img");
-            if (webIcon) {
-                webIcon.src = "assets/icons/web-tick-icon.png";
-            }
-
-            // Add a message at the bottom for next steps
-            const taskWebElement = document.querySelector(".Taskweb");
-            taskWebElement.innerHTML += `
-            <div class="next-steps">
-                <p>COMPLETE</p>
-            </div>
-        `;
-            webopen = false;
-        } else {
-            console.log("Not all tasks are complete yet.");
-        }
-    }
 
 
 

@@ -5,82 +5,71 @@ let passwordblur = true;
 let passwordtask1 = false;
 let passwordtask2 = false;
 let passwordtask3 = false;
-
+let passwordStrengths = document.querySelectorAll('.password-strength')
 
 const instructionPasswordModel = document.getElementById('instructions-password'); // Instruction model
-const confirmpasswordButton = document.getElementById('confirm-password-button');
-
-
 const passwordContainer = document.getElementById('password-container');
 const passwordContainerBlur = document.getElementById('password-interface');
 const pwnedpasswordContainerBlur = document.getElementById('Pwned');
 
-let passwordInput = document.getElementById('password');
-let passwordStrengths = document.querySelectorAll('.password-strength')
-
-export function confirmpasswordButtonFunction(){
+export function confirmpasswordButtonFunction() {
     instructionPasswordModel.style.display = 'none';
     passwordContainerBlur.classList.remove('blurred'); // Remove the blur
     pwnedpasswordContainerBlur.classList.add('blurred'); // Apply the to right side
 
 }
 
-export function passowrdCompleteFunction(){
+export function passwordCompleteFunction() {
     if (passwordtaskComplete) {
         passwordContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
     }
 }
 
-export async function checkButtonFunction(){
+export async function checkButtonFunction() {
     const passwordPWNED = document.getElementById('passwordPWNED').value;
-        const resultElement = document.getElementById('result');
+    const resultElement = document.getElementById('result');
 
-        // Clear previous results
-        resultElement.textContent = "";
-        resultElement.style.color = "";
+    // Clear previous results
+    resultElement.textContent = "";
+    resultElement.style.color = "";
 
+    if (passwordblur == false) {
+        if (!passwordPWNED) {
+            resultElement.textContent = "Please enter a password.";
+            resultElement.style.color = "red"; // works
+            return;
+        }
 
+        try {
+            // Hash the password 
+            const hashedPassword = await encrypt(passwordPWNED);
 
-        if (passwordblur == false) {
+            // Extract the first 5 characters of the hash
+            const hashPrefix = hashedPassword.substring(0, 5);
+            const hashSuffix = hashedPassword.substring(5).toUpperCase();
 
+            // Fetch data from the Pwned Passwords API
+            const response = await fetch(`https://api.pwnedpasswords.com/range/${hashPrefix}`);
 
-
-            if (!passwordPWNED) {
-                resultElement.textContent = "Please enter a password.";
+            if (!response.ok) {
+                resultElement.textContent = "Error fetching data. Please try again later.";
                 resultElement.style.color = "red"; // works
                 return;
             }
 
-            try {
-                // Hash the password 
-                const hashedPassword = await encrypt(passwordPWNED);
+            const data = await response.text();
+            const breaches = data.split('\n').map(line => {
+                const [suffix, count] = line.split(':');
+                return { suffix, count: parseInt(count) };
+            });
 
-                // Extract the first 5 characters of the hash
-                const hashPrefix = hashedPassword.substring(0, 5);
-                const hashSuffix = hashedPassword.substring(5).toUpperCase();
+            // Find the match for the password
+            const matchedBreach = breaches.find(breach => breach.suffix === hashSuffix);
 
-                // Fetch data from the Pwned Passwords API
-                const response = await fetch(`https://api.pwnedpasswords.com/range/${hashPrefix}`);
-
-                if (!response.ok) {
-                    resultElement.textContent = "Error fetching data. Please try again later.";
-                    resultElement.style.color = "red"; // works
-                    return;
-                }
-
-                const data = await response.text();
-                const breaches = data.split('\n').map(line => {
-                    const [suffix, count] = line.split(':');
-                    return { suffix, count: parseInt(count) };
-                });
-
-                // Find the match for the password
-                const matchedBreach = breaches.find(breach => breach.suffix === hashSuffix);
-
-                // If the password has been pwned
-                if (matchedBreach) {
-                    resultElement.innerHTML = `
+            // If the password has been pwned
+            if (matchedBreach) {
+                resultElement.innerHTML = `
                 <p style="color: red;">This password has been pwned! It has appeared in ${matchedBreach.count} breaches.</p>
                 <p style="color: red;"><strong>Why is this a problem?</strong></p>
                 <p style="color: red;">When your password is involved in a breach, attackers can potentially use it to gain unauthorized access to your accounts, putting your personal data at risk. It's recommended to change it immediately.</p>
@@ -91,58 +80,49 @@ export async function checkButtonFunction(){
                 <li style="color: red;">Consider using a password manager to create and store strong, unique passwords for each account.</li>
                 </ul>
                 `;
+                passwordtask2 = true;
 
-                    passwordtask2 = true;
+                // Update the task list status
+                document.querySelector("#task-2-status").textContent = "Complete";
+                document.querySelector("#task-2-status").classList.remove("incomplete");
+                document.querySelector("#task-2-status").classList.add("complete");
 
-                    // Update the task list status
-                    document.querySelector("#task-2-status").textContent = "Complete";
-                    document.querySelector("#task-2-status").classList.remove("incomplete");
-                    document.querySelector("#task-2-status").classList.add("complete");
+                passwordComplete()
+            } else {
+                passwordtask2 = true;
 
-                    passwordComplete()
-                } else {
+                // Update the task list status
+                document.querySelector("#task-2-status").textContent = "Complete";
+                document.querySelector("#task-2-status").classList.remove("incomplete");
+                document.querySelector("#task-2-status").classList.add("complete");
 
-                    passwordtask2 = true;
+                passwordtask3 = true;
 
-                    // Update the task list status
-                    document.querySelector("#task-2-status").textContent = "Complete";
-                    document.querySelector("#task-2-status").classList.remove("incomplete");
-                    document.querySelector("#task-2-status").classList.add("complete");
+                // Update the task list status
+                document.querySelector("#task-3-status").textContent = "Complete";
+                document.querySelector("#task-3-status").classList.remove("incomplete");
+                document.querySelector("#task-3-status").classList.add("complete");
 
-                    passwordtask3 = true;
-
-                    // Update the task list status
-                    document.querySelector("#task-3-status").textContent = "Complete";
-                    document.querySelector("#task-3-status").classList.remove("incomplete");
-                    document.querySelector("#task-3-status").classList.add("complete");
-
-
-
-
-
-                    resultElement.innerHTML = `
+                resultElement.innerHTML = `
                     <p style="color: green;">This password has not been pwned. It appears safe to use.</p>
                 `;
-                    passwordComplete()
-                }
-
-
-            } catch (error) {
-                resultElement.textContent = "Error checking password. Please try again later.";
-                resultElement.style.color = "red"; // works
-                console.error(error);
+                passwordComplete()
             }
-        }
-}
 
+        } catch (error) {
+            resultElement.textContent = "Error checking password. Please try again later.";
+            resultElement.style.color = "red"; // works
+            console.error(error);
+        }
+    }
+}
 
 export function togglePasswordInput() {
     const passwordInput = document.getElementById('passwordPWNED');
     passwordblur = false;
-        passwordInput.disabled = false; // Enable
-    
-}
+    passwordInput.disabled = false; // Enable
 
+}
 
 // SHA-1 Hashing Function (to hash the password)
 export function encrypt(str) {
@@ -221,15 +201,12 @@ export function checkPasswordStrength(password) {
             task1Status.classList.add("complete");
             pwnedpasswordContainerBlur.classList.remove('blurred'); // Remove the blur from right side
 
-
             togglePasswordInput();
-
 
             // Call passwordComplete to check all tasks
             passwordComplete();
         }
     });
-
     text.textContent = strengthText;
     text.style.color = gradientColor;
 }
