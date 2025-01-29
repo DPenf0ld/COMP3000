@@ -1,0 +1,1 @@
+console.log('phishingController.js loaded');

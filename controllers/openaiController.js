@@ -1,3 +1,4 @@
+console.log('openaiController.js loaded');
 import { OpenAI } from 'openai';
 import dotenv from 'dotenv';
 import express from 'express';

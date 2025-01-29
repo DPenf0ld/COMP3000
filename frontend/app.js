@@ -1,18 +1,39 @@
 import { updateClock } from '../controllers/clockController.js';
-
+import { togglePasswordInput, encrypt } from '../controllers/passwordController.js';
 
 document.addEventListener('DOMContentLoaded', function () {
-    //email code
+
+    let passwordopen = false;
+    let webopen = false;
+    let emailopen = false;
+    let FirstOpenPassword = true; // Track if password exercise is opened for the first time
+
     const emailIconDesktop = document.getElementById('email-icon');        // Icon for email on desktop
     const emailIconTaskbar = document.getElementById('taskbar-email');     // Icon for email on taskbar
     const emailIconProgress = document.getElementById('progress-email');     // Icon for email on progress tracker
+
+    const passwordIconDesktop = document.getElementById('password-icon');        // Icon for password on desktop
+    const passwordIconTaskbar = document.getElementById('taskbar-password');     // Icon for password on taskbar
+    const passwordIconProgress = document.getElementById('progress-password');     // Icon for password on progress tracker
+
+    const webIconDesktop = document.getElementById('web-icon');        // Icon for web on desktop
+    const webIconTaskbar = document.getElementById('taskbar-web');     // Icon for web on taskbar
+    const webIconProgress = document.getElementById('progress-web');     // Icon for web on progress tracker
+
+    let emailtaskComplete = false;
+    let passwordtaskComplete = false;
+    let webtaskComplete = false;
+
+
+    //email code
+
 
     const inboxContainer = document.getElementById('inbox-container');     // Inbox container
     const emailContainer = document.getElementById('email-interface');     // Inbox container
     //const emailContentContainer = document.querySelector('.email-content');
     const emailListContainer = document.querySelector('.email-list');
     let emailtypereminder = false;
-    let emailopen = false;
+
 
     const instructionModel = document.getElementById('instructions-email'); // Instruction model
     const nextButton = document.getElementById('next-button');
@@ -27,9 +48,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let displaynextemailbutton = false; //do not show next email button orginally
     let selectedoption = false;
     let correctselectedoption = false;
-    let passwordopen = false;
 
-    let emailtaskComplete = false;
+
+
     let emailtask1 = false;
     let emailtask2 = false;
     let emailtask3 = false;
@@ -40,17 +61,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let arrow5 = false;
     let arrow6 = false;
 
-    let deceptivecount = 0;
-    let spearcount = 0;
-    let safecount = 0;
-    let clonecount = 0;
     let phishingcount = 0;
 
 
 
     //password code
-    let FirstOpenPassword = true; // Track if password exercise is opened for the first time
-    let passwordtaskComplete = false;
+
 
     let passwordtask1 = false;
     let passwordtask2 = false;
@@ -58,9 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let passwordblur = true;
 
-    const passwordIconDesktop = document.getElementById('password-icon');        // Icon for password on desktop
-    const passwordIconTaskbar = document.getElementById('taskbar-password');     // Icon for password on taskbar
-    const passwordIconProgress = document.getElementById('progress-password');     // Icon for password on progress tracker
+
 
     const instructionPasswordModel = document.getElementById('instructions-password'); // Instruction model
     const confirmpasswordButton = document.getElementById('confirm-password-button');
@@ -75,13 +89,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //web code
     const webContainer = document.getElementById('web-container');
-    let webopen = false;
 
-    const webIconDesktop = document.getElementById('web-icon');        // Icon for web on desktop
-    const webIconTaskbar = document.getElementById('taskbar-web');     // Icon for web on taskbar
-    const webIconProgress = document.getElementById('progress-web');     // Icon for web on progress tracker
+
+
     const webCompleteButton = document.getElementById('CompleteWeb');
-    let webtaskComplete = false;
+
 
     let webtask1 = false;
     let webtask2 = false;
@@ -811,7 +823,6 @@ document.addEventListener('DOMContentLoaded', function () {
     //
     //
     //
-
     function togglePassword() {
         if (passwordContainer.style.display === 'block' && passwordtaskComplete == true) {
             passwordopen = false;
@@ -824,7 +835,7 @@ document.addEventListener('DOMContentLoaded', function () {
             webContainer.style.display = 'none'
             desktopArea.style.display = 'none';
         }
-
+    
         // Show instructions if it's the first time opening
         if (FirstOpenPassword) {
             instructionPasswordModel.style.display = 'flex'; //working
@@ -833,6 +844,10 @@ document.addEventListener('DOMContentLoaded', function () {
             togglePasswordInput();
         }
     }
+
+    
+
+
 
 
     confirmpasswordButton.addEventListener('click', () => {
@@ -917,25 +932,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //IMPLEMENTATION OF PWNED API
     // FUNCTION TO TOGGLE INPUT BASED ON PASSWORDBLUR
-    function togglePasswordInput() {
-        const passwordInput = document.getElementById('passwordPWNED');
-        if (passwordblur) {
-            passwordInput.disabled = true; // Disable
-        } else {
-            passwordInput.disabled = false; // Enable
-        }
-    }
 
 
-    // SHA-1 Hashing Function (to hash the password)
-    function encrypt(str) {
-        const utf8 = new TextEncoder().encode(str);
-        return crypto.subtle.digest('SHA-1', utf8).then(hashBuffer => {
-            return Array.from(new Uint8Array(hashBuffer))
-                .map(byte => byte.toString(16).padStart(2, '0'))
-                .join('');
-        });
-    }
+
+
 
     document.getElementById('checkButton').addEventListener('click', async () => {
         const passwordPWNED = document.getElementById('passwordPWNED').value;

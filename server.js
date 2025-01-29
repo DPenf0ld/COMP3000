@@ -20,8 +20,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());  // Middleware to parse JSON bodies
 
-app.use(express.static(path.join(__dirname, 'public')));  // Serve static files from public folder
+app.use(express.static(path.join(__dirname, 'public')));  // Serve static files from public, frontend and controllers folder
 app.use(express.static(path.join(__dirname, 'frontend')));
+app.use('/controllers', express.static(path.join(__dirname, 'controllers')));
+
 
 // MongoDB connection
 const uri = process.env.MONGODB_URI;
