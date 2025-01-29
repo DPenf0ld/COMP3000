@@ -1,5 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
-import { checkPasswordStrength, togglePasswordInput, encrypt, checkButtonFunction } from '../controllers/passwordController.js';
+import { passowrdCompleteFunction, checkPasswordStrength, togglePasswordInput, encrypt, checkButtonFunction, confirmpasswordButtonFunction} from '../controllers/passwordController.js';
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -21,8 +21,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const webIconProgress = document.getElementById('progress-web');     // Icon for web on progress tracker
 
     let emailtaskComplete = false;
-    let passwordtaskComplete = false;
     let webtaskComplete = false;
+
+    const confirmpasswordButton = document.getElementById('confirm-password-button');
+    confirmpasswordButton.addEventListener('click', confirmpasswordButtonFunction);
 
     const checkButton = document.getElementById('checkButton');
     checkButton.addEventListener('click', checkButtonFunction);
@@ -49,37 +51,21 @@ document.addEventListener('DOMContentLoaded', function () {
     let displaynextemailbutton = false; //do not show next email button orginally
     let selectedoption = false;
     let correctselectedoption = false;
-
-
-
     let emailtask1 = false;
     let emailtask2 = false;
     let emailtask3 = false;
-
     let arrow2 = false;
     let arrow3 = false;
     let arrow4 = false;
     let arrow5 = false;
     let arrow6 = false;
-
     let phishingcount = 0;
 
 
 
     //password code
-
-
-    let passwordtask1 = false;
-    let passwordtask2 = false;
-    let passwordtask3 = false;
-
-
-
-
-
     const instructionPasswordModel = document.getElementById('instructions-password'); // Instruction model
-    const confirmpasswordButton = document.getElementById('confirm-password-button');
-
+    
 
     const passwordContainer = document.getElementById('password-container');
     const passwordContainerBlur = document.getElementById('password-interface');
@@ -107,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const desktopArea = document.getElementById('desktop-area');           // Desktop area
     const backToDesktop = document.getElementById('close-inbox');      // Button or link to return to desktop
     const backToDesktopPassword = document.getElementById('close-password');
+    backToDesktopPassword.addEventListener('click', passowrdCompleteFunction);
     const backToDesktopWeb = document.getElementById('close-web');
 
 
@@ -846,50 +833,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    
-
-
-
-
-    confirmpasswordButton.addEventListener('click', () => {
-        instructionPasswordModel.style.display = 'none';
-        passwordContainerBlur.classList.remove('blurred'); // Remove the blur
-        pwnedpasswordContainerBlur.classList.add('blurred'); // Apply the to right side
-    });
-
-
-
-
-
     // Toggle inbox on desktop and taskbar
     passwordIconDesktop.addEventListener('click', togglePassword);
     passwordIconTaskbar.addEventListener('click', togglePassword);
     passwordIconProgress.addEventListener('click', togglePassword);
-
-    // Go back to the desktop
-    backToDesktopPassword.addEventListener('click', function () {
-        if (passwordtaskComplete) {
-            passwordContainer.style.display = 'none';
-            desktopArea.style.display = 'flex';
-        }
-    });
-
-
 
     passwordInput.addEventListener('input', function (event) {
         checkPasswordStrength(event.target.value); 
     });
 
 
-    //IMPLEMENTATION OF PWNED API
-    // FUNCTION TO TOGGLE INPUT BASED ON PASSWORDBLUR
-
-
-
-
-
-
-    
 
     //SAFE WEB BROWSING EXERCISE CODE 
     //

@@ -1,15 +1,10 @@
 console.log('passwordController.js loaded');
 
-
-
-
+let passwordtaskComplete = false;
 let passwordblur = true;
-
 let passwordtask1 = false;
 let passwordtask2 = false;
 let passwordtask3 = false;
-
-
 
 
 const instructionPasswordModel = document.getElementById('instructions-password'); // Instruction model
@@ -22,6 +17,20 @@ const pwnedpasswordContainerBlur = document.getElementById('Pwned');
 
 let passwordInput = document.getElementById('password');
 let passwordStrengths = document.querySelectorAll('.password-strength')
+
+export function confirmpasswordButtonFunction(){
+    instructionPasswordModel.style.display = 'none';
+    passwordContainerBlur.classList.remove('blurred'); // Remove the blur
+    pwnedpasswordContainerBlur.classList.add('blurred'); // Apply the to right side
+
+}
+
+export function passowrdCompleteFunction(){
+    if (passwordtaskComplete) {
+        passwordContainer.style.display = 'none';
+        desktopArea.style.display = 'flex';
+    }
+}
 
 export async function checkButtonFunction(){
     const passwordPWNED = document.getElementById('passwordPWNED').value;
