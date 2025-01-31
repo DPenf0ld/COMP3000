@@ -1,4 +1,4 @@
-console.log('clockController.js loaded');
+console.log('clockController.js is loaded');
 export function updateClock() {
     const now = new Date();
     const hours = now.getHours();
