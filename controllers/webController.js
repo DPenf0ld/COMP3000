@@ -1,11 +1,12 @@
 console.log('webController.js loaded');
+
 let webopen = false;
-const desktopArea = document.getElementById('desktop-area');
 let webtaskComplete = false;
 let webtask1 = false;
 let webtask2 = false;
 let webtask3 = false;
 
+const desktopArea = document.getElementById('desktop-area');
 const webContainer = document.getElementById('web-container');
 const userInput = document.getElementById('user-input');
 const responseContainer = document.getElementById('response-container');
@@ -16,10 +17,8 @@ export async function askButtonFunction() {
         responseContainer.textContent = 'Please enter a question.';
         return;
     }
-
     // Clear previous response and show loading
     responseContainer.textContent = 'Loading...';
-
     try {
         const response = await fetch('http://localhost:3000/generate-answer', {
             method: 'POST',
@@ -39,12 +38,10 @@ export async function askButtonFunction() {
         console.error('Error:', error);
         responseContainer.textContent = 'Error generating response. Please try again.';
     }
-
 }
 
 // Function to mark all web tasks as complete
 export function webComplete() {
-
     // Update the task list status for Task 1
     const webtask1Status = document.querySelector("#web-task-1-status");
     webtask1Status.textContent = "Complete";
