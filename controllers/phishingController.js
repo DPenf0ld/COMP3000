@@ -1,11 +1,6 @@
 console.log('phishingController.js loaded');
+
 let currentSlide = 0; // Track the current slide
-
-
-//Code for exmaple instructions
-
-const contentElement = document.getElementById('instruction-content');
-const titleElement = document.getElementById('instruction-title');
 let currentEmailIndex = 0;
 let displaynextemailbutton = false; //do not show next email button orginally
 let selectedoption = false;
@@ -20,19 +15,19 @@ let arrow4 = false;
 let arrow5 = false;
 let arrow6 = false;
 let phishingcount = 0;
+let emailtypereminder = false;
+let currentPage = 0; // Track the current page of the model
+
 //const emailContentContainer = document.querySelector('.email-content');
 const emailListContainer = document.querySelector('.email-list');
-let emailtypereminder = false;
 const nextButton = document.getElementById('next-button');
 const confirmButton = document.getElementById('confirm-button');
-
+const contentElement = document.getElementById('instruction-content');
+const titleElement = document.getElementById('instruction-title');
 const instructionModel = document.getElementById('instructions-email'); // Instruction model
 const emailContainer = document.getElementById('email-interface');     // Inbox container
-let currentPage = 0; // Track the current page of the model
 const prevButton = document.getElementById('prev-button');
 
-//hints for example email
-//Highlight phishing words code
 //suspicious words to check for highlighting
 const suspiciousWords = [
     "urgent", "customer", "earlist", "earliest", "verify", "immediately",
@@ -44,6 +39,7 @@ const suspiciousWords = [
     "warnning"
 ];
 
+// Email content
 const emails = [
     {
         type: "Deceptive-Phishing",
@@ -129,12 +125,65 @@ const pages = [
     }
 ];
 
+const slides = [
+    {
+        title: "Introduction",
+        content: `
+        <p>First, we’ll review an example phishing email. These instructions will equip you with methods to <strong>identify phishing emails</strong> and understand their types.</p>
+    `
+    },
+    {
+        title: "Identifying Suspicious Words",
+        content: `
+        <p><strong>Suspicious words</strong> indicate a phishing email. To highlight them:</p>
+        <ul>
+            <li>Double-click a word.</li>
+            <li>Or click at the start of a word and drag your cursor over it.</li>
+        </ul>
+        <p>Take a moment to read the example email and <strong>highlight any words</strong> you think could be suspicious.</p>
+    `
+    },
+    {
+        title: "Step 1: Informal Greeting",
+        content: `
+        <p>An informal or generic greeting is a key indicator of a phishing email. For example, this email uses the term <strong>“Customer”</strong>, which is not specific.</p>
+        <p><strong>Task:</strong> Highlight the word <strong>“Customer”</strong> to complete this step.</p>
+    `
+    },
+    {
+        title: "Step 2: Time Urgency",
+        content: `
+        <p>Phishing emails often create pressure with <strong>time urgency</strong>. Phrases like <strong>“Immediate action required”</strong> or <strong>“Act now”</strong> are common.</p>
+        <p><strong>Task:</strong> In the example email, highlight the word <strong>“urgent”</strong> to complete this step.</p>
+    `
+    },
+    {
+        title: "Step 3: Poor Grammar",
+        content: `
+        <p>One common sign of a phishing email is <strong>poor grammar</strong>, such as misspellings, incorrect punctuation, or awkward phrasing.</p>
+        <p>In this example, the word <strong>“earlist”</strong> (instead of <strong>“earliest”</strong>) is a clear indication of phishing.</p>
+        <p><strong>Task:</strong> Highlight the word <strong>“earlist”</strong> to complete this step.</p>
+    `
+    },
+    {
+        title: "Step 4: Unnecessary Subdomains",
+        content: `
+        <p>Legitimate companies typically use simple, professional domains, like <strong>securepay.com</strong> or <strong>securepaysolutions.com</strong>. In phishing emails, links often contain unnecessary or suspicious subdomains.</p>
+        <p><strong>Task:</strong> Hover over the payment link in the example to reveal the real address. DO NOT CLICK THE LINK!</p>
+    `
+    },
+    {
+        title: "Step 5: Hyphen Usage",
+        content: `
+        <p>A real company uses straightforward email addresses, such as <strong>Billing@securepay.com</strong>. Phishing emails, however, often use long and suspicious addresses.</p>
+        <p><strong>Task:</strong> Hover over the profile picture in the example email to see the true email address.</p>
+    `
+    }
+];
+
+
 export function submitButtonFunction() {
-
-
     tickboxanswer(currentEmailIndex)
-
-
     if (selectedoption) {
         let correctCount = 0;
         let missedCount = 0;
@@ -173,7 +222,6 @@ export function submitButtonFunction() {
                 }
             }
         });
-
 
         console.log(`Correct: ${correctCount}, Missed: ${missedCount}`);
 
@@ -272,68 +320,10 @@ export function confirmButtonFunction() {
 export function firstOpenFunction() {
     instructionModel.style.display = 'flex'; //working
     emailContainer.classList.add('blurred'); // Apply the blur
-
 }
 
 // Update example slides c
 export function updateSlide() {
-    const slides = [
-        {
-            title: "Introduction",
-            content: `
-            <p>First, we’ll review an example phishing email. These instructions will equip you with methods to <strong>identify phishing emails</strong> and understand their types.</p>
-        `
-        },
-        {
-            title: "Identifying Suspicious Words",
-            content: `
-            <p><strong>Suspicious words</strong> indicate a phishing email. To highlight them:</p>
-            <ul>
-                <li>Double-click a word.</li>
-                <li>Or click at the start of a word and drag your cursor over it.</li>
-            </ul>
-            <p>Take a moment to read the example email and <strong>highlight any words</strong> you think could be suspicious.</p>
-        `
-        },
-        {
-            title: "Step 1: Informal Greeting",
-            content: `
-            <p>An informal or generic greeting is a key indicator of a phishing email. For example, this email uses the term <strong>“Customer”</strong>, which is not specific.</p>
-            <p><strong>Task:</strong> Highlight the word <strong>“Customer”</strong> to complete this step.</p>
-        `
-        },
-        {
-            title: "Step 2: Time Urgency",
-            content: `
-            <p>Phishing emails often create pressure with <strong>time urgency</strong>. Phrases like <strong>“Immediate action required”</strong> or <strong>“Act now”</strong> are common.</p>
-            <p><strong>Task:</strong> In the example email, highlight the word <strong>“urgent”</strong> to complete this step.</p>
-        `
-        },
-        {
-            title: "Step 3: Poor Grammar",
-            content: `
-            <p>One common sign of a phishing email is <strong>poor grammar</strong>, such as misspellings, incorrect punctuation, or awkward phrasing.</p>
-            <p>In this example, the word <strong>“earlist”</strong> (instead of <strong>“earliest”</strong>) is a clear indication of phishing.</p>
-            <p><strong>Task:</strong> Highlight the word <strong>“earlist”</strong> to complete this step.</p>
-        `
-        },
-        {
-            title: "Step 4: Unnecessary Subdomains",
-            content: `
-            <p>Legitimate companies typically use simple, professional domains, like <strong>securepay.com</strong> or <strong>securepaysolutions.com</strong>. In phishing emails, links often contain unnecessary or suspicious subdomains.</p>
-            <p><strong>Task:</strong> Hover over the payment link in the example to reveal the real address. DO NOT CLICK THE LINK!</p>
-        `
-        },
-        {
-            title: "Step 5: Hyphen Usage",
-            content: `
-            <p>A real company uses straightforward email addresses, such as <strong>Billing@securepay.com</strong>. Phishing emails, however, often use long and suspicious addresses.</p>
-            <p><strong>Task:</strong> Hover over the profile picture in the example email to see the true email address.</p>
-        `
-        }
-    ];
-    
-
     titleElement.innerHTML = slides[currentSlide].title;
     contentElement.innerHTML = slides[currentSlide].content;
     const emailSenderElement = document.querySelector('.email-sender');
@@ -365,8 +355,6 @@ export function updateSlide() {
     } else {
         console.log("Invalid slide number");
     }
-
-
 }
 
 export function emailComplete() {
@@ -410,13 +398,11 @@ export function highlightText(element, word) {
     const regex = new RegExp(`(${word})`, 'gi'); // Case-insensitive match
     element.innerHTML = element.innerHTML.replace(regex, (match) => {
         // Wrap in span and add arrow 
-
         return `<span class="highlight">${match}<span class="arrow-icon"><img src="assets/icons/arrow-icon.png" alt="arrow"></span></span>`;
     });
 }
 
 export function exampleInstructions() {
-
     // Create the instruction box
     const instructionBox = document.createElement('div');
     instructionBox.className = 'instruction-box';
@@ -431,16 +417,8 @@ export function exampleInstructions() {
 
     // Append instruction box
     emailListContainer.appendChild(instructionBox);
-
-
-    // load elments
-
     const prevButton = document.getElementById('prev-slide');
     const nextButton = document.getElementById('next-slide');
-
-
-
-
 
     // Event listeners for buttons
     prevButton.addEventListener('click', () => {
@@ -496,7 +474,6 @@ export function reminder() {
         closeButton.className = 'close-button';
         closeButton.innerHTML = '&times;'; // The cross symbol
 
-
         // Set the inner HTML for the information box with line breaks
         reminder.innerHTML = `
         <strong>Deceptive Phishing</strong><br>
@@ -508,18 +485,15 @@ export function reminder() {
         <strong>Spear Phishing</strong><br>
         Targeted attacks aimed at specific individuals or organizations, often using personal information to craft convincing emails.<br><br>
     `;
-
         emailListContainer.appendChild(reminder);
         // Append the close button to the info box
         reminder.appendChild(closeButton);
         emailtypereminder = true;
 
-
         closeButton.addEventListener('click', () => {
             reminder.remove();
             emailtypereminder = false;
         });
-
     }
 }
 
@@ -621,8 +595,6 @@ export function unhideInstructionBox() {
 }
 
 export function showNextEmail() {
-
     currentEmailIndex++;
     addGeneratedEmail();
-
 }
