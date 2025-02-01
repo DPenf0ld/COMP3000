@@ -1,6 +1,7 @@
 console.log('phishingController.js loaded');
 let currentSlide = 0; // Track the current slide
 
+
 //Code for exmaple instructions
 
 const contentElement = document.getElementById('instruction-content');

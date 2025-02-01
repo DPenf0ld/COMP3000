@@ -1,112 +1,95 @@
 import { updateClock } from '../controllers/clockController.js';
 import { passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
 import { askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
-import { submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail,  confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction  } from '../controllers/phishingController.js';
+import { submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
 
 
 
 document.addEventListener('DOMContentLoaded', function () {
-
-    let passwordtaskComplete = true; //SET TO TRUE SO ANYTHING CAN BE OPEN, FIX TO GET REAL VARIABLE FROM PASSWORDCONTROLLER.JS
+    //Sets each task to not open
     let passwordopen = false;
     let webopen = false;
     let emailopen = false;
 
+    //Email Icons
+    const emailIconDesktop = document.getElementById('email-icon');
+    emailIconDesktop.addEventListener('click', toggleInbox);
 
-    const prevButton = document.getElementById('prev-button');
-    let FirstOpenPassword = true; // Track if password exercise is opened for the first time
+    const emailIconTaskbar = document.getElementById('taskbar-email');
+    emailIconTaskbar.addEventListener('click', toggleInbox);
 
-    const emailIconDesktop = document.getElementById('email-icon');        // Icon for email on desktop
-    const emailIconTaskbar = document.getElementById('taskbar-email');     // Icon for email on taskbar
-    const emailIconProgress = document.getElementById('progress-email');     // Icon for email on progress tracker
+    const emailIconProgress = document.getElementById('progress-email');
+    emailIconProgress.addEventListener('click', toggleInbox);
 
-    const passwordIconDesktop = document.getElementById('password-icon');        // Icon for password on desktop
-    const passwordIconTaskbar = document.getElementById('taskbar-password');     // Icon for password on taskbar
-    const passwordIconProgress = document.getElementById('progress-password');     // Icon for password on progress tracker
+    //Password Icons
+    const passwordIconDesktop = document.getElementById('password-icon');
+    passwordIconDesktop.addEventListener('click', togglePassword);
 
-    const webIconDesktop = document.getElementById('web-icon');        // Icon for web on desktop
-    const webIconTaskbar = document.getElementById('taskbar-web');     // Icon for web on taskbar
-    const webIconProgress = document.getElementById('progress-web');     // Icon for web on progress tracker
+    const passwordIconTaskbar = document.getElementById('taskbar-password');
+    passwordIconTaskbar.addEventListener('click', togglePassword);
 
+    const passwordIconProgress = document.getElementById('progress-password');
+    passwordIconProgress.addEventListener('click', togglePassword);
+
+    //Web Icons
+    const webIconDesktop = document.getElementById('web-icon');
+    webIconDesktop.addEventListener('click', toggleWeb);
+
+    const webIconTaskbar = document.getElementById('taskbar-web');
+    webIconTaskbar.addEventListener('click', toggleWeb);
+
+    const webIconProgress = document.getElementById('progress-web');
+    webIconProgress.addEventListener('click', toggleWeb);
+
+    //Tasks Completion Trackers
     let emailtaskComplete = false;
+    let passwordtaskComplete = false;
     let webtaskComplete = false;
 
-    const confirmpasswordButton = document.getElementById('confirm-password-button');
-    confirmpasswordButton.addEventListener('click', confirmpasswordButtonFunction);
-
-    const checkButton = document.getElementById('checkButton');
-    checkButton.addEventListener('click', checkButtonFunction);
-
-    //openai code
-    const askButton = document.getElementById('ask-button');
-    askButton.addEventListener('click', askButtonFunction);
-
-    //password code
-    const instructionPasswordModel = document.getElementById('instructions-password'); // Instruction model
-    const passwordContainer = document.getElementById('password-container');
-    const passwordContainerBlur = document.getElementById('password-interface');
-    let passwordInput = document.getElementById('password');
-
-    //web code
-    const webCompleteButton = document.getElementById('CompleteWeb');
-    webCompleteButton.addEventListener('click', webComplete);
-
-
-    //email code
-    const inboxContainer = document.getElementById('inbox-container');     // Inbox container
-    const nextButton = document.getElementById('next-button');
-    const confirmButton = document.getElementById('confirm-button');
-    let isFirstOpen = true; // Track if inbox is opened for the first time
-
-    //web code
-    const webContainer = document.getElementById('web-container');
-
-
-
-
-
-
-
-
-
-
+    //Tracks if each task is opened for the first time
+    let isFirstOpen = true; //email
+    let FirstOpenPassword = true;
+    let FirstOpenWeb = true;
 
     //Desktop code
-    const desktopArea = document.getElementById('desktop-area');           // Desktop area
-    const backToDesktop = document.getElementById('close-inbox');      // Button or link to return to desktop
+    const desktopArea = document.getElementById('desktop-area');
+
+    const backToDesktop = document.getElementById('close-inbox');
+    backToDesktop.addEventListener('click', backToDesktopPhishing);
+
     const backToDesktopPassword = document.getElementById('close-password');
     backToDesktopPassword.addEventListener('click', passwordCompleteFunction);
-    
+
     const backToDesktopWeb = document.getElementById('close-web');
     backToDesktopWeb.addEventListener('click', webCompleteFunction);
 
+    //Phishing Task Code
+    const inboxContainer = document.getElementById('inbox-container');
 
+    const reminderemail = document.getElementById('reminder');
+    reminderemail.addEventListener('click', reminder);
 
-
-
-
-
-
-
-    //PHISHING EXERCISE CODE 
-    //
-    //
-    //
-    //
-    //
-
-
-
-
-    // Add event listeners 
+    const prevButton = document.getElementById('prev-button');
     prevButton.addEventListener('click', prevButtonFunction);
 
+    const nextButton = document.getElementById('next-button');
     nextButton.addEventListener('click', nextButtonFunction);
 
+    const confirmButton = document.getElementById('confirm-button');
     confirmButton.addEventListener('click', confirmButtonFunction);
+
+    const emailBodyElement = document.querySelector('.email-body');
+    enableHighlighting(emailBodyElement);
+
+    const emailSubjectElement = document.querySelector('.email-subject-line');
+    enableHighlighting(emailSubjectElement);
+    
+    const submitButton = document.getElementById('submit-highlight');
+    submitButton.addEventListener('click', submitButtonFunction);
 
     // Toggle inbox code
     function toggleInbox() {
+        displayEmail(); //MOVED, TAKE OUT OF FUNCTION IF PROBLEM
         if (inboxContainer.style.display === 'block' && emailtaskComplete == true) { //closes inbox
             emailopen = false;
             // If inbox is currently displayed, hide it and show desktop
@@ -114,13 +97,11 @@ document.addEventListener('DOMContentLoaded', function () {
             desktopArea.style.display = 'flex';
         } else if ((passwordopen != true && webtaskComplete) || (webopen != true && passwordtaskComplete) || (webtaskComplete && passwordtaskComplete) || (webopen != true && passwordopen != true)) { //opens inbox 
             emailopen = true;
-
             // If inbox is not displayed, show it and hide desktop
             inboxContainer.style.display = 'block';
             passwordContainer.style.display = 'none'
             webContainer.style.display = 'none'
             desktopArea.style.display = 'none';
-
             // Show instructions if it's the first time opening the inbox
             if (isFirstOpen) {
                 isFirstOpen = false;
@@ -129,69 +110,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Toggle inbox on desktop and taskbar
-    emailIconDesktop.addEventListener('click', toggleInbox);
-    emailIconTaskbar.addEventListener('click', toggleInbox);
-    emailIconProgress.addEventListener('click', toggleInbox);
+    //Password Task Code
+    const instructionPasswordModel = document.getElementById('instructions-password');
+    const passwordContainer = document.getElementById('password-container');
+    const passwordContainerBlur = document.getElementById('password-interface');
+    let passwordInput = document.getElementById('password');
 
-    // Go back to the desktop
-    backToDesktop.addEventListener('click', backToDesktopPhishing);
+    const confirmpasswordButton = document.getElementById('confirm-password-button');
+    confirmpasswordButton.addEventListener('click', confirmpasswordButtonFunction);
 
+    const checkButton = document.getElementById('checkButton');
+    checkButton.addEventListener('click', checkButtonFunction);
 
-    //display emails
-    let currentEmailIndex = 0;
-
-    
-
-    
-
-
-
-
-    // Initial display
-    displayEmail(currentEmailIndex);
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-    const emailBodyElement = document.querySelector('.email-body');
-    const emailSubjectElement = document.querySelector('.email-subject-line');
-    const submitButton = document.getElementById('submit-highlight');
-
-    
-
-    // Enable highlighting for both the email body and subject
-    enableHighlighting(emailBodyElement);
-    enableHighlighting(emailSubjectElement);
-
-    // Handle submission when the submit button is clicked
-    submitButton.addEventListener('click', submitButtonFunction);
-
-
-
-    //function to bring back information
-
-    // Listen for info to be clicked
-    document.getElementById('reminder').addEventListener('click', reminder);
-
-    
-
-
-
-    
-
-    //PASSWORD EXERCISE CODE 
+    //toggle password code
     function togglePassword() {
         if (passwordContainer.style.display === 'block' && passwordtaskComplete == true) {
             passwordopen = false;
@@ -214,23 +145,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Toggle inbox on desktop and taskbar
-    passwordIconDesktop.addEventListener('click', togglePassword);
-    passwordIconTaskbar.addEventListener('click', togglePassword);
-    passwordIconProgress.addEventListener('click', togglePassword);
-
     passwordInput.addEventListener('input', function (event) {
         checkPasswordStrength(event.target.value);
     });
 
-    //SAFE WEB BROWSING EXERCISE CODE 
+    //web code
+    const webContainer = document.getElementById('web-container');
+    const webCompleteButton = document.getElementById('CompleteWeb');
+    webCompleteButton.addEventListener('click', webComplete);
 
-    // Toggle inbox on desktop and taskbar
-    webIconDesktop.addEventListener('click', toggleWeb);
-    webIconTaskbar.addEventListener('click', toggleWeb);
-    webIconProgress.addEventListener('click', toggleWeb);
-
-    // Toggle web code
+    //toggle web task
     function toggleWeb() {
         if (webContainer.style.display === 'block' && webtaskComplete == true) {
             webopen = false;
@@ -254,6 +178,10 @@ document.addEventListener('DOMContentLoaded', function () {
             //  }
         }
     }
+
+    //openai code - web Task
+    const askButton = document.getElementById('ask-button');
+    askButton.addEventListener('click', askButtonFunction);
 });
 
 // Call clock function and update every second

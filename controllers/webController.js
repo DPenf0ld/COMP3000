@@ -1,11 +1,11 @@
 console.log('webController.js loaded');
-
-
+let webopen = false;
+const desktopArea = document.getElementById('desktop-area');
 let webtaskComplete = false;
 let webtask1 = false;
 let webtask2 = false;
 let webtask3 = false;
-let webopen = false;
+
 const webContainer = document.getElementById('web-container');
 const userInput = document.getElementById('user-input');
 const responseContainer = document.getElementById('response-container');

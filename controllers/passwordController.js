@@ -1,5 +1,6 @@
 console.log('passwordController.js loaded');
-
+const desktopArea = document.getElementById('desktop-area');
+let passwordopen = false;
 let passwordtaskComplete = false;
 let passwordblur = true;
 let passwordtask1 = false;
