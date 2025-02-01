@@ -1,5 +1,5 @@
 console.log('passwordController.js loaded');
-const desktopArea = document.getElementById('desktop-area');
+
 let passwordopen = false;
 let passwordtaskComplete = false;
 let passwordblur = true;
@@ -8,6 +8,7 @@ let passwordtask2 = false;
 let passwordtask3 = false;
 let passwordStrengths = document.querySelectorAll('.password-strength')
 
+const desktopArea = document.getElementById('desktop-area');
 const instructionPasswordModel = document.getElementById('instructions-password'); // Instruction model
 const passwordContainer = document.getElementById('password-container');
 const passwordContainerBlur = document.getElementById('password-interface');
@@ -17,7 +18,6 @@ export function confirmpasswordButtonFunction() {
     instructionPasswordModel.style.display = 'none';
     passwordContainerBlur.classList.remove('blurred'); // Remove the blur
     pwnedpasswordContainerBlur.classList.add('blurred'); // Apply the to right side
-
 }
 
 export function passwordCompleteFunction() {
@@ -122,7 +122,6 @@ export function togglePasswordInput() {
     const passwordInput = document.getElementById('passwordPWNED');
     passwordblur = false;
     passwordInput.disabled = false; // Enable
-
 }
 
 // SHA-1 Hashing Function (to hash the password)
@@ -191,7 +190,7 @@ export function checkPasswordStrength(password) {
 
     passwordStrengths.forEach(passwordStrength => {
         passwordStrength.style.background = `conic-gradient(${gradientColor} ${degree}deg, #1115 ${degree}deg)`;
-        // Check if password strength is "Strong" (green color)
+        // Check if password strength is Strong
         if (strengthText === 'Strong') {
             passwordtask1 = true;
 
@@ -203,7 +202,6 @@ export function checkPasswordStrength(password) {
             pwnedpasswordContainerBlur.classList.remove('blurred'); // Remove the blur from right side
 
             togglePasswordInput();
-
             // Call passwordComplete to check all tasks
             passwordComplete();
         }
