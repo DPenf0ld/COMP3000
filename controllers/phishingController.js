@@ -614,3 +614,12 @@ export function showNextEmail() {
     currentEmailIndex++;
     addGeneratedEmail();
 }
+
+export function closeInbox(){
+    if (emailtaskComplete) {
+        emailopen = false;
+        // If inbox is currently displayed, hide it and show desktop
+        inboxContainer.style.display = 'none';
+        desktopArea.style.display = 'flex';
+    }
+}

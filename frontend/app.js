@@ -1,7 +1,7 @@
 import { updateClock } from '../controllers/clockController.js';
-import { passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
-import { askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
-import { submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
+import { closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
+import { closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
+import { closeInbox, submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
 
 
 
@@ -91,19 +91,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Toggle inbox code
     function toggleInbox() {
-        displayEmail(); //MOVED, TAKE OUT OF FUNCTION IF PROBLEM
-        if (inboxContainer.style.display === 'block' && emailtaskComplete == true) { //closes inbox
-            emailopen = false;
-            // If inbox is currently displayed, hide it and show desktop
-            inboxContainer.style.display = 'none';
-            desktopArea.style.display = 'flex';
-        } else if ((passwordopen != true && webtaskComplete) || (webopen != true && passwordtaskComplete) || (webtaskComplete && passwordtaskComplete) || (webopen != true && passwordopen != true)) { //opens inbox 
+        displayEmail();
+        if (inboxContainer.style.display === 'block') { //closes inbox
+            closeInbox()
+        } else  { //opens inbox 
             emailopen = true;
+
             // If inbox is not displayed, show it and hide desktop
             inboxContainer.style.display = 'block';
-            passwordContainer.style.display = 'none'
-            webContainer.style.display = 'none'
+            passwordContainer.style.display = 'none';
+            webContainer.style.display = 'none';
             desktopArea.style.display = 'none';
+
             // Show instructions if it's the first time opening the inbox
             if (isFirstOpen) {
                 isFirstOpen = false;
@@ -126,10 +125,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //toggle password code
     function togglePassword() {
-        if (passwordContainer.style.display === 'block' && passwordtaskComplete == true) {
-            passwordopen = false;
-            passwordContainer.style.display = 'none';
-            desktopArea.style.display = 'flex';
+        if (passwordContainer.style.display === 'block') {
+            closePassword()
+
         } else if ((emailopen != true && webtaskComplete) || (webopen != true && emailtaskComplete) || (webtaskComplete && emailtaskComplete) || (webopen != true && emailopen != true)) {
             passwordopen = true;
             passwordContainer.style.display = 'block';
@@ -158,11 +156,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //toggle web task
     function toggleWeb() {
-        if (webContainer.style.display === 'block' && webtaskComplete == true) {
-            webopen = false;
-            // If inbox is currently displayed, hide it and show desktop
-            webContainer.style.display = 'none';
-            desktopArea.style.display = 'flex';
+        if (webContainer.style.display === 'block') {
+            closeWeb()
         } else if ((passwordopen != true && emailtaskComplete) || (emailopen != true && passwordtaskComplete) || (emailtaskComplete && passwordtaskComplete) || (emailopen != true && passwordopen != true)) {
             webopen = true;
 

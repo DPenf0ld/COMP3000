@@ -210,3 +210,12 @@ export function checkPasswordStrength(password) {
     text.style.color = gradientColor;
 }
 
+export function closePassword(){
+    if (passwordtaskComplete) {
+        passwordopen = false;
+        // If inbox is currently displayed, hide it and show desktop
+        passwordContainer.style.display = 'none';
+        desktopArea.style.display = 'flex';
+    }
+}
+

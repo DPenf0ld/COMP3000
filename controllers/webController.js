@@ -92,3 +92,12 @@ export function webCompleteFunction(){
         desktopArea.style.display = 'flex';
     }
 }
+
+export function closeWeb(){
+    if (webtaskComplete) {
+        webopen = false;
+        // If inbox is currently displayed, hide it and show desktop
+        webContainer.style.display = 'none';
+        desktopArea.style.display = 'flex';
+    }
+}
