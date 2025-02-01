@@ -1,7 +1,8 @@
 console.log('webController.js loaded');
 
-let webopen = false;
-let webtaskComplete = false;
+export let webopen = false;
+export let webtaskComplete = false;
+
 let webtask1 = false;
 let webtask2 = false;
 let webtask3 = false;
@@ -100,4 +101,8 @@ export function closeWeb(){
         webContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
     }
+}
+
+export function setWebOpen(value) {
+    webopen = value;
 }

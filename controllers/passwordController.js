@@ -1,7 +1,10 @@
 console.log('passwordController.js loaded');
 
-let passwordopen = false;
-let passwordtaskComplete = false;
+export let passwordopen = false;
+export let passwordtaskComplete = false;
+
+
+
 let passwordblur = true;
 let passwordtask1 = false;
 let passwordtask2 = false;
@@ -217,5 +220,9 @@ export function closePassword(){
         passwordContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
     }
+}
+
+export function setPasswordOpen(value) {
+    passwordopen = value;
 }
 

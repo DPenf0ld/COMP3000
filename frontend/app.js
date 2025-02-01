@@ -1,14 +1,14 @@
 import { updateClock } from '../controllers/clockController.js';
-import { closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
-import { closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
-import { closeInbox, submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
+import { setPasswordOpen , passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
+import { setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
+import { setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
 
 
 
 document.addEventListener('DOMContentLoaded', function () {
     //Sets each task to not open
-    let passwordopen = false;
-    let webopen = false;
+    //let passwordopen = false;
+    //let webopen = false;
     let emailopen = false;
 
     //Email Icons
@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //Tasks Completion Trackers
     let emailtaskComplete = false;
-    let passwordtaskComplete = false;
-    let webtaskComplete = false;
+    //let passwordtaskComplete = false;
+
 
     //Tracks if each task is opened for the first time
     let isFirstOpen = true; //email
@@ -94,8 +94,8 @@ document.addEventListener('DOMContentLoaded', function () {
         displayEmail();
         if (inboxContainer.style.display === 'block') { //closes inbox
             closeInbox()
-        } else  { //opens inbox 
-            emailopen = true;
+        } else if ((passwordopen != true && webtaskComplete) || (webopen != true && passwordtaskComplete) || (webtaskComplete && passwordtaskComplete) || (webopen != true && passwordopen != true))  { //opens inbox 
+            setEmailOpen(true);
 
             // If inbox is not displayed, show it and hide desktop
             inboxContainer.style.display = 'block';
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
             closePassword()
 
         } else if ((emailopen != true && webtaskComplete) || (webopen != true && emailtaskComplete) || (webtaskComplete && emailtaskComplete) || (webopen != true && emailopen != true)) {
-            passwordopen = true;
+            setPasswordOpen(true); // Call function to update passwordopen
             passwordContainer.style.display = 'block';
             inboxContainer.style.display = 'none';
             webContainer.style.display = 'none'
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (webContainer.style.display === 'block') {
             closeWeb()
         } else if ((passwordopen != true && emailtaskComplete) || (emailopen != true && passwordtaskComplete) || (emailtaskComplete && passwordtaskComplete) || (emailopen != true && passwordopen != true)) {
-            webopen = true;
+            setWebOpen(true);
 
             // If inbox is not displayed, show it and hide desktop
             webContainer.style.display = 'block';

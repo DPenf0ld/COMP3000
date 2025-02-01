@@ -1,8 +1,8 @@
 console.log('phishingController.js loaded');
 
 const desktopArea = document.getElementById('desktop-area');
-let emailopen = false;
-let emailtaskComplete = false;
+export let emailopen = false;
+export let emailtaskComplete = false;
 let correctCount = 0;
 let missedCount = 0;
 let currentEmailIndex = 0;
@@ -622,4 +622,8 @@ export function closeInbox(){
         inboxContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
     }
+}
+
+export function setEmailOpen(value) {
+    emailopen = value;
 }
