@@ -64,6 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
     backToDesktopWeb.addEventListener('click', webCompleteFunction);
 
     //Phishing Task Code
+
+
     const inboxContainer = document.getElementById('inbox-container');
 
     const reminderemail = document.getElementById('reminder');

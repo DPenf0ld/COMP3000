@@ -1,6 +1,10 @@
 console.log('phishingController.js loaded');
 
-let currentSlide = 0; // Track the current slide
+const desktopArea = document.getElementById('desktop-area');
+let emailopen = false;
+let emailtaskComplete = false;
+let correctCount = 0;
+let missedCount = 0;
 let currentEmailIndex = 0;
 let displaynextemailbutton = false; //do not show next email button orginally
 let selectedoption = false;
@@ -19,11 +23,12 @@ let emailtypereminder = false;
 let currentPage = 0; // Track the current page of the model
 
 //const emailContentContainer = document.querySelector('.email-content');
+const inboxContainer = document.getElementById('inbox-container');
 const emailListContainer = document.querySelector('.email-list');
 const nextButton = document.getElementById('next-button');
 const confirmButton = document.getElementById('confirm-button');
-const contentElement = document.getElementById('instruction-content');
-const titleElement = document.getElementById('instruction-title');
+const emailBodyElement = document.querySelector('.email-body');
+const emailSubjectElement = document.querySelector('.email-subject-line')
 const instructionModel = document.getElementById('instructions-email'); // Instruction model
 const emailContainer = document.getElementById('email-interface');     // Inbox container
 const prevButton = document.getElementById('prev-button');
@@ -125,68 +130,13 @@ const pages = [
     }
 ];
 
-const slides = [
-    {
-        title: "Introduction",
-        content: `
-        <p>First, we’ll review an example phishing email. These instructions will equip you with methods to <strong>identify phishing emails</strong> and understand their types.</p>
-    `
-    },
-    {
-        title: "Identifying Suspicious Words",
-        content: `
-        <p><strong>Suspicious words</strong> indicate a phishing email. To highlight them:</p>
-        <ul>
-            <li>Double-click a word.</li>
-            <li>Or click at the start of a word and drag your cursor over it.</li>
-        </ul>
-        <p>Take a moment to read the example email and <strong>highlight any words</strong> you think could be suspicious.</p>
-    `
-    },
-    {
-        title: "Step 1: Informal Greeting",
-        content: `
-        <p>An informal or generic greeting is a key indicator of a phishing email. For example, this email uses the term <strong>“Customer”</strong>, which is not specific.</p>
-        <p><strong>Task:</strong> Highlight the word <strong>“Customer”</strong> to complete this step.</p>
-    `
-    },
-    {
-        title: "Step 2: Time Urgency",
-        content: `
-        <p>Phishing emails often create pressure with <strong>time urgency</strong>. Phrases like <strong>“Immediate action required”</strong> or <strong>“Act now”</strong> are common.</p>
-        <p><strong>Task:</strong> In the example email, highlight the word <strong>“urgent”</strong> to complete this step.</p>
-    `
-    },
-    {
-        title: "Step 3: Poor Grammar",
-        content: `
-        <p>One common sign of a phishing email is <strong>poor grammar</strong>, such as misspellings, incorrect punctuation, or awkward phrasing.</p>
-        <p>In this example, the word <strong>“earlist”</strong> (instead of <strong>“earliest”</strong>) is a clear indication of phishing.</p>
-        <p><strong>Task:</strong> Highlight the word <strong>“earlist”</strong> to complete this step.</p>
-    `
-    },
-    {
-        title: "Step 4: Unnecessary Subdomains",
-        content: `
-        <p>Legitimate companies typically use simple, professional domains, like <strong>securepay.com</strong> or <strong>securepaysolutions.com</strong>. In phishing emails, links often contain unnecessary or suspicious subdomains.</p>
-        <p><strong>Task:</strong> Hover over the payment link in the example to reveal the real address. DO NOT CLICK THE LINK!</p>
-    `
-    },
-    {
-        title: "Step 5: Hyphen Usage",
-        content: `
-        <p>A real company uses straightforward email addresses, such as <strong>Billing@securepay.com</strong>. Phishing emails, however, often use long and suspicious addresses.</p>
-        <p><strong>Task:</strong> Hover over the profile picture in the example email to see the true email address.</p>
-    `
-    }
-];
+
 
 
 export function submitButtonFunction() {
     tickboxanswer(currentEmailIndex)
     if (selectedoption) {
-        let correctCount = 0;
-        let missedCount = 0;
+
 
         // Get all highlighted elements from both body and subject
         const highlightedBodyElements = emailBodyElement.querySelectorAll('.highlighted');
@@ -230,19 +180,20 @@ export function submitButtonFunction() {
             nextemailbutton()
         }
 
-        if (correctCount == 10) {
-            emailtask3 = true;
-            console.log("Task 3 correct")
+    }
+    
+    if (correctCount == 3) {
+        emailtask3 = true;
+        console.log("Task 3 correct")
 
-            // Update the task list status for Task 3
-            const task3Status = document.querySelector("#email-task-3-status");
-            task3Status.textContent = "Complete";
-            task3Status.classList.remove("incomplete");
-            task3Status.classList.add("complete");
+        // Update the task list status for Task 3
+        const task3Status = document.querySelector("#email-task-3-status");
+        task3Status.textContent = "Complete";
+        task3Status.classList.remove("incomplete");
+        task3Status.classList.add("complete");
 
-            // Call emailComplete to check all tasks
-            emailComplete();
-        }
+        // Call emailComplete to check all tasks
+        emailComplete();
     }
 }
 
@@ -322,40 +273,7 @@ export function firstOpenFunction() {
     emailContainer.classList.add('blurred'); // Apply the blur
 }
 
-// Update example slides c
-export function updateSlide() {
-    titleElement.innerHTML = slides[currentSlide].title;
-    contentElement.innerHTML = slides[currentSlide].content;
-    const emailSenderElement = document.querySelector('.email-sender');
 
-    console.log(titleElement)
-    // Toggle button visibility
-    prevButton.classList.toggle('hidden', currentSlide === 0); //no previous on slide 1
-    nextButton.textContent = currentSlide === slides.length - 1 ? "Finish" : "Next"; //replace next with finish on last slide
-    if (currentSlide === 2 && arrow2 == false) {
-        arrow2 = true
-        highlightText(emailBodyElement, "Customer");
-        console.log("Highlight Customer");
-    } else if (currentSlide === 3 && arrow3 == false) {
-        arrow3 = true
-        highlightText(emailSubjectElement, "urgent");
-        console.log("Highlight Urgent");
-    } else if (currentSlide === 4 && arrow4 == false) {
-        arrow4 = true
-        highlightText(emailBodyElement, "earlist");
-        console.log("Highlight Earlist");
-    } else if (currentSlide === 5 && arrow5 == false) {
-        arrow5 = true
-        highlightText(emailBodyElement, "SecurePay Solutions");
-        console.log("Highlight securepay.com");
-    } else if (currentSlide === 6 && arrow6 == false) {
-        arrow6 = true
-        highlightText(emailSenderElement, "S");
-        console.log("Highlight Profile Picture");
-    } else {
-        console.log("Invalid slide number");
-    }
-}
 
 export function emailComplete() {
     // Check if all tasks are complete
@@ -394,15 +312,66 @@ export function nextemailbutton() {
 
 
 
-export function highlightText(element, word) {
-    const regex = new RegExp(`(${word})`, 'gi'); // Case-insensitive match
-    element.innerHTML = element.innerHTML.replace(regex, (match) => {
-        // Wrap in span and add arrow 
-        return `<span class="highlight">${match}<span class="arrow-icon"><img src="assets/icons/arrow-icon.png" alt="arrow"></span></span>`;
-    });
-}
+
 
 export function exampleInstructions() {
+    let currentSlide = 0; // Track the current slide
+    const slides = [
+        {
+            title: "Introduction",
+            content: `
+            <p>First, we’ll review an example phishing email. These instructions will equip you with methods to <strong>identify phishing emails</strong> and understand their types.</p>
+        `
+        },
+        {
+            title: "Identifying Suspicious Words",
+            content: `
+            <p><strong>Suspicious words</strong> indicate a phishing email. To highlight them:</p>
+            <ul>
+                <li>Double-click a word.</li>
+                <li>Or click at the start of a word and drag your cursor over it.</li>
+            </ul>
+            <p>Take a moment to read the example email and <strong>highlight any words</strong> you think could be suspicious.</p>
+        `
+        },
+        {
+            title: "Step 1: Informal Greeting",
+            content: `
+            <p>An informal or generic greeting is a key indicator of a phishing email. For example, this email uses the term <strong>“Customer”</strong>, which is not specific.</p>
+            <p><strong>Task:</strong> Highlight the word <strong>“Customer”</strong> to complete this step.</p>
+        `
+        },
+        {
+            title: "Step 2: Time Urgency",
+            content: `
+            <p>Phishing emails often create pressure with <strong>time urgency</strong>. Phrases like <strong>“Immediate action required”</strong> or <strong>“Act now”</strong> are common.</p>
+            <p><strong>Task:</strong> In the example email, highlight the word <strong>“urgent”</strong> to complete this step.</p>
+        `
+        },
+        {
+            title: "Step 3: Poor Grammar",
+            content: `
+            <p>One common sign of a phishing email is <strong>poor grammar</strong>, such as misspellings, incorrect punctuation, or awkward phrasing.</p>
+            <p>In this example, the word <strong>“earlist”</strong> (instead of <strong>“earliest”</strong>) is a clear indication of phishing.</p>
+            <p><strong>Task:</strong> Highlight the word <strong>“earlist”</strong> to complete this step.</p>
+        `
+        },
+        {
+            title: "Step 4: Unnecessary Subdomains",
+            content: `
+            <p>Legitimate companies typically use simple, professional domains, like <strong>securepay.com</strong> or <strong>securepaysolutions.com</strong>. In phishing emails, links often contain unnecessary or suspicious subdomains.</p>
+            <p><strong>Task:</strong> Hover over the payment link in the example to reveal the real address. DO NOT CLICK THE LINK!</p>
+        `
+        },
+        {
+            title: "Step 5: Hyphen Usage",
+            content: `
+            <p>A real company uses straightforward email addresses, such as <strong>Billing@securepay.com</strong>. Phishing emails, however, often use long and suspicious addresses.</p>
+            <p><strong>Task:</strong> Hover over the profile picture in the example email to see the true email address.</p>
+        `
+        }
+    ];
+
     // Create the instruction box
     const instructionBox = document.createElement('div');
     instructionBox.className = 'instruction-box';
@@ -417,8 +386,56 @@ export function exampleInstructions() {
 
     // Append instruction box
     emailListContainer.appendChild(instructionBox);
+
+    const contentElement = document.getElementById('instruction-content'); //cannot find
+    const titleElement = document.getElementById('instruction-title');
     const prevButton = document.getElementById('prev-slide');
     const nextButton = document.getElementById('next-slide');
+
+    // Update example slides c
+    function updateSlide() {
+        titleElement.innerHTML = slides[currentSlide].title;
+        contentElement.innerHTML = slides[currentSlide].content;
+        const emailSenderElement = document.querySelector('.email-sender');
+        const emailBodyElement = document.querySelector('.email-body');
+        const emailSubjectElement = document.querySelector('.email-subject-line')
+
+        console.log(titleElement)
+        // Toggle button visibility
+        prevButton.classList.toggle('hidden', currentSlide === 0); //no previous on slide 1
+        nextButton.textContent = currentSlide === slides.length - 1 ? "Finish" : "Next"; //replace next with finish on last slide
+        if (currentSlide === 2 && arrow2 == false) {
+            arrow2 = true
+            highlightText(emailBodyElement, "Customer");
+            console.log("Highlight Customer");
+        } else if (currentSlide === 3 && arrow3 == false) {
+            arrow3 = true
+            highlightText(emailSubjectElement, "urgent");
+            console.log("Highlight Urgent");
+        } else if (currentSlide === 4 && arrow4 == false) {
+            arrow4 = true
+            highlightText(emailBodyElement, "earlist");
+            console.log("Highlight Earlist");
+        } else if (currentSlide === 5 && arrow5 == false) {
+            arrow5 = true
+            highlightText(emailBodyElement, "SecurePay Solutions");
+            console.log("Highlight securepay.com");
+        } else if (currentSlide === 6 && arrow6 == false) {
+            arrow6 = true
+            highlightText(emailSenderElement, "S");
+            console.log("Highlight Profile Picture");
+        } else {
+            console.log("Invalid slide number");
+        }
+    }
+
+    function highlightText(element, word) {
+        const regex = new RegExp(`(${word})`, 'gi'); // Case-insensitive match
+        element.innerHTML = element.innerHTML.replace(regex, (match) => {
+            // Wrap in span and add arrow 
+            return `<span class="highlight">${match}<span class="arrow-icon"><img src="assets/icons/arrow-icon.png" alt="arrow"></span></span>`;
+        });
+    }
 
     // Event listeners for buttons
     prevButton.addEventListener('click', () => {
@@ -534,7 +551,7 @@ export function tickboxanswer(currentEmailIndex) {
             // Call email Complete to check all tasks
             emailComplete();
         }
-        if (phishingcount == 5) {
+        if (phishingcount == 1) { //CHNAGE BACK TO 5
             emailtask2 = true;
             console.log("Task 2 correct")
             // Update the task list status for Task 2
@@ -583,7 +600,6 @@ export function displayEmail(index) {
         if (index === 0 && instructionsConfirmed) {
             exampleInstructions()
         }
-
     }
     displaynextemailbutton = false;
     nextemailbutton()
