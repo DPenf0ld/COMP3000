@@ -10,6 +10,12 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
   const confirmPassword = document.getElementById('confirmPassword').value;
   const dob = document.getElementById('dob').value;
 
+  //disables going back (stops user logging back in without credentials)
+  window.history.pushState(null, "", window.location.href);
+  window.onpopstate = function () {
+    window.history.pushState(null, "", window.location.href);
+  };
+
   // Validate email
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailPattern.test(email)) {
@@ -17,7 +23,7 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
     return;
   }
 
-    // Validate password
+  // Validate password
   const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d)[A-Za-z\d!@#$%^&*]{12,}$/;
   if (!passwordPattern.test(password)) {
     alert('Password must be at least 12 characters long, contain a capital letter, a number, and a special character.');
@@ -54,7 +60,7 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
   }
 });
 
-  
+
 document.getElementById('login-form')?.addEventListener('submit', async (event) => {
   event.preventDefault();
 
@@ -86,4 +92,3 @@ document.getElementById('login-form')?.addEventListener('submit', async (event) 
 });
 
 
-  

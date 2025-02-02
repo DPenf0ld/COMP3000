@@ -1,4 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
+import { LogOutFunction } from '../controllers/LogOutController.js';
 import { setPasswordOpen , passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
 import { setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
 import { setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
@@ -6,11 +7,6 @@ import { setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFun
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    //Sets each task to not open
-    //let passwordopen = false;
-    //let webopen = false;
-    let emailopen = false;
-
     //Email Icons
     const emailIconDesktop = document.getElementById('email-icon');
     emailIconDesktop.addEventListener('click', toggleInbox);
@@ -41,11 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const webIconProgress = document.getElementById('progress-web');
     webIconProgress.addEventListener('click', toggleWeb);
 
-    //Tasks Completion Trackers
-    let emailtaskComplete = false;
-    //let passwordtaskComplete = false;
-
-
     //Tracks if each task is opened for the first time
     let isFirstOpen = true; //email
     let FirstOpenPassword = true;
@@ -57,6 +48,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const backToDesktop = document.getElementById('close-inbox');
     backToDesktop.addEventListener('click', backToDesktopPhishing);
 
+    const LogOut = document.getElementById('LogoutButton');
+    LogOut.addEventListener('click', LogOutFunction);
+
     const backToDesktopPassword = document.getElementById('close-password');
     backToDesktopPassword.addEventListener('click', passwordCompleteFunction);
 
@@ -64,8 +58,6 @@ document.addEventListener('DOMContentLoaded', function () {
     backToDesktopWeb.addEventListener('click', webCompleteFunction);
 
     //Phishing Task Code
-
-
     const inboxContainer = document.getElementById('inbox-container');
 
     const reminderemail = document.getElementById('reminder');
@@ -96,13 +88,11 @@ document.addEventListener('DOMContentLoaded', function () {
             closeInbox()
         } else if ((passwordopen != true && webtaskComplete) || (webopen != true && passwordtaskComplete) || (webtaskComplete && passwordtaskComplete) || (webopen != true && passwordopen != true))  { //opens inbox 
             setEmailOpen(true);
-
             // If inbox is not displayed, show it and hide desktop
             inboxContainer.style.display = 'block';
             passwordContainer.style.display = 'none';
             webContainer.style.display = 'none';
             desktopArea.style.display = 'none';
-
             // Show instructions if it's the first time opening the inbox
             if (isFirstOpen) {
                 isFirstOpen = false;
@@ -112,10 +102,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     //Password Task Code
+    let passwordInput = document.getElementById('password');
+
     const instructionPasswordModel = document.getElementById('instructions-password');
     const passwordContainer = document.getElementById('password-container');
     const passwordContainerBlur = document.getElementById('password-interface');
-    let passwordInput = document.getElementById('password');
 
     const confirmpasswordButton = document.getElementById('confirm-password-button');
     confirmpasswordButton.addEventListener('click', confirmpasswordButtonFunction);
@@ -127,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function togglePassword() {
         if (passwordContainer.style.display === 'block') {
             closePassword()
-
         } else if ((emailopen != true && webtaskComplete) || (webopen != true && emailtaskComplete) || (webtaskComplete && emailtaskComplete) || (webopen != true && emailopen != true)) {
             setPasswordOpen(true); // Call function to update passwordopen
             passwordContainer.style.display = 'block';
@@ -135,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function () {
             webContainer.style.display = 'none'
             desktopArea.style.display = 'none';
         }
-
         // Show instructions if it's the first time opening
         if (FirstOpenPassword) {
             instructionPasswordModel.style.display = 'flex'; //working
@@ -175,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function () {
             //  }
         }
     }
-
     //openai code - web Task
     const askButton = document.getElementById('ask-button');
     askButton.addEventListener('click', askButtonFunction);
