@@ -4,7 +4,7 @@ export let passwordopen = false;
 export let passwordtaskComplete = false;
 
 
-
+let confirmClose = false;
 let passwordblur = true;
 let passwordtask1 = false;
 let passwordtask2 = false;
@@ -16,6 +16,35 @@ const instructionPasswordModel = document.getElementById('instructions-password'
 const passwordContainer = document.getElementById('password-container');
 const passwordContainerBlur = document.getElementById('password-interface');
 const pwnedpasswordContainerBlur = document.getElementById('Pwned');
+const leavetaskModel = document.getElementById('leave-password-task')
+
+
+
+export function closePassword(){
+    if (passwordtaskComplete || confirmClose) {
+        confirmClose = false;
+        passwordopen = false;
+        // If inbox is currently displayed, hide it and show desktop
+        passwordContainer.style.display = 'none';
+        desktopArea.style.display = 'flex';
+    }
+    else {
+        leavetaskModel.style.display = 'flex'; //working
+        passwordContainerBlur.classList.add('blurred'); // Apply the blur
+    }
+}
+
+export function backpasswordFunction(){
+    leavetaskModel.style.display = 'none'; 
+    passwordContainerBlur.classList.remove('blurred'); // remove the blur
+}
+
+export function confirmpasswordFunction(){
+    passwordContainerBlur.classList.remove('blurred'); // remove the blur
+    confirmClose = true;
+    closePassword()
+}
+
 
 export function confirmpasswordButtonFunction() {
     instructionPasswordModel.style.display = 'none';
@@ -213,14 +242,7 @@ export function checkPasswordStrength(password) {
     text.style.color = gradientColor;
 }
 
-export function closePassword(){
-    if (passwordtaskComplete) {
-        passwordopen = false;
-        // If inbox is currently displayed, hide it and show desktop
-        passwordContainer.style.display = 'none';
-        desktopArea.style.display = 'flex';
-    }
-}
+
 
 export function setPasswordOpen(value) {
     passwordopen = value;
