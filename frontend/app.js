@@ -2,7 +2,7 @@ import { updateClock } from '../controllers/clockController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { setPasswordOpen , passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
 import { setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
-import { setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
+import { confirmphishingFunction, backphishingFunction, setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
 
 
 
@@ -16,6 +16,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const emailIconProgress = document.getElementById('progress-email');
     emailIconProgress.addEventListener('click', toggleInbox);
+
+    const backphishingbutton = document.getElementById('backphishing-button');
+    backphishingbutton.addEventListener('click', backphishingFunction);
+
+    const confirmphishingbutton = document.getElementById('confirmphishing-button');
+    confirmphishingbutton.addEventListener('click', confirmphishingFunction);
 
     //Password Icons
     const passwordIconDesktop = document.getElementById('password-icon');

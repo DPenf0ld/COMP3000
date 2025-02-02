@@ -21,6 +21,7 @@ let arrow6 = false;
 let phishingcount = 0;
 let emailtypereminder = false;
 let currentPage = 0; // Track the current page of the model
+let confirmClose = false;
 
 //const emailContentContainer = document.querySelector('.email-content');
 const inboxContainer = document.getElementById('inbox-container');
@@ -32,6 +33,7 @@ const emailSubjectElement = document.querySelector('.email-subject-line')
 const instructionModel = document.getElementById('instructions-email'); // Instruction model
 const emailContainer = document.getElementById('email-interface');     // Inbox container
 const prevButton = document.getElementById('prev-button');
+const leavetaskModel = document.getElementById('leave-task');
 
 //suspicious words to check for highlighting
 const suspiciousWords = [
@@ -202,7 +204,24 @@ export function backToDesktopPhishing() {
         inboxContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
     }
+    else {
+        leavetaskModel.style.display = 'flex'; //working
+        emailContainer.classList.add('blurred'); // Apply the blur
+    }
 }
+
+export function backphishingFunction(){
+    leavetaskModel.style.display = 'none'; 
+    emailContainer.classList.remove('blurred'); // remove the blur
+}
+
+export function confirmphishingFunction(){
+    emailContainer.classList.remove('blurred'); // remove the blur
+    confirmClose = true;
+    closeInbox()
+}
+
+
 
 // Function to highlight missed suspicious word
 export function highlightMissedWord(word, element) {
@@ -616,7 +635,7 @@ export function showNextEmail() {
 }
 
 export function closeInbox(){
-    if (emailtaskComplete) {
+    if (emailtaskComplete || confirmClose) {
         emailopen = false;
         // If inbox is currently displayed, hide it and show desktop
         inboxContainer.style.display = 'none';
