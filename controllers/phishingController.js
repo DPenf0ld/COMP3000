@@ -1,6 +1,5 @@
 console.log('phishingController.js loaded');
 
-const desktopArea = document.getElementById('desktop-area');
 export let emailopen = false;
 export let emailtaskComplete = false;
 let correctCount = 0;
@@ -23,7 +22,32 @@ let emailtypereminder = false;
 let currentPage = 0; // Track the current page of the model
 let confirmClose = false;
 
+const initialState = {
+    emailopen: false,
+    emailtaskComplete: false,
+    correctCount: 0,
+    missedCount: 0,
+    currentEmailIndex: 0,
+    displaynextemailbutton: false,
+    selectedoption: false,
+    instructionsConfirmed: false,
+    correctselectedoption: false,
+    emailtask1: false,
+    emailtask2: false,
+    emailtask3: false,
+    arrow2: false,
+    arrow3: false,
+    arrow4: false,
+    arrow5: false,
+    arrow6: false,
+    phishingcount: 0,
+    emailtypereminder: false,
+    currentPage: 0,
+    confirmClose: false
+};
+
 //const emailContentContainer = document.querySelector('.email-content');
+const desktopArea = document.getElementById('desktop-area');
 const inboxContainer = document.getElementById('inbox-container');
 const emailListContainer = document.querySelector('.email-list');
 const nextButton = document.getElementById('next-button');
@@ -217,8 +241,32 @@ export function backphishingFunction(){
 
 export function confirmphishingFunction(){
     emailContainer.classList.remove('blurred'); // remove the blur
-    confirmClose = true;
+    confirmClose = true; 
+    resetPhishingTask()
     closeInbox()
+}
+
+function resetPhishingTask() {
+    emailopen = initialState.emailopen;
+    emailtaskComplete = initialState.emailtaskComplete;
+    correctCount = initialState.correctCount;
+    missedCount = initialState.missedCount;
+    currentEmailIndex = initialState.currentEmailIndex;
+    displaynextemailbutton = initialState.displaynextemailbutton;
+    selectedoption = initialState.selectedoption;
+    instructionsConfirmed = initialState.instructionsConfirmed;
+    correctselectedoption = initialState.correctselectedoption;
+    emailtask1 = initialState.emailtask1;
+    emailtask2 = initialState.emailtask2;
+    emailtask3 = initialState.emailtask3;
+    arrow2 = initialState.arrow2;
+    arrow3 = initialState.arrow3;
+    arrow4 = initialState.arrow4;
+    arrow5 = initialState.arrow5;
+    arrow6 = initialState.arrow6;
+    phishingcount = initialState.phishingcount;
+    emailtypereminder = initialState.emailtypereminder;
+    currentPage = initialState.currentPage;
 }
 
 
@@ -636,6 +684,7 @@ export function showNextEmail() {
 
 export function closeInbox(){
     if (emailtaskComplete || confirmClose) {
+        confirmClose = initialState.confirmClose;
         emailopen = false;
         // If inbox is currently displayed, hide it and show desktop
         inboxContainer.style.display = 'none';
