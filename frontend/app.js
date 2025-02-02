@@ -1,7 +1,7 @@
 import { updateClock } from '../controllers/clockController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { confirmpasswordFunction, backpasswordFunction, setPasswordOpen , passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
-import { setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
+import { confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
 import { confirmphishingFunction, backphishingFunction, setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
 
 
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
     backToDesktopPassword.addEventListener('click', closePassword);
 
     const backToDesktopWeb = document.getElementById('close-web');
-    backToDesktopWeb.addEventListener('click', webCompleteFunction);
+    backToDesktopWeb.addEventListener('click', closeWeb);
 
     //Phishing Task Code
     const inboxContainer = document.getElementById('inbox-container');
@@ -161,6 +161,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const webContainer = document.getElementById('web-container');
     const webCompleteButton = document.getElementById('CompleteWeb');
     webCompleteButton.addEventListener('click', webComplete);
+
+    
+    const backwebbutton = document.getElementById('backweb-button');
+    backwebbutton.addEventListener('click', backwebFunction);
+
+    const confirmwebbutton = document.getElementById('confirmweb-button');
+    confirmwebbutton.addEventListener('click', confirmwebFunction);
 
     //toggle web task
     function toggleWeb() {

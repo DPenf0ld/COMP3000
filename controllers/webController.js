@@ -6,11 +6,26 @@ export let webtaskComplete = false;
 let webtask1 = false;
 let webtask2 = false;
 let webtask3 = false;
+let confirmClose = false;
 
 const desktopArea = document.getElementById('desktop-area');
 const webContainer = document.getElementById('web-container');
+const webInterface = document.getElementById('web-interface');
 const userInput = document.getElementById('user-input');
 const responseContainer = document.getElementById('response-container');
+
+const leavetaskModel = document.getElementById('leave-web-task');
+
+export function backwebFunction(){
+    leavetaskModel.style.display = 'none'; 
+    webInterface.classList.remove('blurred'); // remove the blur
+}
+
+export function confirmwebFunction(){
+    webInterface.classList.remove('blurred'); // remove the blur
+    confirmClose = true;
+    closeWeb()
+}
 
 export async function askButtonFunction() {
     const question = userInput.value.trim();
@@ -95,12 +110,17 @@ export function webCompleteFunction(){
 }
 
 export function closeWeb(){
-    if (webtaskComplete) {
+    if (webtaskComplete || confirmClose) {
+        confirmClose = false;
         webopen = false;
         // If inbox is currently displayed, hide it and show desktop
         webContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
     }
+        else {
+            leavetaskModel.style.display = 'flex'; //working
+            webInterface.classList.add('blurred'); // Apply the blur
+        }
 }
 
 export function setWebOpen(value) {
