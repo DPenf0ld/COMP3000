@@ -50,7 +50,29 @@
                     <p>Folder</p>
                 </li>
             </ul>
-            <button id="LogoutButton">Log Out</button>
+            <button class="nav-button" id="LogoutButton">Log Out</button>
+            <!-- LogOut Model -->
+            
+        </div>
+
+    </div>
+    <div id="instructions-logout" class="instructions" style="display: none;">
+        <div class="instructions-content">
+            <h2 id="page-title">Are you sure you want to LogOut?</h2>
+            <p id="page-content">
+                <!-- Manually load first info page -->
+
+                This exercise will teach you how to identify <strong>phishing emails</strong>—fraudulent
+                messages
+                designed to steal sensitive information.<br><br>
+                Phishing emails often contain suspicious links or attachments meant to trick you. Let's improve
+                your
+                detection skills!
+            </p>
+            <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
+                <button id="backLogOut-button" class="nav-button">Back</button>
+                <button id="confirmLogout-button" class="nav-button">Confirm</button>
+            </div>
         </div>
     </div>
 
@@ -136,7 +158,7 @@
             </div>
 
 
-            
+
             <!-- Colour meaning -->
             <div class="colour-meaning-box">
                 <p><span class="colour-box green"></span> Correct suspicious word</p>
@@ -298,7 +320,7 @@
     <script type="module" src="app.js"></script>
 
 
-    
+
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
-import { LogOutFunction } from '../controllers/LogOutController.js';
+import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { setPasswordOpen , passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
 import { setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
 import { setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
@@ -44,6 +44,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //Desktop code
     const desktopArea = document.getElementById('desktop-area');
+
+    const backLogOut = document.getElementById('backLogOut-button');
+    backLogOut.addEventListener('click', BackLogOutFunction);
+
+    const confirmLogout = document.getElementById('confirmLogout-button');
+    confirmLogout.addEventListener('click', ConfirmLogOut);
 
     const backToDesktop = document.getElementById('close-inbox');
     backToDesktop.addEventListener('click', backToDesktopPhishing);
