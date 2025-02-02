@@ -8,13 +8,26 @@ let webtask2 = false;
 let webtask3 = false;
 let confirmClose = false;
 
+const initialState = {
+    webtask1: false,
+    webtask2: false,
+    webtask3: false,
+};
+
 const desktopArea = document.getElementById('desktop-area');
 const webContainer = document.getElementById('web-container');
 const webInterface = document.getElementById('web-interface');
 const userInput = document.getElementById('user-input');
 const responseContainer = document.getElementById('response-container');
-
 const leavetaskModel = document.getElementById('leave-web-task');
+
+function resetWebTask() {
+    webtask1 = initialState.webtask1;
+    webtask2 = initialState.webtask2;
+    webtask3 = initialState.webtask3;
+    leavetaskModel.style.display = 'none'; 
+    webInterface.classList.remove('blurred'); 
+}
 
 export function backwebFunction(){
     leavetaskModel.style.display = 'none'; 
@@ -24,6 +37,9 @@ export function backwebFunction(){
 export function confirmwebFunction(){
     webInterface.classList.remove('blurred'); // remove the blur
     confirmClose = true;
+    webopen = false;
+    webtaskComplete = false;
+    resetWebTask()
     closeWeb()
 }
 
