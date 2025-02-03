@@ -17,9 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const emailIconProgress = document.getElementById('progress-email');
     emailIconProgress.addEventListener('click', toggleInbox);
 
-    const ResetEmail = document.getElementById('reset-email');
-    ResetEmail.addEventListener('click', confirmphishingFunction);
-
     //Password Icons
     const passwordIconDesktop = document.getElementById('password-icon');
     passwordIconDesktop.addEventListener('click', togglePassword);
@@ -29,9 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const passwordIconProgress = document.getElementById('progress-password');
     passwordIconProgress.addEventListener('click', togglePassword);
-
-    const ResetPassword = document.getElementById('reset-password');
-    ResetPassword.addEventListener('click', confirmphishingFunction);
 
     //Web Icons
     const webIconDesktop = document.getElementById('web-icon');
@@ -57,22 +51,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const confirmLogout = document.getElementById('confirmLogout-button');
     confirmLogout.addEventListener('click', ConfirmLogOut);
 
-    const backToDesktop = document.getElementById('close-inbox');
-    backToDesktop.addEventListener('click', backToDesktopPhishing);
-
     const LogOut = document.getElementById('LogoutButton');
     LogOut.addEventListener('click', LogOutFunction);
 
     //Reset Tasks
+    const ResetEmail = document.getElementById('reset-email');
+    ResetEmail.addEventListener('click', backToDesktopPhishing);
 
-    const backToDesktopPassword = document.getElementById('close-password');
-    backToDesktopPassword.addEventListener('click', closePassword);
-
-    const backToDesktopWeb = document.getElementById('close-web');
-    backToDesktopWeb.addEventListener('click', closeWeb);
+    const ResetPassword = document.getElementById('reset-password');
+    ResetPassword.addEventListener('click', closePassword);
 
     //Phishing Task Code
     const inboxContainer = document.getElementById('inbox-container');
+
+    const backToDesktop = document.getElementById('close-inbox');
+    backToDesktop.addEventListener('click', backToDesktopPhishing);
 
     const backphishingbutton = document.getElementById('backphishing-button');
     backphishingbutton.addEventListener('click', backphishingFunction);
@@ -135,6 +128,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const confirmpasswordbutton = document.getElementById('confirmpassword-button');
     confirmpasswordbutton.addEventListener('click', confirmpasswordFunction);
 
+    const backToDesktopPassword = document.getElementById('close-password');
+    backToDesktopPassword.addEventListener('click', closePassword);
 
     const confirmpasswordButton = document.getElementById('confirm-password-button');
     confirmpasswordButton.addEventListener('click', confirmpasswordButtonFunction);
@@ -169,6 +164,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //web code
     const webContainer = document.getElementById('web-container');
+
+    const backToDesktopWeb = document.getElementById('close-web');
+    backToDesktopWeb.addEventListener('click', closeWeb);
 
     const webCompleteButton = document.getElementById('CompleteWeb');
     webCompleteButton.addEventListener('click', webCompleteFunction);

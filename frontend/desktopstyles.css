@@ -69,10 +69,12 @@ h1 {
     list-style-type: none;
     padding: 0;
     margin: 0;
+
 }
 
 .progress-item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
     cursor: pointer;
@@ -85,6 +87,7 @@ h1 {
 }
 
 .progress-item p {
+    margin-right: 20px;
     margin: 0;
     font-size: 1.5em;
 }
@@ -329,6 +332,22 @@ p {
     width: 100%; /* Takes full width of the container */
 }
 
+.reset {
+    padding: 10px 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    min-width: 100px; 
+    text-align: center;
+    margin-left: auto;
+}
+
+.reset:hover {
+    background-color: #c54003; /* Darker blue when hovered */
+}
 
 
 .nav-button {
