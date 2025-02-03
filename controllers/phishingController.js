@@ -20,31 +20,10 @@ let arrow6 = false;
 let phishingcount = 0;
 let emailtypereminder = false;
 let currentPage = 0; // Track the current page of the model
-let confirmClose = false;
+let confirmClose = false
+let instructionboxCreated = false;
 
-const initialState = {
-    emailopen: false,
-    emailtaskComplete: false,
-    correctCount: 0,
-    missedCount: 0,
-    currentEmailIndex: 0,
-    displaynextemailbutton: false,
-    selectedoption: false,
-    instructionsConfirmed: false,
-    correctselectedoption: false,
-    emailtask1: false,
-    emailtask2: false,
-    emailtask3: false,
-    arrow2: false,
-    arrow3: false,
-    arrow4: false,
-    arrow5: false,
-    arrow6: false,
-    phishingcount: 0,
-    emailtypereminder: false,
-    currentPage: 0,
-    confirmClose: false
-};
+
 
 //const emailContentContainer = document.querySelector('.email-content');
 const desktopArea = document.getElementById('desktop-area');
@@ -157,7 +136,52 @@ const pages = [
 ];
 
 
+export function initialiseEmail() {
+    instructionboxCreated = false;
+    emailopen = false,
+        correctCount = 0,
+        missedCount = 0,
+        currentEmailIndex = 0,
+        displaynextemailbutton = false,
+        selectedoption = false,
+        instructionsConfirmed = false,
+        correctselectedoption = false,
+        arrow2 = false,
+        arrow3 = false,
+        arrow4 = false,
+        arrow5 = false,
+        arrow6 = false,
+        phishingcount = 0,
+        emailtypereminder = false,
+        currentPage = 0,
+        confirmClose = false
 
+    if (emailtaskComplete == false) {
+        instructionModel.style.display = 'flex'; //working
+        emailContainer.classList.add('blurred'); // Apply the blur
+
+        emailtask1 = false;
+        document.querySelector("#email-task-1-status").textContent = "incomplete";
+        document.querySelector("#email-task-1-status").classList.remove("complete");
+        document.querySelector("#email-task-1-status").classList.add("incomplete");
+
+        emailtask2 = false;
+        document.querySelector("#email-task-2-status").textContent = "Incomplete";
+        document.querySelector("#email-task-2-status").classList.remove("complete");
+        document.querySelector("#email-task-2-status").classList.add("incomplete");
+
+        emailtask3 = false;
+        document.querySelector("#email-task-3-status").textContent = "incomplete";
+        document.querySelector("#email-task-3-status").classList.remove("complete");
+        document.querySelector("#email-task-3-status").classList.add("incomplete");
+
+
+        displayEmail(currentEmailIndex)
+        updateModelContent();
+        emailComplete();
+    }
+
+}
 
 export function submitButtonFunction() {
     tickboxanswer(currentEmailIndex)
@@ -207,7 +231,7 @@ export function submitButtonFunction() {
         }
 
     }
-    
+
     if (correctCount == 3) {
         emailtask3 = true;
         console.log("Task 3 correct")
@@ -234,39 +258,27 @@ export function backToDesktopPhishing() {
     }
 }
 
-export function backphishingFunction(){
-    leavetaskModel.style.display = 'none'; 
+export function backphishingFunction() {
+    leavetaskModel.style.display = 'none';
     emailContainer.classList.remove('blurred'); // remove the blur
 }
 
-export function confirmphishingFunction(){
+
+
+export function confirmphishingFunction() {
     emailContainer.classList.remove('blurred'); // remove the blur
-    confirmClose = true; 
+    confirmClose = true;
+    emailopen = false;
+    emailtaskComplete = false;
+    instructionboxCreated = true;
+    exampleInstructions()
     resetPhishingTask()
     closeInbox()
 }
 
 function resetPhishingTask() {
-    emailopen = initialState.emailopen;
-    emailtaskComplete = initialState.emailtaskComplete;
-    correctCount = initialState.correctCount;
-    missedCount = initialState.missedCount;
-    currentEmailIndex = initialState.currentEmailIndex;
-    displaynextemailbutton = initialState.displaynextemailbutton;
-    selectedoption = initialState.selectedoption;
-    instructionsConfirmed = initialState.instructionsConfirmed;
-    correctselectedoption = initialState.correctselectedoption;
-    emailtask1 = initialState.emailtask1;
-    emailtask2 = initialState.emailtask2;
-    emailtask3 = initialState.emailtask3;
-    arrow2 = initialState.arrow2;
-    arrow3 = initialState.arrow3;
-    arrow4 = initialState.arrow4;
-    arrow5 = initialState.arrow5;
-    arrow6 = initialState.arrow6;
-    phishingcount = initialState.phishingcount;
-    emailtypereminder = initialState.emailtypereminder;
-    currentPage = initialState.currentPage;
+    leavetaskModel.style.display = 'none';
+    emailContainer.classList.remove('blurred');
 }
 
 
@@ -383,16 +395,16 @@ export function nextemailbutton() {
 
 export function exampleInstructions() {
     let currentSlide = 0; // Track the current slide
-    const slides = [
-        {
-            title: "Introduction",
-            content: `
+        const slides = [
+            {
+                title: "Introduction",
+                content: `
             <p>First, we’ll review an example phishing email. These instructions will equip you with methods to <strong>identify phishing emails</strong> and understand their types.</p>
         `
-        },
-        {
-            title: "Identifying Suspicious Words",
-            content: `
+            },
+            {
+                title: "Identifying Suspicious Words",
+                content: `
             <p><strong>Suspicious words</strong> indicate a phishing email. To highlight them:</p>
             <ul>
                 <li>Double-click a word.</li>
@@ -400,59 +412,72 @@ export function exampleInstructions() {
             </ul>
             <p>Take a moment to read the example email and <strong>highlight any words</strong> you think could be suspicious.</p>
         `
-        },
-        {
-            title: "Step 1: Informal Greeting",
-            content: `
+            },
+            {
+                title: "Step 1: Informal Greeting",
+                content: `
             <p>An informal or generic greeting is a key indicator of a phishing email. For example, this email uses the term <strong>“Customer”</strong>, which is not specific.</p>
             <p><strong>Task:</strong> Highlight the word <strong>“Customer”</strong> to complete this step.</p>
         `
-        },
-        {
-            title: "Step 2: Time Urgency",
-            content: `
+            },
+            {
+                title: "Step 2: Time Urgency",
+                content: `
             <p>Phishing emails often create pressure with <strong>time urgency</strong>. Phrases like <strong>“Immediate action required”</strong> or <strong>“Act now”</strong> are common.</p>
             <p><strong>Task:</strong> In the example email, highlight the word <strong>“urgent”</strong> to complete this step.</p>
         `
-        },
-        {
-            title: "Step 3: Poor Grammar",
-            content: `
+            },
+            {
+                title: "Step 3: Poor Grammar",
+                content: `
             <p>One common sign of a phishing email is <strong>poor grammar</strong>, such as misspellings, incorrect punctuation, or awkward phrasing.</p>
             <p>In this example, the word <strong>“earlist”</strong> (instead of <strong>“earliest”</strong>) is a clear indication of phishing.</p>
             <p><strong>Task:</strong> Highlight the word <strong>“earlist”</strong> to complete this step.</p>
         `
-        },
-        {
-            title: "Step 4: Unnecessary Subdomains",
-            content: `
+            },
+            {
+                title: "Step 4: Unnecessary Subdomains",
+                content: `
             <p>Legitimate companies typically use simple, professional domains, like <strong>securepay.com</strong> or <strong>securepaysolutions.com</strong>. In phishing emails, links often contain unnecessary or suspicious subdomains.</p>
             <p><strong>Task:</strong> Hover over the payment link in the example to reveal the real address. DO NOT CLICK THE LINK!</p>
         `
-        },
-        {
-            title: "Step 5: Hyphen Usage",
-            content: `
+            },
+            {
+                title: "Step 5: Hyphen Usage",
+                content: `
             <p>A real company uses straightforward email addresses, such as <strong>Billing@securepay.com</strong>. Phishing emails, however, often use long and suspicious addresses.</p>
             <p><strong>Task:</strong> Hover over the profile picture in the example email to see the true email address.</p>
         `
+            }
+        ];
+    if (instructionboxCreated == false) {
+        
+
+        // Create the instruction box
+        const instructionBox = document.createElement('div');
+        instructionBox.className = 'instruction-box';
+        instructionBox.innerHTML = `
+    <strong id="instruction-title"></strong>
+    <div id="instruction-content"></div>
+    <div class="instruction-buttons">
+        <button id="prev-slide" class="nav-button hidden">Previous</button>
+        <button id="next-slide" class="nav-button">Next</button>
+    </div>
+`;
+        instructionboxCreated = true;
+
+        // Append instruction box
+        emailListContainer.appendChild(instructionBox);
+    }
+    else {
+        instructionBox = document.querySelector('.instruction-box'); // Select existing instruction box
+        if (instructionBox) {
+            instructionBox.classList.remove('instruction-box'); // Remove class if needed
+        } else {
+            console.error("Instruction box not found");
         }
-    ];
 
-    // Create the instruction box
-    const instructionBox = document.createElement('div');
-    instructionBox.className = 'instruction-box';
-    instructionBox.innerHTML = `
-        <strong id="instruction-title"></strong>
-        <div id="instruction-content"></div>
-        <div class="instruction-buttons">
-            <button id="prev-slide" class="nav-button hidden">Previous</button>
-            <button id="next-slide" class="nav-button">Next</button>
-        </div>
-    `;
-
-    // Append instruction box
-    emailListContainer.appendChild(instructionBox);
+    }
 
     const contentElement = document.getElementById('instruction-content'); //cannot find
     const titleElement = document.getElementById('instruction-title');
@@ -524,6 +549,7 @@ export function exampleInstructions() {
 
     // open first slide when function is called
     updateSlide();
+
 }
 
 // ai generated email and add to email array
@@ -674,7 +700,13 @@ export function displayEmail(index) {
 
 export function unhideInstructionBox() {
     const multiplechoiceBox = document.querySelector('.multiplechoice-box');
-    multiplechoiceBox.classList.remove('hidden'); // unhide the box by removing hidden
+
+    if (instructionboxCreated) {
+        multiplechoiceBox.classList.add('hidden')
+    } else {
+        multiplechoiceBox.classList.remove('hidden'); // unhide the box by removing hidden
+    }
+
 }
 
 export function showNextEmail() {
@@ -682,13 +714,17 @@ export function showNextEmail() {
     addGeneratedEmail();
 }
 
-export function closeInbox(){
+export function closeInbox() {
     if (emailtaskComplete || confirmClose) {
-        confirmClose = initialState.confirmClose;
+        confirmClose = false;
         emailopen = false;
         // If inbox is currently displayed, hide it and show desktop
         inboxContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
+    }
+    else {
+        leavetaskModel.style.display = 'flex'; //working
+        emailContainer.classList.add('blurred'); // Apply the blur
     }
 }
 

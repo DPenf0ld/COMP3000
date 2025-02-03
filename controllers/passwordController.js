@@ -63,10 +63,6 @@ export function initialisePassword() {
 }
 
 function resetPasswordTask() {
-    passwordblur = initialState.passwordblur;
-    passwordtask1 = initialState.passwordtask1;
-    passwordtask2 = initialState.passwordtask2;
-    passwordtask3 = initialState.passwordtask3;
     leavetaskModel.style.display = 'none';
     passwordContainerBlur.classList.remove('blurred');
 }
