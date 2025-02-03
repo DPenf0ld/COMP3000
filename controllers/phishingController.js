@@ -470,12 +470,12 @@ export function exampleInstructions() {
         emailListContainer.appendChild(instructionBox);
     }
     else {
-        instructionBox = document.querySelector('.instruction-box'); // Select existing instruction box
-        if (instructionBox) {
-            instructionBox.classList.remove('instruction-box'); // Remove class if needed
-        } else {
-            console.error("Instruction box not found");
-        }
+      //  instructionBox = document.querySelector('.instruction-box'); // Select existing instruction box
+     //   if (instructionBox) {
+      //      instructionBox.classList.remove('instruction-box'); // Remove class if needed
+       // } else {
+       //     console.error("Instruction box not found");
+       // }
 
     }
 
@@ -542,7 +542,6 @@ export function exampleInstructions() {
             currentSlide++;
             updateSlide();
         } else {
-            instructionBox.remove(); // Close the instruction box when "Finish" is clicked
             unhideInstructionBox()
         }
     });

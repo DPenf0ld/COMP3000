@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const emailIconProgress = document.getElementById('progress-email');
     emailIconProgress.addEventListener('click', toggleInbox);
 
+    const ResetEmail = document.getElementById('reset-email');
+    ResetEmail.addEventListener('click', confirmphishingFunction);
+
     //Password Icons
     const passwordIconDesktop = document.getElementById('password-icon');
     passwordIconDesktop.addEventListener('click', togglePassword);
@@ -26,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const passwordIconProgress = document.getElementById('progress-password');
     passwordIconProgress.addEventListener('click', togglePassword);
+
+    const ResetPassword = document.getElementById('reset-password');
+    ResetPassword.addEventListener('click', confirmphishingFunction);
 
     //Web Icons
     const webIconDesktop = document.getElementById('web-icon');
@@ -56,6 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const LogOut = document.getElementById('LogoutButton');
     LogOut.addEventListener('click', LogOutFunction);
+
+    //Reset Tasks
 
     const backToDesktopPassword = document.getElementById('close-password');
     backToDesktopPassword.addEventListener('click', closePassword);

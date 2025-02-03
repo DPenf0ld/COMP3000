@@ -138,7 +138,7 @@ export function webComplete() {
     }
 
     // Check if all tasks are complete
-    if (webtask1 && webtask2 && webtask3 && webtaskComplete != true) {
+    if (webtask1 && webtask2 && webtask3) {
         webtaskComplete = true;
 
         // Update the icon to show the completed status
