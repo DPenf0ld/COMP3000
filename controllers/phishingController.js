@@ -254,31 +254,39 @@ export function backToDesktopPhishing() {
     }
     else {
         leavetaskModel.style.display = 'flex'; //working
-        emailContainer.classList.add('blurred'); // Apply the blur
+        desktopArea.classList.add('blurred'); // Apply the blur
     }
 }
 
 export function backphishingFunction() {
     leavetaskModel.style.display = 'none';
-    emailContainer.classList.remove('blurred'); // remove the blur
+    desktopArea.classList.remove('blurred'); // remove the blur
 }
 
 
 
 export function confirmphishingFunction() {
-    emailContainer.classList.remove('blurred'); // remove the blur
+    desktopArea.classList.remove('blurred'); // remove the blur
     confirmClose = true;
     emailopen = false;
     emailtaskComplete = false;
     instructionboxCreated = true;
-    exampleInstructions()
+    const emailIcon = document.querySelector("#progress-email img");
+    if (emailIcon) {
+        emailIcon.src = "assets/icons/email-icon.png";
+    }
+
+
+
+
+    //exampleInstructions()
     resetPhishingTask()
     closeInbox()
 }
 
 function resetPhishingTask() {
     leavetaskModel.style.display = 'none';
-    emailContainer.classList.remove('blurred');
+    desktopArea.classList.remove('blurred');
 }
 
 
@@ -375,6 +383,11 @@ export function emailComplete() {
         emailopen = false;
     } else {
         console.log("Not all tasks are complete yet.");
+        const taskEmailElement = document.querySelector(".Taskemail");
+        const nextStepsDiv = taskEmailElement.querySelector(".next-steps");
+        if (nextStepsDiv) {
+            nextStepsDiv.remove(); 
+        }
     }
 }
 
@@ -387,6 +400,11 @@ export function nextemailbutton() {
         nextEmailButton.style.display = 'none';
         nextEmailButton.removeEventListener('click', showNextEmail);
     }
+}
+
+export function resetEmailFromDesktop(){
+    leavetaskModel.style.display = 'flex'; //working
+    desktopArea.classList.add('blurred'); // Apply the blur
 }
 
 
@@ -700,11 +718,11 @@ export function displayEmail(index) {
 export function unhideInstructionBox() {
     const multiplechoiceBox = document.querySelector('.multiplechoice-box');
 
-    if (instructionboxCreated) {
-        multiplechoiceBox.classList.add('hidden')
-    } else {
+  //  if (instructionboxCreated) {
+   //     multiplechoiceBox.classList.add('hidden')
+   // } else {
         multiplechoiceBox.classList.remove('hidden'); // unhide the box by removing hidden
-    }
+ //   }
 
 }
 
@@ -723,7 +741,7 @@ export function closeInbox() {
     }
     else {
         leavetaskModel.style.display = 'flex'; //working
-        emailContainer.classList.add('blurred'); // Apply the blur
+        desktopArea.classList.add('blurred'); // Apply the blur
     }
 }
 
