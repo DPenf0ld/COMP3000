@@ -28,19 +28,42 @@ export function webfirstOpenFunction() {
     instructionModel.style.display = 'flex'; //working
     webInterface.classList.add('blurred'); // Apply the blur
 }
+
 const initialState = {
-    webtask1: false,
-    webtask2: false,
-    webtask3: false,
     confirmClose: false,
     instructionsConfirmed: false,
 };
 
+export function initialiseWeb() {
+    document.getElementById("user-input").value = ""; //reset input
+    document.getElementById("response-container").value = ""; //reset web search results
+    responseContainer.textContent = '';
+
+    if (webtaskComplete ==false){
+        instructionModel.style.display = 'flex'; //working
+        webInterface.classList.add('blurred'); // Apply the blur
+
+        webtask1 = false;
+        document.querySelector("#web-task-1-status").textContent = "incomplete";
+        document.querySelector("#web-task-1-status").classList.remove("complete");
+        document.querySelector("#web-task-1-status").classList.add("incomplete");
+    
+        webtask2 = false;
+        document.querySelector("#web-task-2-status").textContent = "Incomplete";
+        document.querySelector("#web-task-2-status").classList.remove("complete");
+        document.querySelector("#web-task-2-status").classList.add("incomplete");
+    
+        webtask3 = false;
+        document.querySelector("#web-task-3-status").textContent = "incomplete";
+        document.querySelector("#web-task-3-status").classList.remove("complete");
+        document.querySelector("#web-task-3-status").classList.add("incomplete");
+    
+        webComplete()
+    }
+
+}
 
 function resetWebTask() {
-    webtask1 = initialState.webtask1;
-    webtask2 = initialState.webtask2;
-    webtask3 = initialState.webtask3;
     leavetaskModel.style.display = 'none';
     webInterface.classList.remove('blurred');
 }
@@ -91,25 +114,28 @@ export async function askButtonFunction() {
 // Function to mark all web tasks as complete
 export function webComplete() {
     // Update the task list status for Task 1
-    const webtask1Status = document.querySelector("#web-task-1-status");
-    webtask1Status.textContent = "Complete";
-    webtask1Status.classList.remove("incomplete");
-    webtask1Status.classList.add("complete");
-    webtask1 = true;
+    if (webtask1) {
+        const webtask1Status = document.querySelector("#web-task-1-status");
+        webtask1Status.textContent = "Complete";
+        webtask1Status.classList.remove("incomplete");
+        webtask1Status.classList.add("complete");
+    }
 
+
+    if (webtask2) {
     // Update the task list status for Task 2
     const webtask2Status = document.querySelector("#web-task-2-status");
     webtask2Status.textContent = "Complete";
     webtask2Status.classList.remove("incomplete");
     webtask2Status.classList.add("complete");
-    webtask2 = true;
-
+    }
+    if (webtask3) {
     // Update the task list status for Task 3
     const webtask3Status = document.querySelector("#web-task-3-status");
     webtask3Status.textContent = "Complete";
     webtask3Status.classList.remove("incomplete");
     webtask3Status.classList.add("complete");
-    webtask3 = true;
+    }
 
     // Check if all tasks are complete
     if (webtask1 && webtask2 && webtask3 && webtaskComplete != true) {
@@ -128,17 +154,16 @@ export function webComplete() {
             <p>COMPLETE</p>
         </div>
     `;
-        webopen = false;
     } else {
         console.log("Not all tasks are complete yet.");
     }
 }
 
 export function webCompleteFunction() {
-    if (webtaskComplete) {
-        webContainer.style.display = 'none';
-        desktopArea.style.display = 'flex';
-    }
+    webtask1 = true;
+    webtask2 = true;
+    webtask3 = true;
+    webComplete()
 }
 
 export function closeWeb() {

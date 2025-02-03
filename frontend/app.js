@@ -1,7 +1,7 @@
 import { updateClock } from '../controllers/clockController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
-import { confirmwebButtonFunction, webfirstOpenFunction, confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
+import {  initialiseWeb, confirmwebButtonFunction, webfirstOpenFunction, confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
 import { confirmphishingFunction, backphishingFunction, setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
 
 
@@ -160,8 +160,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //web code
     const webContainer = document.getElementById('web-container');
+    
     const webCompleteButton = document.getElementById('CompleteWeb');
-    webCompleteButton.addEventListener('click', webComplete);
+    webCompleteButton.addEventListener('click', webCompleteFunction);
 
     const confirmwebButton = document.getElementById('confirm-web-button');
     confirmwebButton.addEventListener('click', confirmwebButtonFunction);
@@ -177,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (webContainer.style.display === 'block') {
             closeWeb()
         } else if ((passwordopen != true && emailtaskComplete) || (emailopen != true && passwordtaskComplete) || (emailtaskComplete && passwordtaskComplete) || (emailopen != true && passwordopen != true)) {
+            initialiseWeb()
             setWebOpen(true);
 
             // If inbox is not displayed, show it and hide desktop
