@@ -91,6 +91,14 @@ export function confirmpasswordFunction() {
     confirmClose = true;
     passwordopen = false;
     passwordtaskComplete = false;
+    const passwordIcon = document.querySelector("#progress-password img");
+    if (passwordIcon) {
+        passwordIcon.src = "assets/icons/password-icon.png";
+    }
+
+
+    
+
 
     resetPasswordTask()
     closePassword()
@@ -251,12 +259,14 @@ export function passwordComplete() {
     `;
         passwordopen = false;
     } else {
-        console.log("Not all tasks are complete yet.");
-        const passwordIcon = document.querySelector("#progress-password img");
-        if (passwordIcon) {
-            passwordIcon.src = "assets/icons/password-icon.png";
-        }
 
+        console.log("Not all tasks are complete yet.");
+           // remove next steps
+           const taskPasswordElement = document.querySelector(".Taskpassword");
+           const nextStepsDiv = taskPasswordElement.querySelector(".next-steps");
+           if (nextStepsDiv) {
+               nextStepsDiv.remove(); 
+           }
     }
 }
 
