@@ -1,7 +1,7 @@
 import { updateClock } from '../controllers/clockController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
-import { initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen , passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
-import { confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
+import { initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
+import { confirmwebButtonFunction, webfirstOpenFunction, confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
 import { confirmphishingFunction, backphishingFunction, setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
 
 
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const emailSubjectElement = document.querySelector('.email-subject-line');
     enableHighlighting(emailSubjectElement);
-    
+
     const submitButton = document.getElementById('submit-highlight');
     submitButton.addEventListener('click', submitButtonFunction);
 
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
         displayEmail();
         if (inboxContainer.style.display === 'block') { //closes inbox
             closeInbox()
-        } else if ((passwordopen != true && webtaskComplete) || (webopen != true && passwordtaskComplete) || (webtaskComplete && passwordtaskComplete) || (webopen != true && passwordopen != true))  { //opens inbox 
+        } else if ((passwordopen != true && webtaskComplete) || (webopen != true && passwordtaskComplete) || (webtaskComplete && passwordtaskComplete) || (webopen != true && passwordopen != true)) { //opens inbox 
             setEmailOpen(true);
             // If inbox is not displayed, show it and hide desktop
             inboxContainer.style.display = 'block';
@@ -163,7 +163,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const webCompleteButton = document.getElementById('CompleteWeb');
     webCompleteButton.addEventListener('click', webComplete);
 
-    
+    const confirmwebButton = document.getElementById('confirm-web-button');
+    confirmwebButton.addEventListener('click', confirmwebButtonFunction);
+
     const backwebbutton = document.getElementById('backweb-button');
     backwebbutton.addEventListener('click', backwebFunction);
 
@@ -184,11 +186,10 @@ document.addEventListener('DOMContentLoaded', function () {
             desktopArea.style.display = 'none';
 
             // Show instructions if it's the first time opening the inbox
-            //   if (isFirstOpen) {
-            //      instructionModel.style.display = 'flex'; //working
-            //     emailContainer.classList.add('blurred'); // Apply the blur
-            //      isFirstOpen = false;
-            //  }
+            if (FirstOpenWeb) {
+                FirstOpenWeb = false;
+                webfirstOpenFunction()
+            }
         }
     }
     //openai code - web Task

@@ -7,12 +7,9 @@ let webtask1 = false;
 let webtask2 = false;
 let webtask3 = false;
 let confirmClose = false;
+let instructionsConfirmed = false; //used to display example email instructions
 
-const initialState = {
-    webtask1: false,
-    webtask2: false,
-    webtask3: false,
-};
+
 
 const desktopArea = document.getElementById('desktop-area');
 const webContainer = document.getElementById('web-container');
@@ -20,21 +17,40 @@ const webInterface = document.getElementById('web-interface');
 const userInput = document.getElementById('user-input');
 const responseContainer = document.getElementById('response-container');
 const leavetaskModel = document.getElementById('leave-web-task');
+const instructionModel = document.getElementById('instructions-web');
+
+export function confirmwebButtonFunction() {
+    instructionModel.style.display = 'none';
+    instructionsConfirmed = true; // listener to display instructions once user confirms
+    webInterface.classList.remove('blurred'); // Remove the blur
+}
+export function webfirstOpenFunction() {
+    instructionModel.style.display = 'flex'; //working
+    webInterface.classList.add('blurred'); // Apply the blur
+}
+const initialState = {
+    webtask1: false,
+    webtask2: false,
+    webtask3: false,
+    confirmClose: false,
+    instructionsConfirmed: false,
+};
+
 
 function resetWebTask() {
     webtask1 = initialState.webtask1;
     webtask2 = initialState.webtask2;
     webtask3 = initialState.webtask3;
-    leavetaskModel.style.display = 'none'; 
-    webInterface.classList.remove('blurred'); 
+    leavetaskModel.style.display = 'none';
+    webInterface.classList.remove('blurred');
 }
 
-export function backwebFunction(){
-    leavetaskModel.style.display = 'none'; 
+export function backwebFunction() {
+    leavetaskModel.style.display = 'none';
     webInterface.classList.remove('blurred'); // remove the blur
 }
 
-export function confirmwebFunction(){
+export function confirmwebFunction() {
     webInterface.classList.remove('blurred'); // remove the blur
     confirmClose = true;
     webopen = false;
@@ -118,14 +134,14 @@ export function webComplete() {
     }
 }
 
-export function webCompleteFunction(){
+export function webCompleteFunction() {
     if (webtaskComplete) {
         webContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
     }
 }
 
-export function closeWeb(){
+export function closeWeb() {
     if (webtaskComplete || confirmClose) {
         confirmClose = false;
         webopen = false;
@@ -133,10 +149,10 @@ export function closeWeb(){
         webContainer.style.display = 'none';
         desktopArea.style.display = 'flex';
     }
-        else {
-            leavetaskModel.style.display = 'flex'; //working
-            webInterface.classList.add('blurred'); // Apply the blur
-        }
+    else {
+        leavetaskModel.style.display = 'flex'; //working
+        webInterface.classList.add('blurred'); // Apply the blur
+    }
 }
 
 export function setWebOpen(value) {
