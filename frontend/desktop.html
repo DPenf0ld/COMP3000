@@ -35,26 +35,31 @@
                 <li class="progress-item" id="progress-email">
                     <img src="assets/icons/email-icon.png" alt="Email" class="taskbar-icon">
                     <p>Phishing Awareness</p>
+
+                </li>
+                <li>
                     <button class="reset" id="reset-email">Reset Email</button>
                 </li>
                 <li class="progress-item" id="progress-password">
                     <img src="assets/icons/password-icon.png" alt="Password Tester" class="taskbar-icon">
                     <p>Password Tester</p>
+                </li>
+                <li>
                     <button id="reset-password" class="reset">Reset Password</button>
                 </li>
                 <li class="progress-item" id="progress-web">
                     <img src="assets/icons/web-icon.png" alt="Browser" class="taskbar-icon">
                     <p>Safe Web Browsing</p>
+                </li>
+                <li>
                     <button id="reset-web" class="reset">Reset Web</button>
                 </li>
-
             </ul>
-
-           
-
-            <button class="reset" id="LogoutButton">Log Out</button>
-            <!-- LogOut Model -->
             
+            <div class="logoutRight">
+                <button class="reset" id="LogoutButton">Log Out</button>
+            </div>
+
         </div>
 
     </div>
@@ -263,16 +268,16 @@
                         id="task-3-status">Incomplete</span></li>
             </ul>
         </div>
-        <div id="leave-password-task" class="instructions" style="display: none;">
-            <div class="instructions-content">
-                <h2 id="page-title">Are you sure you want to reset task?</h2>
-                <p id="page-content">
-                    All progress will be lost.
-                </p>
-                <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
-                    <button id="backpassword-button" class="nav-button">Back</button>
-                    <button id="confirmpassword-button" class="nav-button">Confirm</button>
-                </div>
+    </div>
+    <div id="leave-password-task" class="instructions" style="display: none;">
+        <div class="instructions-content">
+            <h2 id="page-title">Are you sure you want to reset task?</h2>
+            <p id="page-content">
+                All progress will be lost.
+            </p>
+            <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
+                <button id="backpassword-button" class="nav-button">Back</button>
+                <button id="confirmpassword-button" class="nav-button">Confirm</button>
             </div>
         </div>
     </div>

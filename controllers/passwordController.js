@@ -62,9 +62,9 @@ export function initialisePassword() {
 
 }
 
-function resetPasswordTask() {
+export function resetPasswordTask() {
     leavetaskModel.style.display = 'none';
-    passwordContainerBlur.classList.remove('blurred');
+    desktopArea.classList.remove('blurred');
 }
 
 export function closePassword() {
@@ -77,23 +77,28 @@ export function closePassword() {
     }
     else {
         leavetaskModel.style.display = 'flex'; //working
-        passwordContainerBlur.classList.add('blurred'); // Apply the blur
+        desktopArea.classList.add('blurred'); // Apply the blur
     }
 }
 
 export function backpasswordFunction() {
     leavetaskModel.style.display = 'none';
-    passwordContainerBlur.classList.remove('blurred'); // remove the blur
+    desktopArea.classList.remove('blurred'); // remove the blur
 }
 
 export function confirmpasswordFunction() {
-    passwordContainerBlur.classList.remove('blurred'); // remove the blur
+    desktopArea.classList.remove('blurred'); // remove the blur
     confirmClose = true;
     passwordopen = false;
     passwordtaskComplete = false;
 
     resetPasswordTask()
     closePassword()
+}
+
+export function resetPasswordFromDesktop(){
+    leavetaskModel.style.display = 'flex'; //working
+    desktopArea.classList.add('blurred'); // Apply the blur
 }
 
 
@@ -233,7 +238,7 @@ export function passwordComplete() {
 
         // Update the icon to show the completed status
         const passwordIcon = document.querySelector("#progress-password img");
-        if (passwordIcon) {
+        if (passwordIcon) { //cannot find
             passwordIcon.src = "assets/icons/password-tick-icon.png";
         }
 
@@ -247,6 +252,11 @@ export function passwordComplete() {
         passwordopen = false;
     } else {
         console.log("Not all tasks are complete yet.");
+        const passwordIcon = document.querySelector("#progress-password img");
+        if (passwordIcon) {
+            passwordIcon.src = "assets/icons/password-icon.png";
+        }
+
     }
 }
 

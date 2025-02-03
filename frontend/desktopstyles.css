@@ -74,9 +74,8 @@ h1 {
 
 .progress-item {
     display: flex;
-    justify-content: space-between;
+    margin-top: 10px;
     align-items: center;
-    margin-bottom: 10px;
     cursor: pointer;
 }
 
@@ -87,7 +86,6 @@ h1 {
 }
 
 .progress-item p {
-    margin-right: 20px;
     margin: 0;
     font-size: 1.5em;
 }
@@ -333,6 +331,7 @@ p {
 }
 
 .reset {
+    justify-content: space-between;
     padding: 10px 10px;
     border: none;
     border-radius: 10px;
@@ -342,12 +341,22 @@ p {
     font-size: 14px;
     min-width: 100px; 
     text-align: center;
-    margin-left: auto;
+    margin-top: 5px;
 }
 
 .reset:hover {
     background-color: #c54003; /* Darker blue when hovered */
 }
+.logoutRight {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%; 
+    margin-top: 20px; 
+    margin-left: auto;
+}
+
+
 
 
 .nav-button {
