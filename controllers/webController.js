@@ -19,6 +19,11 @@ const responseContainer = document.getElementById('response-container');
 const leavetaskModel = document.getElementById('leave-web-task');
 const instructionModel = document.getElementById('instructions-web');
 
+export function resetWebFromDesktop(){
+    leavetaskModel.style.display = 'flex'; //working
+    desktopArea.classList.add('blurred'); // Apply the blur
+}
+
 export function confirmwebButtonFunction() {
     instructionModel.style.display = 'none';
     instructionsConfirmed = true; // listener to display instructions once user confirms
@@ -65,19 +70,25 @@ export function initialiseWeb() {
 
 function resetWebTask() {
     leavetaskModel.style.display = 'none';
-    webInterface.classList.remove('blurred');
+    desktopArea.classList.remove('blurred');
 }
 
 export function backwebFunction() {
     leavetaskModel.style.display = 'none';
-    webInterface.classList.remove('blurred'); // remove the blur
+    desktopArea.classList.remove('blurred'); // remove the blur
 }
 
 export function confirmwebFunction() {
-    webInterface.classList.remove('blurred'); // remove the blur
+    desktopArea.classList.remove('blurred'); // remove the blur
     confirmClose = true;
     webopen = false;
     webtaskComplete = false;
+    const webIcon = document.querySelector("#progress-web img");
+    if (webIcon) {
+        webIcon.src = "assets/icons/web-icon.png";
+    }
+
+
     resetWebTask()
     closeWeb()
 }
@@ -155,6 +166,11 @@ export function webComplete() {
         </div>
     `;
     } else {
+        const taskWebElement = document.querySelector(".Taskweb");
+        const nextStepsDiv = taskWebElement.querySelector(".next-steps");
+        if (nextStepsDiv) {
+            nextStepsDiv.remove(); 
+        }
         console.log("Not all tasks are complete yet.");
     }
 }
@@ -176,7 +192,7 @@ export function closeWeb() {
     }
     else {
         leavetaskModel.style.display = 'flex'; //working
-        webInterface.classList.add('blurred'); // Apply the blur
+        desktopArea.classList.add('blurred'); // Apply the blur
     }
 }
 
