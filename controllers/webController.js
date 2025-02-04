@@ -88,7 +88,7 @@ export function confirmwebFunction() {
         webIcon.src = "assets/icons/web-icon.png";
     }
 
-
+    markTaskIncomplete()
     resetWebTask()
     closeWeb()
 }
@@ -121,6 +121,17 @@ export async function askButtonFunction() {
         responseContainer.textContent = 'Error generating response. Please try again.';
     }
 }
+
+export function webPreviouslyComplete(){
+    webtaskComplete = true;
+        // Update the icon to show the completed status
+        const webIcon = document.querySelector("#progress-web img");
+        if (webIcon) { //cannot find
+            webIcon.src = "assets/icons/web-tick-icon.png";
+        }
+}
+
+
 
 // Function to mark all web tasks as complete
 export function webComplete() {
@@ -218,5 +229,25 @@ async function markTaskComplete(webtaskComplete) {
       localStorage.setItem('tasks', JSON.stringify(tasks));
   
       console.log(`${webtaskComplete} marked as complete.`);
+    }
+}
+
+async function markTaskIncomplete(webtaskComplete) {
+    const email = localStorage.getItem('userEmail'); // Get logged-in user's email
+    if (!email) return; // Ensure user is logged in
+  
+    const response = await fetch('/update-tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, taskName: 'webtaskComplete', status: false }) // Send task name & status
+    });
+  
+    if (response.ok) {
+      // Update local storage to reflect completed tasks
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+      tasks[webtaskComplete] = false;
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+  
+      console.log(`${webtaskComplete} marked as incomplete.`);
     }
 }

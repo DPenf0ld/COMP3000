@@ -280,6 +280,7 @@ export function confirmphishingFunction() {
 
 
     //exampleInstructions()
+    markTaskIncomplete()
     resetPhishingTask()
     closeInbox()
 }
@@ -749,6 +750,17 @@ export function setEmailOpen(value) {
     emailopen = value;
 }
 
+export function emailPreviouslyComplete(){
+    emailtaskComplete = true;
+        // Update the icon to show the completed status
+        const emailIcon = document.querySelector("#progress-email img");
+        if (emailIcon) { //cannot find
+            emailIcon.src = "assets/icons/email-tick-icon.png";
+        }
+}
+
+
+
 async function markTaskComplete(emailtaskComplete) {
     const email = localStorage.getItem('userEmail'); // Get logged-in user's email
     if (!email) return; // Ensure user is logged in
@@ -766,6 +778,26 @@ async function markTaskComplete(emailtaskComplete) {
       localStorage.setItem('tasks', JSON.stringify(tasks));
   
       console.log(`${emailtaskComplete} marked as complete.`);
+    }
+}
+
+async function markTaskIncomplete(emailtaskComplete) {
+    const email = localStorage.getItem('userEmail'); // Get logged-in user's email
+    if (!email) return; // Ensure user is logged in
+  
+    const response = await fetch('/update-tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, taskName: 'emailtaskComplete', status: false }) // Send task name & status
+    });
+  
+    if (response.ok) {
+      // Update local storage to reflect completed tasks
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+      tasks[emailtaskComplete] = false;
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+  
+      console.log(`${emailtaskComplete} marked as incomplete.`);
     }
 }
   

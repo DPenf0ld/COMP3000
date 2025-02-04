@@ -99,7 +99,7 @@ export function confirmpasswordFunction() {
 
     
 
-
+    markTaskIncomplete()
     resetPasswordTask()
     closePassword()
 }
@@ -238,6 +238,15 @@ export function encrypt(str) {
     });
 }
 
+export function passwordPreviouslyComplete(){
+    passwordtaskComplete = true;
+        // Update the icon to show the completed status
+        const passwordIcon = document.querySelector("#progress-password img");
+        if (passwordIcon) { //cannot find
+            passwordIcon.src = "assets/icons/password-tick-icon.png";
+        }
+}
+
 // Function to mark all password tasks as complete
 export function passwordComplete() {
     // Check if all tasks are complete
@@ -354,5 +363,25 @@ async function markTaskComplete(passwordtaskComplete) {
       localStorage.setItem('tasks', JSON.stringify(tasks));
   
       console.log(`${passwordtaskComplete} marked as complete.`);
+    }
+}
+
+async function markTaskIncomplete(passwordtaskComplete) {
+    const email = localStorage.getItem('userEmail'); // Get logged-in user's email
+    if (!email) return; // Ensure user is logged in
+  
+    const response = await fetch('/update-tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, taskName: 'passwordtaskComplete', status: false }) // Send task name & status
+    });
+  
+    if (response.ok) {
+      // Update local storage to reflect completed tasks
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+      tasks[passwordtaskComplete] = false;
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+  
+      console.log(`${passwordtaskComplete} marked as incomplete.`);
     }
 }
