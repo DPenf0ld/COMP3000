@@ -241,7 +241,8 @@ export function encrypt(str) {
 // Function to mark all password tasks as complete
 export function passwordComplete() {
     // Check if all tasks are complete
-    if (passwordtask1 && passwordtask2 && passwordtask3 && passwordtaskComplete != true) {
+    if (passwordtask1 && passwordtask2 && passwordtask3 || passwordtaskComplete ) {
+        markTaskComplete()
         passwordtaskComplete = true;
 
         // Update the icon to show the completed status
@@ -336,3 +337,22 @@ export function setPasswordOpen(value) {
     passwordopen = value;
 }
 
+async function markTaskComplete(passwordtaskComplete) {
+    const email = localStorage.getItem('userEmail'); // Get logged-in user's email
+    if (!email) return; // Ensure user is logged in
+  
+    const response = await fetch('/update-tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, taskName: 'passwordtaskComplete', status: true }) // Send task name & status
+    });
+  
+    if (response.ok) {
+      // Update local storage to reflect completed tasks
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+      tasks[passwordtaskComplete] = true;
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+  
+      console.log(`${passwordtaskComplete} marked as complete.`);
+    }
+}

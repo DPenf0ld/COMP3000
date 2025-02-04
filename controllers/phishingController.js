@@ -364,9 +364,9 @@ export function firstOpenFunction() {
 
 export function emailComplete() {
     // Check if all tasks are complete
-    if (emailtask1 && emailtask2 && emailtask3 && emailtaskComplete != true) {
+    if (emailtask1 && emailtask2 && emailtask3 || emailtaskComplete) {
         emailtaskComplete = true;
-
+        markTaskComplete()
         // Update the icon to show the completed status
         const emailIcon = document.querySelector("#progress-email img");
         if (emailIcon) {
@@ -748,3 +748,25 @@ export function closeInbox() {
 export function setEmailOpen(value) {
     emailopen = value;
 }
+
+async function markTaskComplete(emailtaskComplete) {
+    const email = localStorage.getItem('userEmail'); // Get logged-in user's email
+    if (!email) return; // Ensure user is logged in
+  
+    const response = await fetch('/update-tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, taskName: 'emailtaskComplete', status: true }) // Send task name & status
+    });
+  
+    if (response.ok) {
+      // Update local storage to reflect completed tasks
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+      tasks[emailtaskComplete] = true;
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+  
+      console.log(`${emailtaskComplete} marked as complete.`);
+    }
+}
+  
+  

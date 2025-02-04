@@ -82,6 +82,11 @@ app.post('/signup', async (req, res) => {
     email,
     password: hashedPassword,
     dob: userDob.toISOString(), // Save DOB in ISO string format
+    tasks: {
+      passwordtaskComplete: false,
+      webtaskComplete: false,
+      emailtaskComplete: false
+    }
   };
 
   try {
@@ -97,12 +102,13 @@ app.post('/signup', async (req, res) => {
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
+  const db = client.db('GuardPoint');
+  const usersCollection = db.collection('users');
+
   if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required' });
   }
 
-  const db = client.db('GuardPoint');
-  const usersCollection = db.collection('users');
 
   // Find user by email
   const user = await usersCollection.findOne({ email });
@@ -121,8 +127,36 @@ app.post('/login', async (req, res) => {
     expiresIn: '1h',
   });
 
-  res.status(200).json({ token, });
+  res.status(200).json({ token,tasks: user.tasks || {} });
 });
+
+app.post('/update-tasks', async (req, res) => {
+  const { email, taskName, status } = req.body;
+
+  if (!email || !taskName || status === undefined) {
+    return res.status(400).json({ message: 'Invalid request' });
+  }
+
+  const db = client.db('GuardPoint');
+  const usersCollection = db.collection('users');
+
+  try {
+    const updateResult = await usersCollection.updateOne(
+      { email },
+      { $set: { [`tasks.${taskName}`]: status } }
+    );
+
+    if (updateResult.modifiedCount > 0) {
+      res.status(200).json({ message: 'Task updated successfully' });
+    } else {
+      res.status(400).json({ message: 'Task update failed' });
+    }
+  } catch (error) {
+    console.error('Error updating tasks:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 
 

@@ -7,6 +7,19 @@ import { resetEmailFromDesktop, initialiseEmail, confirmphishingFunction, backph
 
 
 document.addEventListener('DOMContentLoaded', function () {
+
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+
+    if (tasks.passwordtaskComplete) {
+        passwordComplete() //password task
+    }
+    if (tasks.webtaskComplete) {
+        webComplete() //web task
+    }
+    if (tasks.emailtaskComplete) {
+        emailComplete() //email task
+    }
+
     //Email Icons
     const emailIconDesktop = document.getElementById('email-icon');
     emailIconDesktop.addEventListener('click', toggleInbox);
