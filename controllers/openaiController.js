@@ -46,44 +46,60 @@ app.post('/generate-answer', async (req, res) => {
 //generatin phishing email
 app.post('/generate-phishing', async (req, res) => {
     try {
+        const { firstName } = req.body; // Get firstName from request body
+
         const response = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
             messages: [
                 {
+                    role: 'system',
+                    content: "You are an AI that strictly outputs JSON. Do not include explanations or extra text."
+                },
+                {
                     role: 'user',
                     content: `Complete this task with UK spelling:
-                    Generate a phishing email or safe email. Each part of the email needs to link together, the email must follow the type it is. Use the following structure:
-                    type: The type of email ("Deceptive-Phishing", "Clone-Phishing", "Spear-Phishing", "Safe-Email").
-                    hover: The email address displayed on hover. If it is a phishing email, it should be suspicious (e.g., domain mismatches or typosquatting).
-                    sender: The sender's name.
-                    subject: The subject line of the email.
-                    body: The HTML body of the email. For phishing emails, include suspicious indicators (e.g., urgency, grammatical errors, fake links) and embed clickable links or phrases where hovering shows a suspicious address. For safe emails, avoid suspicious indicators.
-                    Use the following suspicious words where appropriate for phishing emails, and include possible misspellings for variation:
+                    Generate a phishing email or a safe email. Each part of the email must be cohesive, and the email must align with its designated type. If a firstName is provided, personalise the email accordingly for **spear-phishing** and **safe emails**.
+
+                    ### **Email Structure:**
+                    - **type**: The type of email ("Deceptive-Phishing", "Clone-Phishing", "Spear-Phishing", "Safe-Email").
+                    - **hover**: The email address displayed when hovering over a link. If phishing, it should look suspicious (e.g., domain mismatches or typosquatting).
+                    - **sender**: The sender’s name.
+                    - **subject**: The email subject line.
+                    - **body**: The HTML body of the email. Phishing emails must include warning signs (e.g., urgency, fake links, grammatical errors), while safe emails should be professional.
+
+                    ### **Personalisation Rules:**
+                    - If **firstName** is provided:
+                      - For **Spear-Phishing**: Address the user directly using their first name (e.g., "Hello, ${firstName},").
+                      - For **Safe Emails**: Use first name naturally in a greeting (e.g., "Hi ${firstName},").
+                    - If no **firstName** is provided, use a generic greeting (e.g., "Dear Customer").
+
+                    ### **Suspicious Words for Phishing Emails:**
+                    Use variations (including misspellings) from the following list in **phishing emails**:  
                     ["urgent", "customer", "earlist", "earliest", "verify", "immediately", "action", "login", "failure", "restricted", "confirm", "suspended", "validate", "dispute", "locked", "alert", "refund", "unauthorised", "reset", "identity", "unusual", "warning", "verrify", "custumer", "logon", "loging", "failur", "restringted", "suspend", "confrm", "valdate", "disput", "alrt", "unautherised", "idnetity", "warnning"].
 
-                        Output the response in this JSON format. Ensure the email content is formatted correctly with HTML line breaks (<br>), this is an example. There should be a hover for safe emails too. DO NOT CHANGE THE COLOUR, SIZE OR FONT OF THE TEXT:
-                        {
-                            "type": "Deceptive-Phishing",
-                            "hover": "SecurePay@example.com",
-                            "sender": "SecurePay Solutions",
-                            "subject": "Urgent Account Update Required",
-                            "body": "<html><body>Message Here</body></html>"
-                        }`
-
-                    ,
-                },
+                    ### **Output Format (Ensure Proper HTML Formatting & No Style Changes):**
+                    Output the response in **valid JSON format only**, without explanations. Example:
+                    {
+                        "type": "Spear-Phishing",
+                        "hover": "support@paypal-secure.com",
+                        "sender": "PayPal Security Team",
+                        "subject": "Important Account Verification - Action Required",
+                        "body": "<html><body>Dear ${firstName},<br><br>ADD INFORMATION ABOUT EMAIL. ADD FAKE LINK <a href='http://fake-paypal.com' title='support@paypal-secure.com'>here</a> immediately.<br><br>Regards,<br>PayPal Security Team CHANGE</body></html>"
+                    }`
+                }
             ],
-            max_tokens: 300,
+            max_tokens: 350,
         });
 
-        // JSON for email structure
-        const email = JSON.parse(response.choices[0].message.content);
+        // Ensure valid JSON response
+        const email = JSON.parse(response.choices[0].message.content.trim());
         res.json(email);
     } catch (error) {
         console.error('Error generating phishing email:', error);
         res.status(500).json({ error: 'Failed to generate email' });
     }
 });
+
 
 
 

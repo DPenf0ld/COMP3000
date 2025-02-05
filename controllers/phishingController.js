@@ -576,7 +576,8 @@ export async function addGeneratedEmail() {
     try {
         const response = await fetch('http://localhost:3000/generate-phishing', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ firstName: localStorage.getItem('firstName') })
         });
 
         if (!response.ok) throw new Error('Failed to fetch generated email');
