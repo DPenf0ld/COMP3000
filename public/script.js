@@ -85,6 +85,7 @@ document.getElementById('login-form')?.addEventListener('submit', async (event) 
     localStorage.setItem('token', result.token);
     localStorage.setItem('userEmail', email); // Store email in localStorage
     localStorage.setItem('tasks', JSON.stringify(result.tasks));
+    localStorage.setItem('firstName', result.firstName); // Store first name
     
     alert('Login successful!');
     window.location.href = 'desktop.html';

@@ -101,7 +101,6 @@ app.post('/signup', async (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
-
   const db = client.db('GuardPoint');
   const usersCollection = db.collection('users');
 
@@ -127,7 +126,11 @@ app.post('/login', async (req, res) => {
     expiresIn: '1h',
   });
 
-  res.status(200).json({ token,tasks: user.tasks || {} });
+  res.status(200).json({ 
+    firstName: user.firstName, //retreives first name
+    token,
+    tasks: user.tasks || {},
+  });
 });
 
 app.post('/update-tasks', async (req, res) => {

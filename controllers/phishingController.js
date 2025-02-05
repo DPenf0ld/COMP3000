@@ -26,6 +26,7 @@ let instructionboxCreated = false;
 
 
 //const emailContentContainer = document.querySelector('.email-content');
+const firstName = localStorage.getItem('firstName');
 const desktopArea = document.getElementById('desktop-area');
 const inboxContainer = document.getElementById('inbox-container');
 const emailListContainer = document.querySelector('.email-list');
@@ -73,7 +74,7 @@ const emails = [
 // Pages content
 const pages = [
     {
-        title: "Welcome to the Email Inbox",
+        title: `Welcome to the Email Inbox, ${firstName}!`, //add firstName here
         content: `
             This exercise will teach you how to identify <strong>phishing emails</strong>—fraudulent messages designed to steal sensitive information.<br><br>
             Phishing emails often contain suspicious links or attachments meant to trick you. Let's improve your detection skills!
