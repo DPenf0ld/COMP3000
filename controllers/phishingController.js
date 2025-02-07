@@ -138,8 +138,8 @@ const pages = [
 
 
 export function initialiseEmail() {
-    instructionboxCreated = false;
-    emailopen = false,
+        instructionboxCreated = false,
+        emailopen = false,
         correctCount = 0,
         missedCount = 0,
         currentEmailIndex = 0,
@@ -156,6 +156,10 @@ export function initialiseEmail() {
         emailtypereminder = false,
         currentPage = 0,
         confirmClose = false
+
+        prevButton.classList.add('hidden'); // Hide previous button on reset
+    nextButton.classList.remove('hidden'); // Show next button on reset
+    confirmButton.classList.add('hidden'); // Hide confirm button on reset
 
     if (emailtaskComplete == false) {
         instructionModel.style.display = 'flex'; //working
@@ -272,6 +276,7 @@ export function confirmphishingFunction() {
     emailopen = false;
     emailtaskComplete = false;
     instructionboxCreated = true;
+
     const emailIcon = document.querySelector("#progress-email img");
     if (emailIcon) {
         emailIcon.src = "assets/icons/email-icon.png";
@@ -279,8 +284,7 @@ export function confirmphishingFunction() {
 
 
 
-
-    //exampleInstructions()
+    unhideInstructionBox()
     markTaskIncomplete()
     resetPhishingTask()
     closeInbox()
@@ -470,13 +474,19 @@ export function exampleInstructions() {
         `
         }
     ];
-    let instructionBox = document.querySelector('.instruction-box'); // Declare it outside
+    let instructionBox = document.querySelector('.instruction-box'); // Declare outside
 
     if (!instructionboxCreated) {
-        // Create the instruction box
-        instructionBox = document.createElement('div');
-        instructionBox.className = 'instruction-box';
-        instructionBox.innerHTML = `
+        if (instructionBox) {
+            console.log("Unhiding Instructions")
+            console.log(currentSlide)
+            instructionBox.classList.remove('hidden');
+        } else {
+            console.log("Creating Instructions for first time")
+            console.log(currentSlide)
+            instructionBox = document.createElement('div');
+            instructionBox.className = 'instruction-box';
+            instructionBox.innerHTML = `
             <strong id="instruction-title"></strong>
             <div id="instruction-content"></div>
             <div class="instruction-buttons">
@@ -484,21 +494,27 @@ export function exampleInstructions() {
                 <button id="next-slide" class="nav-button">Next</button>
             </div>
         `;
+
+            // Append instruction box
+            emailListContainer.appendChild(instructionBox);
+        }
+
         instructionboxCreated = true;
-    
-        // Append instruction box
-        emailListContainer.appendChild(instructionBox);
     } else {
         instructionboxCreated = false;
         instructionBox = document.querySelector('.instruction-box'); // Get the box
-    
+
         if (instructionBox) {
+            console.log("Hiding Instructions and Resetting Slide count")
+            
             instructionBox.classList.add('hidden');
+            currentSlide = 0;
+            console.log(currentSlide)
         } else {
             console.error("Instruction box not found");
         }
     }
-    
+
 
     const contentElement = document.getElementById('instruction-content'); //cannot find
     const titleElement = document.getElementById('instruction-title');
@@ -507,6 +523,8 @@ export function exampleInstructions() {
 
     // Update example slides c
     function updateSlide() {
+        console.log("Slide Number:" + currentSlide)
+        console.log("Slide Length:" + slides.length)
         titleElement.innerHTML = slides[currentSlide].title;
         contentElement.innerHTML = slides[currentSlide].content;
         const emailSenderElement = document.querySelector('.email-sender');
@@ -563,6 +581,7 @@ export function exampleInstructions() {
             currentSlide++;
             updateSlide();
         } else {
+            console.log("Finish button clicked");
             unhideInstructionBox()
         }
     });
@@ -722,9 +741,14 @@ export function displayEmail(index) {
 export function unhideInstructionBox() {
     const multiplechoiceBox = document.querySelector('.multiplechoice-box');
 
+    if (confirmClose) {
+        multiplechoiceBox.classList.add('hidden');
+    }
+    else {
+        multiplechoiceBox.classList.remove('hidden'); // unhide the box by removing hidden
+        exampleInstructions()
+    }
 
-    multiplechoiceBox.classList.remove('hidden'); // unhide the box by removing hidden
-    exampleInstructions()
 
 
 }
