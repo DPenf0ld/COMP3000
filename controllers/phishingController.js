@@ -388,7 +388,7 @@ export function emailComplete() {
         const taskEmailElement = document.querySelector(".Taskemail");
         const nextStepsDiv = taskEmailElement.querySelector(".next-steps");
         if (nextStepsDiv) {
-            nextStepsDiv.remove(); 
+            nextStepsDiv.remove();
         }
     }
 }
@@ -404,7 +404,7 @@ export function nextemailbutton() {
     }
 }
 
-export function resetEmailFromDesktop(){
+export function resetEmailFromDesktop() {
     leavetaskModel.style.display = 'flex'; //working
     desktopArea.classList.add('blurred'); // Apply the blur
 }
@@ -415,16 +415,16 @@ export function resetEmailFromDesktop(){
 
 export function exampleInstructions() {
     let currentSlide = 0; // Track the current slide
-        const slides = [
-            {
-                title: "Introduction",
-                content: `
+    const slides = [
+        {
+            title: "Introduction",
+            content: `
             <p>First, we’ll review an example phishing email. These instructions will equip you with methods to <strong>identify phishing emails</strong> and understand their types.</p>
         `
-            },
-            {
-                title: "Identifying Suspicious Words",
-                content: `
+        },
+        {
+            title: "Identifying Suspicious Words",
+            content: `
             <p><strong>Suspicious words</strong> indicate a phishing email. To highlight them:</p>
             <ul>
                 <li>Double-click a word.</li>
@@ -432,72 +432,73 @@ export function exampleInstructions() {
             </ul>
             <p>Take a moment to read the example email and <strong>highlight any words</strong> you think could be suspicious.</p>
         `
-            },
-            {
-                title: "Step 1: Informal Greeting",
-                content: `
+        },
+        {
+            title: "Step 1: Informal Greeting",
+            content: `
             <p>An informal or generic greeting is a key indicator of a phishing email. For example, this email uses the term <strong>“Customer”</strong>, which is not specific.</p>
             <p><strong>Task:</strong> Highlight the word <strong>“Customer”</strong> to complete this step.</p>
         `
-            },
-            {
-                title: "Step 2: Time Urgency",
-                content: `
+        },
+        {
+            title: "Step 2: Time Urgency",
+            content: `
             <p>Phishing emails often create pressure with <strong>time urgency</strong>. Phrases like <strong>“Immediate action required”</strong> or <strong>“Act now”</strong> are common.</p>
             <p><strong>Task:</strong> In the example email, highlight the word <strong>“urgent”</strong> to complete this step.</p>
         `
-            },
-            {
-                title: "Step 3: Poor Grammar",
-                content: `
+        },
+        {
+            title: "Step 3: Poor Grammar",
+            content: `
             <p>One common sign of a phishing email is <strong>poor grammar</strong>, such as misspellings, incorrect punctuation, or awkward phrasing.</p>
             <p>In this example, the word <strong>“earlist”</strong> (instead of <strong>“earliest”</strong>) is a clear indication of phishing.</p>
             <p><strong>Task:</strong> Highlight the word <strong>“earlist”</strong> to complete this step.</p>
         `
-            },
-            {
-                title: "Step 4: Unnecessary Subdomains",
-                content: `
+        },
+        {
+            title: "Step 4: Unnecessary Subdomains",
+            content: `
             <p>Legitimate companies typically use simple, professional domains, like <strong>securepay.com</strong> or <strong>securepaysolutions.com</strong>. In phishing emails, links often contain unnecessary or suspicious subdomains.</p>
             <p><strong>Task:</strong> Hover over the payment link in the example to reveal the real address. DO NOT CLICK THE LINK!</p>
         `
-            },
-            {
-                title: "Step 5: Hyphen Usage",
-                content: `
+        },
+        {
+            title: "Step 5: Hyphen Usage",
+            content: `
             <p>A real company uses straightforward email addresses, such as <strong>Billing@securepay.com</strong>. Phishing emails, however, often use long and suspicious addresses.</p>
             <p><strong>Task:</strong> Hover over the profile picture in the example email to see the true email address.</p>
         `
-            }
-        ];
-    if (instructionboxCreated == false) {
-        
+        }
+    ];
+    let instructionBox = document.querySelector('.instruction-box'); // Declare it outside
 
+    if (!instructionboxCreated) {
         // Create the instruction box
-        const instructionBox = document.createElement('div');
+        instructionBox = document.createElement('div');
         instructionBox.className = 'instruction-box';
         instructionBox.innerHTML = `
-    <strong id="instruction-title"></strong>
-    <div id="instruction-content"></div>
-    <div class="instruction-buttons">
-        <button id="prev-slide" class="nav-button hidden">Previous</button>
-        <button id="next-slide" class="nav-button">Next</button>
-    </div>
-`;
+            <strong id="instruction-title"></strong>
+            <div id="instruction-content"></div>
+            <div class="instruction-buttons">
+                <button id="prev-slide" class="nav-button hidden">Previous</button>
+                <button id="next-slide" class="nav-button">Next</button>
+            </div>
+        `;
         instructionboxCreated = true;
-
+    
         // Append instruction box
         emailListContainer.appendChild(instructionBox);
+    } else {
+        instructionboxCreated = false;
+        instructionBox = document.querySelector('.instruction-box'); // Get the box
+    
+        if (instructionBox) {
+            instructionBox.classList.add('hidden');
+        } else {
+            console.error("Instruction box not found");
+        }
     }
-    else {
-      //  instructionBox = document.querySelector('.instruction-box'); // Select existing instruction box
-     //   if (instructionBox) {
-      //      instructionBox.classList.remove('instruction-box'); // Remove class if needed
-       // } else {
-       //     console.error("Instruction box not found");
-       // }
-
-    }
+    
 
     const contentElement = document.getElementById('instruction-content'); //cannot find
     const titleElement = document.getElementById('instruction-title');
@@ -721,11 +722,10 @@ export function displayEmail(index) {
 export function unhideInstructionBox() {
     const multiplechoiceBox = document.querySelector('.multiplechoice-box');
 
-  //  if (instructionboxCreated) {
-   //     multiplechoiceBox.classList.add('hidden')
-   // } else {
-        multiplechoiceBox.classList.remove('hidden'); // unhide the box by removing hidden
- //   }
+
+    multiplechoiceBox.classList.remove('hidden'); // unhide the box by removing hidden
+    exampleInstructions()
+
 
 }
 
@@ -752,13 +752,13 @@ export function setEmailOpen(value) {
     emailopen = value;
 }
 
-export function emailPreviouslyComplete(){
+export function emailPreviouslyComplete() {
     emailtaskComplete = true;
-        // Update the icon to show the completed status
-        const emailIcon = document.querySelector("#progress-email img");
-        if (emailIcon) { //cannot find
-            emailIcon.src = "assets/icons/email-tick-icon.png";
-        }
+    // Update the icon to show the completed status
+    const emailIcon = document.querySelector("#progress-email img");
+    if (emailIcon) { //cannot find
+        emailIcon.src = "assets/icons/email-tick-icon.png";
+    }
 }
 
 
@@ -766,41 +766,41 @@ export function emailPreviouslyComplete(){
 async function markTaskComplete(emailtaskComplete) {
     const email = localStorage.getItem('userEmail'); // Get logged-in user's email
     if (!email) return; // Ensure user is logged in
-  
+
     const response = await fetch('/update-tasks', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, taskName: 'emailtaskComplete', status: true }) // Send task name & status
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, taskName: 'emailtaskComplete', status: true }) // Send task name & status
     });
-  
+
     if (response.ok) {
-      // Update local storage to reflect completed tasks
-      const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
-      tasks[emailtaskComplete] = true;
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-  
-      console.log(`${emailtaskComplete} marked as complete.`);
+        // Update local storage to reflect completed tasks
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+        tasks[emailtaskComplete] = true;
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
+        console.log(`${emailtaskComplete} marked as complete.`);
     }
 }
 
 async function markTaskIncomplete(emailtaskComplete) {
     const email = localStorage.getItem('userEmail'); // Get logged-in user's email
     if (!email) return; // Ensure user is logged in
-  
+
     const response = await fetch('/update-tasks', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, taskName: 'emailtaskComplete', status: false }) // Send task name & status
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, taskName: 'emailtaskComplete', status: false }) // Send task name & status
     });
-  
+
     if (response.ok) {
-      // Update local storage to reflect completed tasks
-      const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
-      tasks[emailtaskComplete] = false;
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-  
-      console.log(`${emailtaskComplete} marked as incomplete.`);
+        // Update local storage to reflect completed tasks
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+        tasks[emailtaskComplete] = false;
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
+        console.log(`${emailtaskComplete} marked as incomplete.`);
     }
 }
-  
-  
+
+

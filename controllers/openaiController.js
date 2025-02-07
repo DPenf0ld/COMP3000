@@ -34,7 +34,6 @@ app.post('/generate-answer', async (req, res) => {
             max_tokens: 100
 
         });
-
         // Send the answer back to the client
         res.json({ answer: response.choices[0].message.content });
     } catch (error) {
