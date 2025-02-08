@@ -15,7 +15,11 @@ const desktopArea = document.getElementById('desktop-area');
 const instructionPasswordModel = document.getElementById('instructions-password'); // Instruction model
 const passwordContainer = document.getElementById('password-container');
 const passwordContainerBlur = document.getElementById('password-interface');
+
 const pwnedpasswordContainerBlur = document.getElementById('Pwned');
+const middleContainerBlur = document.getElementById('middle');
+const bottomContainerBlur = document.getElementById('bottom');
+
 const leavetaskModel = document.getElementById('leave-password-task')
 
 const prevPasswordButton = document.getElementById('prev-password-button');
@@ -162,7 +166,8 @@ export function updateModelContent() {
 export function confirmpasswordButtonFunction() {
     instructionPasswordModel.style.display = 'none';
     passwordContainerBlur.classList.remove('blurred'); // Remove the blur
-    pwnedpasswordContainerBlur.classList.add('blurred'); // Apply the to right side
+    middleContainerBlur.classList.add('blurred'); // Apply blur to middle and bottom
+    bottomContainerBlur.classList.add('blurred');
 }
 
 export function prevPasswordButtonFunction() {
@@ -195,7 +200,7 @@ export async function checkButtonFunction() {
     resultElement.textContent = "";
     resultElement.style.color = "";
 
-    if (passwordblur == false) {
+
         if (!passwordPWNED) {
             resultElement.textContent = "Please enter a password.";
             resultElement.style.color = "red"; // works
@@ -234,32 +239,28 @@ export async function checkButtonFunction() {
                 <p style="color: red;">This password has been pwned and therefore compromised! It has appeared in <strong>${matchedBreach.count} breaches. You should stop using it immediately!</strong></p>
                 <p style="color: red;"><strong>Proceed to Task 2 to create a new, secure password.</strong></p>
                 `;
-                passwordtask2 = true;
+                passwordtask1 = true;
 
                 // Update the task list status
-                document.querySelector("#task-2-status").textContent = "Complete";
-                document.querySelector("#task-2-status").classList.remove("incomplete");
-                document.querySelector("#task-2-status").classList.add("complete");
+                document.querySelector("#task-1-status").textContent = "Complete";
+                document.querySelector("#task-1-status").classList.remove("incomplete");
+                document.querySelector("#task-1-status").classList.add("complete");
+                middleContainerBlur.classList.remove('blurred');
 
                 passwordComplete()
             } else {
-                passwordtask2 = true;
+                passwordtask1 = true;
 
                 // Update the task list status
-                document.querySelector("#task-2-status").textContent = "Complete";
-                document.querySelector("#task-2-status").classList.remove("incomplete");
-                document.querySelector("#task-2-status").classList.add("complete");
-
-                passwordtask3 = true;
-
-                // Update the task list status
-                document.querySelector("#task-3-status").textContent = "Complete";
-                document.querySelector("#task-3-status").classList.remove("incomplete");
-                document.querySelector("#task-3-status").classList.add("complete");
+                document.querySelector("#task-1-status").textContent = "Complete";
+                document.querySelector("#task-1-status").classList.remove("incomplete");
+                document.querySelector("#task-1-status").classList.add("complete");
 
                 resultElement.innerHTML = `
                     <p style="color: green;">Great your password has not appeared in a breach! But remember, just because a password hasn’t been exposed doesn’t mean it’s strong. <strong>Proceed to Task 2 to create a stronger one.</strong></p>
                     `;
+
+                    middleContainerBlur.classList.remove('blurred');
                 passwordComplete()
             }
 
@@ -268,7 +269,7 @@ export async function checkButtonFunction() {
             resultElement.style.color = "red"; // works
             console.error(error);
         }
-    }
+    
 }
 
 export async function check2Function() {
@@ -358,12 +359,12 @@ export async function check2Function() {
 
 export function togglePasswordInput() {
     if (passwordtask1) {
-        const passwordInput = document.getElementById('passwordPWNED');
+        const passwordInput = document.getElementById('password');
         passwordblur = false;
         passwordInput.disabled = false; // Enable
     }
     else {
-        const passwordInput = document.getElementById('passwordPWNED');
+        const passwordInput = document.getElementById('password');
         passwordblur = true;
         passwordInput.disabled = true; // disable
     }
@@ -458,23 +459,24 @@ export function checkPasswordStrength(password) {
             passwordtask1 = true;
 
             // Update the task list status for Task 1
-            const task1Status = document.querySelector("#task-1-status");
-            task1Status.textContent = "Complete";
-            task1Status.classList.remove("incomplete");
-            task1Status.classList.add("complete");
-            pwnedpasswordContainerBlur.classList.remove('blurred'); // Remove the blur from right side
+            const task2Status = document.querySelector("#task-2-status");
+            task2Status.textContent = "Complete";
+            task2Status.classList.remove("incomplete");
+            task2Status.classList.add("complete");
 
+            bottomContainerBlur.classList.remove('blurred');
             togglePasswordInput();
             // Call passwordComplete to check all tasks
             passwordComplete();
         }
         else if (passwordtask1 == false) {
             // Update the task list status for Task 1
-            const task1Status = document.querySelector("#task-1-status");
-            task1Status.textContent = "Incomplete";
-            task1Status.classList.remove("Complete");
-            task1Status.classList.add("incomplete");
-            pwnedpasswordContainerBlur.classList.add('blurred'); // Remove the blur from right side
+            const task2Status = document.querySelector("#task-2-status");
+            task2Status.textContent = "Incomplete";
+            task2Status.classList.remove("Complete");
+            task2Status.classList.add("incomplete");
+            middleContainerBlur.classList.add('blurred'); 
+            bottomContainerBlur.classList.add('blurred'); 
             togglePasswordInput();
         }
     });
