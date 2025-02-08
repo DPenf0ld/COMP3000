@@ -11,6 +11,7 @@ let passwordtask2 = false;
 let passwordtask3 = false;
 let passwordStrengths = document.querySelectorAll('.password-strength')
 
+const task2CheckButton = document.getElementById('Task2-Check');
 const desktopArea = document.getElementById('desktop-area');
 const instructionPasswordModel = document.getElementById('instructions-password'); // Instruction model
 const passwordContainer = document.getElementById('password-container');
@@ -246,7 +247,7 @@ export async function checkButtonFunction() {
                 document.querySelector("#task-1-status").classList.remove("incomplete");
                 document.querySelector("#task-1-status").classList.add("complete");
                 middleContainerBlur.classList.remove('blurred');
-
+                togglePasswordInput()
                 passwordComplete()
             } else {
                 passwordtask1 = true;
@@ -261,6 +262,7 @@ export async function checkButtonFunction() {
                     `;
 
                     middleContainerBlur.classList.remove('blurred');
+                    togglePasswordInput()
                 passwordComplete()
             }
 
@@ -456,7 +458,11 @@ export function checkPasswordStrength(password) {
         passwordStrength.style.background = `conic-gradient(${gradientColor} ${degree}deg, #1115 ${degree}deg)`;
         // Check if password strength is Strong
         if (strengthText === 'Strong') {
-            passwordtask1 = true;
+            passwordtask2 = true;
+            bottomContainerBlur.classList.remove('blurred')
+
+            task2CheckButton.classList.remove('hidden'); 
+            
 
             // Update the task list status for Task 1
             const task2Status = document.querySelector("#task-2-status");
@@ -469,13 +475,12 @@ export function checkPasswordStrength(password) {
             // Call passwordComplete to check all tasks
             passwordComplete();
         }
-        else if (passwordtask1 == false) {
+        else if (passwordtask2 == false) {
             // Update the task list status for Task 1
             const task2Status = document.querySelector("#task-2-status");
             task2Status.textContent = "Incomplete";
             task2Status.classList.remove("Complete");
             task2Status.classList.add("incomplete");
-            middleContainerBlur.classList.add('blurred'); 
             bottomContainerBlur.classList.add('blurred'); 
             togglePasswordInput();
         }
