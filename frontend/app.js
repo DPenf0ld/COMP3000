@@ -1,6 +1,6 @@
 import { updateClock } from '../controllers/clockController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
-import { passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
+import { prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
 import { webPreviouslyComplete, resetWebFromDesktop, initialiseWeb, confirmwebButtonFunction, webfirstOpenFunction, confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
 import { emailPreviouslyComplete, emailComplete, resetEmailFromDesktop, initialiseEmail, confirmphishingFunction, backphishingFunction, setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
 
@@ -141,11 +141,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const backpasswordbutton = document.getElementById('backpassword-button');
     backpasswordbutton.addEventListener('click', backpasswordFunction);
 
+
+
     const confirmpasswordbutton = document.getElementById('confirmpassword-button');
     confirmpasswordbutton.addEventListener('click', confirmpasswordFunction);
 
     const backToDesktopPassword = document.getElementById('close-password');
     backToDesktopPassword.addEventListener('click', closePassword);
+
+    const prevPasswordButton = document.getElementById('prev-password-button');
+    prevPasswordButton.addEventListener('click', prevPasswordButtonFunction);
+
+    const nextPasswordButton = document.getElementById('next-password-button');
+    nextPasswordButton.addEventListener('click', nextPasswordButtonFunction);
 
     const confirmpasswordButton = document.getElementById('confirm-password-button');
     confirmpasswordButton.addEventListener('click', confirmpasswordButtonFunction);

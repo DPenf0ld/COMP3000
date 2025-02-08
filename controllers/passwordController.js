@@ -3,7 +3,7 @@ console.log('passwordController.js loaded');
 export let passwordopen = false;
 export let passwordtaskComplete = false;
 
-
+let currentPage = 0; // Track the current page of the model
 let confirmClose = false;
 let passwordblur = true;
 let passwordtask1 = false;
@@ -18,14 +18,46 @@ const passwordContainerBlur = document.getElementById('password-interface');
 const pwnedpasswordContainerBlur = document.getElementById('Pwned');
 const leavetaskModel = document.getElementById('leave-password-task')
 
+const prevPasswordButton = document.getElementById('prev-password-button');
+const nextPasswordButton = document.getElementById('next-password-button');
+const confirmPasswordButton = document.getElementById('confirm-password-button');
+
+const instructionModel = document.getElementById('instructions-password'); // Instruction model
 const passwordPWNED = document.getElementById('passwordPWNED').value;
 const resultElement = document.getElementById('result');
 
+// Pages content
+const pages = [
+    {
+        title: `Welcome to the Password Security Challenge!`, 
+        content: `
+            This exercise will help you improve your skills in creating strong passwords while also ensuring your current passwords are not compromised.
+        `
+    },
+    {
+        title: "Your Task:",
+        content: `
+            • <strong>Check a password you currently use to see if it has appeared in any data breaches.</strong><br>
+            • <strong>Create a new, strong password that follows security best practices.</strong><br>
+            • <strong>Ensure your new password has not appeared in any breaches before completing the challenge.</strong><br><br>
+        `
+    },
+    {
+        title: "We will follow NCSE password guidance, which recommends:",
+        content: `
+            ✅ Using at least <strong>three random words</strong>instead of a single word.<br>
+            ✅ <strong>Avoiding common words</strong>(e.g., “password” or “123456”).<br>
+            ✅ Using a mix of <strong>uppercase, lowercase, numbers, and special characters.</strong><br>
+            ✅ <strong>Not reusing passwords</strong> across different accounts.<br><br>
+            <strong>Click Confirm to start the challenge!</strong><br><br>
+        `
+    }
+];
 
 
-const initialState = {
-    passwordblur: true,
-};
+
+
+
 
 export function initialisePassword() {
     document.getElementById("passwordPWNED").value = "";
@@ -57,6 +89,7 @@ export function initialisePassword() {
     
         passwordComplete()
         togglePasswordInput()
+        updateModelContent()
 
     }
 
@@ -98,7 +131,8 @@ export function confirmpasswordFunction() {
 
 
     
-
+    currentPage = 0,
+    console.log(currentPage);
     markTaskIncomplete()
     resetPasswordTask()
     closePassword()
@@ -109,12 +143,42 @@ export function resetPasswordFromDesktop(){
     desktopArea.classList.add('blurred'); // Apply the blur
 }
 
+//update the model content based on the current page
+export function updateModelContent() {
+    console.log(currentPage)
+    const titleElement = instructionModel.querySelector('h2');
+    const contentElement = instructionModel.querySelector('p');
+
+    // Update title and content
+    titleElement.textContent = pages[currentPage].title;
+    contentElement.innerHTML = pages[currentPage].content;
+
+    // Manage button visibility
+    prevPasswordButton.classList.toggle('hidden', currentPage === 0);
+    nextPasswordButton.classList.toggle('hidden', currentPage === pages.length - 1);
+    confirmPasswordButton.classList.toggle('hidden', currentPage !== pages.length - 1);
+}
 
 export function confirmpasswordButtonFunction() {
     instructionPasswordModel.style.display = 'none';
     passwordContainerBlur.classList.remove('blurred'); // Remove the blur
     pwnedpasswordContainerBlur.classList.add('blurred'); // Apply the to right side
 }
+
+export function prevPasswordButtonFunction() {
+    if (currentPage > 0) {
+        currentPage--;
+        updateModelContent();
+    }
+}
+
+export function nextPasswordButtonFunction() {
+    if (currentPage < pages.length - 1) {
+        currentPage++;
+        updateModelContent();
+    }
+}
+
 
 export function passwordCompleteFunction() {
     if (passwordtaskComplete) {
