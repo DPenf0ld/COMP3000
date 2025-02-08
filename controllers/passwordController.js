@@ -231,15 +231,8 @@ export async function checkButtonFunction() {
             // If the password has been pwned
             if (matchedBreach) {
                 resultElement.innerHTML = `
-                <p style="color: red;">This password has been pwned! It has appeared in ${matchedBreach.count} breaches.</p>
-                <p style="color: red;"><strong>Why is this a problem?</strong></p>
-                <p style="color: red;">When your password is involved in a breach, attackers can potentially use it to gain unauthorized access to your accounts, putting your personal data at risk. It's recommended to change it immediately.</p>
-                <p style="color: red;"><strong>How to improve your password:</strong></p>
-                <ul>
-                <li style="color: red;">Use a combination of uppercase and lowercase letters, numbers, and special characters.</li>
-                <li style="color: red;">Avoid using easily guessable information like your name, birthdate, or common words.</li>
-                <li style="color: red;">Consider using a password manager to create and store strong, unique passwords for each account.</li>
-                </ul>
+                <p style="color: red;">This password has been pwned and therefore compromised! It has appeared in <strong>${matchedBreach.count} breaches. You should stop using it immediately!</strong></p>
+                <p style="color: red;"><strong>Proceed to Task 2 to create a new, secure password.</strong></p>
                 `;
                 passwordtask2 = true;
 
@@ -265,8 +258,93 @@ export async function checkButtonFunction() {
                 document.querySelector("#task-3-status").classList.add("complete");
 
                 resultElement.innerHTML = `
-                    <p style="color: green;">This password has not been pwned. It appears safe to use.</p>
+                    <p style="color: green;">Great your password has not appeared in a breach! But remember, just because a password hasn’t been exposed doesn’t mean it’s strong. <strong>Proceed to Task 2 to create a stronger one.</strong></p>
+                    `;
+                passwordComplete()
+            }
+
+        } catch (error) {
+            resultElement.textContent = "Error checking password. Please try again later.";
+            resultElement.style.color = "red"; // works
+            console.error(error);
+        }
+    }
+}
+
+export async function check2Function() {
+
+    const passwordPWNED = document.getElementById('password').value;
+    const resultElement = document.getElementById('resulttask2');
+    // Clear previous results
+    resultElement.textContent = "";
+    resultElement.style.color = "";
+
+    if (passwordblur == false) {
+        if (!passwordPWNED) {
+            resultElement.textContent = "Please enter a password.";
+            resultElement.style.color = "red"; // works
+            return;
+        }
+
+        try {
+            // Hash the password 
+            const hashedPassword = await encrypt(passwordPWNED);
+
+            // Extract the first 5 characters of the hash
+            const hashPrefix = hashedPassword.substring(0, 5);
+            const hashSuffix = hashedPassword.substring(5).toUpperCase();
+
+            // Fetch data from the Pwned Passwords API
+            const response = await fetch(`https://api.pwnedpasswords.com/range/${hashPrefix}`);
+
+            if (!response.ok) {
+                resultElement.textContent = "Error fetching data. Please try again later.";
+                resultElement.style.color = "red"; // works
+                return;
+            }
+
+            const data = await response.text();
+            const breaches = data.split('\n').map(line => {
+                const [suffix, count] = line.split(':');
+                return { suffix, count: parseInt(count) };
+            });
+
+            // Find the match for the password
+            const matchedBreach = breaches.find(breach => breach.suffix === hashSuffix);
+
+            // If the password has been pwned
+            if (matchedBreach) {
+                resultElement.innerHTML = `
+                <p style="color: red;">This password has been pwned and therefore compromised! It has appeared in <strong>${matchedBreach.count} breaches.</strong></p>
+                <p style="color: red;"><strong>You should stop using it immediately!</strong></p>
+                <p style="color: red;"><strong>You must create a different one.</strong></p>
                 `;
+                passwordtask2 = true;
+
+                // Update the task list status
+                document.querySelector("#task-2-status").textContent = "Complete";
+                document.querySelector("#task-2-status").classList.remove("incomplete");
+                document.querySelector("#task-2-status").classList.add("complete");
+
+                passwordComplete()
+            } else {
+                passwordtask2 = true;
+
+                // Update the task list status
+                document.querySelector("#task-2-status").textContent = "Complete";
+                document.querySelector("#task-2-status").classList.remove("incomplete");
+                document.querySelector("#task-2-status").classList.add("complete");
+
+                passwordtask3 = true;
+
+                // Update the task list status
+                document.querySelector("#task-3-status").textContent = "Complete";
+                document.querySelector("#task-3-status").classList.remove("incomplete");
+                document.querySelector("#task-3-status").classList.add("complete");
+
+                resultElement.innerHTML = `
+                    <p style="color: green;">Perfect! Your password is strong and has never been found in a breach. Well done!</strong></p>
+                    `;
                 passwordComplete()
             }
 
