@@ -3,6 +3,7 @@ console.log('passwordController.js loaded');
 export let passwordopen = false;
 export let passwordtaskComplete = false;
 
+let pwnedpasswords = 0;
 let feedback = false;
 let currentPage = 0; // Track the current page of the model
 let confirmClose = false;
@@ -136,6 +137,7 @@ export function confirmpasswordFunction() {
     confirmClose = true;
     passwordopen = false;
     passwordtaskComplete = false;
+    pwnedpasswords = 0;
     const passwordIcon = document.querySelector("#progress-password img");
     if (passwordIcon) {
         passwordIcon.src = "assets/icons/password-icon.png";
@@ -243,11 +245,16 @@ export async function checkButtonFunction() {
 
         // If the password has been pwned
         if (matchedBreach) {
-            resultElement.innerHTML = `
+
+
+            pwnedpasswords++;
+            if (pwnedpasswords>=5){
+                passwordtask1 = true;
+
+                resultElement.innerHTML = `
                 <p style="color: red;">This password has been pwned and therefore compromised! It has appeared in <strong>${matchedBreach.count} breaches. You should stop using it immediately!</strong></p>
                 <p style="color: red;"><strong>Proceed to Task 2 to create a new, secure password.</strong></p>
                 `;
-            passwordtask1 = true;
 
             // Update the task list status
             document.querySelector("#task-1-status").textContent = "Complete";
@@ -256,21 +263,34 @@ export async function checkButtonFunction() {
             middleContainerBlur.classList.remove('blurred');
             togglePasswordInput()
             passwordComplete()
+            } else {
+                resultElement.innerHTML = `
+                <p style="color: red;">This password has been pwned and therefore compromised! It has appeared in <strong>${matchedBreach.count} breaches. You should stop using it immediately!</strong></p>
+                <p style="color: red;"><strong>Test ${5-pwnedpasswords} more passwords to move onto Task 2</strong></p>
+                `;
+
+            }
         } else {
-            passwordtask1 = true;
-
-            // Update the task list status
+            pwnedpasswords++;
+            if (pwnedpasswords>=5){
+                passwordtask1 = true;
+                resultElement.innerHTML = `
+                <p style="color: green;">Great your password has not appeared in a breach! But remember, just because a password hasn’t been exposed doesn’t mean it’s strong. <strong>Proceed to Task 2 to create a stronger one.</strong></p>
+                <p style="color: green;"><strong>Proceed to Task 2 to create a new, secure password.</strong></p>
+                `;
+                            // Update the task list status
             document.querySelector("#task-1-status").textContent = "Complete";
             document.querySelector("#task-1-status").classList.remove("incomplete");
             document.querySelector("#task-1-status").classList.add("complete");
-
-            resultElement.innerHTML = `
-                    <p style="color: green;">Great your password has not appeared in a breach! But remember, just because a password hasn’t been exposed doesn’t mean it’s strong. <strong>Proceed to Task 2 to create a stronger one.</strong></p>
-                    `;
-
             middleContainerBlur.classList.remove('blurred');
             togglePasswordInput()
             passwordComplete()
+            } else{
+                resultElement.innerHTML = `
+                <p style="color: green;">Great your password has not appeared in a breach! But remember, just because a password hasn’t been exposed doesn’t mean it’s strong.</p>
+                <p style="color: green;"><strong>Test ${5-pwnedpasswords} more passwords to move onto Task 2</strong></p>
+                `;
+            }
         }
 
     } catch (error) {
