@@ -38,6 +38,7 @@ const instructionModel = document.getElementById('instructions-email'); // Instr
 const emailContainer = document.getElementById('email-interface');     // Inbox container
 const prevButton = document.getElementById('prev-button');
 const leavetaskModel = document.getElementById('leave-task');
+const submitButton = document.getElementById('submit-highlight');
 
 //suspicious words to check for highlighting
 const suspiciousWords = [
@@ -217,11 +218,10 @@ export function submitButtonFunction() {
 
         console.log(`Correct: ${correctCount}, Missed: ${missedCount}`);
 
-        if (correctselectedoption) {
+        
             displaynextemailbutton = true;
             nextemailbutton()
-        }
-
+        
     }
 
     if (correctCount == 3) {
@@ -387,11 +387,13 @@ export function emailComplete() {
 export function nextemailbutton() {
     const nextEmailButton = document.getElementById('next-email');
     if (displaynextemailbutton) { //check if true
-        nextEmailButton.style.display = 'block';
+        nextEmailButton.style.display = 'block'; //enabling
         nextEmailButton.addEventListener('click', showNextEmail);
+        submitButton.style.display = 'none';
     } else {
-        nextEmailButton.style.display = 'none';
+        nextEmailButton.style.display = 'none'; //disabling
         nextEmailButton.removeEventListener('click', showNextEmail);
+        submitButton.style.display = 'block'; 
     }
 }
 
