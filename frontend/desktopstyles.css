@@ -663,7 +663,7 @@ p {
 }
 
 .password-info {
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 1em;
     color: #000000;
 }
@@ -748,7 +748,7 @@ p {
 .Pwned input {
     width: 100%; /* Ensure the input takes up the full width of the container */
     padding: 10px 15px;
-    margin-bottom: 15px; /* Add space below the input */
+    margin-bottom: 5px; /* Add space below the input */
     font-size: 1em;
     border: none;
     outline: none;
@@ -775,8 +775,8 @@ p {
 
 /* Button Styles */
 .Task2-Check {
-    width: 15%; /* Full width of the container */
-    margin-top: 10px;
+    width: 30%; /* Full width of the container */
+    margin-top: 0px;
     padding: 10px;
     background-color: #333;
     color: white;
@@ -800,7 +800,7 @@ p {
 
 /* Pwned Password Box */
 .ResultsPwn {
-    margin-top: 20px;
+    margin-top: 10px;
     text-align: center;
     color: #333;
     font-size: 1rem;

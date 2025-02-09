@@ -3,6 +3,7 @@ console.log('passwordController.js loaded');
 export let passwordopen = false;
 export let passwordtaskComplete = false;
 
+let feedback = false;
 let currentPage = 0; // Track the current page of the model
 let confirmClose = false;
 let passwordblur = true;
@@ -30,11 +31,12 @@ const confirmPasswordButton = document.getElementById('confirm-password-button')
 const instructionModel = document.getElementById('instructions-password'); // Instruction model
 const passwordPWNED = document.getElementById('passwordPWNED').value;
 const resultElement = document.getElementById('result');
+const resulttask2Element = document.getElementById('resulttask2');
 
 // Pages content
 const pages = [
     {
-        title: `Welcome to the Password Security Challenge!`, 
+        title: `Welcome to the Password Security Challenge!`,
         content: `
             This exercise will help you improve your skills in creating strong passwords while also ensuring your current passwords are not compromised.
         `
@@ -65,15 +67,19 @@ const pages = [
 
 
 export function initialisePassword() {
+
     document.getElementById("passwordPWNED").value = "";
     document.getElementById("password").value = "";
     // Clear previous results
+    resulttask2Element.textContent = "";
+    resulttask2Element.style.color = "";
     resultElement.textContent = "";
     resultElement.style.color = "";
     checkPasswordStrength("")
 
 
-    if (passwordtaskComplete ==false){
+
+    if (passwordtaskComplete == false) {
         instructionPasswordModel.style.display = 'flex'; //working
         passwordContainerBlur.classList.add('blurred'); // Apply the blur
 
@@ -81,17 +87,17 @@ export function initialisePassword() {
         document.querySelector("#task-1-status").textContent = "incomplete";
         document.querySelector("#task-1-status").classList.remove("complete");
         document.querySelector("#task-1-status").classList.add("incomplete");
-    
+
         passwordtask2 = false;
         document.querySelector("#task-2-status").textContent = "Incomplete";
         document.querySelector("#task-2-status").classList.remove("complete");
         document.querySelector("#task-2-status").classList.add("incomplete");
-    
+
         passwordtask3 = false;
         document.querySelector("#task-3-status").textContent = "incomplete";
         document.querySelector("#task-3-status").classList.remove("complete");
         document.querySelector("#task-3-status").classList.add("incomplete");
-    
+
         passwordComplete()
         togglePasswordInput()
         updateModelContent()
@@ -126,6 +132,7 @@ export function backpasswordFunction() {
 
 export function confirmpasswordFunction() {
     desktopArea.classList.remove('blurred'); // remove the blur
+    task2CheckButton.classList.add('hidden');
     confirmClose = true;
     passwordopen = false;
     passwordtaskComplete = false;
@@ -135,15 +142,15 @@ export function confirmpasswordFunction() {
     }
 
 
-    
+
     currentPage = 0,
-    console.log(currentPage);
+        console.log(currentPage);
     markTaskIncomplete()
     resetPasswordTask()
     closePassword()
 }
 
-export function resetPasswordFromDesktop(){
+export function resetPasswordFromDesktop() {
     leavetaskModel.style.display = 'flex'; //working
     desktopArea.classList.add('blurred'); // Apply the blur
 }
@@ -202,76 +209,76 @@ export async function checkButtonFunction() {
     resultElement.style.color = "";
 
 
-        if (!passwordPWNED) {
-            resultElement.textContent = "Please enter a password.";
+    if (!passwordPWNED) {
+        resultElement.textContent = "Please enter a password.";
+        resultElement.style.color = "red"; // works
+        return;
+    }
+
+    try {
+        // Hash the password 
+        const hashedPassword = await encrypt(passwordPWNED);
+
+        // Extract the first 5 characters of the hash
+        const hashPrefix = hashedPassword.substring(0, 5);
+        const hashSuffix = hashedPassword.substring(5).toUpperCase();
+
+        // Fetch data from the Pwned Passwords API
+        const response = await fetch(`https://api.pwnedpasswords.com/range/${hashPrefix}`);
+
+        if (!response.ok) {
+            resultElement.textContent = "Error fetching data. Please try again later.";
             resultElement.style.color = "red"; // works
             return;
         }
 
-        try {
-            // Hash the password 
-            const hashedPassword = await encrypt(passwordPWNED);
+        const data = await response.text();
+        const breaches = data.split('\n').map(line => {
+            const [suffix, count] = line.split(':');
+            return { suffix, count: parseInt(count) };
+        });
 
-            // Extract the first 5 characters of the hash
-            const hashPrefix = hashedPassword.substring(0, 5);
-            const hashSuffix = hashedPassword.substring(5).toUpperCase();
+        // Find the match for the password
+        const matchedBreach = breaches.find(breach => breach.suffix === hashSuffix);
 
-            // Fetch data from the Pwned Passwords API
-            const response = await fetch(`https://api.pwnedpasswords.com/range/${hashPrefix}`);
-
-            if (!response.ok) {
-                resultElement.textContent = "Error fetching data. Please try again later.";
-                resultElement.style.color = "red"; // works
-                return;
-            }
-
-            const data = await response.text();
-            const breaches = data.split('\n').map(line => {
-                const [suffix, count] = line.split(':');
-                return { suffix, count: parseInt(count) };
-            });
-
-            // Find the match for the password
-            const matchedBreach = breaches.find(breach => breach.suffix === hashSuffix);
-
-            // If the password has been pwned
-            if (matchedBreach) {
-                resultElement.innerHTML = `
+        // If the password has been pwned
+        if (matchedBreach) {
+            resultElement.innerHTML = `
                 <p style="color: red;">This password has been pwned and therefore compromised! It has appeared in <strong>${matchedBreach.count} breaches. You should stop using it immediately!</strong></p>
                 <p style="color: red;"><strong>Proceed to Task 2 to create a new, secure password.</strong></p>
                 `;
-                passwordtask1 = true;
+            passwordtask1 = true;
 
-                // Update the task list status
-                document.querySelector("#task-1-status").textContent = "Complete";
-                document.querySelector("#task-1-status").classList.remove("incomplete");
-                document.querySelector("#task-1-status").classList.add("complete");
-                middleContainerBlur.classList.remove('blurred');
-                togglePasswordInput()
-                passwordComplete()
-            } else {
-                passwordtask1 = true;
+            // Update the task list status
+            document.querySelector("#task-1-status").textContent = "Complete";
+            document.querySelector("#task-1-status").classList.remove("incomplete");
+            document.querySelector("#task-1-status").classList.add("complete");
+            middleContainerBlur.classList.remove('blurred');
+            togglePasswordInput()
+            passwordComplete()
+        } else {
+            passwordtask1 = true;
 
-                // Update the task list status
-                document.querySelector("#task-1-status").textContent = "Complete";
-                document.querySelector("#task-1-status").classList.remove("incomplete");
-                document.querySelector("#task-1-status").classList.add("complete");
+            // Update the task list status
+            document.querySelector("#task-1-status").textContent = "Complete";
+            document.querySelector("#task-1-status").classList.remove("incomplete");
+            document.querySelector("#task-1-status").classList.add("complete");
 
-                resultElement.innerHTML = `
+            resultElement.innerHTML = `
                     <p style="color: green;">Great your password has not appeared in a breach! But remember, just because a password hasn’t been exposed doesn’t mean it’s strong. <strong>Proceed to Task 2 to create a stronger one.</strong></p>
                     `;
 
-                    middleContainerBlur.classList.remove('blurred');
-                    togglePasswordInput()
-                passwordComplete()
-            }
-
-        } catch (error) {
-            resultElement.textContent = "Error checking password. Please try again later.";
-            resultElement.style.color = "red"; // works
-            console.error(error);
+            middleContainerBlur.classList.remove('blurred');
+            togglePasswordInput()
+            passwordComplete()
         }
-    
+
+    } catch (error) {
+        resultElement.textContent = "Error checking password. Please try again later.";
+        resultElement.style.color = "red"; // works
+        console.error(error);
+    }
+
 }
 
 export async function check2Function() {
@@ -383,19 +390,19 @@ export function encrypt(str) {
     });
 }
 
-export function passwordPreviouslyComplete(){
+export function passwordPreviouslyComplete() {
     passwordtaskComplete = true;
-        // Update the icon to show the completed status
-        const passwordIcon = document.querySelector("#progress-password img");
-        if (passwordIcon) { //cannot find
-            passwordIcon.src = "assets/icons/password-tick-icon.png";
-        }
+    // Update the icon to show the completed status
+    const passwordIcon = document.querySelector("#progress-password img");
+    if (passwordIcon) { //cannot find
+        passwordIcon.src = "assets/icons/password-tick-icon.png";
+    }
 }
 
 // Function to mark all password tasks as complete
 export function passwordComplete() {
     // Check if all tasks are complete
-    if (passwordtask1 && passwordtask2 && passwordtask3 || passwordtaskComplete ) {
+    if (passwordtask1 && passwordtask2 && passwordtask3 || passwordtaskComplete) {
         markTaskComplete()
         passwordtaskComplete = true;
 
@@ -405,23 +412,27 @@ export function passwordComplete() {
             passwordIcon.src = "assets/icons/password-tick-icon.png";
         }
 
-        // Add a message at the bottom for next steps
-        const taskPasswordElement = document.querySelector(".Taskpassword");
-        taskPasswordElement.innerHTML += `
+        if (feedback == false) {
+            // Add a message at the bottom for next steps
+            const taskPasswordElement = document.querySelector(".Taskpassword");
+            taskPasswordElement.innerHTML += `
         <div class="next-steps">
             <p>You can test more passwords or minimise this tab and move on to the next task.</p>
         </div>
     `;
+            feedback = true;
+        }
+
         passwordopen = false;
     } else {
 
         console.log("Not all tasks are complete yet.");
-           // remove next steps
-           const taskPasswordElement = document.querySelector(".Taskpassword");
-           const nextStepsDiv = taskPasswordElement.querySelector(".next-steps");
-           if (nextStepsDiv) {
-               nextStepsDiv.remove(); 
-           }
+        // remove next steps
+        const taskPasswordElement = document.querySelector(".Taskpassword");
+        const nextStepsDiv = taskPasswordElement.querySelector(".next-steps");
+        if (nextStepsDiv) {
+            nextStepsDiv.remove();
+        }
     }
 }
 
@@ -461,8 +472,8 @@ export function checkPasswordStrength(password) {
             passwordtask2 = true;
             bottomContainerBlur.classList.remove('blurred')
 
-            task2CheckButton.classList.remove('hidden'); 
-            
+            task2CheckButton.classList.remove('hidden');
+
 
             // Update the task list status for Task 1
             const task2Status = document.querySelector("#task-2-status");
@@ -481,7 +492,7 @@ export function checkPasswordStrength(password) {
             task2Status.textContent = "Incomplete";
             task2Status.classList.remove("Complete");
             task2Status.classList.add("incomplete");
-            bottomContainerBlur.classList.add('blurred'); 
+            bottomContainerBlur.classList.add('blurred');
             togglePasswordInput();
         }
     });
@@ -498,39 +509,39 @@ export function setPasswordOpen(value) {
 async function markTaskComplete(passwordtaskComplete) {
     const email = localStorage.getItem('userEmail'); // Get logged-in user's email
     if (!email) return; // Ensure user is logged in
-  
+
     const response = await fetch('/update-tasks', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, taskName: 'passwordtaskComplete', status: true }) // Send task name & status
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, taskName: 'passwordtaskComplete', status: true }) // Send task name & status
     });
-  
+
     if (response.ok) {
-      // Update local storage to reflect completed tasks
-      const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
-      tasks[passwordtaskComplete] = true;
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-  
-      console.log(`${passwordtaskComplete} marked as complete.`);
+        // Update local storage to reflect completed tasks
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+        tasks[passwordtaskComplete] = true;
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
+        console.log(`${passwordtaskComplete} marked as complete.`);
     }
 }
 
 async function markTaskIncomplete(passwordtaskComplete) {
     const email = localStorage.getItem('userEmail'); // Get logged-in user's email
     if (!email) return; // Ensure user is logged in
-  
+
     const response = await fetch('/update-tasks', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, taskName: 'passwordtaskComplete', status: false }) // Send task name & status
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, taskName: 'passwordtaskComplete', status: false }) // Send task name & status
     });
-  
+
     if (response.ok) {
-      // Update local storage to reflect completed tasks
-      const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
-      tasks[passwordtaskComplete] = false;
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-  
-      console.log(`${passwordtaskComplete} marked as incomplete.`);
+        // Update local storage to reflect completed tasks
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+        tasks[passwordtaskComplete] = false;
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
+        console.log(`${passwordtaskComplete} marked as incomplete.`);
     }
 }
