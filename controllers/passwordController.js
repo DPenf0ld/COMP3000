@@ -37,27 +37,27 @@ const resulttask2Element = document.getElementById('resulttask2');
 // Pages content
 const pages = [
     {
-        title: `Welcome to the Password Security Challenge!`,
+        title: `🔐 Welcome to the Password Security Challenge!`,
         content: `
-            This exercise will help you improve your skills in creating strong passwords while also ensuring your current passwords are not compromised.
+            🛡️ This exercise will help you improve your skills in creating strong passwords while also ensuring your current passwords are not compromised.
         `
     },
     {
-        title: "Your Task:",
+        title: "🎯 Your Task:",
         content: `
-            • <strong>Check a password you currently use to see if it has appeared in any data breaches.</strong><br>
-            • <strong>Create a new, strong password that follows security best practices.</strong><br>
-            • <strong>Ensure your new password has not appeared in any breaches before completing the challenge.</strong><br><br>
+        🔍 <strong>Check a password you currently use</strong> to see if it has appeared in any data breaches.<br>
+        🏗️ <strong>Create a new, strong password</strong> that follows security best practices.<br>
+        ✅ <strong>Ensure your new password</strong> has not appeared in any breaches before completing the challenge.<br><br>
         `
     },
     {
         title: "We will follow NCSE password guidance, which recommends:",
         content: `
-            ✅ Using at least <strong>three random words</strong>instead of a single word.<br>
-            ✅ <strong>Avoiding common words</strong>(e.g., “password” or “123456”).<br>
-            ✅ Using a mix of <strong>uppercase, lowercase, numbers, and special characters.</strong><br>
-            ✅ <strong>Not reusing passwords</strong> across different accounts.<br><br>
-            <strong>Click Confirm to start the challenge!</strong><br><br>
+        ✅ Use at least <strong>three random words</strong> instead of a single word.<br>
+        🚫 <strong>Avoid common words</strong> (e.g., “password” or “123456”).<br>
+        🔢 Use a mix of <strong>uppercase, lowercase, numbers, and special characters.</strong><br>
+        🔄 <strong>Never reuse passwords</strong> across different accounts.<br><br>
+        🔓 <strong>Click Confirm to start the challenge!</strong><br><br>
         `
     }
 ];

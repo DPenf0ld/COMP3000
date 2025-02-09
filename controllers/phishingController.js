@@ -353,8 +353,6 @@ export function firstOpenFunction() {
     emailContainer.classList.add('blurred'); // Apply the blur
 }
 
-
-
 export function emailComplete() {
     // Check if all tasks are complete
     if (emailtask1 && emailtask2 && emailtask3 || emailtaskComplete) {
