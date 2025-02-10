@@ -598,14 +598,15 @@ export function reminder() {
 
         // Set the inner HTML for the information box with line breaks
         reminder.innerHTML = `
-        <strong>Deceptive Phishing</strong><br>
-        Fraudulent emails that impersonate legitimate entities to steal sensitive information like passwords or credit card details.<br><br>
-        
-        <strong>Clone Phishing</strong><br>
-        Replicas of legitimate emails with malicious links or attachments, often using 'resend' or 'updated version' to trick the victim.<br><br>
-        
-        <strong>Spear Phishing</strong><br>
-        Targeted attacks aimed at specific individuals or organizations, often using personal information to craft convincing emails.<br><br>
+<strong>Deceptive Phishing</strong><br>
+A fake email that <strong>impersonates a trusted company</strong> to steal personal details.<br><br>
+
+<strong>Clone Phishing</strong><br>
+A <strong>copy of a real email</strong> but with dangerous changes (links and attachments).<br><br>
+
+<strong>Spear Phishing</strong><br>
+A <strong>targeted scam using your personal details</strong> to seem more convincing.<br><br>
+
     `;
         emailListContainer.appendChild(reminder);
         // Append the close button to the info box

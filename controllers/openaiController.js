@@ -45,14 +45,13 @@ app.post('/generate-answer', async (req, res) => {
 // Generating phishing email
 app.post('/generate-phishing', async (req, res) => {
     try {
-        const { firstName } = req.body; // Get firstName from request body
+        const { firstName } = req.body;
 
-        // Define email types and pick randomly (1 in 4 chance)
         const emailTypes = ['Deceptive-Phishing', 'Clone-Phishing', 'Spear-Phishing', 'Safe-Email'];
         const randomType = emailTypes[Math.floor(Math.random() * emailTypes.length)];
 
         const response = await openai.chat.completions.create({
-            model: 'gpt-4', // Switch to newer model if available, otherwise 'gpt-3.5-turbo'
+            model: 'gpt-4',
             messages: [
                 {
                     role: 'system',
@@ -61,7 +60,7 @@ app.post('/generate-phishing', async (req, res) => {
                 {
                     role: 'user',
                     content: `Complete this task with UK spelling:
-                    Generate an email of type ${randomType} (Deceptive-Phishing, Clone-Phishing, Spear-Phishing, or Safe-Email). The email must be coherent, long, and follow a realistic pattern. Include no more than 3 suspicious words in phishing emails. The emails should not be easily identifiable as phishing, and the user should have to investigate the hover text, sender, subject, and body to find the clues. 
+                    Generate an email of type ${randomType} (Deceptive-Phishing, Clone-Phishing, Spear-Phishing, or Safe-Email). The email must be coherent, long, and follow a realistic pattern. Include no more than 3 suspicious words in phishing emails. The emails should not be easily identifiable as phishing, and the user should have to investigate the hover text, sender, subject, and body to find the clues.
 
                     ### **Email Structure:**
                     - **type**: The type of email (e.g., "Deceptive-Phishing", "Clone-Phishing", "Spear-Phishing", "Safe-Email").
@@ -72,9 +71,12 @@ app.post('/generate-phishing', async (req, res) => {
 
                     ### **Personalisation Rules:**
                     - If **firstName** is provided:
-                      - For **Spear-Phishing**: Address the user directly using their first name (e.g., "Hello, ${firstName},").
-                      - For **Safe Emails**: Use first name naturally (e.g., "Hi ${firstName},").
-                    - If no **firstName** is provided, use a generic greeting (e.g., "Dear Customer").
+                      - For **Spear-Phishing** and **Safe Emails**, **use the provided first name exactly as given** in \`${firstName}\`. Do not replace or modify it.
+                      - If no **firstName** is provided, use a generic greeting (e.g., "Dear Customer").
+
+                    ### **Phishing Email Differences:**
+                    - **Deceptive Phishing**: The email appears to be from a real company but has altered details. The sender’s name may look real, but the **email domain is fake** (e.g., "support@paypal-secure.com").
+                    - **Clone Phishing**: The email **closely mimics a real email** the user might have received before but contains **malicious changes**, such as altered links or attachments. The **email address has small changes** (e.g., "admin@paypa1.com" instead of "admin@paypal.com").
 
                     ### **Suspicious Words for Phishing Emails:**
                     Include a maximum of 3 suspicious words (misspelled or otherwise) from this list:
@@ -91,10 +93,9 @@ app.post('/generate-phishing', async (req, res) => {
                     }`
                 }
             ],
-            max_tokens: 500, // Increase token limit for longer emails
+            max_tokens: 500,
         });
 
-        // Ensure valid JSON response
         const email = JSON.parse(response.choices[0].message.content.trim());
         res.json(email);
     } catch (error) {
