@@ -9,8 +9,8 @@
 /* Main content layout */
 main {
     display: flex; 
-    justify-content: space-between; 
-    align-items: stretch; 
+    justify-content: center;
+    align-items: center;
     gap: 5%; /* Add some space between the two sections */
     padding: 5%;
     margin: 0 auto;
@@ -25,7 +25,6 @@ body {
 
 nav {
     display: flex;
-    padding: 1%;
     justify-content: center; 
     align-items: center; 
     background-color: #004c8c; 
@@ -35,22 +34,32 @@ nav {
 
 nav .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    padding: 0 20px; 
+    margin: 1%;
 }
 
 nav ul {
     list-style: none;
     display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
 }
 
 nav ul li {
-    margin-left: 20%;
+    margin: 0 30px; 
 }
 
 nav ul li a {
-    color: #fff;
+    color: white;
+    font-size: 1.3rem; 
     text-decoration: none;
+    font-weight: bold;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
 }
 
 nav ul li a:hover {
@@ -58,18 +67,20 @@ nav ul li a:hover {
 }
 
 .hero {
-    background: #004c8c;
     color: white;
-    padding: 10% 2%;
     text-align: center;
     width: 100%;
     border-radius: 1.5%; 
 }
 
 .hero-content {
-
-    margin: 0 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center the content */
+    align-items: center; /* Horizontally center the content */
     width: 100%;
+    text-align: center;
+    margin: 0 auto; /* Center it horizontally */
 }
 
 .hero-content h2 {
@@ -79,24 +90,27 @@ nav ul li a:hover {
 }
 
 .hero-content p {
+    font-weight: bold;
     width: 100%;
     margin: 2% 0;
-    font-size: 1.25rem; /* Adjust font size for readability */
+    font-size: 2rem; /* Adjust font size for readability */
 }
 
 .btn {
-    background-color: #ffda44;
-    color: #004c8c;
+    background-color: #004c8c;
+    color: #ffffff;
     padding: 1% 2%;
     text-decoration: none;
-    border-radius: 0.5%;
+    border-radius: 10px;
     transition: background-color 0.3s;
     display: inline-block;
     margin-top: 2%;
+    font-weight: bold;
+    font-size: 1.3rem;
 }
 
 .btn:hover {
-    background-color: #ffbb00;
+    background-color: #002e53;
 }
 
 footer {
@@ -129,7 +143,7 @@ footer {
 }
 
 .auth-form {
-    background-color: #0073e6;
+    background-color: #333;
     color: white;
 }
 
@@ -199,4 +213,37 @@ footer {
         background-position: 0 50%;
     }
 }
+
+
+.icon {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    width: 100%; 
+    margin: auto; 
+}
+
+.icon-img {
+    width: 600px; 
+    height: auto;
+}
+
+.terms {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+label a {
+    color: #0373cf; 
+    text-decoration: none; 
+    font-weight: bold; 
+    display: inline-block;
+    vertical-align: middle;
+}
+
+label a:hover {
+    color: #05508d; 
+    text-decoration: underline; 
+}
+
 

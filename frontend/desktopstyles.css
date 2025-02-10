@@ -1,3 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
 body, html {
     margin: 0;
     padding: 0;
@@ -52,7 +59,7 @@ body, html {
     right: 0;
     margin:20px;
     height: auto;
-    background-color: #004c8c;
+    background-color: #333;
     padding: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     display: inline-block;
@@ -292,7 +299,6 @@ h1 {
 
 /* Instructions styles */
 .instructions {
-
     font-size: medium;
     position: absolute;
     top: 50%;       
@@ -337,7 +343,7 @@ p {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    background-color: #007bff;
+    background-color: #0073e6;
     color: white;
     font-size: 14px;
     min-width: 100px; 
