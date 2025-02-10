@@ -217,7 +217,7 @@ footer {
 
 .icon {
     display: flex;
-    justify-content: center; /* Centers horizontally */
+    justify-content: center; 
     width: 100%; 
     margin: auto; 
 }
