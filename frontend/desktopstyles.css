@@ -40,17 +40,6 @@ body, html {
 
 
 
-/* Desktop Area */
-.desktop-area {
-    background-size: cover;
-    background-position: center;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
-}
 
 /*Progress Tracker*/
 .progress {
@@ -145,7 +134,7 @@ h1 {
     font-size: 14px;
     font-weight: bold;
     color: #fff; 
-    background-color: #0073e6;
+    background-color: #004c8c;
     padding: 5px 10px; 
     border-radius: 15px; 
     display: inline-block; 
@@ -343,7 +332,7 @@ p {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    background-color: #0073e6;
+    background-color: #004c8c;
     color: white;
     font-size: 14px;
     min-width: 100px; 
@@ -1121,17 +1110,30 @@ margin-left: 8px;
 }
 
 
+/* Desktop Area */
+.desktop-area {
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+}
 
 .GuardPoint-icon {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    height: auto;
-    width: auto; 
-    margin: auto; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .GuardPoint-icon-img {
     width: 600px; 
     height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
 }
