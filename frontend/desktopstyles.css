@@ -20,10 +20,7 @@ body, html {
     position: absolute; /* Position it at the back */
     height: 100vh;
     width: 100%;
-    background: linear-gradient(45deg, #d2001a, #7462ff, #f48e21, #23d5ab);
-
-
-
+    background: linear-gradient(45deg, #1e3a8a, #1463b8, #5193ff, #7e46e5);
     background-size: 300% 300%;
     animation: color 12s ease-in-out infinite;
     z-index: -2;
