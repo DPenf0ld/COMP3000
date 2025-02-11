@@ -6,15 +6,13 @@ export function profileInfo(){
     console.log("Loaded profile Info!")
     if (profileContainer.style.display === 'block') { //closes profile if open
         closeProfileFunction()
-    } else if (desktopArea.style.display != 'none') { //opens inbox only on desktop
-        desktopArea.style.display = 'none'; //hides desktop
+    } else {
         profileContainer.style.display = 'block' //shows profile
     }
 }
 
 export function closeProfileFunction(){
     profileContainer.style.display = 'none' //hides profile
-    desktopArea.style.display = 'flex'; //shows desktop
 }
 
 
