@@ -26,6 +26,8 @@ let instructionboxCreated = false;
 
 
 //const emailContentContainer = document.querySelector('.email-content');
+
+const profileContainer = document.getElementById('profile-container');
 const resetEmail = document.getElementById('reset-email');
 const firstName = localStorage.getItem('firstName');
 const desktopArea = document.getElementById('desktop-area');
@@ -274,6 +276,13 @@ export function confirmphishingFunction() {
     if (resetEmail.style.display === 'block') {
         resetEmail.style.display = 'none';
     }
+
+    //disable reset 
+    if (profileContainer.style.display === 'block') {
+        profileContainer.style.display = 'none' //hides profile
+    }
+
+
 
     unhideInstructionBox()
     markTaskIncomplete()

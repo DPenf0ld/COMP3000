@@ -13,6 +13,8 @@ let passwordtask2 = false;
 let passwordtask3 = false;
 let passwordStrengths = document.querySelectorAll('.password-strength')
 
+
+const profileContainer = document.getElementById('profile-container');
 const task2CheckButton = document.getElementById('Task2-Check');
 const desktopArea = document.getElementById('desktop-area');
 const instructionPasswordModel = document.getElementById('instructions-password'); // Instruction model
@@ -147,6 +149,12 @@ export function confirmpasswordFunction() {
     //disable reset 
     if (resetPassword.style.display === 'block') {
         resetPassword.style.display = 'none';
+    }
+
+    
+    //disable reset 
+    if (profileContainer.style.display === 'block') {
+        profileContainer.style.display = 'none' //hides profile
     }
 
 

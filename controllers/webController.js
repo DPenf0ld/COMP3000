@@ -10,6 +10,7 @@ let confirmClose = false;
 let instructionsConfirmed = false; //used to display example email instructions
 
 
+const profileContainer = document.getElementById('profile-container');
 const resetWeb = document.getElementById('reset-web');
 const desktopArea = document.getElementById('desktop-area');
 const webContainer = document.getElementById('web-container');
@@ -91,6 +92,12 @@ export function confirmwebFunction() {
     //disable reset 
     if (resetWeb.style.display === 'block') {
         resetWeb.style.display = 'none';
+    }
+    
+    
+    //disable reset 
+    if (profileContainer.style.display === 'block') {
+        profileContainer.style.display = 'none' //hides profile
     }
 
     markTaskIncomplete()
