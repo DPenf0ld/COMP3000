@@ -10,7 +10,7 @@ let confirmClose = false;
 let instructionsConfirmed = false; //used to display example email instructions
 
 
-
+const resetWeb = document.getElementById('reset-web');
 const desktopArea = document.getElementById('desktop-area');
 const webContainer = document.getElementById('web-container');
 const webInterface = document.getElementById('web-interface');
@@ -19,7 +19,7 @@ const responseContainer = document.getElementById('response-container');
 const leavetaskModel = document.getElementById('leave-web-task');
 const instructionModel = document.getElementById('instructions-web');
 
-export function resetWebFromDesktop(){
+export function resetWebFromDesktop() {
     leavetaskModel.style.display = 'flex'; //working
     desktopArea.classList.add('blurred'); // Apply the blur
 }
@@ -44,7 +44,7 @@ export function initialiseWeb() {
     document.getElementById("response-container").value = ""; //reset web search results
     responseContainer.textContent = '';
 
-    if (webtaskComplete ==false){
+    if (webtaskComplete == false) {
         instructionModel.style.display = 'flex'; //working
         webInterface.classList.add('blurred'); // Apply the blur
 
@@ -52,17 +52,17 @@ export function initialiseWeb() {
         document.querySelector("#web-task-1-status").textContent = "incomplete";
         document.querySelector("#web-task-1-status").classList.remove("complete");
         document.querySelector("#web-task-1-status").classList.add("incomplete");
-    
+
         webtask2 = false;
         document.querySelector("#web-task-2-status").textContent = "Incomplete";
         document.querySelector("#web-task-2-status").classList.remove("complete");
         document.querySelector("#web-task-2-status").classList.add("incomplete");
-    
+
         webtask3 = false;
         document.querySelector("#web-task-3-status").textContent = "incomplete";
         document.querySelector("#web-task-3-status").classList.remove("complete");
         document.querySelector("#web-task-3-status").classList.add("incomplete");
-    
+
         webComplete()
     }
 
@@ -86,6 +86,11 @@ export function confirmwebFunction() {
     const webIcon = document.querySelector("#progress-web img");
     if (webIcon) {
         webIcon.src = "assets/icons/web-icon.png";
+    }
+
+    //disable reset 
+    if (resetWeb.style.display === 'block') {
+        resetWeb.style.display = 'none';
     }
 
     markTaskIncomplete()
@@ -122,13 +127,18 @@ export async function askButtonFunction() {
     }
 }
 
-export function webPreviouslyComplete(){
+export function webPreviouslyComplete() {
     webtaskComplete = true;
-        // Update the icon to show the completed status
-        const webIcon = document.querySelector("#progress-web img");
-        if (webIcon) { //cannot find
-            webIcon.src = "assets/icons/web-tick-icon.png";
-        }
+    // Update the icon to show the completed status
+    const webIcon = document.querySelector("#progress-web img");
+    if (webIcon) { //cannot find
+        webIcon.src = "assets/icons/web-tick-icon.png";
+    }
+
+    //enable reset since task is complete
+    if (resetWeb.style.display === 'none') {
+        resetWeb.style.display = 'block'; 
+    }
 }
 
 
@@ -145,18 +155,18 @@ export function webComplete() {
 
 
     if (webtask2) {
-    // Update the task list status for Task 2
-    const webtask2Status = document.querySelector("#web-task-2-status");
-    webtask2Status.textContent = "Complete";
-    webtask2Status.classList.remove("incomplete");
-    webtask2Status.classList.add("complete");
+        // Update the task list status for Task 2
+        const webtask2Status = document.querySelector("#web-task-2-status");
+        webtask2Status.textContent = "Complete";
+        webtask2Status.classList.remove("incomplete");
+        webtask2Status.classList.add("complete");
     }
     if (webtask3) {
-    // Update the task list status for Task 3
-    const webtask3Status = document.querySelector("#web-task-3-status");
-    webtask3Status.textContent = "Complete";
-    webtask3Status.classList.remove("incomplete");
-    webtask3Status.classList.add("complete");
+        // Update the task list status for Task 3
+        const webtask3Status = document.querySelector("#web-task-3-status");
+        webtask3Status.textContent = "Complete";
+        webtask3Status.classList.remove("incomplete");
+        webtask3Status.classList.add("complete");
     }
 
     // Check if all tasks are complete
@@ -170,6 +180,11 @@ export function webComplete() {
             webIcon.src = "assets/icons/web-tick-icon.png";
         }
 
+        //enable reset since task is complete
+        if (resetWeb.style.display === 'none') {
+            resetWeb.style.display = 'block'; 
+        }
+
         // Add a message at the bottom for next steps
         const taskWebElement = document.querySelector(".Taskweb");
         taskWebElement.innerHTML += `
@@ -181,7 +196,7 @@ export function webComplete() {
         const taskWebElement = document.querySelector(".Taskweb");
         const nextStepsDiv = taskWebElement.querySelector(".next-steps");
         if (nextStepsDiv) {
-            nextStepsDiv.remove(); 
+            nextStepsDiv.remove();
         }
         console.log("Not all tasks are complete yet.");
     }
@@ -215,39 +230,39 @@ export function setWebOpen(value) {
 async function markTaskComplete(webtaskComplete) {
     const email = localStorage.getItem('userEmail'); // Get logged-in user's email
     if (!email) return; // Ensure user is logged in
-  
+
     const response = await fetch('/update-tasks', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, taskName: 'webtaskComplete', status: true }) // Send task name & status
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, taskName: 'webtaskComplete', status: true }) // Send task name & status
     });
-  
+
     if (response.ok) {
-      // Update local storage to reflect completed tasks
-      const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
-      tasks[webtaskComplete] = true;
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-  
-      console.log(`${webtaskComplete} marked as complete.`);
+        // Update local storage to reflect completed tasks
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+        tasks[webtaskComplete] = true;
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
+        console.log(`${webtaskComplete} marked as complete.`);
     }
 }
 
 async function markTaskIncomplete(webtaskComplete) {
     const email = localStorage.getItem('userEmail'); // Get logged-in user's email
     if (!email) return; // Ensure user is logged in
-  
+
     const response = await fetch('/update-tasks', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, taskName: 'webtaskComplete', status: false }) // Send task name & status
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, taskName: 'webtaskComplete', status: false }) // Send task name & status
     });
-  
+
     if (response.ok) {
-      // Update local storage to reflect completed tasks
-      const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
-      tasks[webtaskComplete] = false;
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-  
-      console.log(`${webtaskComplete} marked as incomplete.`);
+        // Update local storage to reflect completed tasks
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+        tasks[webtaskComplete] = false;
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
+        console.log(`${webtaskComplete} marked as incomplete.`);
     }
 }

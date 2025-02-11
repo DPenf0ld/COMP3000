@@ -26,6 +26,7 @@ let instructionboxCreated = false;
 
 
 //const emailContentContainer = document.querySelector('.email-content');
+const resetEmail = document.getElementById('reset-email');
 const firstName = localStorage.getItem('firstName');
 const desktopArea = document.getElementById('desktop-area');
 const inboxContainer = document.getElementById('inbox-container');
@@ -269,7 +270,10 @@ export function confirmphishingFunction() {
         emailIcon.src = "assets/icons/email-icon.png";
     }
 
-
+    //disable reset 
+    if (resetEmail.style.display === 'block') {
+        resetEmail.style.display = 'none';
+    }
 
     unhideInstructionBox()
     markTaskIncomplete()
@@ -364,6 +368,10 @@ export function emailComplete() {
             emailIcon.src = "assets/icons/email-tick-icon.png";
         }
 
+        //enable reset since task is complete
+        if (resetEmail.style.display === 'none') {
+            resetEmail.style.display = 'block';
+        }
         // Add a message at the bottom for next steps
         const taskElement = document.querySelector(".Taskemail");
         taskElement.innerHTML += `
@@ -565,21 +573,21 @@ export function exampleInstructions() {
 
 // ai generated email and add to email array
 export async function addGeneratedEmail() {
-    if (currentEmailIndex>=20){
+    if (currentEmailIndex >= 0) { //SET TO 0 FOR TESTING
         try {
             const response = await fetch('http://localhost:3000/generate-phishing', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ firstName: localStorage.getItem('firstName') })
             });
-    
+
             if (!response.ok) throw new Error('Failed to fetch generated email');
-    
+
             const generatedEmail = await response.json();
-    
+
             // Add the generated email to the array
             emails.push(generatedEmail);
-    
+
             console.log('Updated Emails Array:', emails);
         } catch (error) {
             console.error('Error adding generated email:', error);
@@ -590,8 +598,8 @@ export async function addGeneratedEmail() {
 
 // ai generated email and add to email array PRELOADED
 export async function preloademails() {
-    //pre load 20 emails
-    for (let i = 0; i < 20; i++) {
+    //pre load 20 emails SET TO 0 FOR TESTING
+    for (let i = 0; i < 0; i++) {
         try {
             const response = await fetch('http://localhost:3000/generate-phishing', {
                 method: 'POST',
@@ -782,6 +790,12 @@ export function emailPreviouslyComplete() {
     const emailIcon = document.querySelector("#progress-email img");
     if (emailIcon) { //cannot find
         emailIcon.src = "assets/icons/email-tick-icon.png";
+    }
+
+
+    //enable reset since task is complete
+    if (resetEmail.style.display === 'none') {
+        resetEmail.style.display = 'block';
     }
 }
 
