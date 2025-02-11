@@ -123,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Toggle inbox code
     function toggleInbox() {
+        profileContainer.style.display = 'none' //hides profile
         initialiseEmail();
         displayEmail();
         if (inboxContainer.style.display === 'block') { //closes inbox
@@ -177,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //toggle password code
     function togglePassword() {
+        profileContainer.style.display = 'none' //hides profile
         initialisePassword()
         if (passwordContainer.style.display === 'block') {
             closePassword()
@@ -220,6 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //toggle web task
     function toggleWeb() {
+        profileContainer.style.display = 'none' //hides profile
         if (webContainer.style.display === 'block') {
             closeWeb()
         } else if ((passwordopen != true && emailtaskComplete) || (emailopen != true && passwordtaskComplete) || (emailtaskComplete && passwordtaskComplete) || (emailopen != true && passwordopen != true)) {

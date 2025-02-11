@@ -13,6 +13,10 @@ export function profileInfo(){
 }
 
 export function closeProfileFunction(){
-    desktopArea.style.display = 'block'; //shows desktop
     profileContainer.style.display = 'none' //hides profile
+    desktopArea.style.display = 'flex'; //shows desktop
 }
+
+
+
+        
