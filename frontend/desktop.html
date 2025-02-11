@@ -10,7 +10,7 @@
 
 <body>
     <div class="animated-background"></div>
-    
+
     <!-- Desktop Area -->
     <div class="desktop-area" id="desktop-area">
         <!-- Icons on the desktop -->
@@ -39,24 +39,14 @@
                 <li class="progress-item" id="progress-email">
                     <img src="assets/icons/email-icon.png" alt="Email" class="taskbar-icon">
                     <p>Phishing Awareness</p>
-
-                </li>
-                <li>
-                    <button class="reset" id="reset-email">Reset Phishing Task</button>
                 </li>
                 <li class="progress-item" id="progress-password">
                     <img src="assets/icons/password-icon.png" alt="Password Tester" class="taskbar-icon">
                     <p>Password Tester</p>
                 </li>
-                <li>
-                    <button id="reset-password" class="reset">Reset Password Task</button>
-                </li>
                 <li class="progress-item" id="progress-web">
                     <img src="assets/icons/web-icon.png" alt="Browser" class="taskbar-icon">
                     <p>Safe Web Browsing</p>
-                </li>
-                <li>
-                    <button id="reset-web" class="reset">Reset Web Task</button>
                 </li>
             </ul>
 
@@ -205,7 +195,8 @@
                 <h2 id="page-title">Welcome to the Password Security Challenge!</h2>
                 <p id="page-content">
                     <!-- Manually load first info page -->
-                    This exercise will help you improve your skills in creating strong passwords while also ensuring your current passwords are not compromised.
+                    This exercise will help you improve your skills in creating strong passwords while also ensuring
+                    your current passwords are not compromised.
                 </p>
                 <div class="button-container">
                     <button id="prev-password-button" class="nav-button hidden">Previous</button>
@@ -219,8 +210,10 @@
         <div class="password-interface" id="password-interface">
             <div class="Pwned" id="Pwned">
                 <h2>Task 1: Check 5 Passwords against Data Breahces</h2>
-                <p>Enter a password you currently use and we will check if it has appeared in a data breach. Additionally, test various passwords of mixed complexity and test against data breaches.</p>
-                <p>🔒 Your password is never stored or shared—it is checked securely using the Have I Been Pwned database.</p>
+                <p>Enter a password you currently use and we will check if it has appeared in a data breach.
+                    Additionally, test various passwords of mixed complexity and test against data breaches.</p>
+                <p>🔒 Your password is never stored or shared—it is checked securely using the Have I Been Pwned
+                    database.</p>
                 <input type="password" id="passwordPWNED" placeholder="Enter your password">
                 <button id="checkButton" class="checkButton">Check</button>
                 <div class="ResultsPwn">
@@ -233,19 +226,20 @@
                 <div class="password-info">
                     <p>Now that you’ve checked an old password, it’s time to create a new, strong password.</p>
                     <p>🔒 Your password is never stored or shared</p>
-                
+
                     <h3>Password Requirements (NCSE Guidelines)</h3>
                     <ul>
                         <li>✅ Use at least <strong>three random words</strong> (e.g., “PurpleCactusPiano”).</li>
                         <li>✅ Make it at least <strong>12 characters long</strong>.</li>
                         <li>✅ Do <strong>not</strong> use <strong>dictionary words</strong> or predictable phrases.</li>
-                        <li>✅ Add a mix of <strong>uppercase, lowercase, numbers, and special characters</strong> for extra security.</li>
+                        <li>✅ Add a mix of <strong>uppercase, lowercase, numbers, and special characters</strong> for
+                            extra security.</li>
                         <li>✅ <strong>Avoid using passwords</strong> that have been previously breached.</li>
                     </ul>
                 </div>
                 <div class="StrengthTest">
                     <input type="password" id="password" placeholder="Enter your password">
-                
+
                     <div class="password-strength"></div>
                     <div class="password-strength"></div>
                     <div class="password-strength"></div>
@@ -269,8 +263,8 @@
                         id="task-1-status">Incomplete</span></li>
                 <li><strong>Task 2: Create a Secure Password</strong> <span class="status incomplete"
                         id="task-2-status">Incomplete</span></li>
-                <li><strong>Task 3: Check Your New Password Against Data Breaches</strong> <span class="status incomplete"
-                        id="task-3-status">Incomplete</span></li>
+                <li><strong>Task 3: Check Your New Password Against Data Breaches</strong> <span
+                        class="status incomplete" id="task-3-status">Incomplete</span></li>
             </ul>
         </div>
     </div>
@@ -325,7 +319,7 @@
                 <li><strong>Web3</strong> <span class="status incomplete" id="web-task-3-status">Incomplete</span></li>
             </ul>
         </div>
-        
+
     </div>
     <div id="leave-web-task" class="instructions" style="display: none;">
         <div class="instructions-content">
@@ -340,6 +334,49 @@
         </div>
     </div>
 
+
+
+    <!-- Profile (Hidden) -->
+    <div class="profile-container" id="profile-container" style="display: none;">
+        <button id="close-profile" aria-label="Close Profile">&times;</button> <!-- Close button -->
+        <ul class="Reset-list">
+            <li class="progress-item" id="progress-password">
+                <p>First Name: </p>
+                <div id="firstName"> FirstName</div>
+            </li>
+            <li class="progress-item" id="progress-password">
+                <p>Last Name: </p>
+                <div id="lastName"> LastName</div>
+            </li>
+            <li class="progress-item" id="progress-password">
+                <p>Email: </p>
+                <div id="Profile-email"> ProfileEmail</div>
+            </li>
+            <li class="progress-item" id="progress-password">
+                <p>Date of Birth: </p>
+                <div id="dob"> Dob</div>
+            </li>
+            <li class="progress-item">
+                <button class="reset progress-button" id="reset-email">
+                    <img src="assets/icons/email-icon.png" alt="Email" class="taskbar-icon">
+                    <span>Reset Phishing Task</span>
+                </button>
+            </li>
+            
+            <li class="progress-item">
+                <button class="reset progress-button" id="reset-password">
+                    <img src="assets/icons/password-icon.png" alt="Password Tester" class="taskbar-icon">
+                    <span>Reset Password Task</span>
+                </button>
+            </li>
+            <li class="progress-item">
+                <button class="reset progress-button" id="reset-web">
+                    <img src="assets/icons/web-icon.png" alt="Browser" class="taskbar-icon">
+                    <span>Reset Web Task</span>
+                </button>
+            </li>
+        </ul>
+    </div>
 
 
     <!-- Taskbar at the bottom -->

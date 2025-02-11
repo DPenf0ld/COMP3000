@@ -1,4 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
+import { closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
 import { webPreviouslyComplete, resetWebFromDesktop, initialiseWeb, confirmwebButtonFunction, webfirstOpenFunction, confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
@@ -19,6 +20,16 @@ document.addEventListener('DOMContentLoaded', function () {
     if (tasks.emailtaskComplete) {
         emailPreviouslyComplete() //email task
     }
+
+    //Profile
+    const profileInfoButton = document.getElementById('email');
+    profileInfoButton.addEventListener('click', profileInfo);
+
+    const profileContainer = document.getElementById('profile-container');
+
+
+    const closeProfile = document.getElementById('close-profile');
+    closeProfile.addEventListener('click', closeProfileFunction);
 
     //Email Icons
     const emailIconDesktop = document.getElementById('email-icon');
@@ -238,9 +249,37 @@ setInterval(updateClock, 1000);
 updateClock();
 
 const userEmail = localStorage.getItem('userEmail'); // Retrieve the email from localStorage
+const firstName = localStorage.getItem('firstName');
+const lastName = localStorage.getItem('lastName');
+const dob = localStorage.getItem('dob');
+
+
 if (userEmail) {
     const emailElement = document.getElementById('email');
     emailElement.innerText = userEmail; // Set the email to the div
+
+    const ProfileEmailElement = document.getElementById('Profile-email');
+    ProfileEmailElement.innerText = userEmail; // Set the email to the div
+
+    const ProfileFirstName = document.getElementById('firstName');
+    ProfileFirstName.innerText = firstName;
+
+    const ProfileLastName = document.getElementById('lastName');
+    ProfileLastName.innerText = lastName;
+
+
+
+    const ProfileDob = document.getElementById('dob');
+
+    if (dob) {
+        const formattedDob = new Date(dob).toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+
+        ProfileDob.innerText = formattedDob; // Display formatted date
+    }
 } else {
     console.log('User email not found');
 } 

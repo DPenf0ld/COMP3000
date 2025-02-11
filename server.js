@@ -128,6 +128,8 @@ app.post('/login', async (req, res) => {
 
   res.status(200).json({ 
     firstName: user.firstName, //retreives first name
+    lastName: user.lastName, 
+    dob: user.dob, 
     token,
     tasks: user.tasks || {},
   });
