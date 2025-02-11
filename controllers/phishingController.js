@@ -126,7 +126,7 @@ const pages = [
 
 
 export function initialiseEmail() {
-        instructionboxCreated = false,
+    instructionboxCreated = false,
         emailopen = false,
         correctCount = 0,
         missedCount = 0,
@@ -145,7 +145,7 @@ export function initialiseEmail() {
         currentPage = 0,
         confirmClose = false
 
-        prevButton.classList.add('hidden'); // Hide previous button on reset
+    prevButton.classList.add('hidden'); // Hide previous button on reset
     nextButton.classList.remove('hidden'); // Show next button on reset
     confirmButton.classList.add('hidden'); // Hide confirm button on reset
 
@@ -218,10 +218,10 @@ export function submitButtonFunction() {
 
         console.log(`Correct: ${correctCount}, Missed: ${missedCount}`);
 
-        
-            displaynextemailbutton = true;
-            nextemailbutton()
-        
+
+        displaynextemailbutton = true;
+        nextemailbutton()
+
     }
 
     if (correctCount == 3) {
@@ -391,7 +391,7 @@ export function nextemailbutton() {
     } else {
         nextEmailButton.style.display = 'none'; //disabling
         nextEmailButton.removeEventListener('click', showNextEmail);
-        submitButton.style.display = 'block'; 
+        submitButton.style.display = 'block';
     }
 }
 
@@ -478,7 +478,7 @@ export function exampleInstructions() {
 
         if (instructionBox) {
             console.log("Hiding Instructions and Resetting Slide count")
-            
+
             instructionBox.classList.add('hidden');
             currentSlide = 0;
             console.log(currentSlide)
@@ -565,25 +565,52 @@ export function exampleInstructions() {
 
 // ai generated email and add to email array
 export async function addGeneratedEmail() {
-    try {
-        const response = await fetch('http://localhost:3000/generate-phishing', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ firstName: localStorage.getItem('firstName') })
-        });
-
-        if (!response.ok) throw new Error('Failed to fetch generated email');
-
-        const generatedEmail = await response.json();
-
-        // Add the generated email to the array
-        emails.push(generatedEmail);
-
-        console.log('Updated Emails Array:', emails);
-    } catch (error) {
-        console.error('Error adding generated email:', error);
+    if (currentEmailIndex>=20){
+        try {
+            const response = await fetch('http://localhost:3000/generate-phishing', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ firstName: localStorage.getItem('firstName') })
+            });
+    
+            if (!response.ok) throw new Error('Failed to fetch generated email');
+    
+            const generatedEmail = await response.json();
+    
+            // Add the generated email to the array
+            emails.push(generatedEmail);
+    
+            console.log('Updated Emails Array:', emails);
+        } catch (error) {
+            console.error('Error adding generated email:', error);
+        }
     }
     displayEmail(currentEmailIndex);
+}
+
+// ai generated email and add to email array PRELOADED
+export async function preloademails() {
+    //pre load 20 emails
+    for (let i = 0; i < 20; i++) {
+        try {
+            const response = await fetch('http://localhost:3000/generate-phishing', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ firstName: localStorage.getItem('firstName') })
+            });
+
+            if (!response.ok) throw new Error('Failed to fetch generated email');
+
+            const generatedEmail = await response.json();
+
+            // Add the generated email to the array
+            emails.push(generatedEmail);
+
+            console.log('Updated Emails Array:', emails);
+        } catch (error) {
+            console.error('Error adding generated email:', error);
+        }
+    }
 }
 
 export function reminder() {
