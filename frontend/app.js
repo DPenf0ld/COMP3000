@@ -180,6 +180,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function togglePassword() {
         profileContainer.style.display = 'none' //hides profile
         initialisePassword()
+        console.log(emailopen)
+        console.log(emailtaskComplete)
         if (passwordContainer.style.display === 'block') {
             closePassword()
         } else if ((emailopen != true && webtaskComplete) || (webopen != true && emailtaskComplete) || (webtaskComplete && emailtaskComplete) || (webopen != true && emailopen != true)) {
