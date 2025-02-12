@@ -191,6 +191,20 @@ footer {
     background-color: #003d7a;
 }
 
+.auth-form select {
+    width: 100%;
+    padding: 1%;
+    margin-bottom: 2%;
+    border: 0.1% solid #ccc;
+    border-radius: 0.5%;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+}
+
+.auth-form select:hover {
+    border-color: #004c8c;
+}
 
 /*animated background*/
 
