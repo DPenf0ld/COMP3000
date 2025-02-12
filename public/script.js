@@ -54,7 +54,7 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ firstName, lastName, email, password, dob, organisation}),
+    body: JSON.stringify({ firstName, lastName, email, password, dob, organisation }),
   });
 
   const result = await response.text();
@@ -92,11 +92,16 @@ document.getElementById('login-form')?.addEventListener('submit', async (event) 
     localStorage.setItem('userEmail', email); // Store email in localStorage
     localStorage.setItem('tasks', JSON.stringify(result.tasks));
     localStorage.setItem('firstName', result.firstName); // Store first name
-    localStorage.setItem('lastName', result.lastName); 
-    localStorage.setItem('dob', result.dob); 
-    
-    alert('Login successful!');
-    window.location.href = 'desktop.html';
+    localStorage.setItem('lastName', result.lastName);
+    localStorage.setItem('dob', result.dob);
+
+
+    if (result.role === "admin") {
+      window.location.href = "admin.html"; // Redirect admins
+    } else {
+      alert('Login successful!');
+      window.location.href = 'desktop.html';
+    }
   } catch (error) {
     alert(error.message || 'Login failed');
   }
