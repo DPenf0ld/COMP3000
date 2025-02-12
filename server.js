@@ -109,10 +109,10 @@ app.post('/login', async (req, res) => {
   const db = client.db('GuardPoint');
   const usersCollection = db.collection('users');
 
+
   if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required' });
   }
-
 
   // Find user by email
   const user = await usersCollection.findOne({ email });
