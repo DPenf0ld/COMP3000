@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
         emailPreviouslyComplete() //email task
     }
 
+
     //Profile
     const profileInfoButton = document.getElementById('email');
     profileInfoButton.addEventListener('click', profileInfo);

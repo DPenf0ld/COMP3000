@@ -1,0 +1,8 @@
+Admin Login Information:
+FirstName: Admin
+LastName: Admin
+Email: Admin1@gmail.com
+Organisation: Test Group 1
+Password: Testing99#complete
+dob:22/02/2003
+role: admin
