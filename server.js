@@ -162,6 +162,32 @@ app.post('/update-tasks', async (req, res) => {
   }
 });
 
+app.post('/update-profile', async (req, res) => {
+  const { email, firstName, lastName, dob } = req.body;
+  
+  if (!email || !firstName || !lastName || !dob) {
+      return res.status(400).json({ message: 'All fields are required' });
+  }
+
+  const db = client.db('GuardPoint');
+  const usersCollection = db.collection('users');
+
+  try {
+      const updateResult = await usersCollection.updateOne(
+          { email },
+          { $set: { firstName, lastName, dob } }
+      );
+
+      if (updateResult.modifiedCount > 0) {
+          res.status(200).json({ message: 'Profile updated successfully' });
+      } else {
+          res.status(400).json({ message: 'No changes made or user not found' });
+      }
+  } catch (error) {
+      console.error('Error updating profile:', error);
+      res.status(500).json({ message: 'Server error' });
+  }
+});
 
 
 

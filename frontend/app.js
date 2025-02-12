@@ -1,5 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
-import { closeProfileFunction, profileInfo } from '../controllers/profileController.js';
+import { saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
 import { webPreviouslyComplete, resetWebFromDesktop, initialiseWeb, confirmwebButtonFunction, webfirstOpenFunction, confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
@@ -30,6 +30,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const closeProfile = document.getElementById('close-profile');
     closeProfile.addEventListener('click', closeProfileFunction);
+
+    const editProfile = document.getElementById('edit-profile-btn');
+    editProfile.addEventListener('click', editProfileFunction);
+
+    const saveProfile = document.getElementById('save-profile-btn');
+    saveProfile.addEventListener('click', saveProfileFunction);
 
     //Email Icons
     const emailIconDesktop = document.getElementById('email-icon');
