@@ -197,6 +197,39 @@ app.post('/update-profile', async (req, res) => {
   }
 });
 
+//FIX HERE
+app.get('/admin/users', async (req, res) => {
+  try {
+    // Extract the token from the Authorisation header
+    const token = req.headers['authorization']?.split(' ')[1]; 
+    if (!token) {
+      return res.status(403).json({ message: 'No token provided' });
+    }
+
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const db = client.db('GuardPoint');
+    const usersCollection = db.collection('users');
+
+    // Find admin's organisation
+    const admin = await usersCollection.findOne({ _id: new ObjectId(decoded.userId), role: 'admin' });
+
+    if (!admin) {
+      return res.status(403).json({ message: 'Access denied' });
+    }
+
+    // Get users from the same organisation
+    const users = await usersCollection.find(
+      { organisation: admin.organisation, role: 'user' },
+      { projection: { firstName: 1, lastName: 1, email: 1, tasks: 1 } }
+    ).toArray();
+
+    res.json(users);
+  } catch (error) {
+    console.error('Detailed error:', error); // Log detailed error
+    res.status(500).json({ message: 'Server error', error: error.message }); // Send error message in response
+  }
+});
 
 
 // Start the server

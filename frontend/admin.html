@@ -9,7 +9,27 @@
 </head>
 
 <body>
+
+
+
+    
     <div class="animated-background"></div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Tasks Completed</th>
+            </tr>
+        </thead>
+        <tbody id="user-table-body"></tbody>
+    </table>
+
+
+
+
+
     <!-- Desktop Area -->
     <div class="desktop-area" id="desktop-area">
         <div class="logoutRight">
@@ -20,7 +40,7 @@
             <img src="assets/icons/GuardPoint-Icon.png" alt="GuardPoint-Icon" class="GuardPoint-icon-img">
         </div>
         <div class="clock" id="clock"></div>
-    
+
     </div>
     <div id="admin-instructions-logout" class="instructions" style="display: none;">
         <div class="instructions-content">
@@ -32,7 +52,10 @@
         </div>
     </div>
 
+
+
     <!-- Link to external JS file -->
     <script type="module" src="admin.js"></script>
 </body>
+
 </html>
