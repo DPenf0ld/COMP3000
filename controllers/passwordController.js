@@ -313,6 +313,10 @@ export async function checkButtonFunction() {
         console.error(error);
     }
 
+    document.getElementById('passwordPWNED').value = "";
+
+
+
 }
 
 export async function check2Function() {
