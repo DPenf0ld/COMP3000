@@ -9,6 +9,7 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
   const password = document.getElementById('password').value;
   const confirmPassword = document.getElementById('confirmPassword').value;
   const dob = document.getElementById('dob').value;
+  const organisation = document.getElementById('organisation').value;
 
   //disables going back (stops user logging back in without credentials)
   window.history.pushState(null, "", window.location.href);
@@ -42,13 +43,18 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
     return;
   }
 
+  if (!organisation) {
+    alert('Please select an organisation.');
+    return;
+  }
+
   // Send signup request to server
   const response = await fetch('/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ firstName, lastName, email, password, dob }),
+    body: JSON.stringify({ firstName, lastName, email, password, dob, organisation}),
   });
 
   const result = await response.text();

@@ -37,10 +37,10 @@ async function connectToMongo() {
 
 // Routes
 app.post('/signup', async (req, res) => {
-  const { firstName, lastName, email, password, dob } = req.body;
+  const { firstName, lastName, email, password, dob, organisation } = req.body;
 
   // Validate input
-  if (!firstName || !lastName || !email || !password || !dob) {
+  if (!firstName || !lastName || !email || !password || !dob || !organisation) {
     return res.status(400).send('All fields are required');
   }
 
@@ -60,6 +60,10 @@ app.post('/signup', async (req, res) => {
   const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d)[A-Za-z\d!@#$%^&*]{5,}$/;
   if (!passwordPattern.test(password)) {
     return res.status(400).send('Password must contain a capital letter, a number, a special character, and be at least 5 characters long');
+  }
+
+  if (!organisation) {
+    return res.status(400).send('Organisation is required');
   }
 
   const db = client.db('GuardPoint');
@@ -82,6 +86,7 @@ app.post('/signup', async (req, res) => {
     email,
     password: hashedPassword,
     dob: userDob.toISOString(), // Save DOB in ISO string format
+    organisation,
     tasks: {
       passwordtaskComplete: false,
       webtaskComplete: false,
