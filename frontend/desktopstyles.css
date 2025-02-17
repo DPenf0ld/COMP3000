@@ -1209,3 +1209,16 @@ margin-left: 8px;
     color: #e0e0e0; /* hover colour */
     cursor: pointer; 
 }
+
+.profile-info input{
+    width: 100%;
+    padding: 1%;
+    margin-bottom: 5px;
+    border: 0.1% solid #ccc;
+    border-radius: 0.5%;
+}
+
+.profile-info p{
+    margin-bottom: 10px;
+}
+

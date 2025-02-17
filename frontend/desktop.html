@@ -342,12 +342,12 @@
         <li class="profile-info" id="progress-password">
             <p>First Name: </p>
             <div id="firstName"> FirstName</div>
-            <input type="text" id="edit-firstName" style="display: none;" />
+            <input type="text" id="edit-firstName" placeholder="Type your first name" required style="display: none;" />
         </li>
         <li class="profile-info" id="progress-password">
             <p>Last Name: </p>
             <div id="lastName"> LastName</div>
-            <input type="text" id="edit-lastName" style="display: none;" />
+            <input type="text" id="edit-lastName" placeholder="Type your last name" required style="display: none;" />
         </li>
         <li class="profile-info" id="progress-password">
             <p>Date of Birth: </p>
@@ -361,6 +361,7 @@
 
         <button id="edit-profile-btn" class="reset progress-button">Edit Profile</button>
         <button id="save-profile-btn" class="reset progress-button" style="display: none;">Save Changes</button>
+        <button id="cancel-profile-btn" class="reset progress-button" style="display: none;">Cancel</button>
         <ul class="Reset-list">
             <li class="progress-item">
                 <button class="reset progress-button" id="reset-email" style="display: none;">

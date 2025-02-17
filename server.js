@@ -65,7 +65,7 @@ app.post('/signup', async (req, res) => {
   if (!organisation) {
     return res.status(400).send('Organisation is required');
   }
-
+ 
   const db = client.db('GuardPoint');
   const usersCollection = db.collection('users');
 

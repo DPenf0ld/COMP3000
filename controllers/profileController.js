@@ -11,11 +11,33 @@ export function profileInfo(){
     }
 }
 
+export function cancelProfileFunction(){
+    document.getElementById('edit-profile-btn').style.display = 'block';
+    document.getElementById('save-profile-btn').style.display = 'none';
+
+    document.getElementById('firstName').style.display = 'block';
+    document.getElementById('edit-firstName').style.display = 'none';
+    document.getElementById('edit-firstName').value = localStorage.getItem('firstName') || '';
+
+    document.getElementById('lastName').style.display = 'block';
+    document.getElementById('edit-lastName').style.display = 'none';
+    document.getElementById('edit-lastName').value = localStorage.getItem('lastName') || '';
+
+    document.getElementById('dob').style.display = 'block';
+    document.getElementById('edit-dob').style.display = 'none';
+    document.getElementById('edit-dob').value = localStorage.getItem('dob') || '';
+
+    document.getElementById('cancel-profile-btn').style.display = 'none'; //disable
+}
+
 export function closeProfileFunction(){
     profileContainer.style.display = 'none' //hides profile
+    cancelProfileFunction()
 }
 
 export function editProfileFunction(){
+    document.getElementById('cancel-profile-btn').style.display = 'block';
+
     document.getElementById('edit-profile-btn').style.display = 'none';
     document.getElementById('save-profile-btn').style.display = 'block';
 
