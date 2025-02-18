@@ -27,20 +27,48 @@ app.post('/generate-answer', async (req, res) => {
             store: true,
             messages: [
                 {
+                    
                     role: 'user',
-                    content: `I want you to provide search results from this input '${userMessage}'. Your result needs to simulate the internet, include headers and a small paragraph per one. Only include 3 fake websites. Do not add any extra feedback and do not number the sites.`
+                    content: `I want you to generate six search results for the query: '${userMessage}'.
+                    
+                    - Provide **six results**: 
+                      - Three should be **legitimate** websites.
+                      - Three should be **malicious** scam/phishing websites.
+                    
+                    - Format the response as a **JSON array** with objects structured like this:
+                      {
+                        "title": "Website Name",
+                        "url": "https://example.com",
+                        "description": "A short description of what the site offers.",
+                        "isSafe": true  // or false for malicious sites
+                      }
+                    
+                    - For **malicious sites**, make them appear suspicious by:
+                      - Using **HTTP instead of HTTPS**.
+                      - Slightly misspelling well-known brand names (e.g., "PaypaI.com" instead of "Paypal.com").
+                      - Making exaggerated claims (e.g., "Win a Free iPhone! Click Now").
+                      - Using domains like ".xyz", ".info", ".top".
+                    
+                    - Return ONLY the JSON array. Do NOT include any extra text or explanations.`
+               
                 },
             ],
-            max_tokens: 100
-
+            max_tokens: 500
         });
-        // Send the answer back to the client
-        res.json({ answer: response.choices[0].message.content });
+
+        // turn into json (if needed)
+        const searchResults = JSON.parse(response.choices[0].message.content);
+
+        // Send array back 
+        res.json({ answer: searchResults });
+
+
     } catch (error) {
         console.error('Error generating answer:', error);
         res.status(500).json({ error: 'Failed to generate answer' });
     }
 });
+
 
 // Generating phishing email
 app.post('/generate-phishing', async (req, res) => {

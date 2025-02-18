@@ -1222,3 +1222,18 @@ margin-left: 8px;
     margin-bottom: 10px;
 }
 
+.search-title {
+    color: lightblue; 
+    text-decoration: underline;
+    cursor: pointer; 
+}
+
+.search-url {
+    color: grey;
+    font-style: italic; 
+}
+
+.search-description {
+    color: grey;
+    font-size: 0.9em; 
+}

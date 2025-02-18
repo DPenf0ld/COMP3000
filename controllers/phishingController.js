@@ -580,6 +580,7 @@ export function exampleInstructions() {
 
 }
 
+
 // ai generated email and add to email array
 export async function addGeneratedEmail() {
     if (currentEmailIndex >= 0) { //SET TO 0 FOR TESTING

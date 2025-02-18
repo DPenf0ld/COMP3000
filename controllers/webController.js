@@ -20,6 +20,9 @@ const responseContainer = document.getElementById('response-container');
 const leavetaskModel = document.getElementById('leave-web-task');
 const instructionModel = document.getElementById('instructions-web');
 
+// empty array for searches 
+let searches = [];
+
 export function resetWebFromDesktop() {
     leavetaskModel.style.display = 'flex'; //working
     desktopArea.classList.add('blurred'); // Apply the blur
@@ -93,8 +96,8 @@ export function confirmwebFunction() {
     if (resetWeb.style.display === 'block') {
         resetWeb.style.display = 'none';
     }
-    
-    
+
+
     //disable reset 
     if (profileContainer.style.display === 'block') {
         profileContainer.style.display = 'none' //hides profile
@@ -105,8 +108,9 @@ export function confirmwebFunction() {
     closeWeb()
 }
 
+
 export async function askButtonFunction() {
-    const question = userInput.value.trim();
+    const question = userInput.value.trim(); //stores question
     if (!question) {
         responseContainer.textContent = 'Please enter a question.';
         return;
@@ -127,12 +131,50 @@ export async function askButtonFunction() {
         }
 
         const data = await response.json();
-        responseContainer.textContent = data.answer; // Display the OpenAI response
+        searches.push(...data.answer);  //triple dot allows each element to individually be added to the array
+        // Display the results
+        displaySearchResults();
+        searches = [];  //reset after displaying
+
     } catch (error) {
         console.error('Error:', error);
         responseContainer.textContent = 'Error generating response. Please try again.';
     }
 }
+
+
+function displaySearchResults() {
+    // Clear previous search
+    responseContainer.innerHTML = '';
+
+    for (let i = 0; i < searches.length; i++) {
+        const search = searches[i];
+        const searchItem = document.createElement('div');
+        searchItem.classList.add('search-result');
+
+        // Create title
+        const title = document.createElement('h2');
+        title.textContent = search.title;
+        title.classList.add('search-title');
+
+        //create url
+        const url = document.createElement('h3');
+        url.textContent = search.url;
+        url.classList.add('search-url');
+
+        // Create description
+        const description = document.createElement('p');
+        description.textContent = search.description;
+        description.classList.add('search-description');
+
+        searchItem.appendChild(title);
+        searchItem.appendChild(url);
+        searchItem.appendChild(description);
+
+        responseContainer.appendChild(searchItem);
+    }
+}
+
 
 export function webPreviouslyComplete() {
     webtaskComplete = true;
@@ -144,7 +186,7 @@ export function webPreviouslyComplete() {
 
     //enable reset since task is complete
     if (resetWeb.style.display === 'none') {
-        resetWeb.style.display = 'block'; 
+        resetWeb.style.display = 'block';
     }
 }
 
@@ -189,7 +231,7 @@ export function webComplete() {
 
         //enable reset since task is complete
         if (resetWeb.style.display === 'none') {
-            resetWeb.style.display = 'block'; 
+            resetWeb.style.display = 'block';
         }
 
         // Add a message at the bottom for next steps
