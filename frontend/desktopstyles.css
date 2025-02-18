@@ -1226,6 +1226,7 @@ margin-left: 8px;
     color: lightblue; 
     text-decoration: underline;
     cursor: pointer; 
+    margin-bottom: 0%;
 }
 
 .search-url {
