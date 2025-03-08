@@ -1,4 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
+import { QuizFunction} from '../controllers/quizController.js';
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
@@ -20,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (tasks.emailtaskComplete) {
         emailPreviouslyComplete() //email task
     }
-
 
     //Profile
     const profileInfoButton = document.getElementById('email');
@@ -130,6 +130,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const submitButton = document.getElementById('submit-highlight');
     submitButton.addEventListener('click', submitButtonFunction);
+
+    // Quiz code
+    const QuizButton = document.getElementById('Quiz');
+    QuizButton.addEventListener('click', toggleQuiz);
+
+    const quizContainer = document.getElementById('quiz-container');
+
+    let test1 = true;
+    function toggleQuiz() {
+        profileContainer.style.display = 'none' //hides profile
+        if (quizContainer.style.display === 'block') { //closes quiz
+            quizContainer.style.display === 'none'
+        } else if (test1) { //make sure everything else is complete
+            //close everything
+            inboxContainer.style.display = 'none';
+            passwordContainer.style.display = 'none';
+            webContainer.style.display = 'none';
+            desktopArea.style.display = 'none';
+
+            //show quiz
+            quizContainer.style.display === 'block'
+        }
+    }
 
     // Toggle inbox code
     function toggleInbox() {
