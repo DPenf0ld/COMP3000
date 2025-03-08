@@ -1,5 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
-import { QuizFunction} from '../controllers/quizController.js';
+import { closeQuizFunction, backquizFunction, confirmquizFunction} from '../controllers/quizController.js';
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
@@ -135,7 +135,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const QuizButton = document.getElementById('Quiz');
     QuizButton.addEventListener('click', toggleQuiz);
 
+    const CloseQuiz = document.getElementById('close-quiz');
+    CloseQuiz.addEventListener('click', closeQuizFunction);
+
     const quizContainer = document.getElementById('quiz-container');
+
+    const backquizbutton = document.getElementById('backquiz-button');
+    backquizbutton.addEventListener('click', backquizFunction);
+
+    const confirmquizbutton = document.getElementById('confirmquiz-button');
+    confirmquizbutton.addEventListener('click', confirmquizFunction);
 
     let test1 = true;
     function toggleQuiz() {
@@ -185,8 +194,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const backpasswordbutton = document.getElementById('backpassword-button');
     backpasswordbutton.addEventListener('click', backpasswordFunction);
-
-
 
     const confirmpasswordbutton = document.getElementById('confirmpassword-button');
     confirmpasswordbutton.addEventListener('click', confirmpasswordFunction);
