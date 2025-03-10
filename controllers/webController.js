@@ -151,6 +151,21 @@ function displaySearchResults() {
         const search = searches[i];
         const searchItem = document.createElement('div');
         searchItem.classList.add('search-result');
+        searchItem.setAttribute('data-isSafe', search.isSafe); //use to check if the user is correct or not
+
+
+        searchItem.addEventListener('click', function () {
+            const isSafe = searchItem.getAttribute('data-isSafe') === 'true'; // Get 'isSafe' value
+
+            
+            if (isSafe) {
+                searchItem.style.backgroundColor = 'green';  // green if safe
+            } else {
+                searchItem.style.backgroundColor = 'red';    // red if unsafe
+            }
+
+            searchItem.style.pointerEvents = 'none';  // Disable pointer once clicked
+        });
 
         // Create title
         const title = document.createElement('h2');
