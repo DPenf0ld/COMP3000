@@ -132,6 +132,12 @@ document.addEventListener('DOMContentLoaded', function () {
     submitButton.addEventListener('click', submitButtonFunction);
 
     // Quiz code
+    const QuizIcon = document.getElementById('quiz-icon');
+    QuizIcon.addEventListener('click', toggleQuiz);
+
+    const QuizTaskbar = document.getElementById('taskbar-quiz');
+    QuizTaskbar.addEventListener('click', toggleQuiz);
+
     const QuizButton = document.getElementById('Quiz');
     QuizButton.addEventListener('click', toggleQuiz);
 
@@ -150,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function toggleQuiz() {
         profileContainer.style.display = 'none' //hides profile
         if (quizContainer.style.display === 'block') { //closes quiz
-            quizContainer.style.display = 'none'
+            closeQuizFunction()
         } else if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
             //close everything
             inboxContainer.style.display = 'none';
