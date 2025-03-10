@@ -10,6 +10,7 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
   const confirmPassword = document.getElementById('confirmPassword').value;
   const dob = document.getElementById('dob').value;
   const organisation = document.getElementById('organisation').value;
+  const signupError = document.querySelector('.signup-error');
 
   //disables going back (stops user logging back in without credentials)
   window.history.pushState(null, "", window.location.href);
@@ -20,31 +21,31 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
   // Validate email
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailPattern.test(email)) {
-    alert('Please enter a valid email address.');
+    signupError.innerHTML = `<p class="error">Please enter a valid email address.</p>`; // Show error message
     return;
   }
 
   // Validate password
   const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d)[A-Za-z\d!@#$%^&*]{12,}$/;
   if (!passwordPattern.test(password)) {
-    alert('Password must be at least 12 characters long, contain a capital letter, a number, and a special character.');
+    signupError.innerHTML = `<p class="error">Password must be at least 12 characters long, contain a capital letter, a number, and a special character.</p>`; // Show error message
     return;
   }
 
   // Check if passwords match
   if (password !== confirmPassword) {
-    alert('Passwords do not match.');
+    signupError.innerHTML = `<p class="error">Passwords do not match.</p>`; // Show error message
     return;
   }
 
   // Validate date of birth
   if (!dob) {
-    alert('Date of birth is required.');
+    signupError.innerHTML = `<p class="error">Date of birth is required.</p>`; // Show error message
     return;
   }
 
   if (!organisation) {
-    alert('Please select an organisation.');
+    signupError.innerHTML = `<p class="error">Please select an organisation.</p>`; // Show error message
     return;
   }
 
@@ -59,10 +60,12 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
 
   const result = await response.text();
   if (response.status === 201) {
-    alert('Signup successful!');
-    window.location.href = 'login.html'; // Redirect to login page
+    signupError.innerHTML = '<p class="success">Signup successful!</p>';
+    setTimeout(() => {
+      window.location.href = 'login.html'; // Redirect to login page
+    }, 2000); // Redirect after 2 seconds to read successful sign up
   } else {
-    alert(result); // Show error message
+    signupError.innerHTML = `<p class="error">${result}</p>`; // Show error message
   }
 });
 

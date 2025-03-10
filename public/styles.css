@@ -8,13 +8,14 @@
 
 /* Main content layout */
 main {
-    display: flex; 
+    display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5%; /* Add some space between the two sections */
-    padding: 5%;
+    gap: 5%;
+    /* Add some space between the two sections */
+    padding: 2% 5%;
     margin: 0 auto;
-    max-width: 80%; 
+    max-width: 80%;
     height: 80%;
 }
 
@@ -25,18 +26,20 @@ body {
 
 nav {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    background-color: #333; 
-    color: white; /* Text color */
-    text-align: center; /* Center-align text inside */
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    /* Text color */
+    text-align: center;
+    /* Center-align text inside */
 }
 
 nav .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 20px; 
+    padding: 0 20px;
     margin: 1%;
 }
 
@@ -49,12 +52,12 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 30px; 
+    margin: 0 30px;
 }
 
 nav ul li a {
     color: white;
-    font-size: 1.3rem; 
+    font-size: 1.3rem;
     text-decoration: none;
     font-weight: bold;
     justify-content: center;
@@ -70,17 +73,20 @@ nav ul li a:hover {
     color: white;
     text-align: center;
     width: 100%;
-    border-radius: 1.5%; 
+    border-radius: 1.5%;
 }
 
 .hero-content {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Vertically center the content */
-    align-items: center; /* Horizontally center the content */
+    justify-content: center;
+    /* Vertically center the content */
+    align-items: center;
+    /* Horizontally center the content */
     width: 100%;
     text-align: center;
-    margin: 0 auto; /* Center it horizontally */
+    margin: 0 auto;
+    /* Center it horizontally */
 }
 
 .hero-content h2 {
@@ -93,7 +99,8 @@ nav ul li a:hover {
     font-weight: bold;
     width: 100%;
     margin: 2% 0;
-    font-size: 2rem; /* Adjust font size for readability */
+    font-size: 2rem;
+    /* Adjust font size for readability */
 }
 
 .btn {
@@ -114,10 +121,10 @@ nav ul li a:hover {
 }
 
 footer {
-    position: fixed; 
-    bottom: 0;     
-    left: 0;       
-    width: 100%;    
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     background-color: #333;
     color: white;
     text-align: center;
@@ -125,10 +132,10 @@ footer {
     margin-bottom: 1%;
 }
 
-/* keeping same properties*/
+/*  same properties*/
 .common-box {
     height: auto;
-    width: 45%; /* Same width for both */
+    width: 45%;
     padding: 4%;
     border-radius: 0.8%;
     box-shadow: 0 0.4% 0.6% rgba(0, 0, 0, 0.1);
@@ -150,7 +157,8 @@ footer {
 }
 
 .form-container {
-    flex: 1; /* Allow form to grow and fill space */
+    flex: 1;
+    /* Allow form to grow and fill space */
 }
 
 .auth-form h2 {
@@ -208,7 +216,8 @@ footer {
 /*animated background*/
 
 .animated-background {
-    position: absolute; /* Position it at the back */
+    position: absolute;
+    /* Position it at the back */
     height: 100vh;
     width: 100%;
     background: linear-gradient(45deg, #1e3a8a, #1463b8, #5193ff, #7e46e5);
@@ -221,9 +230,11 @@ footer {
     0% {
         background-position: 0 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0 50%;
     }
@@ -232,14 +243,27 @@ footer {
 
 .icon {
     display: flex;
-    justify-content: center; 
-    width: 100%; 
-    margin: auto; 
+    justify-content: center;
+    width: 100%;
+    margin: auto;
 }
 
 .icon-img {
     border-radius: 20px;
-    width: 600px; 
+    width: 600px;
+    height: auto;
+}
+
+.login-img {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+}
+
+.login-img {
+    border-radius: 20px;
+    width: 500px;
     height: auto;
 }
 
@@ -250,16 +274,29 @@ footer {
 }
 
 label a {
-    color: #0373cf; 
-    text-decoration: none; 
-    font-weight: bold; 
+    color: #0373cf;
+    text-decoration: none;
+    font-weight: bold;
     display: inline-block;
     vertical-align: middle;
 }
 
 label a:hover {
-    color: #05508d; 
-    text-decoration: underline; 
+    color: #05508d;
+    text-decoration: underline;
 }
 
+/*signup errors*/
+.signup-error {
+    margin-top: 5%;
+}
 
+.success {
+    color: green;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
