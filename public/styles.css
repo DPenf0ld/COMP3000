@@ -286,8 +286,12 @@ label a:hover {
     text-decoration: underline;
 }
 
-/*signup errors*/
+/*signup and login errors*/
 .signup-error {
+    margin-top: 5%;
+}
+
+.login-error {
     margin-top: 5%;
 }
 

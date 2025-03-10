@@ -72,6 +72,7 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
 
 document.getElementById('login-form')?.addEventListener('submit', async (event) => {
   event.preventDefault();
+  const loginError = document.querySelector('.login-error');
 
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
@@ -102,11 +103,13 @@ document.getElementById('login-form')?.addEventListener('submit', async (event) 
     if (result.role === "admin") {
       window.location.href = "admin.html"; // Redirect admins
     } else {
-      alert('Login successful!');
-      window.location.href = 'desktop.html';
+      loginError.innerHTML = '<p class="success">Login successful!</p>';
+      setTimeout(() => {
+        window.location.href = 'desktop.html'; // Redirect to desktop
+      }, 2000); // Redirect after 2 seconds to read successful sign in
     }
   } catch (error) {
-    alert(error.message || 'Login failed');
+    loginError.innerHTML = `<p class="error">${error.message || 'Login failed'}</p>`;
   }
 });
 
