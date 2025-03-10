@@ -150,8 +150,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function toggleQuiz() {
         profileContainer.style.display = 'none' //hides profile
         if (quizContainer.style.display === 'block') { //closes quiz
-            quizContainer.style.display === 'none'
-        } else if (test1) { //make sure everything else is complete
+            quizContainer.style.display = 'none'
+        } else if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
             //close everything
             inboxContainer.style.display = 'none';
             passwordContainer.style.display = 'none';
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
             desktopArea.style.display = 'none';
 
             //show quiz
-            quizContainer.style.display === 'block'
+            quizContainer.style.display = 'block'
         }
     }
 
