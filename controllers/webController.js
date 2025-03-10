@@ -153,20 +153,6 @@ function displaySearchResults() {
         searchItem.classList.add('search-result');
         searchItem.setAttribute('data-isSafe', search.isSafe); //use to check if the user is correct or not
 
-
-        searchItem.addEventListener('click', function () {
-            const isSafe = searchItem.getAttribute('data-isSafe') === 'true'; // Get 'isSafe' value
-
-            
-            if (isSafe) {
-                searchItem.style.backgroundColor = 'green';  // green if safe
-            } else {
-                searchItem.style.backgroundColor = 'red';    // red if unsafe
-            }
-
-            searchItem.style.pointerEvents = 'none';  // Disable pointer once clicked
-        });
-
         // Create title
         const title = document.createElement('h2');
         title.textContent = search.title;
@@ -182,9 +168,35 @@ function displaySearchResults() {
         description.textContent = search.description;
         description.classList.add('search-description');
 
+        // Create Feedback
+        const feedback = document.createElement('p');
+        feedback.textContent = search.feedback;
+        feedback.classList.add('search-feedback');
+        feedback.style.display = 'none'; // hide feedback
+
+        // Add click event listener to reveal feedback
+        searchItem.addEventListener('click', function () {
+            const isSafe = searchItem.getAttribute('data-isSafe') === 'true'; // Get 'isSafe' value
+
+            // Change background color based on safety
+            if (isSafe) {
+                searchItem.style.backgroundColor = '#66CDAA';  // Green if safe
+            } else {
+                searchItem.style.backgroundColor = '#FF6F6F';    // Red if unsafe
+            }
+
+            // Show feedback after clicking
+            feedback.style.display = 'block';  // Show feedback
+
+            searchItem.style.pointerEvents = 'none';  // Disable pointer once clicked
+        });
+
+
+
         searchItem.appendChild(title);
         searchItem.appendChild(url);
         searchItem.appendChild(description);
+        searchItem.appendChild(feedback);
 
         responseContainer.appendChild(searchItem);
     }

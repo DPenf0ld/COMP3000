@@ -32,8 +32,11 @@ app.post('/generate-answer', async (req, res) => {
                     content: `I want you to generate six search results for the query: '${userMessage}'.
                     
                     - Provide **six results**: 
+                      - Produce a total of 6 Results
                       - Three should be **legitimate** websites.
                       - Three should be **malicious** scam/phishing websites.
+                      - Put these 6 websites in a random order
+                     
                     
                     - Format the response as a **JSON array** with objects structured like this:
                       {
@@ -41,6 +44,7 @@ app.post('/generate-answer', async (req, res) => {
                         "url": "https://example.com",
                         "description": "A short description of what the site offers.",
                         "isSafe": true  // or false for malicious sites
+                        "feedback": Explain why the information is safe or not
                       }
                     
                     - For **malicious sites**, make them appear suspicious by:
