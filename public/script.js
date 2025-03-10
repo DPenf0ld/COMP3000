@@ -63,7 +63,7 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
     signupError.innerHTML = '<p class="success">Signup successful!</p>';
     setTimeout(() => {
       window.location.href = 'login.html'; // Redirect to login page
-    }, 2000); // Redirect after 2 seconds to read successful sign up
+    }, 500); // Delay to read successful sign up
   } else {
     signupError.innerHTML = `<p class="error">${result}</p>`; // Show error message
   }
@@ -106,7 +106,7 @@ document.getElementById('login-form')?.addEventListener('submit', async (event) 
       loginError.innerHTML = '<p class="success">Login successful!</p>';
       setTimeout(() => {
         window.location.href = 'desktop.html'; // Redirect to desktop
-      }, 2000); // Redirect after 2 seconds to read successful sign in
+      }, 500); // delay to read successful sign in
     }
   } catch (error) {
     loginError.innerHTML = `<p class="error">${error.message || 'Login failed'}</p>`;
