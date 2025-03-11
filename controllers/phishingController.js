@@ -250,9 +250,6 @@ export function backphishingFunction() {
     document.getElementById("reminder").disabled = false;
     document.getElementById("prev-slide").disabled = false;
     document.getElementById("next-slide").disabled = false;
-    document.getElementById('next-button').disabled = false;
-    document.getElementById('confirm-button').disabled = false;
-    document.getElementById('prev-button').disabled = false;
     document.getElementById('submit-highlight').disabled = false;
 }
 
@@ -260,13 +257,16 @@ export function backphishingFunction() {
 
 export function confirmphishingFunction() {
     document.getElementById("reminder").disabled = false;
-    document.getElementById("prev-slide").disabled = false;
-    document.getElementById("next-slide").disabled = false;
+    if (instructionboxCreated) {
+        document.getElementById("prev-slide").disabled = false; //error since element gets deleted
+        document.getElementById("next-slide").disabled = false; //error since element gets deleted
+    }
+
     document.getElementById('next-button').disabled = false;
     document.getElementById('confirm-button').disabled = false;
     document.getElementById('prev-button').disabled = false;
     document.getElementById('submit-highlight').disabled = false;
-    
+
     inboxContainer.classList.remove('blurred'); // remove the blur
     confirmClose = true;
     emailopen = false;
@@ -424,7 +424,13 @@ export function resetEmailFromDesktop() {
     desktopArea.classList.add('blurred'); // Apply the blur
 }
 
-
+function removeInstructions() {
+    const instructionBox = document.querySelector('.instruction-box');
+    if (instructionBox) {
+        instructionBox.remove();
+        instructionboxCreated = false;
+    }
+}
 
 
 
@@ -473,16 +479,11 @@ export function exampleInstructions() {
     let instructionBox = document.querySelector('.instruction-box'); // Declare outside
 
     if (!instructionboxCreated) {
-        if (instructionBox) {
-            console.log("Unhiding Instructions")
-            console.log(currentSlide)
-            instructionBox.classList.remove('hidden');
-        } else {
-            console.log("Creating Instructions for first time")
-            console.log(currentSlide)
-            instructionBox = document.createElement('div');
-            instructionBox.className = 'instruction-box';
-            instructionBox.innerHTML = `
+        console.log("Creating Instructions for first time")
+        console.log(currentSlide)
+        instructionBox = document.createElement('div');
+        instructionBox.className = 'instruction-box';
+        instructionBox.innerHTML = `
             <strong id="instruction-title"></strong>
             <div id="instruction-content"></div>
             <div class="instruction-buttons">
@@ -490,25 +491,10 @@ export function exampleInstructions() {
                 <button id="next-slide" class="nav-button">Next</button>
             </div>
         `;
-
-            // Append instruction box
-            emailListContainer.appendChild(instructionBox);
-        }
+        // Append instruction box
+        emailListContainer.appendChild(instructionBox);
 
         instructionboxCreated = true;
-    } else {
-        instructionboxCreated = false;
-        instructionBox = document.querySelector('.instruction-box'); // Get the box
-
-        if (instructionBox) {
-            console.log("Hiding Instructions and Resetting Slide count")
-
-            instructionBox.classList.add('hidden');
-            currentSlide = 0;
-            console.log(currentSlide)
-        } else {
-            console.error("Instruction box not found");
-        }
     }
 
 
@@ -768,14 +754,12 @@ export function unhideInstructionBox() {
 
     if (confirmClose) {
         multiplechoiceBox.classList.add('hidden');
+        removeInstructions()
     }
     else {
         multiplechoiceBox.classList.remove('hidden'); // unhide the box by removing hidden
-        exampleInstructions()
+        removeInstructions()
     }
-
-
-
 }
 
 export function showNextEmail() {
@@ -796,11 +780,10 @@ export function closeInbox() {
         inboxContainer.classList.add('blurred'); // Apply the blur
 
         document.getElementById("reminder").disabled = true;
-        document.getElementById("prev-slide").disabled = true;
-        document.getElementById("next-slide").disabled = true;
-        document.getElementById('next-button').disabled = true;
-        document.getElementById('confirm-button').disabled = true;
-        document.getElementById('prev-button').disabled = true;
+        if (instructionboxCreated) {
+            document.getElementById("prev-slide").disabled = true; //error since element gets deleted
+            document.getElementById("next-slide").disabled = true; //error since element gets deleted
+        }
         document.getElementById('submit-highlight').disabled = true;
     }
 }
