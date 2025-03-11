@@ -124,6 +124,12 @@ export function closePassword() {
         desktopArea.style.display = 'flex';
     }
     else {
+        //disable inputs and buttons 
+        document.getElementById("passwordPWNED").disabled = true; 
+        document.getElementById("checkButton").disabled = true; 
+        document.getElementById("password").disabled = true; 
+        document.getElementById("Task2-Check").disabled = true; 
+
         leavetaskModel.style.display = 'flex'; //working
         passwordContainer.classList.add('blurred'); // Apply the blur
     }
@@ -132,9 +138,17 @@ export function closePassword() {
 export function backpasswordFunction() {
     leavetaskModel.style.display = 'none';
     passwordContainer.classList.remove('blurred'); // remove the blur
+    document.getElementById("passwordPWNED").disabled = false; 
+    document.getElementById("checkButton").disabled = false; 
+    document.getElementById("password").disabled = false; 
+    document.getElementById("Task2-Check").disabled = false; 
 }
 
 export function confirmpasswordFunction() {
+    document.getElementById("passwordPWNED").disabled = false; 
+    document.getElementById("checkButton").disabled = false; 
+    document.getElementById("password").disabled = false; 
+    document.getElementById("Task2-Check").disabled = false; 
     passwordContainer.classList.remove('blurred'); // remove the blur
     task2CheckButton.classList.add('hidden');
     confirmClose = true;
