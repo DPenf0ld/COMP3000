@@ -391,7 +391,7 @@ export async function check2Function() {
                 document.querySelector("#task-3-status").classList.add("complete");
 
                 resultElement.innerHTML = `
-                    <p style="color: green;">Perfect! Your password is strong and has never been found in a breach. Well done!</strong></p>
+                    <p style="color: green;">Your password is strong and has never been found in a breach. Well done!</strong></p>
                     `;
                 passwordComplete()
             }
