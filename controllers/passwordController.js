@@ -206,6 +206,8 @@ export function confirmpasswordButtonFunction() {
     passwordContainerBlur.classList.remove('blurred'); // Remove the blur
     middleContainerBlur.classList.add('blurred'); // Apply blur to middle and bottom
     bottomContainerBlur.classList.add('blurred');
+    document.getElementById("passwordPWNED").disabled = false; 
+    document.getElementById("checkButton").disabled = false; 
 }
 
 export function prevPasswordButtonFunction() {

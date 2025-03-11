@@ -99,6 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
     ResetWeb.addEventListener('click', resetWebFromDesktop);
 
     //Phishing Task Code
+    document.getElementById("reminder").disabled = true; 
+
     const inboxContainer = document.getElementById('inbox-container');
 
     const backToDesktop = document.getElementById('close-inbox');
@@ -191,6 +193,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     //Password Task Code
+    document.getElementById("passwordPWNED").disabled = true; 
+    document.getElementById("checkButton").disabled = true; 
+
     let passwordInput = document.getElementById('password');
 
     const instructionPasswordModel = document.getElementById('instructions-password');
@@ -255,6 +260,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     //web code
+    document.getElementById("ask-button").disabled = true; 
+    document.getElementById("user-input").disabled = true; 
+
     const webContainer = document.getElementById('web-container');
 
     const backToDesktopWeb = document.getElementById('close-web');

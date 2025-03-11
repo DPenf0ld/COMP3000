@@ -32,6 +32,8 @@ export function confirmwebButtonFunction() {
     instructionModel.style.display = 'none';
     instructionsConfirmed = true; // listener to display instructions once user confirms
     webInterface.classList.remove('blurred'); // Remove the blur
+    document.getElementById("ask-button").disabled = false; 
+    document.getElementById("user-input").disabled = false; 
 }
 export function webfirstOpenFunction() {
     instructionModel.style.display = 'flex'; //working
@@ -80,9 +82,15 @@ function resetWebTask() {
 export function backwebFunction() {
     leavetaskModel.style.display = 'none';
     webContainer.classList.remove('blurred'); // remove the blur
+
+    document.getElementById("ask-button").disabled = false; 
+    document.getElementById("user-input").disabled = false; 
 }
 
 export function confirmwebFunction() {
+    document.getElementById("ask-button").disabled = false; 
+    document.getElementById("user-input").disabled = false; 
+    
     webContainer.classList.remove('blurred'); // remove the blur
     confirmClose = true;
     webopen = false;
@@ -294,6 +302,9 @@ export function closeWeb() {
         desktopArea.style.display = 'flex';
     }
     else {
+        document.getElementById("ask-button").disabled = true; 
+        document.getElementById("user-input").disabled = true; 
+
         leavetaskModel.style.display = 'flex'; //working
         webContainer.classList.add('blurred'); // Apply the blur
     }

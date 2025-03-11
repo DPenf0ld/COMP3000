@@ -246,11 +246,27 @@ export function submitButtonFunction() {
 export function backphishingFunction() {
     leavetaskModel.style.display = 'none';
     inboxContainer.classList.remove('blurred'); // remove the blur
+
+    document.getElementById("reminder").disabled = false;
+    document.getElementById("prev-slide").disabled = false;
+    document.getElementById("next-slide").disabled = false;
+    document.getElementById('next-button').disabled = false;
+    document.getElementById('confirm-button').disabled = false;
+    document.getElementById('prev-button').disabled = false;
+    document.getElementById('submit-highlight').disabled = false;
 }
 
 
 
 export function confirmphishingFunction() {
+    document.getElementById("reminder").disabled = false;
+    document.getElementById("prev-slide").disabled = false;
+    document.getElementById("next-slide").disabled = false;
+    document.getElementById('next-button').disabled = false;
+    document.getElementById('confirm-button').disabled = false;
+    document.getElementById('prev-button').disabled = false;
+    document.getElementById('submit-highlight').disabled = false;
+    
     inboxContainer.classList.remove('blurred'); // remove the blur
     confirmClose = true;
     emailopen = false;
@@ -345,6 +361,7 @@ export function nextButtonFunction() {
 }
 
 export function confirmButtonFunction() {
+    document.getElementById("reminder").disabled = false;
     instructionModel.style.display = 'none';
     instructionsConfirmed = true; // listener to display instructions once user confirms
     emailContainer.classList.remove('blurred'); // Remove the blur
@@ -777,6 +794,14 @@ export function closeInbox() {
     else {
         leavetaskModel.style.display = 'flex'; //working
         inboxContainer.classList.add('blurred'); // Apply the blur
+
+        document.getElementById("reminder").disabled = true;
+        document.getElementById("prev-slide").disabled = true;
+        document.getElementById("next-slide").disabled = true;
+        document.getElementById('next-button').disabled = true;
+        document.getElementById('confirm-button').disabled = true;
+        document.getElementById('prev-button').disabled = true;
+        document.getElementById('submit-highlight').disabled = true;
     }
 }
 
