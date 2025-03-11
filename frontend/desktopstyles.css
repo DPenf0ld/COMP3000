@@ -1168,18 +1168,18 @@ margin-left: 8px;
 .profile-container {
     padding: 40px;
     position: absolute;
-    bottom: 10%; /* Aligns to the bottom */
-    left: 2%; /* Aligns to the left */
+    bottom: 10%; 
+    left: 2%; 
     background-color: #333;
     border: 2px solid #e5e5e5;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     z-index: 10;
-    width: auto; /* Fit content width */
-    height: auto; /* Fit content height */
-    max-width: 90%; /* Prevent excessive stretching on wide screens */
+    width: auto; 
+    height: auto; 
+    max-width: 90%; 
+    border-radius: 3%;
 }
 
 

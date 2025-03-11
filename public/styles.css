@@ -244,28 +244,27 @@ footer {
 .icon {
     display: flex;
     justify-content: center;
-    width: 100%;
     margin: auto;
+    height: auto;
+    width: 100%;
 }
 
 .icon-img {
     border-radius: 20px;
-    width: 600px;
     height: auto;
+    width: 60%;
 }
 
 .login-img {
     display: flex;
     justify-content: center;
+    height: auto;
     width: 100%;
     margin: auto;
+    border-radius: 20px;
 }
 
-.login-img {
-    border-radius: 20px;
-    width: 500px;
-    height: auto;
-}
+
 
 .terms {
     display: inline-block;
