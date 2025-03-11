@@ -1,5 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
-import { closeQuizFunction, backquizFunction, confirmquizFunction} from '../controllers/quizController.js';
+import { closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
@@ -218,10 +218,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const checkButton = document.getElementById('checkButton');
     checkButton.addEventListener('click', checkButtonFunction);
 
-    document.getElementById("passwordPWNED").addEventListener("keypress", function(event) {
-        if (event.key === "Enter") { 
-            event.preventDefault();  
-            document.getElementById("checkButton").click(); 
+    document.getElementById("passwordPWNED").addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("checkButton").click();
         }
     });
 
@@ -274,6 +274,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const confirmwebbutton = document.getElementById('confirmweb-button');
     confirmwebbutton.addEventListener('click', confirmwebFunction);
 
+    //openai code - web Task
+    const askButton = document.getElementById('ask-button');
+    askButton.addEventListener('click', askButtonFunction);
+
+    document.getElementById("user-input").addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("ask-button").click();
+        }
+    });
+
     //toggle web task
     function toggleWeb() {
         profileContainer.style.display = 'none' //hides profile
@@ -296,9 +307,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-    //openai code - web Task
-    const askButton = document.getElementById('ask-button');
-    askButton.addEventListener('click', askButtonFunction);
 });
 
 // Call clock function and update every second
