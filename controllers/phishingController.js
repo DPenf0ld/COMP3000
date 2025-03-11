@@ -242,16 +242,6 @@ export function submitButtonFunction() {
     }
 }
 
-export function backToDesktopPhishing() {
-    if (emailtaskComplete) {
-        inboxContainer.style.display = 'none';
-        desktopArea.style.display = 'flex';
-    }
-    else {
-        leavetaskModel.style.display = 'flex'; //working
-        desktopArea.classList.add('blurred'); // Apply the blur
-    }
-}
 
 export function backphishingFunction() {
     leavetaskModel.style.display = 'none';

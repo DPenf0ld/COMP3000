@@ -4,7 +4,7 @@ import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeP
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
 import { webPreviouslyComplete, resetWebFromDesktop, initialiseWeb, confirmwebButtonFunction, webfirstOpenFunction, confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
-import { preloademails, emailPreviouslyComplete, emailComplete, resetEmailFromDesktop, initialiseEmail, confirmphishingFunction, backphishingFunction, setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, backToDesktopPhishing, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
+import { preloademails, emailPreviouslyComplete, emailComplete, resetEmailFromDesktop, initialiseEmail, confirmphishingFunction, backphishingFunction, setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
 
 
 
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const inboxContainer = document.getElementById('inbox-container');
 
     const backToDesktop = document.getElementById('close-inbox');
-    backToDesktop.addEventListener('click', backToDesktopPhishing);
+    backToDesktop.addEventListener('click', closeInbox);
 
     const backphishingbutton = document.getElementById('backphishing-button');
     backphishingbutton.addEventListener('click', backphishingFunction);
@@ -171,11 +171,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Toggle inbox code
     function toggleInbox() {
         profileContainer.style.display = 'none' //hides profile
-        initialiseEmail();
-        displayEmail();
         if (inboxContainer.style.display === 'block') { //closes inbox
             closeInbox()
         } else if ((passwordopen != true && webtaskComplete) || (webopen != true && passwordtaskComplete) || (webtaskComplete && passwordtaskComplete) || (webopen != true && passwordopen != true)) { //opens inbox 
+            initialiseEmail();
+            displayEmail();
             setEmailOpen(true);
             // If inbox is not displayed, show it and hide desktop
             inboxContainer.style.display = 'block';
@@ -231,12 +231,10 @@ document.addEventListener('DOMContentLoaded', function () {
     //toggle password code
     function togglePassword() {
         profileContainer.style.display = 'none' //hides profile
-        initialisePassword()
-        console.log(emailopen)
-        console.log(emailtaskComplete)
         if (passwordContainer.style.display === 'block') {
             closePassword()
         } else if ((emailopen != true && webtaskComplete) || (webopen != true && emailtaskComplete) || (webtaskComplete && emailtaskComplete) || (webopen != true && emailopen != true)) {
+            initialisePassword()
             setPasswordOpen(true); // Call function to update passwordopen
             passwordContainer.style.display = 'block';
             inboxContainer.style.display = 'none';

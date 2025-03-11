@@ -21,7 +21,7 @@ const instructionPasswordModel = document.getElementById('instructions-password'
 const passwordContainer = document.getElementById('password-container');
 const passwordContainerBlur = document.getElementById('password-interface');
 
-const pwnedpasswordContainerBlur = document.getElementById('Pwned');
+
 const middleContainerBlur = document.getElementById('middle');
 const bottomContainerBlur = document.getElementById('bottom');
 
@@ -33,7 +33,7 @@ const confirmPasswordButton = document.getElementById('confirm-password-button')
 
 const resetPassword = document.getElementById('reset-password');
 const instructionModel = document.getElementById('instructions-password'); // Instruction model
-const passwordPWNED = document.getElementById('passwordPWNED').value;
+
 const resultElement = document.getElementById('result');
 const resulttask2Element = document.getElementById('resulttask2');
 
