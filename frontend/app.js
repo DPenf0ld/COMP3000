@@ -152,7 +152,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const confirmquizbutton = document.getElementById('confirmquiz-button');
     confirmquizbutton.addEventListener('click', confirmquizFunction);
 
-    let test1 = true;
     function toggleQuiz() {
         profileContainer.style.display = 'none' //hides profile
         if (quizContainer.style.display === 'block') { //closes quiz
@@ -218,6 +217,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const checkButton = document.getElementById('checkButton');
     checkButton.addEventListener('click', checkButtonFunction);
+
+    document.getElementById("passwordPWNED").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") { 
+            event.preventDefault();  
+            document.getElementById("checkButton").click(); 
+        }
+    });
 
     const check2 = document.getElementById('Task2-Check');
     check2.addEventListener('click', check2Function);
