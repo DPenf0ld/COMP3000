@@ -1072,7 +1072,7 @@ margin-left: 8px;
     display: flex;
     align-items: center;
     position: absolute;
-    top: 10%; 
+    top: 5%; 
 }
 
 #user-input {
@@ -1102,13 +1102,16 @@ margin-left: 8px;
 
 #response-container {
     position: absolute;
-    top:20%;
+    top:16%;
     width: 80%;
     background: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
     text-align: left;
+    max-height: 60vh; /* ADJUST */
+    overflow-y: auto;
+    padding: 20px;
 }
 
 

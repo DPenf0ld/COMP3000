@@ -163,6 +163,7 @@ footer {
     flex: 1;
     /* Allow form to grow and fill space */
     overflow-y: auto;
+    padding: 20px;
 }
 
 .auth-form h2 {
