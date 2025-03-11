@@ -79,11 +79,11 @@ function resetWebTask() {
 
 export function backwebFunction() {
     leavetaskModel.style.display = 'none';
-    desktopArea.classList.remove('blurred'); // remove the blur
+    webContainer.classList.remove('blurred'); // remove the blur
 }
 
 export function confirmwebFunction() {
-    desktopArea.classList.remove('blurred'); // remove the blur
+    webContainer.classList.remove('blurred'); // remove the blur
     confirmClose = true;
     webopen = false;
     webtaskComplete = false;
@@ -295,7 +295,7 @@ export function closeWeb() {
     }
     else {
         leavetaskModel.style.display = 'flex'; //working
-        desktopArea.classList.add('blurred'); // Apply the blur
+        webContainer.classList.add('blurred'); // Apply the blur
     }
 }
 

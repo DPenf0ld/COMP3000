@@ -125,17 +125,17 @@ export function closePassword() {
     }
     else {
         leavetaskModel.style.display = 'flex'; //working
-        desktopArea.classList.add('blurred'); // Apply the blur
+        passwordContainer.classList.add('blurred'); // Apply the blur
     }
 }
 
 export function backpasswordFunction() {
     leavetaskModel.style.display = 'none';
-    desktopArea.classList.remove('blurred'); // remove the blur
+    passwordContainer.classList.remove('blurred'); // remove the blur
 }
 
 export function confirmpasswordFunction() {
-    desktopArea.classList.remove('blurred'); // remove the blur
+    passwordContainer.classList.remove('blurred'); // remove the blur
     task2CheckButton.classList.add('hidden');
     confirmClose = true;
     passwordopen = false;

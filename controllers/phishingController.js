@@ -245,13 +245,13 @@ export function submitButtonFunction() {
 
 export function backphishingFunction() {
     leavetaskModel.style.display = 'none';
-    desktopArea.classList.remove('blurred'); // remove the blur
+    inboxContainer.classList.remove('blurred'); // remove the blur
 }
 
 
 
 export function confirmphishingFunction() {
-    desktopArea.classList.remove('blurred'); // remove the blur
+    inboxContainer.classList.remove('blurred'); // remove the blur
     confirmClose = true;
     emailopen = false;
     emailtaskComplete = false;
@@ -776,7 +776,7 @@ export function closeInbox() {
     }
     else {
         leavetaskModel.style.display = 'flex'; //working
-        desktopArea.classList.add('blurred'); // Apply the blur
+        inboxContainer.classList.add('blurred'); // Apply the blur
     }
 }
 
