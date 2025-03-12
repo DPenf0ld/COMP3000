@@ -1301,3 +1301,21 @@ margin-left: 8px;
 #close-quiz:hover {
     color: #e74c3c; /* Red Hover Colour*/
 }
+
+/* Quiz multiple choice styles*/
+.quiz-radio-section label {
+    display: flex;
+    align-items: center;
+    font-size: small;
+    color: #000000;
+    cursor: pointer;
+}
+
+/* Hover effect */
+.quiz-radio-section label:hover::before {
+    border-color: #0056b3;
+}
+
+.quiz-radio-section label:hover {
+    color: #007bff;
+}

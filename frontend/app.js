@@ -1,5 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
-import { QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
+import { nextQuestion, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
@@ -136,6 +136,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Quiz code
     const completeTasks = document.querySelector('.complete-tasks');
 
+    const submitQuiz = document.getElementById('submit-quiz');
+    submitQuiz.addEventListener('click', checkAnswer);
+    
+    const nextQuiz = document.getElementById('next-quiz');
+    nextQuiz.addEventListener('click', nextQuestion);
+
     const confirmquizButton = document.getElementById('confirm-quiz-button');
     confirmquizButton.addEventListener('click', confirmquizButtonFunction);
 
@@ -163,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
         profileContainer.style.display = 'none' //hides profile
         if (quizContainer.style.display === 'block') { //closes quiz
             closeQuizFunction()
-        } else if(webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
+        } else { //if(webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
             //close everything
             inboxContainer.style.display = 'none';
             passwordContainer.style.display = 'none';
@@ -172,12 +178,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
             //show quiz
             quizContainer.style.display = 'block'
+            loadQuestion();
 
             QuizfirstOpenFunction() //always show instructions
-
-        } else {
-            completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
         }
+        //  } else {
+      //  completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
+        //  }
     }
 
     // Toggle inbox code
