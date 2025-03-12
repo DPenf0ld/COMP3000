@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const RedoEmail = document.getElementById('email-redo');
     RedoEmail.addEventListener('click', RedoEmailFunction);
 
-    function RedoEmailFunction(){
+    function RedoEmailFunction() {
         failedTasks();
         toggleInbox();
     }
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const RedoPassword = document.getElementById('password-redo');
     RedoPassword.addEventListener('click', RedoPasswordFunction);
 
-    function RedoPasswordFunction(){
+    function RedoPasswordFunction() {
         failedTasks();
         togglePassword();
     }
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const RedoWeb = document.getElementById('web-redo');
     RedoWeb.addEventListener('click', RedoWebFunction);
 
-    function RedoWebFunction(){
+    function RedoWebFunction() {
         failedTasks();
         toggleWeb();
     }
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const submitQuiz = document.getElementById('submit-quiz');
     submitQuiz.addEventListener('click', checkAnswer);
-    
+
 
     const confirmquizButton = document.getElementById('confirm-quiz-button');
     confirmquizButton.addEventListener('click', confirmquizButtonFunction);
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
         profileContainer.style.display = 'none' //hides profile
         if (quizContainer.style.display === 'block') { //closes quiz
             closeQuizFunction()
-        } else { //if(webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
+        } else if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
             //close everything
             inboxContainer.style.display = 'none';
             passwordContainer.style.display = 'none';
@@ -205,10 +205,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             QuizfirstOpenFunction() //always show instructions
 
+
+        } else {
+            completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
         }
-        //  } else {
-      //  completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
-        //  }
     }
 
     // Toggle inbox code
