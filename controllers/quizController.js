@@ -1,4 +1,7 @@
 console.log('quizController.js loaded');
+import { confirmphishingFunction } from '../controllers/phishingController.js';
+import { confirmpasswordFunction } from '../controllers/passwordController.js';
+import { confirmwebFunction } from '../controllers/webController.js';
 
 export let quizOpen = false;
 
@@ -18,6 +21,10 @@ let passwordCorrect = 0;
 document.getElementById('results-header').style.display = 'none';
 document.getElementById('results-task-header').style.display = 'none';
 document.getElementById('pass/fail-header').style.display = 'none';
+
+document.getElementById('email-redo').style.display = 'none';
+document.getElementById('password-redo').style.display = 'none';
+document.getElementById('web-redo').style.display = 'none';
 
 // Quiz Questions 
 const Questions = [
@@ -109,6 +116,10 @@ function createChart() {
     document.getElementById('results-task-header').style.display = 'block';
     document.getElementById('pass/fail-header').style.display = 'block';
 
+    document.getElementById('email-redo').style.display = 'block';
+    document.getElementById('password-redo').style.display = 'block';
+    document.getElementById('web-redo').style.display = 'block';
+
 
     const totalCorrect = phishingCorrect + passwordCorrect + webCorrect;
     const percentage = ((totalCorrect / 30) * 100).toFixed(2); // Round to 2 decimal places
@@ -124,32 +135,32 @@ function createChart() {
 
     if (phishingCorrect >= 7) {
         phishingResult = true;
-        document.getElementById('phishing-result').innerHTML = `<span style="color: green;">Phishing task passed ✅</span>`;
+        document.getElementById('phishing-result').innerHTML = `<span style="color: green; font-weight: bold;">Phishing task passed ✅</span>`;
     } else {
-        document.getElementById('phishing-result').innerHTML = `<span style="color: red;">Phishing task failed ❌</span>`;
+        document.getElementById('phishing-result').innerHTML = `<span style="color: red; font-weight: bold;">Phishing task failed ❌</span>`;
     }
-    
+
     if (passwordCorrect >= 7) {
         passwordResult = true;
-        document.getElementById('password-result').innerHTML = `<span style="color: green;">Password task passed ✅</span>`;
+        document.getElementById('password-result').innerHTML = `<span style="color: green; font-weight: bold;">Password task passed ✅</span>`;
     } else {
-        document.getElementById('password-result').innerHTML = `<span style="color: red;">Password task failed ❌</span>`;
+        document.getElementById('password-result').innerHTML = `<span style="color: red; font-weight: bold;">Password task failed ❌</span>`;
     }
-    
+
     if (webCorrect >= 7) {
         webResult = true;
-        document.getElementById('web-result').innerHTML = `<span style="color: green;">Web task passed ✅</span>`;
+        document.getElementById('web-result').innerHTML = `<span style="color: green; font-weight: bold;">Web task passed ✅</span>`;
     } else {
-        document.getElementById('web-result').innerHTML = `<span style="color: red;">Web task failed ❌</span>`;
+        document.getElementById('web-result').innerHTML = `<span style="color: red; font-weight: bold;">Web task failed ❌</span>`;
     }
-    
+
     // Check if all tasks are passed
     if (webResult && passwordResult && phishingResult) {
         document.getElementById('pass/fail-text').innerHTML = `<span style="color: green; font-weight: bold;">Congratulations! You passed all tasks 🎉</span>`;
     } else {
         document.getElementById('pass/fail-text').innerHTML = `<span style="color: red; font-weight: bold;">You did not pass all tasks. Try again! 🔄</span>`;
     }
-    
+
 
 
     new Chart("pieChart", {
@@ -168,6 +179,21 @@ function createChart() {
             }
         }
     });
+}
+
+export function failedTasks() {
+    confirmquizFunction();
+    if (phishingCorrect < 7) {
+        confirmphishingFunction()
+    }
+
+    if (passwordCorrect < 7) {
+        confirmpasswordFunction()
+    }
+
+    if (webCorrect < 7) {
+        confirmwebFunction()
+    }
 }
 
 

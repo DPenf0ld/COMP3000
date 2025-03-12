@@ -393,11 +393,6 @@ p {
     background-color: #0056b3; /* Darker blue when hovered */
 }
 
-.nav-button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-}
-
 .nav-button.hidden {
     display: none;
 }
@@ -1359,7 +1354,7 @@ canvas {
     display: block;
     width: 100%;   
     height: 100%;  
-    max-width: 900px;        
+    max-width: 1200px;        
     max-height: 600px;
 }
 
@@ -1388,4 +1383,21 @@ canvas {
 
 #quiz-results-text {
     font-weight: bold;
+}
+
+.redo-button {
+    margin-bottom: 3%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    min-width: 100px; 
+    text-align: center;
+}
+
+.redo-button:hover {
+    background-color: #0056b3; /* Darker blue when hovered */
 }

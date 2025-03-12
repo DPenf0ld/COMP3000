@@ -1,5 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
-import { quizOpen, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
+import { failedTasks, quizOpen, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
@@ -22,12 +22,36 @@ document.addEventListener('DOMContentLoaded', function () {
         emailPreviouslyComplete() //email task
     }
 
+    //Redo Tasks
+    const RedoEmail = document.getElementById('email-redo');
+    RedoEmail.addEventListener('click', RedoEmailFunction);
+
+    function RedoEmailFunction(){
+        failedTasks();
+        toggleInbox();
+    }
+
+    const RedoPassword = document.getElementById('password-redo');
+    RedoPassword.addEventListener('click', RedoPasswordFunction);
+
+    function RedoPasswordFunction(){
+        failedTasks();
+        togglePassword();
+    }
+
+    const RedoWeb = document.getElementById('web-redo');
+    RedoWeb.addEventListener('click', RedoWebFunction);
+
+    function RedoWebFunction(){
+        failedTasks();
+        toggleWeb();
+    }
+
     //Profile
     const profileInfoButton = document.getElementById('email');
     profileInfoButton.addEventListener('click', profileInfo);
 
     const profileContainer = document.getElementById('profile-container');
-
 
     const closeProfile = document.getElementById('close-profile');
     closeProfile.addEventListener('click', closeProfileFunction);
