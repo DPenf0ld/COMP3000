@@ -15,11 +15,14 @@ let webCorrect = 0;
 let passwordCorrect = 0;
 
 
+document.getElementById('results-header').style.display = 'none';
+document.getElementById('results-task-header').style.display = 'none';
+document.getElementById('pass/fail-header').style.display = 'none';
 
 // Quiz Questions 
 const Questions = [
     {
-        type:"password",
+        type: "password",
         value: "3", // Correct answer
         question: "What should you do if you find that one of your passwords has appeared in a data breach?",
         Answer1: "Ignore it and continue using the password.",
@@ -28,7 +31,7 @@ const Questions = [
         Answer4: "Assume no harm will come from the breach, as no damage has occurred yet."
     },
     {
-        type:"phishing",
+        type: "phishing",
         value: "1", // Correct answer
         question: "You receive an email from 'admin@yourbank.com' stating, 'Your account has been locked due to suspicious activity. Click here to verify your identity.' What is the most likely red flag?",
         Answer1: "The urgency and demand for immediate action",
@@ -74,17 +77,17 @@ export function checkAnswer() {
     let type = Questions[currentQuestionIndex].type;
 
     if (selectedValue === correctValue) {
-        if (type=="phishing"){
+        if (type == "phishing") {
             phishingCorrect++;
             console.log(phishingCorrect);
-        } else if(type=="password"){
+        } else if (type == "password") {
             passwordCorrect++;
             console.log(passwordCorrect);
-        } else if(type=="web"){
+        } else if (type == "web") {
             webCorrect++;
             console.log(webCorrect);
         }
-    } 
+    }
 
     // Show the "Next" button if there are more questions
     if (currentQuestionIndex < Questions.length - 1) {
@@ -98,7 +101,56 @@ export function checkAnswer() {
 }
 
 function createChart() {
-    //hide questions
+    let phishingResult = false;
+    let passwordResult = false;
+    let webResult = false;
+
+    document.getElementById('results-header').style.display = 'block';
+    document.getElementById('results-task-header').style.display = 'block';
+    document.getElementById('pass/fail-header').style.display = 'block';
+
+
+    const totalCorrect = phishingCorrect + passwordCorrect + webCorrect;
+    const percentage = ((totalCorrect / 30) * 100).toFixed(2); // Round to 2 decimal places
+
+    // Update the results text
+    document.getElementById('quiz-results-text').innerHTML = `
+        Phishing questions correct: ${phishingCorrect}/10 <br><br>
+        Password questions correct: ${passwordCorrect}/10 <br><br>
+        Web questions correct: ${webCorrect}/10 <br><br>
+        <strong>Overall Score:</strong> ${totalCorrect}/30 <br><br>
+        <strong>Percentage:</strong> ${percentage}%
+    `;
+
+    if (phishingCorrect >= 7) {
+        phishingResult = true;
+        document.getElementById('phishing-result').innerHTML = `<span style="color: green;">Phishing task passed ✅</span>`;
+    } else {
+        document.getElementById('phishing-result').innerHTML = `<span style="color: red;">Phishing task failed ❌</span>`;
+    }
+    
+    if (passwordCorrect >= 7) {
+        passwordResult = true;
+        document.getElementById('password-result').innerHTML = `<span style="color: green;">Password task passed ✅</span>`;
+    } else {
+        document.getElementById('password-result').innerHTML = `<span style="color: red;">Password task failed ❌</span>`;
+    }
+    
+    if (webCorrect >= 7) {
+        webResult = true;
+        document.getElementById('web-result').innerHTML = `<span style="color: green;">Web task passed ✅</span>`;
+    } else {
+        document.getElementById('web-result').innerHTML = `<span style="color: red;">Web task failed ❌</span>`;
+    }
+    
+    // Check if all tasks are passed
+    if (webResult && passwordResult && phishingResult) {
+        document.getElementById('pass/fail-text').innerHTML = `<span style="color: green; font-weight: bold;">Congratulations! You passed all tasks 🎉</span>`;
+    } else {
+        document.getElementById('pass/fail-text').innerHTML = `<span style="color: red; font-weight: bold;">You did not pass all tasks. Try again! 🔄</span>`;
+    }
+    
+
 
     new Chart("pieChart", {
         type: "pie",
@@ -110,12 +162,12 @@ function createChart() {
             }]
         },
         options: {
-          title: {
-            display: true,
-            text: "GuardPoint Results"
-          }
+            title: {
+                display: true,
+                text: "GuardPoint Results"
+            }
         }
-      });
+    });
 }
 
 
