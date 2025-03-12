@@ -363,11 +363,6 @@ function createChart() {
     document.getElementById('results-task-header').style.display = 'block';
     document.getElementById('pass/fail-header').style.display = 'block';
 
-    document.getElementById('email-redo').style.display = 'block';
-    document.getElementById('password-redo').style.display = 'block';
-    document.getElementById('web-redo').style.display = 'block';
-
-
     const totalCorrect = phishingCorrect + passwordCorrect + webCorrect;
     const percentage = ((totalCorrect / 30) * 100).toFixed(2); // Round to 2 decimal places
 
@@ -385,6 +380,7 @@ function createChart() {
         document.getElementById('phishing-result').innerHTML = `<span style="color: green; font-weight: bold;">Phishing task passed ✅</span>`;
     } else {
         document.getElementById('phishing-result').innerHTML = `<span style="color: red; font-weight: bold;">Phishing task failed ❌</span>`;
+        document.getElementById('email-redo').style.display = 'block';
     }
 
     if (passwordCorrect >= 7) {
@@ -392,6 +388,7 @@ function createChart() {
         document.getElementById('password-result').innerHTML = `<span style="color: green; font-weight: bold;">Password task passed ✅</span>`;
     } else {
         document.getElementById('password-result').innerHTML = `<span style="color: red; font-weight: bold;">Password task failed ❌</span>`;
+        document.getElementById('password-redo').style.display = 'block';
     }
 
     if (webCorrect >= 7) {
@@ -399,6 +396,7 @@ function createChart() {
         document.getElementById('web-result').innerHTML = `<span style="color: green; font-weight: bold;">Web task passed ✅</span>`;
     } else {
         document.getElementById('web-result').innerHTML = `<span style="color: red; font-weight: bold;">Web task failed ❌</span>`;
+        document.getElementById('web-redo').style.display = 'block';
     }
 
     // Check if all tasks are passed
