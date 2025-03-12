@@ -34,7 +34,7 @@ const pages = [
         title: "🌐 Welcome to the Safe Web Browsing Challenge!",
         content: `
             🔍 This exercise will help you improve your ability to identify <strong>unsafe links</strong> in online search results.<br><br>
-            🚨 Cybercriminals create deceptive websites to steal data or infect devices. Your task is to analyze search results and identify which links are unsafe.<br><br>
+            🚨 Cybercriminals create deceptive websites to steal data or infect devices. Your task is to analyse search results and identify which links are unsafe.<br><br>
             🔓 <strong>Click Next to learn more before starting the challenge!</strong>
         `
     },
@@ -52,7 +52,7 @@ const pages = [
         content: `
             🎭 <strong>Fake websites</strong> may mimic trusted brands but contain subtle differences in their URLs.<br>
             📧 <strong>Phishing links</strong> may be disguised as urgent messages or offers.<br>
-            🔗 <strong>Shortened URLs</strong> can hide the real destination—always hover over links to check before clicking.<br><br>
+            🔗 <strong>Shortened URLs</strong> can hide the real destination—always look over links to check before clicking.<br><br>
             <strong>💡 Tip:</strong> Legitimate websites often use HTTPS, but that alone does not guarantee safety!
         `
     },
@@ -62,17 +62,19 @@ const pages = [
             🚫 <strong>Misspellings or extra characters</strong> in URLs (e.g., “amaz0n.com” instead of “amazon.com”).<br>
             🔗 <strong>Unusual domain endings</strong> (e.g., “.xyz” instead of “.com” or “.org”).<br>
             🚨 <strong>Too-good-to-be-true offers</strong> (e.g., “You won a free iPhone! Click now!”).<br>
-            🏴‍☠️ <strong>Fake login pages</strong> asking for credentials—always check the URL before entering details.<br><br>
+            🏴‍☠️ <strong>Fake login pages</strong> asking for credentials—always check the URL before entering details.<br>
+            🎭<strong>Do not click Pop Ups</strong> they are known for redirecting you to malicious websites or install malware.<br><br>
             <strong>💡 Stay cautious and verify links before clicking!</strong>
         `
     },
     {
         title: "✅ Safe Browsing Best Practices",
         content: `
-            🔍 Always <strong>hover over links</strong> before clicking to reveal their true destination.<br>
+            🔍 Always <strong>look at the link or hover over title if link is not present</strong> before clicking to reveal their true destination.<br>
             🔒 Ensure websites use <strong>secure connections (HTTPS)</strong>, but don’t rely on it alone.<br>
             🔑 Use a <strong>password manager</strong>—they won’t autofill credentials on fake sites.<br>
             🚫 Never enter personal details on sites you don’t trust.<br><br>
+            If still unsure: Search for reviews or reports about the site online before visiting.<br><br>
             <strong>💡 Now, let’s begin the challenge!</strong>
         `
     }

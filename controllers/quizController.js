@@ -197,6 +197,96 @@ const Questions = [
         Answer2: "They make passwords longer and harder to guess.",
         Answer3: "They are less likely to be cracked by brute force.",
         Answer4: "They are frequently used in attacks where attackers rely on common knowledge and previous data breaches."
+    },
+    {
+        type: "web",
+        value: "2", 
+        question: "What is the best way to ensure a link you find in a search result is safe before clicking?",
+        Answer1: "Trust any link that appears on the first page of results.",
+        Answer2: "Hover over the link to check its true destination.",
+        Answer3: "Always click on the first link as it’s the most relevant.",
+        Answer4: "Ignore the URL, as the content description is more important."
+    },
+    {
+        type: "web",
+        value: "1", 
+        question: "What does it mean if a URL has unusual characters or misspellings?",
+        Answer1: "It is likely a fake or malicious site.",
+        Answer2: "It may just be a typo and should be trusted.",
+        Answer3: "It is probably a secure website that uses a variation for marketing.",
+        Answer4: "It’s harmless as long as the website looks professional."
+    },
+    {
+        type: "web",
+        value: "4", 
+        question: "What do URL shortening services (e.g., bit.ly) tell you about the website?",
+        Answer1: "They are generally secure, as they only redirect to trusted sites.",
+        Answer2: "They can help you track where the link is being clicked from.",
+        Answer3: "They are a common feature of official promotions.",
+        Answer4: "They can hide the actual destination, making it hard to assess the site’s safety."
+    },
+    {
+        type: "web",
+        value: "3", 
+        question: "What does it mean if a website uses HTTPS but still seems suspicious?",
+        Answer1: "It is definitely safe to enter your personal information.",
+        Answer2: "HTTPS indicates the site is part of an official organization.",
+        Answer3: "HTTPS provides encryption but doesn’t guarantee the site’s legitimacy.",
+        Answer4: "If the site uses HTTPS, it can’t be malicious."
+    },
+    {
+        type: "web",
+        value: "4", 
+        question: "What is one of the main goals of a phishing attack?",
+        Answer1: "To provide users with helpful information.",
+        Answer2: "To redirect traffic to a legitimate website.",
+        Answer3: "To improve user awareness about online threats.",
+        Answer4: "To trick users into revealing sensitive information such as passwords or credit card details."
+    },
+    {
+        type: "web",
+        value: "3", // Correct answer now is Answer3
+        question: "What should you do if you’re unsure about a website’s safety after reviewing its link?",
+        Answer1: "Click the link to confirm it’s safe.",
+        Answer2: "Visit the site anyway, as most websites are safe.",
+        Answer3: "Search for reviews or reports about the site online before visiting.",
+        Answer4: "Ignore your doubts and trust the description provided."
+    },
+    {
+        type: "web",
+        value: "2", // Correct answer now is Answer2
+        question: "If you encounter a website offering an unbelievable deal, what should you be cautious about?",
+        Answer1: "It’s likely a legitimate offer with no risks involved.",
+        Answer2: "It might be a scam designed to steal your personal information.",
+        Answer3: "The offer might be genuine if it’s on a well-known website.",
+        Answer4: "The deal may just be promotional and not a scam."
+    },
+    {
+        type: "web",
+        value: "3", // Correct answer now is Answer3
+        question: "What is the primary reason attackers use fake login pages in phishing attempts?",
+        Answer1: "To provide users with discounts or benefits.",
+        Answer2: "To inform users about a potential issue with their account.",
+        Answer3: "To collect personal credentials and use them for malicious purposes.",
+        Answer4: "To redirect users to a genuine login page."
+    },
+    {
+        type: "web",
+        value: "1", // Correct answer now is Answer1
+        question: "Why is it important to avoid clicking on pop-ups that appear while browsing the web?",
+        Answer1: "They can redirect you to malicious websites or install malware.",
+        Answer2: "They often contain important announcements from trusted websites.",
+        Answer3: "They typically provide discounts or offers from legitimate sources.",
+        Answer4: "They are secure if they appear after entering a trusted website."
+    },
+    {
+        type: "web",
+        value: "4", // Correct answer now is Answer4
+        question: "If you notice a domain name ending in '.xyz' instead of '.com' or '.org,' what does it potentially indicate?",
+        Answer1: "It is more likely to be a legitimate website.",
+        Answer2: "The domain ending is just a marketing strategy.",
+        Answer3: "The site is highly secure because it has a unique domain.",
+        Answer4: "The website could be unreliable and potentially unsafe."
     }
 ];
 
