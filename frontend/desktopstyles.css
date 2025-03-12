@@ -1357,3 +1357,21 @@ canvas {
     margin: 20px auto;
     display: block;
 }
+
+.quiz-interface{
+    padding: 3%;
+}
+
+.quiz-multiplechoice-box {
+    text-align: center; /* Center text inside the box */
+    font-size: 1rem; /* Make the text bigger */
+    padding: 20px;
+}
+
+.quiz-radio-section label {
+    padding: 1%;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
