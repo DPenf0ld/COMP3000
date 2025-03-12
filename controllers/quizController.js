@@ -15,6 +15,7 @@ let webCorrect = 0;
 let passwordCorrect = 0;
 
 // Quiz Questions 
+// Quiz Questions 
 const Questions = [
     {
         type:"phishing",
@@ -232,10 +233,9 @@ export function checkAnswer() {
 
     let selectedValue = selectedOption.value;
     let correctValue = Questions[currentQuestionIndex].value;
-    let type = selectedOption.type;
+    let type = Questions[currentQuestionIndex].type;
 
     if (selectedValue === correctValue) {
-        //FIX HERE
         if (type=="phishing"){
             phishingCorrect++;
             console.log(phishingCorrect);
@@ -256,8 +256,29 @@ export function checkAnswer() {
         nextQuestion()
     } else {
         alert("Quiz completed!");
+        createChart();
     }
 }
+
+function createChart() {
+    new Chart("pieChart", {
+        type: "pie",
+        data: {
+            labels: ["Phishing", "Password", "Web"],
+            datasets: [{
+                backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"], // Customize colors
+                data: [phishingCorrect, passwordCorrect, webCorrect]
+            }]
+        },
+        options: {
+          title: {
+            display: true,
+            text: "GuardPoint Results"
+          }
+        }
+      });
+}
+
 
 // Function to load the next question
 function nextQuestion() {

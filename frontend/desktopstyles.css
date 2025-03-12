@@ -1319,3 +1319,10 @@ margin-left: 8px;
 .quiz-radio-section label:hover {
     color: #007bff;
 }
+
+/*pie chart styles*/
+canvas {
+    max-width: 400px;
+    margin: 20px auto;
+    display: block;
+}
