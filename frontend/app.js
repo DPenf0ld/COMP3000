@@ -3,7 +3,7 @@ import { quizOpen, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquiz
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
-import { webPreviouslyComplete, resetWebFromDesktop, initialiseWeb, confirmwebButtonFunction, webfirstOpenFunction, confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
+import { prevWebButtonFunction, nextWebButtonFunction, webPreviouslyComplete, resetWebFromDesktop, initialiseWeb, confirmwebButtonFunction, webfirstOpenFunction, confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
 import { preloademails, emailPreviouslyComplete, emailComplete, resetEmailFromDesktop, initialiseEmail, confirmphishingFunction, backphishingFunction, setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
 
 
@@ -287,6 +287,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const webCompleteButton = document.getElementById('CompleteWeb');
     webCompleteButton.addEventListener('click', webCompleteFunction);
+
+    const prevwebButton = document.getElementById('prev-web-button');
+    prevwebButton.addEventListener('click', prevWebButtonFunction);
+
+    const nextwebButton = document.getElementById('next-web-button');
+    nextwebButton.addEventListener('click', nextWebButtonFunction);
+
 
     const confirmwebButton = document.getElementById('confirm-web-button');
     confirmwebButton.addEventListener('click', confirmwebButtonFunction);

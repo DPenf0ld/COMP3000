@@ -402,6 +402,7 @@ p {
     display: none;
 }
 
+/* Inbox */
 #prev-button {
     order: 1; /* Forces Previous to always be first */
     margin-right: auto; 
@@ -413,6 +414,36 @@ p {
 }
 
 #confirm-button {
+    order: 3; /* Place Confirm in sequence after Next */
+}
+
+/* Password */
+#prev-password-button {
+    order: 1; /* Forces Previous to always be first */
+    margin-right: auto; 
+}
+
+#next-password-button {
+    order: 2; /* Forces Next to always be last */
+    margin-left: auto; 
+}
+
+#confirm-password-button {
+    order: 3; /* Place Confirm in sequence after Next */
+}
+
+/* Web */
+#prev-web-button {
+    order: 1; /* Forces Previous to always be first */
+    margin-right: auto; 
+}
+
+#next-web-button {
+    order: 2; /* Forces Next to always be last */
+    margin-left: auto; 
+}
+
+#confirm-web-button {
     order: 3; /* Place Confirm in sequence after Next */
 }
 

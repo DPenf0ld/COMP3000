@@ -22,6 +22,94 @@ const instructionModel = document.getElementById('instructions-web');
 
 // empty array for searches 
 let searches = [];
+let currentPage = 0;
+const prevWebButton = document.getElementById('prev-web-button');
+const nextWebButton = document.getElementById('next-web-button');
+const confirmWebButton = document.getElementById('confirm-web-button');
+
+
+// Pages content
+const pages = [
+    {
+        title: "🌐 Welcome to the Safe Web Browsing Challenge!",
+        content: `
+            🔍 This exercise will help you improve your ability to identify <strong>unsafe links</strong> in online search results.<br><br>
+            🚨 Cybercriminals create deceptive websites to steal data or infect devices. Your task is to analyze search results and identify which links are unsafe.<br><br>
+            🔓 <strong>Click Next to learn more before starting the challenge!</strong>
+        `
+    },
+    {
+        title: "🎯 Your Task:",
+        content: `
+            🔎 You will see simulated search results containing a mix of <strong>safe</strong> and <strong>unsafe</strong> links.<br>
+            ❌ Your goal is to <strong>identify the 3 unsafe links</strong> in each round.<br>
+            ✅ Click on a link to classify it, and receive immediate feedback.<br><br>
+            🏆 The challenge gets harder as you progress. Stay alert!
+        `
+    },
+    {
+        title: "🔍 How Attackers Trick You",
+        content: `
+            🎭 <strong>Fake websites</strong> may mimic trusted brands but contain subtle differences in their URLs.<br>
+            📧 <strong>Phishing links</strong> may be disguised as urgent messages or offers.<br>
+            🔗 <strong>Shortened URLs</strong> can hide the real destination—always hover over links to check before clicking.<br><br>
+            <strong>💡 Tip:</strong> Legitimate websites often use HTTPS, but that alone does not guarantee safety!
+        `
+    },
+    {
+        title: "⚠️ Red Flags to Watch For",
+        content: `
+            🚫 <strong>Misspellings or extra characters</strong> in URLs (e.g., “amaz0n.com” instead of “amazon.com”).<br>
+            🔗 <strong>Unusual domain endings</strong> (e.g., “.xyz” instead of “.com” or “.org”).<br>
+            🚨 <strong>Too-good-to-be-true offers</strong> (e.g., “You won a free iPhone! Click now!”).<br>
+            🏴‍☠️ <strong>Fake login pages</strong> asking for credentials—always check the URL before entering details.<br><br>
+            <strong>💡 Stay cautious and verify links before clicking!</strong>
+        `
+    },
+    {
+        title: "✅ Safe Browsing Best Practices",
+        content: `
+            🔍 Always <strong>hover over links</strong> before clicking to reveal their true destination.<br>
+            🔒 Ensure websites use <strong>secure connections (HTTPS)</strong>, but don’t rely on it alone.<br>
+            🔑 Use a <strong>password manager</strong>—they won’t autofill credentials on fake sites.<br>
+            🚫 Never enter personal details on sites you don’t trust.<br><br>
+            <strong>💡 Now, let’s begin the challenge!</strong>
+        `
+    }
+];
+
+//intro code
+//update the model content based on the current page
+export function updateModelContent() {
+    console.log(currentPage)
+    const titleElement = instructionModel.querySelector('h2');
+    const contentElement = instructionModel.querySelector('p');
+
+    // Update title and content
+    titleElement.textContent = pages[currentPage].title;
+    contentElement.innerHTML = pages[currentPage].content;
+
+    // Manage button visibility
+    prevWebButton.classList.toggle('hidden', currentPage === 0);
+    nextWebButton.classList.toggle('hidden', currentPage === pages.length - 1);
+    confirmWebButton.classList.toggle('hidden', currentPage !== pages.length - 1);
+}
+
+export function prevWebButtonFunction() {
+    if (currentPage > 0) {
+        currentPage--;
+        updateModelContent();
+    }
+}
+
+export function nextWebButtonFunction() {
+    if (currentPage < pages.length - 1) {
+        currentPage++;
+        updateModelContent();
+    }
+}
+
+//end of intro slides
 
 export function resetWebFromDesktop() {
     leavetaskModel.style.display = 'flex'; //working
@@ -40,17 +128,14 @@ export function webfirstOpenFunction() {
     webInterface.classList.add('blurred'); // Apply the blur
 }
 
-const initialState = {
-    confirmClose: false,
-    instructionsConfirmed: false,
-};
-
 export function initialiseWeb() {
     document.getElementById("user-input").value = ""; //reset input
     document.getElementById("response-container").value = ""; //reset web search results
     responseContainer.textContent = '';
 
     if (webtaskComplete == false) {
+        currentPage = 0;
+        updateModelContent()
         instructionModel.style.display = 'flex'; //working
         webInterface.classList.add('blurred'); // Apply the blur
 
