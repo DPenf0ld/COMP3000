@@ -86,6 +86,15 @@ h1 {
     font-size: 1.5em;
 }
 
+/* error when trying to access quiz without completing tasks */
+.complete-tasks {
+    margin-top: 5%;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
 
 /* Desktop Icons */
 .icon {

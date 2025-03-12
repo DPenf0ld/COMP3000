@@ -1,7 +1,6 @@
 console.log('quizController.js loaded');
 const desktopArea = document.getElementById('desktop-area');
 const leavetaskModel = document.getElementById('leave-quiz')
-const profileContainer = document.getElementById('profile-container');
 const quizContainer = document.getElementById('quiz-container');
 const quizInterface = document.getElementById('quiz-interface')
 const instructionModel = document.getElementById('instructions-quiz');

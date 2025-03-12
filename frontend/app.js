@@ -134,6 +134,8 @@ document.addEventListener('DOMContentLoaded', function () {
     submitButton.addEventListener('click', submitButtonFunction);
 
     // Quiz code
+    const completeTasks = document.querySelector('.complete-tasks');
+
     const confirmquizButton = document.getElementById('confirm-quiz-button');
     confirmquizButton.addEventListener('click', confirmquizButtonFunction);
 
@@ -161,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
         profileContainer.style.display = 'none' //hides profile
         if (quizContainer.style.display === 'block') { //closes quiz
             closeQuizFunction()
-        } else {//if //(webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
+        } else if(webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
             //close everything
             inboxContainer.style.display = 'none';
             passwordContainer.style.display = 'none';
@@ -173,6 +175,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             QuizfirstOpenFunction() //always show instructions
 
+        } else {
+            completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
         }
     }
 
