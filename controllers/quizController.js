@@ -10,10 +10,14 @@ const instructionModel = document.getElementById('instructions-quiz');
 
 let instructionsConfirmed = false;
 let currentQuestionIndex = 0;
+let phishingCorrect = 0;
+let webCorrect = 0;
+let passwordCorrect = 0;
 
 // Quiz Questions 
 const Questions = [
     {
+        type:"phishing",
         value: "4", // Correct answer
         question: "You receive an email from 'support@secure-payments.com' asking you to confirm your bank details. What should you do first?",
         Answer1: "Click the link and verify the request with your bank",
@@ -22,6 +26,7 @@ const Questions = [
         Answer4: "Hover over the sender's email and any links to check for inconsistencies"
     },
     {
+        type:"phishing",
         value: "2", // Correct answer
         question: "A friend sends you an email saying, 'Hey, check out this amazing deal I found! Click here!' What is the best way to handle this?",
         Answer1: "Click the link because it's from a friend",
@@ -30,6 +35,7 @@ const Questions = [
         Answer4: "Report your friend’s email as phishing immediately"
     },
     {
+        type:"phishing",
         value: "3", // Correct answer
         question: "Which of the following best describes a Spear Phishing attack?",
         Answer1: "A general scam email sent to thousands of random people",
@@ -38,6 +44,7 @@ const Questions = [
         Answer4: "An email that looks identical to a real one but contains hidden malware"
     },
     {
+        type:"phishing",
         value: "1", // Correct answer
         question: "You receive an email from 'admin@yourbank.com' stating, 'Your account has been locked due to suspicious activity. Click here to verify your identity.' What is the most likely red flag?",
         Answer1: "The urgency and demand for immediate action",
@@ -46,6 +53,7 @@ const Questions = [
         Answer4: "The fact that you have a bank account with them"
     },
     {
+        type:"phishing",
         value: "2", // Correct answer
         question: "A co-worker receives an email from IT Support requesting their password to 'fix a system issue.' What should they do?",
         Answer1: "Reply with their password since it’s from IT",
@@ -54,6 +62,7 @@ const Questions = [
         Answer4: "Forward the email to their manager and continue working"
     },
     {
+        type:"phishing",
         value: "4", // Correct answer
         question: "How can you verify if a link in an email is suspicious before clicking on it?",
         Answer1: "Click on the link and see if it looks legitimate",
@@ -62,6 +71,7 @@ const Questions = [
         Answer4: "Hover over the link to check the actual URL"
     },
     {
+        type:"phishing",
         value: "1", // Correct answer
         question: "What is a common sign that an email is a Deceptive Phishing attempt?",
         Answer1: "A generic greeting such as 'Dear Customer' instead of your actual name",
@@ -70,6 +80,7 @@ const Questions = [
         Answer4: "A professional tone with no spelling errors"
     },
     {
+        type:"phishing",
         value: "3", // Correct answer
         question: "Which of the following is an example of Clone Phishing?",
         Answer1: "An email from an unknown sender offering a free prize",
@@ -78,6 +89,7 @@ const Questions = [
         Answer4: "A phishing email that targets a high-profile individual"
     },
     {
+        type:"phishing",
         value: "2", // Correct answer
         question: "A phishing email claims to be from PayPal, stating that your account will be suspended unless you act immediately. What should you do?",
         Answer1: "Click the link to check your account status",
@@ -86,6 +98,7 @@ const Questions = [
         Answer4: "Assume it's real since PayPal sends security alerts"
     },
     {
+        type:"phishing",
         value: "4", // Correct answer
         question: "What should you do if you suspect an email is a phishing attempt?",
         Answer1: "Ignore it and delete it without taking any action",
@@ -94,6 +107,7 @@ const Questions = [
         Answer4: "Report the email to your IT department or the official company it claims to be from"
     }, //END OF PHISHING QUESTIONS
     {
+        type:"password",
         value: "4", // Correct answer
         question: "Why is it risky to use the same password across multiple accounts?",
         Answer1: "It makes the password easier to remember.",
@@ -102,6 +116,7 @@ const Questions = [
         Answer4: "It guarantees better password strength since it's reused."
     },
     {
+        type:"password",
         value: "1", // Correct answer
         question: "What is one of the most important aspects of creating a strong password according to NCSE guidelines?",
         Answer1: "Using at least three random words.",
@@ -110,6 +125,7 @@ const Questions = [
         Answer4: "Including your date of birth for uniqueness."
     },
     {
+        type:"password",
         value: "3", // Correct answer
         question: "What makes credential stuffing such a dangerous attack method?",
         Answer1: "It relies on guessing passwords manually.",
@@ -118,6 +134,7 @@ const Questions = [
         Answer4: "It requires a password manager to be successful."
     },
     {
+        type:"password",
         value: "2", // Correct answer
         question: "What is one of the primary reasons short passwords are less secure?",
         Answer1: "They are easier for humans to guess.",
@@ -126,6 +143,7 @@ const Questions = [
         Answer4: "They are more likely to be unique."
     },
     {
+        type:"password",
         value: "1", // Correct answer
         question: "What is a key reason why using personal details (e.g. pet names, birthdates) in a password is a security risk?",
         Answer1: "Such details can often be easily guessed or found through social media.",
@@ -134,6 +152,7 @@ const Questions = [
         Answer4: "They guarantee that the password will not be part of a common dictionary."
     },
     {
+        type:"password",
         value: "3", // Correct answer
         question: "How can using a password manager improve security?",
         Answer1: "It allows users to remember all their passwords easily.",
@@ -143,6 +162,7 @@ const Questions = [
 
     },
     {
+        type:"password",
         value: "3", // Correct answer
         question: "What should you do if you find that one of your passwords has appeared in a data breach?",
         Answer1: "Ignore it and continue using the password.",
@@ -151,6 +171,7 @@ const Questions = [
         Answer4: "Assume no harm will come from the breach, as no damage has occurred yet."
     },
     {
+        type:"password",
         value: "2", // Correct answer
         question: "Which of the following is NOT a best practice for creating strong passwords?",
         Answer1: "Including a mix of uppercase, lowercase, numbers, and special characters.",
@@ -159,6 +180,7 @@ const Questions = [
         Answer4: "Avoiding common words and predictable phrases."
     },
     {
+        type:"password",
         value: "2", // Correct answer
         question: "Why is it important to regularly update your passwords, even if no breach has occurred?",
         Answer1: "It improves the password's strength and makes it harder to remember.",
@@ -167,6 +189,7 @@ const Questions = [
         Answer4: "It makes the password more difficult to guess by attackers."
     },
     {
+        type:"password",
         value: "4", // Correct answer
         question: "What is a critical reason to follow the NCSE guideline of avoiding common words in passwords?",
         Answer1: "They are easier to remember but also more likely to be part of a dictionary attack.",
@@ -193,8 +216,6 @@ export function loadQuestion() {
     options[2].innerHTML = `<input type="radio" name="option" value="3">${questionData.Answer3}`;
     options[3].innerHTML = `<input type="radio" name="option" value="4">${questionData.Answer4}`;
 
-    // Hide Next button
-    document.getElementById("next-quiz").style.display = "none";
 
     // Clear previous
     document.querySelectorAll('input[name="option"]').forEach(input => input.checked = false);
@@ -211,8 +232,20 @@ export function checkAnswer() {
 
     let selectedValue = selectedOption.value;
     let correctValue = Questions[currentQuestionIndex].value;
+    let type = selectedOption.type;
 
     if (selectedValue === correctValue) {
+        //FIX HERE
+        if (type=="phishing"){
+            phishingCorrect++;
+            console.log(phishingCorrect);
+        } else if(type=="password"){
+            passwordCorrect++;
+            console.log(passwordCorrect);
+        } else if(type=="web"){
+            webCorrect++;
+            console.log(webCorrect);
+        }
         alert("Correct!");
     } else {
         alert("Incorrect!");
@@ -263,6 +296,10 @@ export function confirmquizButtonFunction() {
     loadQuestion()
 }
 export function QuizfirstOpenFunction() {
+    currentQuestionIndex = 0; //reset question number
+    phishingCorrect = 0;
+    webCorrect = 0;
+    passwordCorrect = 0;
     instructionModel.style.display = 'flex'; //working
     quizInterface.classList.add('blurred'); // Apply the blur
 }
