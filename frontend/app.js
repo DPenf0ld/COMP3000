@@ -1,5 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
-import { closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
+import { QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ResetWeb.addEventListener('click', resetWebFromDesktop);
 
     //Phishing Task Code
-    document.getElementById("reminder").disabled = true; 
+    document.getElementById("reminder").disabled = true;
 
     const inboxContainer = document.getElementById('inbox-container');
 
@@ -134,6 +134,9 @@ document.addEventListener('DOMContentLoaded', function () {
     submitButton.addEventListener('click', submitButtonFunction);
 
     // Quiz code
+    const confirmquizButton = document.getElementById('confirm-quiz-button');
+    confirmquizButton.addEventListener('click', confirmquizButtonFunction);
+
     const QuizIcon = document.getElementById('quiz-icon');
     QuizIcon.addEventListener('click', toggleQuiz);
 
@@ -158,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
         profileContainer.style.display = 'none' //hides profile
         if (quizContainer.style.display === 'block') { //closes quiz
             closeQuizFunction()
-        } else if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
+        } else {//if //(webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
             //close everything
             inboxContainer.style.display = 'none';
             passwordContainer.style.display = 'none';
@@ -167,6 +170,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             //show quiz
             quizContainer.style.display = 'block'
+
+            QuizfirstOpenFunction() //always show instructions
+
         }
     }
 
@@ -193,8 +199,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     //Password Task Code
-    document.getElementById("passwordPWNED").disabled = true; 
-    document.getElementById("checkButton").disabled = true; 
+    document.getElementById("passwordPWNED").disabled = true;
+    document.getElementById("checkButton").disabled = true;
 
     let passwordInput = document.getElementById('password');
 
@@ -260,8 +266,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     //web code
-    document.getElementById("ask-button").disabled = true; 
-    document.getElementById("user-input").disabled = true; 
+    document.getElementById("ask-button").disabled = true;
+    document.getElementById("user-input").disabled = true;
 
     const webContainer = document.getElementById('web-container');
 

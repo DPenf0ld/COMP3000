@@ -387,8 +387,23 @@
             </li>
         </ul>
     </div>
-
+    <!-- Quiz (Hidden) -->
     <div class="quiz-container" id="quiz-container" style="display: none;">
+        <!-- Instruction Model -->
+        <div id="instructions-quiz" class="instructions" style="display: none;">
+            <div class="instructions-content">
+                <h2 id="page-title">Welcome to the Quiz</h2>
+                <p id="page-content">
+                    <!-- Manually load first info page -->
+                    This exercise will test the skills you have picked up.
+                    <br> <br>
+                    <strong>Your Task:</strong> Answer the questions to the best of your ability.
+                </p>
+                <div class="button-container">
+                    <button id="confirm-quiz-button" class="nav-button">Confirm</button>
+                </div>
+            </div>
+        </div>
         <div class="quiz-interface" id="quiz-interface">
             <button id="CompleteQuiz">Complete</button>
         </div>
