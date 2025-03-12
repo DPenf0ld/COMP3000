@@ -1,5 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
-import { quizOpen, nextQuestion, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
+import { quizOpen, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
@@ -141,8 +141,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const submitQuiz = document.getElementById('submit-quiz');
     submitQuiz.addEventListener('click', checkAnswer);
     
-    const nextQuiz = document.getElementById('next-quiz');
-    nextQuiz.addEventListener('click', nextQuestion);
 
     const confirmquizButton = document.getElementById('confirm-quiz-button');
     confirmquizButton.addEventListener('click', confirmquizButtonFunction);
@@ -180,9 +178,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             //show quiz
             quizContainer.style.display = 'block'
-            loadQuestion();
 
             QuizfirstOpenFunction() //always show instructions
+
         }
         //  } else {
       //  completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message

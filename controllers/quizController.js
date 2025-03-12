@@ -14,30 +14,88 @@ let currentQuestionIndex = 0;
 // Quiz Questions 
 const Questions = [
     {
-        value: "3", //this is the correct answer
-        question: "Question 1" ,
-        Answer1:"This is answer 1" ,
-        Answer2:"This is answer 2",
-        Answer3:"This is answer 3" ,
-        Answer4:"This is answer 4" 
+        value: "4", // Correct answer
+        question: "You receive an email from 'support@secure-payments.com' asking you to confirm your bank details. What should you do first?",
+        Answer1: "Click the link and verify the request with your bank",
+        Answer2: "Reply to the email asking for more details",
+        Answer3: "Ignore the email since all support emails are scams",
+        Answer4: "Hover over the sender's email and any links to check for inconsistencies"
     },
     {
-        value: "4", //this is the correct answer
-        question: "Question 2" ,
-        Answer1:"This is answer 1" ,
-        Answer2:"This is answer 2",
-        Answer3:"This is answer 3" ,
-        Answer4:"This is answer 4" 
+        value: "2", // Correct answer
+        question: "A friend sends you an email saying, 'Hey, check out this amazing deal I found! Click here!' What is the best way to handle this?",
+        Answer1: "Click the link because it's from a friend",
+        Answer2: "Check with your friend through another contact method before clicking anything",
+        Answer3: "Ignore it since all promotional emails are scams",
+        Answer4: "Report your friend’s email as phishing immediately"
     },
     {
-        value: "1", //this is the correct answer
-        question: "Question 3" ,
-        Answer1:"This is answer 1" ,
-        Answer2:"This is answer 2",
-        Answer3:"This is answer 3" ,
-        Answer4:"This is answer 4" 
+        value: "3", // Correct answer
+        question: "Which of the following best describes a Spear Phishing attack?",
+        Answer1: "A general scam email sent to thousands of random people",
+        Answer2: "A fake email from a bank warning about a security breach",
+        Answer3: "A personalised scam email that includes your name and personal details to gain your trust",
+        Answer4: "An email that looks identical to a real one but contains hidden malware"
+    },
+    {
+        value: "1", // Correct answer
+        question: "You receive an email from 'admin@yourbank.com' stating, 'Your account has been locked due to suspicious activity. Click here to verify your identity.' What is the most likely red flag?",
+        Answer1: "The urgency and demand for immediate action",
+        Answer2: "The use of the bank’s official name",
+        Answer3: "The presence of a clickable link in the email",
+        Answer4: "The fact that you have a bank account with them"
+    },
+    {
+        value: "2", // Correct answer
+        question: "A co-worker receives an email from IT Support requesting their password to 'fix a system issue.' What should they do?",
+        Answer1: "Reply with their password since it’s from IT",
+        Answer2: "Verify with IT through an official contact method before responding",
+        Answer3: "Ignore the email since all IT emails are scams",
+        Answer4: "Forward the email to their manager and continue working"
+    },
+    {
+        value: "4", // Correct answer
+        question: "How can you verify if a link in an email is suspicious before clicking on it?",
+        Answer1: "Click on the link and see if it looks legitimate",
+        Answer2: "Trust the email if it includes a company logo",
+        Answer3: "Reply to the email asking for confirmation",
+        Answer4: "Hover over the link to check the actual URL"
+    },
+    {
+        value: "1", // Correct answer
+        question: "What is a common sign that an email is a Deceptive Phishing attempt?",
+        Answer1: "A generic greeting such as 'Dear Customer' instead of your actual name",
+        Answer2: "An email from a service you recognise",
+        Answer3: "A message confirming a recent purchase you made",
+        Answer4: "A professional tone with no spelling errors"
+    },
+    {
+        value: "3", // Correct answer
+        question: "Which of the following is an example of Clone Phishing?",
+        Answer1: "An email from an unknown sender offering a free prize",
+        Answer2: "An email pretending to be from your bank with a fake warning",
+        Answer3: "An email that looks identical to a legitimate one but has modified links or attachments",
+        Answer4: "A phishing email that targets a high-profile individual"
+    },
+    {
+        value: "2", // Correct answer
+        question: "A phishing email claims to be from PayPal, stating that your account will be suspended unless you act immediately. What should you do?",
+        Answer1: "Click the link to check your account status",
+        Answer2: "Log in to PayPal by typing the official website address in your browser",
+        Answer3: "Reply to the email asking for further clarification",
+        Answer4: "Assume it's real since PayPal sends security alerts"
+    },
+    {
+        value: "4", // Correct answer
+        question: "What should you do if you suspect an email is a phishing attempt?",
+        Answer1: "Ignore it and delete it without taking any action",
+        Answer2: "Forward it to everyone in your company as a warning",
+        Answer3: "Respond to the sender to see if they reply",
+        Answer4: "Report the email to your IT department or the official company it claims to be from"
     }
 ];
+
+
 
 
 export function loadQuestion() {
@@ -81,14 +139,14 @@ export function checkAnswer() {
 
     // Show the "Next" button if there are more questions
     if (currentQuestionIndex < Questions.length - 1) {
-        document.getElementById("next-quiz").style.display = "block";
+        nextQuestion()
     } else {
         alert("Quiz completed!");
     }
 }
 
 // Function to load the next question
-export function nextQuestion() {
+function nextQuestion() {
     currentQuestionIndex++;
     if (currentQuestionIndex < Questions.length) {
         loadQuestion();
@@ -121,6 +179,7 @@ export function confirmquizButtonFunction() {
     instructionModel.style.display = 'none';
     instructionsConfirmed = true; // listener to display instructions once user confirms
     quizInterface.classList.remove('blurred'); // Remove the blur
+    loadQuestion()
 }
 export function QuizfirstOpenFunction() {
     instructionModel.style.display = 'flex'; //working

@@ -117,7 +117,22 @@ const pages = [
         `
     },
     {
-        title: "5️⃣ Your Task",
+        title: "5️⃣ How to Verify Emails",
+        content: `
+            <strong>✅ Verify via an official contact method:</strong><br>
+            Call or email the company using <strong>official contact details</strong> from their website.<br><br>
+
+            <strong>✅ Log in to the official website:</strong><br>
+            If an email claims there’s an issue, visit the official site directly (don’t click the email link!).<br><br>
+
+            <strong>✅ Report suspicious emails:</strong><br>
+            Forward phishing emails to <strong>your IT department</strong> or the <strong>official company it claims to be from.</strong><br><br>
+
+            <strong>🚨 Never trust emails blindly—verify first! 🚨</strong>
+        `
+    },
+    {
+        title: "6️⃣ Your Task",
         content: `
             📌 Highlight suspicious words or phrases.<br>
             📌 Classify the email as Deceptive Phishing, Clone Phishing, Spear Phishing, or Safe.<br>
