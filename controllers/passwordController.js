@@ -62,6 +62,35 @@ const pages = [
         🔄 <strong>Never reuse passwords</strong> across different accounts.<br><br>
         🔓 <strong>Click Confirm to start the challenge!</strong><br><br>
         `
+    },
+    {
+        title: "🔍 Why Checking Passwords Matters",
+        content: `
+        🏴‍☠️ <strong>Hackers use leaked databases</strong> to try stolen passwords on different websites.<br>
+        🔓 <strong>Even strong passwords can be compromised</strong> if they have been exposed in a data breach.<br>
+        🔄 <strong>Attackers use credential stuffing</strong>—testing stolen credentials on multiple sites to gain access.<br><br>
+        <strong>💡 Key takeaway:</strong> Even if your password seems strong, it’s unsafe if it has been exposed in a past breach!
+        `
+    },
+    {
+        title: "❌ Common Password Mistakes",
+        content: `
+        🚫 Using personal details (e.g., birthdates, pet names).<br>
+        🚫 Short passwords—longer is always better!<br>
+        🚫 Predictable sequences (e.g., "qwerty", "123456", "password").<br>
+        🚫 Reusing the same password across multiple accounts.<br><br>
+        <strong>💡 Solution:</strong> Use unique passwords for each account, preferably with a password manager to securely store and generate them.
+        `
+    },
+    {
+        title: "🔑 Why Reusing Passwords is Dangerous",
+        content: `
+        🔄 <strong>If one account is hacked, all accounts with the same password are at risk.</strong><br>
+        🚨 Attackers use <strong>automated tools</strong> to try breached passwords on different sites.<br>
+        🔓 <strong>Once breached, attackers can steal personal data, money, or impersonate you.</strong><br><br>
+        <strong>💡 Always use a unique password for each account!</strong><br><br>
+        🔄 <strong>Update your passwords regularly</strong> to ensure ongoing security, even if no breach has occurred. Regular updates help protect you against future vulnerabilities.
+    `
     }
 ];
 

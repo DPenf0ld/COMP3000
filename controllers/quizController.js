@@ -92,6 +92,87 @@ const Questions = [
         Answer2: "Forward it to everyone in your company as a warning",
         Answer3: "Respond to the sender to see if they reply",
         Answer4: "Report the email to your IT department or the official company it claims to be from"
+    }, //END OF PHISHING QUESTIONS
+    {
+        value: "4", // Correct answer
+        question: "Why is it risky to use the same password across multiple accounts?",
+        Answer1: "It makes the password easier to remember.",
+        Answer2: "It ensures you don’t forget the password.",
+        Answer3: "It increases the likelihood of attackers accessing all your accounts if one password is breached.",
+        Answer4: "It guarantees better password strength since it's reused."
+    },
+    {
+        value: "1", // Correct answer
+        question: "What is one of the most important aspects of creating a strong password according to NCSE guidelines?",
+        Answer1: "Using at least three random words.",
+        Answer2: "Using a single, easily memorable word.",
+        Answer3: "Choosing the longest possible password.",
+        Answer4: "Including your date of birth for uniqueness."
+    },
+    {
+        value: "3", // Correct answer
+        question: "What makes credential stuffing such a dangerous attack method?",
+        Answer1: "It relies on guessing passwords manually.",
+        Answer2: "It uses social engineering to trick users into sharing passwords.",
+        Answer3: "It uses previously breached passwords to attack multiple websites at once.",
+        Answer4: "It requires a password manager to be successful."
+    },
+    {
+        value: "2", // Correct answer
+        question: "What is one of the primary reasons short passwords are less secure?",
+        Answer1: "They are easier for humans to guess.",
+        Answer2: "They can be brute-forced faster by attackers.",
+        Answer3: "They can be hard to remember.",
+        Answer4: "They are more likely to be unique."
+    },
+    {
+        value: "1", // Correct answer
+        question: "What is a key reason why using personal details (e.g. pet names, birthdates) in a password is a security risk?",
+        Answer1: "Such details can often be easily guessed or found through social media.",
+        Answer2: "They make passwords longer and harder to remember.",
+        Answer3: "They are more likely to be encrypted by security systems.",
+        Answer4: "They guarantee that the password will not be part of a common dictionary."
+    },
+    {
+        value: "3", // Correct answer
+        question: "How can using a password manager improve security?",
+        Answer1: "It allows users to remember all their passwords easily.",
+        Answer2: "It stores passwords in an unencrypted format for convenience.",
+        Answer3: "It generates strong, random passwords and stores them securely.",
+        Answer4: "It makes passwords easier to crack by reducing complexity."
+
+    },
+    {
+        value: "3", // Correct answer
+        question: "What should you do if you find that one of your passwords has appeared in a data breach?",
+        Answer1: "Ignore it and continue using the password.",
+        Answer2: "Only change the password on the account where it was breached.",
+        Answer3: "Change the password immediately on all accounts where it’s used.",
+        Answer4: "Assume no harm will come from the breach, as no damage has occurred yet."
+    },
+    {
+        value: "2", // Correct answer
+        question: "Which of the following is NOT a best practice for creating strong passwords?",
+        Answer1: "Including a mix of uppercase, lowercase, numbers, and special characters.",
+        Answer2: "Reusing passwords across multiple accounts for easier management.",
+        Answer3: "Using at least three random words for greater complexity.",
+        Answer4: "Avoiding common words and predictable phrases."
+    },
+    {
+        value: "2", // Correct answer
+        question: "Why is it important to regularly update your passwords, even if no breach has occurred?",
+        Answer1: "It improves the password's strength and makes it harder to remember.",
+        Answer2: "It helps reduce the risk of your password being exposed through future breaches.",
+        Answer3: "It ensures that your password is always stored in an encrypted format.",
+        Answer4: "It makes the password more difficult to guess by attackers."
+    },
+    {
+        value: "4", // Correct answer
+        question: "What is a critical reason to follow the NCSE guideline of avoiding common words in passwords?",
+        Answer1: "They are easier to remember but also more likely to be part of a dictionary attack.",
+        Answer2: "They make passwords longer and harder to guess.",
+        Answer3: "They are less likely to be cracked by brute force.",
+        Answer4: "They are frequently used in attacks where attackers rely on common knowledge and previous data breaches."
     }
 ];
 
@@ -122,7 +203,7 @@ export function loadQuestion() {
 // Function to check the answer
 export function checkAnswer() {
     let selectedOption = document.querySelector('input[name="option"]:checked');
-    
+
     if (!selectedOption) {
         alert("Please select an answer!"); //change to text feedback
         return;
