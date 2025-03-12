@@ -1,4 +1,7 @@
 console.log('quizController.js loaded');
+
+export let quizOpen = false;
+
 const desktopArea = document.getElementById('desktop-area');
 const leavetaskModel = document.getElementById('leave-quiz')
 const quizContainer = document.getElementById('quiz-container');
@@ -38,6 +41,7 @@ const Questions = [
 
 
 export function loadQuestion() {
+    quizOpen = true;
     let questionData = Questions[currentQuestionIndex];
 
     // update the question
@@ -106,6 +110,7 @@ export function backquizFunction() {
 }
 
 export function confirmquizFunction() {
+    quizOpen = false;
     quizInterface.classList.remove('blurred'); // remove the blur
     leavetaskModel.style.display = 'none';
     quizContainer.style.display = 'none';

@@ -1265,12 +1265,12 @@ margin-left: 8px;
 /*quiz styles*/
 .quiz-container {
     width: 95%;
-    height: 85%;
+    height: 90%;
     position: relative;
     top: 2%;
     left: 50%; 
     transform: translateX(-50%);
-    background-color: #ffffff;
+    background-color: #d88080;  /*CHANGE BAACK*/
     border: 2px solid #e5e5e5;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
