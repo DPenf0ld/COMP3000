@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
             QuizfirstOpenFunction() //always show instructions
 
 
-        } else {
+        } else if (!webtaskComplete || !passwordtaskComplete || !emailtaskComplete ){
             completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
         }
     }

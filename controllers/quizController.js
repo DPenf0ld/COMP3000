@@ -18,6 +18,7 @@ let phishingCorrect = 0;
 let webCorrect = 0;
 let passwordCorrect = 0;
 let pieCreated = false;
+let quizComplete = false;
 
 
 // Quiz Questions 
@@ -178,22 +179,26 @@ function createChart() {
         }
     });
     pieCreated = true;
+    quizComplete = true;
 }
 
 export function failedTasks() {
     if (quizOpen) {
         confirmquizFunction();
     }
-    if (phishingCorrect < 7) {
-        confirmphishingFunction()
-    }
+    if (quizComplete) {
+        if (phishingCorrect < 7) {
+            confirmphishingFunction()
+        }
 
-    if (passwordCorrect < 7) {
-        confirmpasswordFunction()
-    }
+        if (passwordCorrect < 7) {
+            confirmpasswordFunction()
+        }
 
-    if (webCorrect < 7) {
-        confirmwebFunction()
+        if (webCorrect < 7) {
+            confirmwebFunction()
+        }
+        quizComplete=false;
     }
 }
 
