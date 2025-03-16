@@ -13,6 +13,7 @@ const instructionModel = document.getElementById('instructions-quiz');
 const resultsInfo = document.getElementById('result-info');
 const progressBar = document.getElementById('progressBar');
 
+
 let instructionsConfirmed = false;
 let currentQuestionIndex = 0;
 let phishingCorrect = 0;
@@ -300,6 +301,11 @@ const Questions = [
 
 
 export function loadQuestion() {
+
+    // update progress bar
+    const progress = (currentQuestionIndex / 30) * 100;
+    progressBar.style.width = `${progress}%`;
+
     quizOpen = true;
     let questionData = Questions[currentQuestionIndex];
 
@@ -503,9 +509,6 @@ export function confirmquizButtonFunction() {
 }
 export function QuizfirstOpenFunction() {
 
-    // update progress bar
-    const progress = (currentQuestionIndex / 30) * 100;
-    progressBar.style.width = `${progress}%`;
 
     if (pieCreated) {
         const oldPiechart = document.getElementById('pieChart');
