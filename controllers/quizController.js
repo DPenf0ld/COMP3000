@@ -11,6 +11,7 @@ const quizContainer = document.getElementById('quiz-container');
 const quizInterface = document.getElementById('quiz-interface')
 const instructionModel = document.getElementById('instructions-quiz');
 const resultsInfo = document.getElementById('result-info');
+const progressBar = document.getElementById('progressBar');
 
 let instructionsConfirmed = false;
 let currentQuestionIndex = 0;
@@ -23,7 +24,7 @@ let quizComplete = false;
 // Quiz Questions 
 const Questions = [
     {
-        type:"password",
+        type: "password",
         value: "3", // Correct answer
         question: "What should you do if you find that one of your passwords has appeared in a data breach?",
         Answer1: "Ignore it and continue using the password.",
@@ -32,7 +33,7 @@ const Questions = [
         Answer4: "Assume no harm will come from the breach, as no damage has occurred yet."
     },
     {
-        type:"phishing",
+        type: "phishing",
         value: "1", // Correct answer
         question: "You receive an email from 'admin@yourbank.com' stating, 'Your account has been locked due to suspicious activity. Click here to verify your identity.' What is the most likely red flag?",
         Answer1: "The urgency and demand for immediate action",
@@ -41,7 +42,7 @@ const Questions = [
         Answer4: "The fact that you have a bank account with them"
     },
     {
-        type:"phishing",
+        type: "phishing",
         value: "4", // Correct answer
         question: "How can you verify if a link in an email is suspicious before clicking on it?",
         Answer1: "Click on the link and see if it looks legitimate",
@@ -59,7 +60,7 @@ const Questions = [
         Answer4: "Ignore your doubts and trust the description provided."
     },
     {
-        type:"phishing",
+        type: "phishing",
         value: "2", // Correct answer
         question: "A phishing email claims to be from PayPal, stating that your account will be suspended unless you act immediately. What should you do?",
         Answer1: "Click the link to check your account status",
@@ -68,7 +69,7 @@ const Questions = [
         Answer4: "Assume it's real since PayPal sends security alerts"
     },
     {
-        type:"password",
+        type: "password",
         value: "3", // Correct answer
         question: "What makes credential stuffing such a dangerous attack method?",
         Answer1: "It relies on guessing passwords manually.",
@@ -77,7 +78,7 @@ const Questions = [
         Answer4: "It requires a password manager to be successful."
     },
     {
-        type:"phishing",
+        type: "phishing",
         value: "4", // Correct answer
         question: "What should you do if you suspect an email is a phishing attempt?",
         Answer1: "Ignore it and delete it without taking any action",
@@ -87,7 +88,7 @@ const Questions = [
     },
     {
         type: "web",
-        value: "3", 
+        value: "3",
         question: "What does it mean if a website uses HTTPS but still seems suspicious?",
         Answer1: "It is definitely safe to enter your personal information.",
         Answer2: "HTTPS indicates the site is part of an official organization.",
@@ -95,7 +96,7 @@ const Questions = [
         Answer4: "If the site uses HTTPS, it can’t be malicious."
     },
     {
-        type:"password",
+        type: "password",
         value: "4", // Correct answer
         question: "Why is it risky to use the same password across multiple accounts?",
         Answer1: "It makes the password easier to remember.",
@@ -105,7 +106,7 @@ const Questions = [
     },
     {
         type: "web",
-        value: "1", 
+        value: "1",
         question: "What does it mean if a URL has unusual characters or misspellings?",
         Answer1: "It is likely a fake or malicious site.",
         Answer2: "It may just be a typo and should be trusted.",
@@ -113,7 +114,7 @@ const Questions = [
         Answer4: "It’s harmless as long as the website looks professional."
     },
     {
-        type:"phishing",
+        type: "phishing",
         value: "1", // Correct answer
         question: "What is a common sign that an email is a Deceptive Phishing attempt?",
         Answer1: "A generic greeting such as 'Dear Customer' instead of your actual name",
@@ -122,7 +123,7 @@ const Questions = [
         Answer4: "A professional tone with no spelling errors"
     },
     {
-        type:"phishing",
+        type: "phishing",
         value: "3", // Correct answer
         question: "Which of the following is an example of Clone Phishing?",
         Answer1: "An email from an unknown sender offering a free prize",
@@ -131,7 +132,7 @@ const Questions = [
         Answer4: "A phishing email that targets a high-profile individual"
     },
     {
-        type:"password",
+        type: "password",
         value: "1", // Correct answer
         question: "What is one of the most important aspects of creating a strong password according to NCSE guidelines?",
         Answer1: "Using at least three random words.",
@@ -141,7 +142,7 @@ const Questions = [
     },
     {
         type: "web",
-        value: "4", 
+        value: "4",
         question: "What is one of the main goals of a phishing attack?",
         Answer1: "To provide users with helpful information.",
         Answer2: "To redirect traffic to a legitimate website.",
@@ -149,7 +150,7 @@ const Questions = [
         Answer4: "To trick users into revealing sensitive information such as passwords or credit card details."
     },
     {
-        type:"phishing",
+        type: "phishing",
         value: "4", // Correct answer
         question: "You receive an email from 'support@secure-payments.com' asking you to confirm your bank details. What should you do first?",
         Answer1: "Click the link and verify the request with your bank",
@@ -167,7 +168,7 @@ const Questions = [
         Answer4: "They are secure if they appear after entering a trusted website."
     },
     {
-        type:"password",
+        type: "password",
         value: "2", // Correct answer
         question: "What is one of the primary reasons short passwords are less secure?",
         Answer1: "They are easier for humans to guess.",
@@ -176,7 +177,7 @@ const Questions = [
         Answer4: "They are more likely to be unique."
     },
     {
-        type:"password",
+        type: "password",
         value: "1", // Correct answer
         question: "What is a key reason why using personal details (e.g. pet names, birthdates) in a password is a security risk?",
         Answer1: "Such details can often be easily guessed or found through social media.",
@@ -186,7 +187,7 @@ const Questions = [
     },
     {
         type: "web",
-        value: "4", 
+        value: "4",
         question: "If you notice a domain name ending in '.xyz' instead of '.com' or '.org,' what does it potentially indicate?",
         Answer1: "It is more likely to be a legitimate website.",
         Answer2: "The domain ending is just a marketing strategy.",
@@ -194,7 +195,7 @@ const Questions = [
         Answer4: "The website could be unreliable and potentially unsafe."
     },
     {
-        type:"password",
+        type: "password",
         value: "3", // Correct answer
         question: "How can using a password manager improve security?",
         Answer1: "It allows users to remember all their passwords easily.",
@@ -204,7 +205,7 @@ const Questions = [
 
     },
     {
-        type:"phishing",
+        type: "phishing",
         value: "2", // Correct answer
         question: "A co-worker receives an email from IT Support requesting their password to 'fix a system issue.' What should they do?",
         Answer1: "Reply with their password since it’s from IT",
@@ -214,7 +215,7 @@ const Questions = [
     },
     {
         type: "web",
-        value: "2", 
+        value: "2",
         question: "What is the best way to ensure a link you find in a search result is safe before clicking?",
         Answer1: "Trust any link that appears on the first page of results.",
         Answer2: "Hover over the link to check its true destination.",
@@ -222,7 +223,7 @@ const Questions = [
         Answer4: "Ignore the URL, as the content description is more important."
     },
     {
-        type:"password",
+        type: "password",
         value: "2", // Correct answer
         question: "Why is it important to regularly update your passwords, even if no breach has occurred?",
         Answer1: "It improves the password's strength and makes it harder to remember.",
@@ -231,7 +232,7 @@ const Questions = [
         Answer4: "It makes the password more difficult to guess by attackers."
     },
     {
-        type:"password",
+        type: "password",
         value: "4", // Correct answer
         question: "What is a critical reason to follow the NCSE guideline of avoiding common words in passwords?",
         Answer1: "They are easier to remember but also more likely to be part of a dictionary attack.",
@@ -241,7 +242,7 @@ const Questions = [
     },
     {
         type: "web",
-        value: "4", 
+        value: "4",
         question: "What do URL shortening services (e.g., bit.ly) tell you about the website?",
         Answer1: "They are generally secure, as they only redirect to trusted sites.",
         Answer2: "They can help you track where the link is being clicked from.",
@@ -249,7 +250,7 @@ const Questions = [
         Answer4: "They can hide the actual destination, making it hard to assess the site’s safety."
     },
     {
-        type:"phishing",
+        type: "phishing",
         value: "2", // Correct answer
         question: "A friend sends you an email saying, 'Hey, check out this amazing deal I found! Click here!' What is the best way to handle this?",
         Answer1: "Click the link because it's from a friend",
@@ -259,7 +260,7 @@ const Questions = [
     },
     {
         type: "web",
-        value: "2", 
+        value: "2",
         question: "If you encounter a website offering an unbelievable deal, what should you be cautious about?",
         Answer1: "It’s likely a legitimate offer with no risks involved.",
         Answer2: "It might be a scam designed to steal your personal information.",
@@ -267,7 +268,7 @@ const Questions = [
         Answer4: "The deal may just be promotional and not a scam."
     },
     {
-        type:"password",
+        type: "password",
         value: "2", // Correct answer
         question: "Which of the following is NOT a best practice for creating strong passwords?",
         Answer1: "Including a mix of uppercase, lowercase, numbers, and special characters.",
@@ -285,7 +286,7 @@ const Questions = [
         Answer4: "To redirect users to a genuine login page."
     },
     {
-        type:"phishing",
+        type: "phishing",
         value: "3", // Correct answer
         question: "Which of the following best describes a Spear Phishing attack?",
         Answer1: "A general scam email sent to thousands of random people",
@@ -355,6 +356,8 @@ export function checkAnswer() {
 }
 
 function createChart() {
+    progressBar.style.width = `100%`;
+
     let phishingResult = false;
     let passwordResult = false;
     let webResult = false;
@@ -452,7 +455,7 @@ export function failedTasks() {
         if (webCorrect < 7) {
             confirmwebFunction()
         }
-        quizComplete=false;
+        quizComplete = false;
     }
 }
 
@@ -460,10 +463,14 @@ export function failedTasks() {
 // Function to load the next question
 function nextQuestion() {
     currentQuestionIndex++;
+
+    // update progress bar
+    const progress = (currentQuestionIndex / 30) * 100;
+    progressBar.style.width = `${progress}%`;
+
+
     if (currentQuestionIndex < Questions.length) {
         loadQuestion();
-    } else {
-        alert("You've completed the quiz!");
     }
 }
 
@@ -495,6 +502,10 @@ export function confirmquizButtonFunction() {
     loadQuestion()
 }
 export function QuizfirstOpenFunction() {
+
+    // update progress bar
+    const progress = (currentQuestionIndex / 30) * 100;
+    progressBar.style.width = `${progress}%`;
 
     if (pieCreated) {
         const oldPiechart = document.getElementById('pieChart');

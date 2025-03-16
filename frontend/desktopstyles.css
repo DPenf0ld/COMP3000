@@ -244,7 +244,8 @@ h1 {
 .email-list {
     font-size: medium;
     width: 25%;
-    background: linear-gradient(to right, #e97c7c, #ffffff); /*fading to white for emails*/
+    background: linear-gradient(to right, #e97c7c, #ffffff);
+    /*fading to white for emails*/
     padding: 10px;
     overflow-y: auto;
     display: flex;
@@ -1409,6 +1410,21 @@ p {
     flex-direction: column;
     align-items: center;
     /* Centers the content horizontally */
+}
+
+.progress-bar-container {
+    background-color: #e0e0e0;
+    height: 20px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: #4caf50;
+    border-radius: 10px;
 }
 
 /* Styles for the close button */
