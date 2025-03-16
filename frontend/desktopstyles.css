@@ -442,6 +442,38 @@ p {
     order: 3; /* Place Confirm in sequence after Next */
 }
 
+/* Search png styles */
+.search {
+    width: 80px;
+    text-align: center;
+    color: white;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.search-img {
+    position: absolute;
+    left: 75%;
+    width: 20px;
+    height: 20px;
+}
+
+
+
+.GuardPoint-search-icon-img {
+    width: 400px; 
+    height: auto;
+    border-radius: 20px;
+    position: absolute; 
+    top: 1%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1; 
+}
+
+
+
+
 
 
 /*Styles for phishing highlights are correct*/
@@ -1108,20 +1140,25 @@ margin-left: 8px;
 .input-container {
     display: flex;
     align-items: center;
-    position: absolute;
-    top: 5%; 
+    top: 1%; 
 }
 
 #user-input {
-    width: 100%;
+    left:43%;
+    top: 22%;
+    position: absolute;
+    width: 10%;
     padding: 10px;
-    margin-right: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 20px; 
 }
 
 #ask-button {
+    width: 7%;
+    right: 39.5%;
+    top: 22%;
+    position: absolute;
     padding: 10px 20px;
     font-size: 16px;
     background-color: #007BFF;
@@ -1139,7 +1176,7 @@ margin-left: 8px;
 
 #response-container {
     position: absolute;
-    top:16%;
+    top:30%;
     width: 80%;
     background: #f9f9f9;
     border: 1px solid #ddd;
@@ -1401,3 +1438,4 @@ canvas {
 .redo-button:hover {
     background-color: #0056b3; /* Darker blue when hovered */
 }
+
