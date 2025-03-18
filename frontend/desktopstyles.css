@@ -90,6 +90,14 @@ h1 {
     font-size: 2em;
 }
 
+
+.reset-text {
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+}
+
+
 /* error when trying to access quiz without completing tasks */
 .complete-tasks {
     margin-top: 5%;
@@ -1360,6 +1368,8 @@ p {
 .profile-info p {
     margin-bottom: 10px;
 }
+
+
 
 .search-title {
     margin-top: 0.5%;

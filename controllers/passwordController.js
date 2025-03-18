@@ -54,7 +54,7 @@ const pages = [
         `
     },
     {
-        title: "We will follow NCSE password guidance, which recommends:",
+        title: "We will follow NCSC password guidance, which recommends:",
         content: `
         ✅ Use at least <strong>three random words</strong> instead of a single word.<br>
         🚫 <strong>Avoid common words</strong> (e.g., “password” or “123456”).<br>
