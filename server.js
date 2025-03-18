@@ -130,6 +130,7 @@ app.post('/login', async (req, res) => {
     role: user.role,
     firstName: user.firstName,
     lastName: user.lastName,
+    organisation: user.organisation,
     token,
     tasks: user.tasks || {},
   });
@@ -163,9 +164,9 @@ app.post('/update-tasks', async (req, res) => {
 });
 
 app.post('/update-profile', async (req, res) => {
-  const { email, firstName, lastName} = req.body;
+  const { email, firstName, lastName, organisation} = req.body;
 
-  if (!email || !firstName || !lastName) {
+  if (!email || !firstName || !lastName || !organisation) {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
@@ -175,7 +176,7 @@ app.post('/update-profile', async (req, res) => {
   try {
     const updateResult = await usersCollection.updateOne(
       { email },
-      { $set: { firstName, lastName} }
+      { $set: { firstName, lastName, organisation} }
     );
 
     if (updateResult.modifiedCount > 0) {

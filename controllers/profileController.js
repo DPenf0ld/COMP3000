@@ -24,6 +24,10 @@ export function cancelProfileFunction(){
     document.getElementById('edit-lastName').style.display = 'none';
     document.getElementById('edit-lastName').value = localStorage.getItem('lastName') || '';
 
+    document.getElementById('organisation').style.display = 'block';
+    document.getElementById('edit-organisation').style.display = 'none';
+    document.getElementById('edit-organisation').value = localStorage.getItem('organisation') || '';
+
     document.getElementById('cancel-profile-btn').style.display = 'none'; //disable
 }
 
@@ -45,14 +49,19 @@ export function editProfileFunction(){
     document.getElementById('lastName').style.display = 'none';
     document.getElementById('edit-lastName').style.display = 'block';
     document.getElementById('edit-lastName').value = localStorage.getItem('lastName') || '';
+
+    document.getElementById('organisation').style.display = 'none';
+    document.getElementById('edit-organisation').style.display = 'block';
+    document.getElementById('edit-organisation').value = localStorage.getItem('organisation') || '';
 }
 
 export async function saveProfileFunction(){
     const updatedFirstName = document.getElementById('edit-firstName').value.trim();
     const updatedLastName = document.getElementById('edit-lastName').value.trim();
+    const updatedOrganisation = document.getElementById('edit-organisation').value.trim();
     const userEmail = localStorage.getItem('userEmail');
 
-    if (!updatedFirstName || !updatedLastName) {
+    if (!updatedFirstName || !updatedLastName || !organisation) {
         alert('All fields must be filled out.');
         return;
     }
@@ -63,7 +72,7 @@ export async function saveProfileFunction(){
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email: userEmail, firstName: updatedFirstName, lastName: updatedLastName}),
+            body: JSON.stringify({ email: userEmail, firstName: updatedFirstName, lastName: updatedLastName, organisation: updatedOrganisation}),
         });
 
         if (!response.ok) { //error handling
@@ -72,15 +81,20 @@ export async function saveProfileFunction(){
 
         localStorage.setItem('firstName', updatedFirstName);
         localStorage.setItem('lastName', updatedLastName);
+        localStorage.setItem('organisation', updatedOrganisation);
 
         document.getElementById('firstName').innerText = updatedFirstName;
         document.getElementById('lastName').innerText = updatedLastName;
+        document.getElementById('organisation').innerText = updatedOrganisation;
 
         document.getElementById('firstName').style.display = 'block';
         document.getElementById('edit-firstName').style.display = 'none';
 
         document.getElementById('lastName').style.display = 'block';
         document.getElementById('edit-lastName').style.display = 'none';
+
+        document.getElementById('organisation').style.display = 'block';
+        document.getElementById('edit-organisation').style.display = 'none';
 
         document.getElementById('edit-profile-btn').style.display = 'block';
         document.getElementById('save-profile-btn').style.display = 'none';

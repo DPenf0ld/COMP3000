@@ -370,6 +370,7 @@ updateClock();
 const userEmail = localStorage.getItem('userEmail'); // Retrieve the email from localStorage
 const firstName = localStorage.getItem('firstName');
 const lastName = localStorage.getItem('lastName');
+const organisation = localStorage.getItem('organisation');
 
 
 if (userEmail) {
@@ -384,6 +385,9 @@ if (userEmail) {
 
     const ProfileLastName = document.getElementById('lastName');
     ProfileLastName.innerText = lastName;
+
+    const ProfileOrganisation = document.getElementById('organisation')
+    ProfileOrganisation.innerText = organisation;
 } else {
     console.log('User email not found');
 } 
