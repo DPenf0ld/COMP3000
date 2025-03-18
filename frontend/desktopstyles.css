@@ -184,7 +184,7 @@ h1 {
     right: 10px;
     background: none;
     border: none;
-    font-size: 30px;
+    font-size: 40px;
     cursor: pointer;
     color: #888;
 }
@@ -203,7 +203,7 @@ h1 {
     left: 50%;
     /* This moves the containers left edge to center and then offsets for center*/
     transform: translateX(-50%);
-    background-color: #f7f7f7;
+    background-color: #e97c7c;
     border: 2px solid #e5e5e5;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -222,7 +222,7 @@ h1 {
 /* Sidebar */
 .email-sidebar {
     width: 20%;
-    background-color: #e97c7c;
+    background-color: #1e3a8a;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -230,14 +230,13 @@ h1 {
 }
 
 .sidebar-item {
-    background-color: #f4c0c0;
+    background-color: #ffffff;
     padding: 10px;
     border-radius: 5px;
-    cursor: pointer;
 }
 
 .sidebar-item.active {
-    background-color: #d93a3a;
+    background-color: #c7c3fc;
     color: white;
     font-weight: bold;
 }
@@ -246,7 +245,7 @@ h1 {
 .email-list {
     font-size: medium;
     width: 25%;
-    background: linear-gradient(to right, #e97c7c, #ffffff);
+    background: linear-gradient(to right, #1e3a8a, #ffffff);
     /*fading to white for emails*/
     padding: 10px;
     overflow-y: auto;
@@ -844,7 +843,7 @@ p {
     right: 10px;
     background: none;
     border: none;
-    font-size: 30px;
+    font-size: 40px;
     cursor: pointer;
     color: #888;
 }
@@ -1115,7 +1114,7 @@ p {
     right: 10px;
     background: none;
     border: none;
-    font-size: 30px;
+    font-size: 40px;
     cursor: pointer;
     color: #888;
 }
@@ -1396,7 +1395,7 @@ p {
     top: 2%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #25434e;
+    background: linear-gradient(to top, #5900e7, #4300be);
     /*CHANGE BAACK*/
     border: 2px solid #e5e5e5;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1438,7 +1437,7 @@ p {
     right: 10px;
     background: none;
     border: none;
-    font-size: 30px;
+    font-size: 40px;
     cursor: pointer;
     color: #888;
 }
