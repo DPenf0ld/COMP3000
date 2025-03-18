@@ -509,6 +509,8 @@ export function confirmquizButtonFunction() {
 }
 export function QuizfirstOpenFunction() {
 
+    quizOpen = true;
+
 
     if (pieCreated) {
         const oldPiechart = document.getElementById('pieChart');

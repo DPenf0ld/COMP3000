@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
         profileContainer.style.display = 'none' //hides profile
         if (quizContainer.style.display === 'block') { //closes quiz
             closeQuizFunction()
-        } else{ //if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
+        } else if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
             //close everything
             inboxContainer.style.display = 'none';
             passwordContainer.style.display = 'none';
@@ -206,8 +206,8 @@ document.addEventListener('DOMContentLoaded', function () {
             QuizfirstOpenFunction() //always show instructions
 
 
-       // } else if (!webtaskComplete || !passwordtaskComplete || !emailtaskComplete ){
-       //     completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
+        } else if (!webtaskComplete || !passwordtaskComplete || !emailtaskComplete ){
+            completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
         }
     }
 
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
         profileContainer.style.display = 'none' //hides profile
         if (inboxContainer.style.display === 'block') { //closes inbox
             closeInbox()
-        } else if ((passwordopen != true && webtaskComplete) || (webopen != true && passwordtaskComplete) || (webtaskComplete && passwordtaskComplete) || (webopen != true && passwordopen != true && quizOpen != true)) { //opens inbox 
+        } else if ((passwordopen != true && webtaskComplete && quizOpen != true) || (webopen != true && passwordtaskComplete && quizOpen != true) || (webtaskComplete && passwordtaskComplete && quizOpen != true) || (webopen != true && passwordopen != true && quizOpen != true)) { //opens inbox 
             initialiseEmail();
             displayEmail();
             setEmailOpen(true);
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
         profileContainer.style.display = 'none' //hides profile
         if (passwordContainer.style.display === 'block') {
             closePassword()
-        } else if ((emailopen != true && webtaskComplete) || (webopen != true && emailtaskComplete) || (webtaskComplete && emailtaskComplete) || (webopen != true && emailopen != true && quizOpen != true)) {
+        } else if ((emailopen != true && webtaskComplete && quizOpen != true) || (webopen != true && emailtaskComplete && quizOpen != true) || (webtaskComplete && emailtaskComplete && quizOpen != true) || (webopen != true && emailopen != true && quizOpen != true)) {
             initialisePassword()
             setPasswordOpen(true); // Call function to update passwordopen
             passwordContainer.style.display = 'block';
@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function () {
         profileContainer.style.display = 'none' //hides profile
         if (webContainer.style.display === 'block') {
             closeWeb()
-        } else if ((passwordopen != true && emailtaskComplete) || (emailopen != true && passwordtaskComplete) || (emailtaskComplete && passwordtaskComplete) || (emailopen != true && passwordopen != true && quizOpen != true)) {
+        } else if ((passwordopen != true && emailtaskComplete && quizOpen != true) || (emailopen != true && passwordtaskComplete && quizOpen != true) || (emailtaskComplete && passwordtaskComplete && quizOpen != true) || (emailopen != true && passwordopen != true && quizOpen != true)) {
             initialiseWeb()
             setWebOpen(true);
 
