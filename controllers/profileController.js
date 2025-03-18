@@ -24,10 +24,6 @@ export function cancelProfileFunction(){
     document.getElementById('edit-lastName').style.display = 'none';
     document.getElementById('edit-lastName').value = localStorage.getItem('lastName') || '';
 
-    document.getElementById('dob').style.display = 'block';
-    document.getElementById('edit-dob').style.display = 'none';
-    document.getElementById('edit-dob').value = localStorage.getItem('dob') || '';
-
     document.getElementById('cancel-profile-btn').style.display = 'none'; //disable
 }
 
@@ -49,19 +45,14 @@ export function editProfileFunction(){
     document.getElementById('lastName').style.display = 'none';
     document.getElementById('edit-lastName').style.display = 'block';
     document.getElementById('edit-lastName').value = localStorage.getItem('lastName') || '';
-
-    document.getElementById('dob').style.display = 'none';
-    document.getElementById('edit-dob').style.display = 'block';
-    document.getElementById('edit-dob').value = localStorage.getItem('dob') || '';
 }
 
 export async function saveProfileFunction(){
     const updatedFirstName = document.getElementById('edit-firstName').value.trim();
     const updatedLastName = document.getElementById('edit-lastName').value.trim();
-    const updatedDob = document.getElementById('edit-dob').value;
     const userEmail = localStorage.getItem('userEmail');
 
-    if (!updatedFirstName || !updatedLastName || !updatedDob) {
+    if (!updatedFirstName || !updatedLastName) {
         alert('All fields must be filled out.');
         return;
     }
@@ -72,7 +63,7 @@ export async function saveProfileFunction(){
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email: userEmail, firstName: updatedFirstName, lastName: updatedLastName, dob: updatedDob }),
+            body: JSON.stringify({ email: userEmail, firstName: updatedFirstName, lastName: updatedLastName}),
         });
 
         if (!response.ok) { //error handling
@@ -81,20 +72,15 @@ export async function saveProfileFunction(){
 
         localStorage.setItem('firstName', updatedFirstName);
         localStorage.setItem('lastName', updatedLastName);
-        localStorage.setItem('dob', updatedDob);
 
         document.getElementById('firstName').innerText = updatedFirstName;
         document.getElementById('lastName').innerText = updatedLastName;
-        document.getElementById('dob').innerText = new Date(updatedDob).toLocaleDateString('en-GB');
 
         document.getElementById('firstName').style.display = 'block';
         document.getElementById('edit-firstName').style.display = 'none';
 
         document.getElementById('lastName').style.display = 'block';
         document.getElementById('edit-lastName').style.display = 'none';
-
-        document.getElementById('dob').style.display = 'block';
-        document.getElementById('edit-dob').style.display = 'none';
 
         document.getElementById('edit-profile-btn').style.display = 'block';
         document.getElementById('save-profile-btn').style.display = 'none';

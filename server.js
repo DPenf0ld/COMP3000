@@ -37,10 +37,10 @@ async function connectToMongo() {
 
 // Routes
 app.post('/signup', async (req, res) => {
-  const { firstName, lastName, email, password, dob, organisation } = req.body;
+  const { firstName, lastName, email, password, organisation } = req.body;
 
   // Validate input
-  if (!firstName || !lastName || !email || !password || !dob || !organisation) {
+  if (!firstName || !lastName || !email || !password || !organisation) {
     return res.status(400).send('All fields are required');
   }
 
@@ -48,12 +48,6 @@ app.post('/signup', async (req, res) => {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailPattern.test(email)) {
     return res.status(400).send('Invalid email format');
-  }
-
-  // Validate Date of Birth (example: ensure it's not in the future)
-  const userDob = new Date(dob);
-  if (isNaN(userDob.getTime()) || userDob > new Date()) {
-    return res.status(400).send('Invalid date of birth');
   }
 
   // Password validation: At least 5 characters, 1 capital letter, 1 number, 1 special character
@@ -85,7 +79,6 @@ app.post('/signup', async (req, res) => {
     lastName,
     email,
     password: hashedPassword,
-    dob: userDob.toISOString(), // Save DOB in ISO string format
     organisation,
     role: "user",
     tasks: {
@@ -137,7 +130,6 @@ app.post('/login', async (req, res) => {
     role: user.role,
     firstName: user.firstName,
     lastName: user.lastName,
-    dob: user.dob,
     token,
     tasks: user.tasks || {},
   });
@@ -171,9 +163,9 @@ app.post('/update-tasks', async (req, res) => {
 });
 
 app.post('/update-profile', async (req, res) => {
-  const { email, firstName, lastName, dob } = req.body;
+  const { email, firstName, lastName} = req.body;
 
-  if (!email || !firstName || !lastName || !dob) {
+  if (!email || !firstName || !lastName) {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
@@ -183,7 +175,7 @@ app.post('/update-profile', async (req, res) => {
   try {
     const updateResult = await usersCollection.updateOne(
       { email },
-      { $set: { firstName, lastName, dob } }
+      { $set: { firstName, lastName} }
     );
 
     if (updateResult.modifiedCount > 0) {

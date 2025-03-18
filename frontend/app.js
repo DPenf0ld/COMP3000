@@ -370,7 +370,6 @@ updateClock();
 const userEmail = localStorage.getItem('userEmail'); // Retrieve the email from localStorage
 const firstName = localStorage.getItem('firstName');
 const lastName = localStorage.getItem('lastName');
-const dob = localStorage.getItem('dob');
 
 
 if (userEmail) {
@@ -385,20 +384,6 @@ if (userEmail) {
 
     const ProfileLastName = document.getElementById('lastName');
     ProfileLastName.innerText = lastName;
-
-
-
-    const ProfileDob = document.getElementById('dob');
-
-    if (dob) {
-        const formattedDob = new Date(dob).toLocaleDateString('en-GB', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        });
-
-        ProfileDob.innerText = formattedDob; // Display formatted date
-    }
 } else {
     console.log('User email not found');
 } 

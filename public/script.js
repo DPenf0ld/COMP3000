@@ -8,7 +8,6 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value;
   const confirmPassword = document.getElementById('confirmPassword').value;
-  const dob = document.getElementById('dob').value;
   const organisation = document.getElementById('organisation').value;
   const signupError = document.querySelector('.signup-error');
 
@@ -38,12 +37,6 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
     return;
   }
 
-  // Validate date of birth
-  if (!dob) {
-    signupError.innerHTML = `<p class="error">Date of birth is required.</p>`; // Show error message
-    return;
-  }
-
   if (!organisation) {
     signupError.innerHTML = `<p class="error">Please select an organisation.</p>`; // Show error message
     return;
@@ -55,7 +48,7 @@ document.getElementById('signup-form')?.addEventListener('submit', async (event)
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ firstName, lastName, email, password, dob, organisation }),
+    body: JSON.stringify({ firstName, lastName, email, password, organisation }),
   });
 
   const result = await response.text();
@@ -97,7 +90,7 @@ document.getElementById('login-form')?.addEventListener('submit', async (event) 
     localStorage.setItem('tasks', JSON.stringify(result.tasks));
     localStorage.setItem('firstName', result.firstName); // Store first name
     localStorage.setItem('lastName', result.lastName);
-    localStorage.setItem('dob', result.dob);
+    localStorage.setItem('organisation', result.organisation);
 
 
     if (result.role === "admin") {
