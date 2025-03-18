@@ -60,7 +60,7 @@ html {
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 2.5em;
     margin-bottom: 10px;
     color: white;
 }
@@ -87,7 +87,7 @@ h1 {
 
 .progress-item p {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
 /* error when trying to access quiz without completing tasks */
@@ -102,16 +102,17 @@ h1 {
 
 /* Desktop Icons */
 .icon {
+    font-weight: bold;
     width: 80px;
     text-align: center;
     color: white;
-    margin: 20px;
+    margin: 50px;
     cursor: pointer;
 }
 
 .icon-img {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
 }
 
 /* Taskbar Icons */
@@ -124,8 +125,8 @@ h1 {
 }
 
 .taskbar-icon {
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
 }
 
 /* Taskbar */
@@ -1276,6 +1277,7 @@ p {
     width: 600px;
     height: auto;
     border-radius: 20px;
+    opacity: 50%;
 }
 
 /* Profile Styles */
