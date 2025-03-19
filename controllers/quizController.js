@@ -294,7 +294,7 @@ export function QuizfirstOpenFunction() {
 
     if (quizComplete) {
         createChart()
-    } else if (quizResults.percentage > 0) {
+    } else if (quizResults.percentage >= 70) {
         phishingCorrect = quizResults.phishingCorrect;
         passwordCorrect = quizResults.passwordCorrect;
         webCorrect = quizResults.webCorrect;
