@@ -85,6 +85,12 @@ app.post('/signup', async (req, res) => {
       passwordtaskComplete: false,
       webtaskComplete: false,
       emailtaskComplete: false,
+    },
+    quizscores: {
+      phishingCorrect:0,
+      passwordCorrect:0,
+      webCorrect:0,
+      percentage:0,
     }
   };
 
@@ -133,6 +139,7 @@ app.post('/login', async (req, res) => {
     organisation: user.organisation,
     token,
     tasks: user.tasks || {},
+    quizscores: user.quizscores || {},
   });
 });
 

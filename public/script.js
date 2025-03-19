@@ -88,6 +88,7 @@ document.getElementById('login-form')?.addEventListener('submit', async (event) 
     localStorage.setItem('token', result.token);
     localStorage.setItem('userEmail', email); // Store email in localStorage
     localStorage.setItem('tasks', JSON.stringify(result.tasks));
+    localStorage.setItem('quizscores', JSON.stringify(result.quizscores));
     localStorage.setItem('firstName', result.firstName); // Store first name
     localStorage.setItem('lastName', result.lastName);
     localStorage.setItem('organisation', result.organisation);
