@@ -59,7 +59,7 @@ app.post('/signup', async (req, res) => {
   if (!organisation) {
     return res.status(400).send('Organisation is required');
   }
- 
+
   const db = client.db('GuardPoint');
   const usersCollection = db.collection('users');
 
@@ -87,10 +87,10 @@ app.post('/signup', async (req, res) => {
       emailtaskComplete: false,
     },
     quizscores: {
-      phishingCorrect:0,
-      passwordCorrect:0,
-      webCorrect:0,
-      percentage:0,
+      phishingCorrect: 0,
+      passwordCorrect: 0,
+      webCorrect: 0,
+      percentage: 0,
     }
   };
 
@@ -181,14 +181,14 @@ app.post('/update-scores', async (req, res) => {
   try {
     const updateResult = await usersCollection.updateOne(
       { email },
-      {  
+      {
         $set: {
-        'quizscores.phishingCorrect': phishingCorrect,
-        'quizscores.passwordCorrect': passwordCorrect,
-        'quizscores.webCorrect': webCorrect,
-        'quizscores.percentage': percentage
+          'quizscores.phishingCorrect': phishingCorrect,
+          'quizscores.passwordCorrect': passwordCorrect,
+          'quizscores.webCorrect': webCorrect,
+          'quizscores.percentage': percentage
+        }
       }
-    }
     );
 
     if (updateResult.modifiedCount > 0) {
@@ -203,7 +203,7 @@ app.post('/update-scores', async (req, res) => {
 });
 
 app.post('/update-profile', async (req, res) => {
-  const { email, firstName, lastName, organisation} = req.body;
+  const { email, firstName, lastName, organisation } = req.body;
 
   if (!email || !firstName || !lastName || !organisation) {
     return res.status(400).json({ message: 'All fields are required' });
@@ -215,7 +215,7 @@ app.post('/update-profile', async (req, res) => {
   try {
     const updateResult = await usersCollection.updateOne(
       { email },
-      { $set: { firstName, lastName, organisation} }
+      { $set: { firstName, lastName, organisation } }
     );
 
     if (updateResult.modifiedCount > 0) {
@@ -233,7 +233,7 @@ app.post('/update-profile', async (req, res) => {
 app.get('/admin/users', async (req, res) => {
   try {
     // Extract the token from the Authorisation header
-    const token = req.headers['authorization']?.split(' ')[1]; 
+    const token = req.headers['authorization']?.split(' ')[1];
     if (!token) {
       return res.status(403).json({ message: 'No token provided' });
     }
