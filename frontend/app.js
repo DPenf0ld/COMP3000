@@ -1,5 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
-import { loadOldQuizResults, failedTasks, quizOpen, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
+import {failedTasks, quizOpen, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
@@ -9,7 +9,6 @@ import { preloademails, emailPreviouslyComplete, emailComplete, resetEmailFromDe
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    loadOldQuizResults()
     preloademails()
     const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
 
@@ -194,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
         profileContainer.style.display = 'none' //hides profile
         if (quizContainer.style.display === 'block') { //closes quiz
             closeQuizFunction()
-        } else if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
+        } else {// if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
             //close everything
             inboxContainer.style.display = 'none';
             passwordContainer.style.display = 'none';
@@ -207,9 +206,9 @@ document.addEventListener('DOMContentLoaded', function () {
             QuizfirstOpenFunction() //always show instructions
 
 
-        } else if (!webtaskComplete || !passwordtaskComplete || !emailtaskComplete ){
-            completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
-        }
+        }// else if (!webtaskComplete || !passwordtaskComplete || !emailtaskComplete ){
+           // completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
+     //   }
     }
 
     // Toggle inbox code

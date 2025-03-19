@@ -94,7 +94,7 @@ app.post('/signup', async (req, res) => {
     }
   };
 
-  
+
 
   try {
     await usersCollection.insertOne(newUser);
@@ -173,11 +173,7 @@ app.post('/update-tasks', async (req, res) => {
 });
 
 app.post('/update-scores', async (req, res) => {
-  const { email, taskName, status } = req.body;
-
-  if (!email || !taskName || status === undefined) {
-    return res.status(400).json({ message: 'Invalid request' });
-  }
+  const { email, phishingCorrect, passwordCorrect, webCorrect, percentage } = req.body;
 
   const db = client.db('GuardPoint');
   const usersCollection = db.collection('users');
@@ -185,7 +181,14 @@ app.post('/update-scores', async (req, res) => {
   try {
     const updateResult = await usersCollection.updateOne(
       { email },
-      { $set: { [`tasks.${taskName}`]: status } }
+      {  
+        $set: {
+        'quizscores.phishingCorrect': phishingCorrect,
+        'quizscores.passwordCorrect': passwordCorrect,
+        'quizscores.webCorrect': webCorrect,
+        'quizscores.percentage': percentage
+      }
+    }
     );
 
     if (updateResult.modifiedCount > 0) {
