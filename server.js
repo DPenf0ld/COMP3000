@@ -94,6 +94,8 @@ app.post('/signup', async (req, res) => {
     }
   };
 
+  
+
   try {
     await usersCollection.insertOne(newUser);
     res.status(201).send('User registered successfully');
@@ -163,6 +165,33 @@ app.post('/update-tasks', async (req, res) => {
       res.status(200).json({ message: 'Task updated successfully' });
     } else {
       res.status(400).json({ message: 'Task update failed' });
+    }
+  } catch (error) {
+    console.error('Error updating tasks:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+app.post('/update-scores', async (req, res) => {
+  const { email, taskName, status } = req.body;
+
+  if (!email || !taskName || status === undefined) {
+    return res.status(400).json({ message: 'Invalid request' });
+  }
+
+  const db = client.db('GuardPoint');
+  const usersCollection = db.collection('users');
+
+  try {
+    const updateResult = await usersCollection.updateOne(
+      { email },
+      { $set: { [`tasks.${taskName}`]: status } }
+    );
+
+    if (updateResult.modifiedCount > 0) {
+      res.status(200).json({ message: 'Scores updated successfully' });
+    } else {
+      res.status(400).json({ message: 'Score update failed' });
     }
   } catch (error) {
     console.error('Error updating tasks:', error);
