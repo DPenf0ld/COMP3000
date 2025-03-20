@@ -1,5 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
-import {failedTasks, quizOpen, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
+import { resetconfirmquizFunction, resetbackquizFunction, resetQuizFunction, failedTasks, quizOpen, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
@@ -160,7 +160,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Quiz code
     const completeTasks = document.querySelector('.complete-tasks');
 
-
+    const resetQuiz = document.getElementById('reset-quiz');
+    resetQuiz.addEventListener('click', resetQuizFunction);
 
     const submitQuiz = document.getElementById('submit-quiz');
     submitQuiz.addEventListener('click', checkAnswer);
@@ -182,6 +183,12 @@ document.addEventListener('DOMContentLoaded', function () {
     CloseQuiz.addEventListener('click', closeQuizFunction);
 
     const quizContainer = document.getElementById('quiz-container');
+
+    const resetbackquizbutton = document.getElementById('reset-backquiz-button');
+    resetbackquizbutton.addEventListener('click', resetbackquizFunction);
+
+    const resetconfirmquizbutton = document.getElementById('reset-confirmquiz-button');
+    resetconfirmquizbutton.addEventListener('click', resetconfirmquizFunction);
 
     const backquizbutton = document.getElementById('backquiz-button');
     backquizbutton.addEventListener('click', backquizFunction);

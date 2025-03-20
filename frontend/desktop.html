@@ -462,8 +462,8 @@
                     <p id="web-result"></p>
                     <button id="web-redo" class="redo-button">Redo Web Task</button>
                     <p id="pass/fail-text"></p>
+                    <button id="reset-quiz" class="redo-button">Reset Quiz</button>
                 </div>
-                <!--<canvas id="pieChart"></canvas>-->
             </div>
         </div>
         <button id="close-quiz" aria-label="Close Quiz">&times;</button> <!-- Close button -->
@@ -476,6 +476,18 @@
                 <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
                     <button id="backquiz-button" class="nav-button">Back</button>
                     <button id="confirmquiz-button" class="nav-button">Confirm</button>
+                </div>
+            </div>
+        </div>
+        <div id="reset-quiz-model" class="instructions" style="display: none;">
+            <div class="instructions-content">
+                <h2 id="page-title">Are you sure you want to reset the Quiz?</h2>
+                <p id="page-content">
+                    Previous score will be stored, unless a better score is achieved.
+                </p>
+                <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
+                    <button id="reset-backquiz-button" class="nav-button">Back</button>
+                    <button id="reset-confirmquiz-button" class="nav-button">Confirm</button>
                 </div>
             </div>
         </div>
