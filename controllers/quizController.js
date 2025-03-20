@@ -565,10 +565,10 @@ export function QuizfirstOpenFunction() {
 export async function sendQuizResults() {
 
     const quizscores = JSON.parse(localStorage.getItem('quizscores')) || {};
-    const currentPercentage = localStorage.getItem('currentPercentage');
+    const percentage = localStorage.getItem('currentPercentage');
     const userEmail = localStorage.getItem('userEmail');
 
-    if (Number(currentPercentage) > Number(quizscores.percentage) || quizscores.percentage == 0) {  //not working, must turn to int
+    if (Number(percentage) > Number(quizscores.percentage) || quizscores.percentage == 0) {  //not working, must turn to int
         try {
             const response = await fetch('/update-scores', {
                 method: 'POST',
@@ -580,7 +580,7 @@ export async function sendQuizResults() {
                     phishingCorrect,
                     passwordCorrect,
                     webCorrect,
-                    currentPercentage
+                    percentage
                 }),
             });
 
@@ -588,7 +588,8 @@ export async function sendQuizResults() {
             localStorage.setItem('quizscores', JSON.stringify({
                 phishingCorrect,
                 passwordCorrect,
-                webCorrect
+                webCorrect,
+                percentage
             }));
 
             if (!response.ok) { //error handling
