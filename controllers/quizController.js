@@ -176,6 +176,10 @@ export function loadQuestion() {
     quizOpen = true;
     let questionData = Questions[currentQuestionIndex];
 
+    // Update the results text
+    document.getElementById('quiz-counter').innerHTML = `
+        Question ${currentQuestionIndex+1}/15 <br><br>
+    `;
     // update the question
     document.querySelector(".quiz-multiplechoice-box h1").textContent = questionData.question;
 
@@ -231,6 +235,7 @@ function createChart() {
     const quizBox = document.querySelector('.quiz-multiplechoice-box');
     quizBox.style.display = 'none';  // Hide only the quiz
 
+    document.getElementById('quiz-counter').style.display = 'none';
     progressBar.style.width = `100%`;
 
     let phishingResult = false;
@@ -445,6 +450,8 @@ export function QuizfirstOpenFunction() {
 
     const quizBox = document.querySelector('.quiz-multiplechoice-box');
     quizBox.style.display = 'block';  // unhide
+
+    document.getElementById('quiz-counter').style.display = 'block';
 
     const quizResults = JSON.parse(localStorage.getItem('quizscores')) || {};
 

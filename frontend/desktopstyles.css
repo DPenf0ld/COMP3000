@@ -1439,6 +1439,12 @@ p {
     border-radius: 10px;
 }
 
+.quiz-headers {
+    text-align: center;  
+    display: block;
+    width: 100%;
+}
+
 /* Styles for the close button */
 #close-quiz {
     z-index: 100;
