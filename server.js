@@ -231,37 +231,40 @@ app.post('/update-profile', async (req, res) => {
 
 //FIX HERE
 app.get('/admin/users', async (req, res) => {
+  
+  const token = req.headers.authorization?.split(' ')[1];
+
+  console.log('Authorisation Header:', req.headers.authorization); //check header
+
+  if (!token) { 
+    return res.status(401).json({ message: 'Unauthorized' }); //error here?
+  }
+
   try {
-    // Extract the token from the Authorisation header
-    const token = req.headers['authorization']?.split(' ')[1];
-    if (!token) {
-      return res.status(403).json({ message: 'No token provided' });
-    }
-
-
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const db = client.db('GuardPoint');
     const usersCollection = db.collection('users');
 
-    // Find admin's organisation
-    const admin = await usersCollection.findOne({ _id: new ObjectId(decoded.userId), role: 'admin' });
+    // Get the admin's organisation
+    const admin = await usersCollection.findOne({ _id: new MongoClient.ObjectId(decoded.userId) });
 
-    if (!admin) {
-      return res.status(403).json({ message: 'Access denied' });
+    if (!admin || admin.role !== 'admin') {
+      return res.status(403).json({ message: 'Forbidden' });
     }
 
-    // Get users from the same organisation
+    // Retrieve users who are in the same organisation but are not admins
     const users = await usersCollection.find(
       { organisation: admin.organisation, role: 'user' },
       { projection: { firstName: 1, lastName: 1, email: 1, tasks: 1 } }
     ).toArray();
 
-    res.json(users);
+    res.status(200).json(users);
   } catch (error) {
-    console.error('Detailed error:', error); // Log detailed error
-    res.status(500).json({ message: 'Server error', error: error.message }); // Send error message in response
+    console.error('Error fetching users:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 
 // Start the server
@@ -270,3 +273,12 @@ app.listen(PORT, () => {
   connectToMongo();
   console.log(`Server running on port ${PORT}`);
 });
+
+// Status codes reminder:
+// 200 - OK: Successful request, action completed.
+// 201 - Created: New resource created (e.g., user).
+// 400 - Bad Request: Invalid input or missing parameters. CLIENT SIDE
+// 401 - Unauthorized: Auth required or invalid token.
+// 403 - Forbidden: Authenticated but no permission to access.
+// 404 - Not Found: Resource (e.g., user) not found.
+// 500 - Internal Server Error: Server error or unexpected condition.
