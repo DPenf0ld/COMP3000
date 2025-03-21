@@ -282,6 +282,10 @@ function createChart() {
     // Check if all tasks are passed
     if (webResult && passwordResult && phishingResult) {
         document.getElementById('pass/fail-text').innerHTML = `<span style="color: green; font-weight: bold;">Congratulations! You passed all tasks 🎉</span>`;
+        const quizIcon = document.querySelector("#Quiz img");
+        if (quizIcon) {
+            quizIcon.src = "assets/icons/quiz-tick-icon.png";
+        }
     } else {
         document.getElementById('pass/fail-text').innerHTML = `<span style="color: red; font-weight: bold;">You did not pass all tasks. Try again! 🔄</span>`;
     }
@@ -371,6 +375,13 @@ export function resetconfirmquizFunction() {
 
     quizComplete = false;
     reset=true;
+
+    const quizIcon = document.querySelector("#Quiz img");
+    if (quizIcon) {
+        quizIcon.src = "assets/icons/quiz.png";
+    }
+
+
     QuizfirstOpenFunction()
 }
 
