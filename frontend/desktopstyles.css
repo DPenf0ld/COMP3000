@@ -1430,6 +1430,7 @@ p {
     width: 100%;
     border-radius: 10px;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .progress-bar {
@@ -1440,13 +1441,13 @@ p {
 }
 
 .quiz-headers {
-    text-align: center;  
+    text-align: center;
     display: block;
     width: 100%;
 }
 
-#results-header{
-    text-align: center;  
+#results-header {
+    text-align: center;
     display: block;
     width: 100%;
 }
@@ -1479,14 +1480,16 @@ canvas {
     max-height: 600px;
 }
 
+
 .quiz-interface {
     padding: 3%;
 }
 
 .quiz-multiplechoice-box h1 {
-    font-size: 24px;
+    font-size: 2.3rem;
     margin-bottom: 15px;
     color: #ffffff;
+    text-align: center;
 }
 
 
@@ -1494,14 +1497,26 @@ canvas {
     margin-bottom: 20px;
     color: white;
     display: flex;
-    flex-direction: column; 
-    gap: 10px; 
+    flex-direction: column;
+    gap: 10px;
 }
 
 .quiz-radio-section input[type="radio"] {
     margin-right: 10px;
     cursor: pointer;
 }
+
+.quiz-radio-section label {
+    font-size: 2rem;
+}
+
+#submit-quiz{
+    font-size: 2rem;
+    padding: 1%;
+    font-weight: bold;
+}
+
+
 
 
 label {
@@ -1519,11 +1534,16 @@ label:hover {
 }
 
 
-
 .result-info {
     /*put text and pie chart side by side*/
     display: flex;
     justify-content: flex-start;
+    margin-left: 5%;
+    margin-top: 0%;
+}
+
+.result-info p {
+    font-size: 1.2rem;
 }
 
 #quiz-results-text {
@@ -1538,9 +1558,10 @@ label:hover {
     cursor: pointer;
     background-color: #007bff;
     color: white;
-    font-size: 14px;
+    font-size: 1rem;
     min-width: 100px;
     text-align: center;
+    font-weight: bold;
 }
 
 .redo-button:hover {

@@ -22,7 +22,7 @@ let webCorrect = 0;
 let passwordCorrect = 0;
 let pieCreated = false;
 let quizComplete = false;
-let reset=false;
+let reset = false;
 
 
 // Quiz Questions 
@@ -178,7 +178,7 @@ export function loadQuestion() {
 
     // Update the results text
     document.getElementById('quiz-counter').innerHTML = `
-        Question ${currentQuestionIndex+1}/15 <br><br>
+        Question ${currentQuestionIndex + 1}/15 <br><br>
     `;
     // update the question
     document.querySelector(".quiz-multiplechoice-box h1").textContent = questionData.question;
@@ -230,7 +230,7 @@ export function checkAnswer() {
 }
 
 function createChart() {
-    reset=false;
+    reset = false;
 
     const quizBox = document.querySelector('.quiz-multiplechoice-box');
     quizBox.style.display = 'none';  // Hide only the quiz
@@ -246,7 +246,7 @@ function createChart() {
     document.getElementById('results-header').style.display = 'block';
     document.getElementById('results-task-header').style.display = 'block';
     document.getElementById('pass/fail-header').style.display = 'block';
-    document.getElementById('reset-quiz').style.display = 'block';
+
 
     const totalCorrect = phishingCorrect + passwordCorrect + webCorrect;
     const percentage = ((totalCorrect / 15) * 100).toFixed(2); // Round to 2 decimal places
@@ -265,7 +265,7 @@ function createChart() {
         phishingResult = true;
         document.getElementById('phishing-result').innerHTML = `<span style="color: green; font-weight: bold;">Phishing task passed ✅</span>`;
     } else {
-        document.getElementById('phishing-result').innerHTML = `<span style="color: red; font-weight: bold;">Phishing task failed ❌</span>`;
+        document.getElementById('phishing-result').innerHTML = `<span style="color:#e97c7c; font-weight: bold;">Phishing task failed ❌</span>`;
         document.getElementById('email-redo').style.display = 'block';
     }
 
@@ -273,7 +273,7 @@ function createChart() {
         passwordResult = true;
         document.getElementById('password-result').innerHTML = `<span style="color: green; font-weight: bold;">Password task passed ✅</span>`;
     } else {
-        document.getElementById('password-result').innerHTML = `<span style="color: red; font-weight: bold;">Password task failed ❌</span>`;
+        document.getElementById('password-result').innerHTML = `<span style="color:#e97c7c; font-weight: bold;">Password task failed ❌</span>`;
         document.getElementById('password-redo').style.display = 'block';
     }
 
@@ -281,7 +281,7 @@ function createChart() {
         webResult = true;
         document.getElementById('web-result').innerHTML = `<span style="color: green; font-weight: bold;">Web task passed ✅</span>`;
     } else {
-        document.getElementById('web-result').innerHTML = `<span style="color: red; font-weight: bold;">Web task failed ❌</span>`;
+        document.getElementById('web-result').innerHTML = `<span style="color:#e97c7c; font-weight: bold;">Web task failed ❌</span>`;
         document.getElementById('web-redo').style.display = 'block';
     }
 
@@ -292,8 +292,9 @@ function createChart() {
         if (quizIcon) {
             quizIcon.src = "assets/icons/quiz-tick-icon.png";
         }
+        document.getElementById('reset-quiz').style.display = 'block';
     } else {
-        document.getElementById('pass/fail-text').innerHTML = `<span style="color: red; font-weight: bold;">You did not pass all tasks. Try again! 🔄</span>`;
+        document.getElementById('pass/fail-text').innerHTML = `<span style="color:#e97c7c; font-weight: bold;">You did not pass all tasks. Try again! 🔄</span>`;
     }
 
     //MUST CREATE ID IN HERE NOT HTML TO ALLOW THE ID TO BE DELETED AND REMADE EVERY TIME A PIE CHART IS NEEDED
@@ -311,14 +312,13 @@ function createChart() {
         data: {
             labels: ["Phishing", "Password", "Web"],
             datasets: [{
-                backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"], // Customize colors
+                backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
                 data: [phishingCorrect, passwordCorrect, webCorrect]
             }]
         },
         options: {
-            title: {
-                display: true,
-                text: "Summary of Results",
+            legend: {
+                display: false 
             }
         }
     });
@@ -380,7 +380,7 @@ export function resetconfirmquizFunction() {
     resetModel.style.display = 'none';
 
     quizComplete = false;
-    reset=true;
+    reset = true;
 
     const quizIcon = document.querySelector("#Quiz img");
     if (quizIcon) {
@@ -431,7 +431,7 @@ export function QuizfirstOpenFunction() {
         oldPiechart.remove(); // NEED CODE TO DELETE THE OLD PIE CHART
     }
 
-    pieCreated=false;
+    pieCreated = false;
 
     // Hide results and buttons
     document.getElementById('results-header').style.display = 'none';
