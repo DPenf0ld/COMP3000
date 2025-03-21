@@ -8,6 +8,7 @@ import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
+
 // Load environment variables
 dotenv.config();
 
@@ -133,27 +134,16 @@ app.post('/login', async (req, res) => {
     expiresIn: '1h',
   });
 
-  let responseData = {
+  res.status(200).json({
     message: 'Login successful',
+    token,
     role: user.role,
     firstName: user.firstName,
     lastName: user.lastName,
     organisation: user.organisation,
-    token,
     tasks: user.tasks || {},
     quizscores: user.quizscores || {},
-  };
-
-  // admin retrives all users in their organisation
-  if (user.role === "admin") {
-    const organisationUsers = await usersCollection
-      .find({ organisation: user.organisation }, { projection: { password: 0 } })
-      .toArray();
-
-    responseData.usersInOrganisation = organisationUsers;
-  }
-
-  res.status(200).json(responseData);
+  });
 });
 
 app.post('/update-tasks', async (req, res) => {
@@ -240,41 +230,44 @@ app.post('/update-profile', async (req, res) => {
   }
 });
 
-//FIX HERE
-app.get('/admin/users', async (req, res) => {
+//PROBLEM HERE
+//retrieve all users info in the same org
+app.get('/admin-dashboard', async (req, res) => {
 
-  const token = req.headers.authorization?.split(' ')[1];
 
-  console.log('Authorisation Header:', req.headers.authorization); //check header
 
+  //THIS IS THE PROBLEM - UNAUTHORISED TOKEN????
+  const token = req.headers['authorization']?.split(' ')[1];
   if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' }); //error here?
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    //CHECK 
+    console.log('Decoded Token:', decoded);
+
     const db = client.db('GuardPoint');
     const usersCollection = db.collection('users');
 
-    // Get the admin's organisation
-    const admin = await usersCollection.findOne({ _id: new MongoClient.ObjectId(decoded.userId) });
+    const admin = await usersCollection.findOne({ _id: new ObjectId(decoded.userId) });
+    console.log('Admin Data:', admin);
 
     if (!admin || admin.role !== 'admin') {
-      return res.status(403).json({ message: 'Forbidden' });
+      return res.status(403).json({ message: 'Access denied' });
     }
 
-    // Retrieve users who are in the same organisation but are not admins
-    const users = await usersCollection.find(
-      { organisation: admin.organisation, role: 'user' },
-      { projection: { firstName: 1, lastName: 1, email: 1, tasks: 1 } }
-    ).toArray();
+    const organisationUsers = await usersCollection
+      .find({ organisation: admin.organisation }, { projection: { password: 0 } })
+      .toArray();
 
-    res.status(200).json(users);
+    res.status(200).json({ usersInOrganisation: organisationUsers }); //sends the data
   } catch (error) {
-    console.error('Error fetching users:', error);
+    console.error('Error verifying admin:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 // Start the server
 const PORT = process.env.PORT || 5000;
