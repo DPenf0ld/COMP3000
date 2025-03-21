@@ -133,7 +133,7 @@ app.post('/login', async (req, res) => {
     expiresIn: '1h',
   });
 
-  res.status(200).json({
+  let responseData = {
     message: 'Login successful',
     role: user.role,
     firstName: user.firstName,
@@ -142,7 +142,18 @@ app.post('/login', async (req, res) => {
     token,
     tasks: user.tasks || {},
     quizscores: user.quizscores || {},
-  });
+  };
+
+  // admin retrives all users in their organisation
+  if (user.role === "admin") {
+    const organisationUsers = await usersCollection
+      .find({ organisation: user.organisation }, { projection: { password: 0 } })
+      .toArray();
+
+    responseData.usersInOrganisation = organisationUsers;
+  }
+
+  res.status(200).json(responseData);
 });
 
 app.post('/update-tasks', async (req, res) => {
@@ -231,12 +242,12 @@ app.post('/update-profile', async (req, res) => {
 
 //FIX HERE
 app.get('/admin/users', async (req, res) => {
-  
+
   const token = req.headers.authorization?.split(' ')[1];
 
   console.log('Authorisation Header:', req.headers.authorization); //check header
 
-  if (!token) { 
+  if (!token) {
     return res.status(401).json({ message: 'Unauthorized' }); //error here?
   }
 
@@ -264,8 +275,6 @@ app.get('/admin/users', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
-
 
 // Start the server
 const PORT = process.env.PORT || 5000;
