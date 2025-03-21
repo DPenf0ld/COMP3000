@@ -235,6 +235,7 @@ function createChart() {
     const quizBox = document.querySelector('.quiz-multiplechoice-box');
     quizBox.style.display = 'none';  // Hide only the quiz
 
+    document.getElementById('quiz-title').style.display = 'none';
     document.getElementById('quiz-counter').style.display = 'none';
     progressBar.style.width = `100%`;
 
@@ -317,7 +318,7 @@ function createChart() {
         options: {
             title: {
                 display: true,
-                text: "GuardPoint Results"
+                text: "Summary of Results",
             }
         }
     });
@@ -452,6 +453,7 @@ export function QuizfirstOpenFunction() {
     quizBox.style.display = 'block';  // unhide
 
     document.getElementById('quiz-counter').style.display = 'block';
+    document.getElementById('quiz-title').style.display = 'block';
 
     const quizResults = JSON.parse(localStorage.getItem('quizscores')) || {};
 

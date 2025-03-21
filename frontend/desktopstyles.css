@@ -1445,6 +1445,12 @@ p {
     width: 100%;
 }
 
+#results-header{
+    text-align: center;  
+    display: block;
+    width: 100%;
+}
+
 /* Styles for the close button */
 #close-quiz {
     z-index: 100;
