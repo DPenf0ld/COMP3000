@@ -1568,3 +1568,72 @@ label:hover {
     background-color: #0056b3;
     /* Darker blue when hovered */
 }
+
+
+/*admin dashboard styles*/
+#user-table-body{
+    font-weight: bold;
+    color: white;
+}
+
+#user-table{
+    font-weight: bold;
+    color: white;
+    width: 100%;
+    border-collapse: collapse; /* stops double boarders*/
+    border: 3px solid white; /* Outer border */
+}
+
+/* Row Spacing */
+#user-table tbody tr {
+    height: auto;
+}
+
+/* Column Spacing */
+#user-table td {
+    padding: 8px 15px;
+    border: 2px solid white; /* Inner cell borders */
+}
+
+
+.GuardPoint-icon-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    margin-bottom: 3%;
+}
+
+.GuardPoint-icon-admin-img {
+    width: 300px;
+    height: auto;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.GuardPoint-icon-admin h1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 1%;
+    background-color: #333;
+    border-radius: 10px;
+}
+
+.info {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 20px;
+    height: auto;
+    background-color: #333;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.controls{
+    margin-right: 30px;
+}

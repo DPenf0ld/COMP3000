@@ -1,5 +1,5 @@
 import { adminLogOutFunction, BackLogOutFunction, ConfirmLogOut } from '../controllers/adminLogOutController.js';
-
+import { updateClock } from '../controllers/clockController.js';
 document.addEventListener('DOMContentLoaded', async function () {
     const adminLogOut = document.getElementById('admin-LogoutButton');
     adminLogOut.addEventListener('click', adminLogOutFunction);
@@ -32,6 +32,11 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 });
 
+// Call clock function and update every second
+setInterval(updateClock, 1000);
+updateClock();
+
+
 // Assume 'organisationUsers' is the array received from the backend
 function populateUserTable(organisationUsers) {
     const tableBody = document.getElementById("user-table-body");
@@ -44,9 +49,9 @@ function populateUserTable(organisationUsers) {
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
             <td>${user.email}</td>
-            <td>${user.tasks?.emailtaskComplete ? "✔️" : "❌"}</td>
-            <td>${user.tasks?.passwordtaskComplete ? "✔️" : "❌"}</td>
-            <td>${user.tasks?.webtaskComplete ? "✔️" : "❌"}</td>
+            <td>${user.tasks?.emailtaskComplete ? "✅" : "❌"}</td>
+            <td>${user.tasks?.passwordtaskComplete ? "✅" : "❌"}</td>
+            <td>${user.tasks?.webtaskComplete ? "✅" : "❌"}</td>
             <td>${user.quizscores?.phishingCorrect ?? 0}</td>
             <td>${user.quizscores?.passwordCorrect ?? 0}</td>
             <td>${user.quizscores?.webCorrect ?? 0}</td>

@@ -13,6 +13,10 @@
 <body>
     <div class="animated-background"></div>
     <!-- Desktop Area -->
+    <div class="GuardPoint-icon-admin">
+        <h1>User Results</h1>
+        <h2>Average Quiz Percentage</h2>
+    </div>
     <div class="desktop-area" id="desktop-area">
         <table id="user-table">
             <thead>
@@ -32,13 +36,13 @@
             <tbody id="user-table-body">
             </tbody>
         </table>
-        <div class="logoutRight">
-            <button class="reset" id="admin-LogoutButton">Log Out</button>
-        </div>
-        <div class="GuardPoint-icon">
-            <img src="assets/icons/GuardPoint-Icon.png" alt="GuardPoint-Icon" class="GuardPoint-icon-img">
-        </div>
-        <div class="clock" id="clock"></div>
+        <div class="info">
+            <img src="assets/icons/GuardPoint-Icon.png" alt="GuardPoint-icon-admin-img" class="GuardPoint-icon-admin-img">
+            <div class="controls">
+                <div class="clock" id="clock"></div>
+                <button class="reset" id="admin-LogoutButton">Log Out</button>
+            </div>
+        </div>        
     </div>
     <div id="admin-instructions-logout" class="instructions" style="display: none;">
         <div class="instructions-content">
