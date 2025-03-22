@@ -44,7 +44,7 @@ function populateUserTable(organisationUsers) {
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
             <td>${user.email}</td>
-            <td>${user.tasks?.phishingtaskComplete ? "✔️" : "❌"}</td>
+            <td>${user.tasks?.emailtaskComplete ? "✔️" : "❌"}</td>
             <td>${user.tasks?.passwordtaskComplete ? "✔️" : "❌"}</td>
             <td>${user.tasks?.webtaskComplete ? "✔️" : "❌"}</td>
             <td>${user.quizscores?.phishingCorrect ?? 0}</td>
