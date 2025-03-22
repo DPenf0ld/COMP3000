@@ -387,6 +387,7 @@ p {
     min-width: 100px;
     text-align: center;
     margin-top: 5px;
+    font-weight: bold;
 }
 
 .reset:hover {
@@ -415,6 +416,7 @@ p {
     font-size: 14px;
     min-width: 100px;
     text-align: center;
+    font-weight: bold;
 }
 
 .nav-button:hover {
@@ -1643,4 +1645,22 @@ label:hover {
 #scrollable {
     max-width: 100%;
     overflow-x: auto;
+}
+
+.graph-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #023e7e;
+    color: white;
+    font-size: 1.3rem;
+    min-width: 100px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.graph-button:hover {
+    background-color: #002144;
+    /* Darker blue when hovered */
 }
