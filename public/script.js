@@ -95,7 +95,11 @@ document.getElementById('login-form')?.addEventListener('submit', async (event) 
 
 
     if (result.role === "admin") {
-      window.location.href = "admin.html"; // Redirect admins
+      localStorage.setItem('organisationUsers', JSON.stringify(result.organisationUsers)); //must string since cannot store array in local storage
+      loginError.innerHTML = '<p class="success">Login successful!</p>';
+      setTimeout(() => {
+        window.location.href = "admin.html"; // Redirect admins
+      }, 500); // delay to read successful sign in
     } else {
       loginError.innerHTML = '<p class="success">Login successful!</p>';
       setTimeout(() => {

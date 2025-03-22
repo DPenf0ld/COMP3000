@@ -20,71 +20,38 @@ document.addEventListener('DOMContentLoaded', async function () {
         return;
     }
 
-    //RETURNING UNDEFINED
-    try {
-        console.log('Sending request with token:', token); 
+    const organisationUsers = JSON.parse(localStorage.getItem('organisationUsers')) || [];
 
-
-        const response = await fetch('http://localhost:5000/admin-dashboard', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch user data');
-        }
-
-        const data = await response.json();
-        console.log('Admin Data:', data); // Debugging
-
-
-    if (data && data.usersInOrganisation && Array.isArray(data.usersInOrganisation)) {
-        console.log('Users in Organisation:', data.usersInOrganisation);
-
-        // Store in localStorage
-        localStorage.setItem('usersInOrganisation', JSON.stringify(data.usersInOrganisation));
-        populateUserTable(data.usersInOrganisation);
+    // Check if organisationUsers has been successful
+    if (organisationUsers.length > 0) {
+        populateUserTable(organisationUsers);
     } else {
-        console.log('No users found or invalid data structure');
-    }
-
-    // confirm its being stored
-    const storedUsers = JSON.parse(localStorage.getItem('usersInOrganisation'));
-    console.log('Stored Users in Organisation:', storedUsers);
-    //NOTHING BEING STORED HERE
-
-
-    } catch (error) {
-        console.log('Error fetching user data:', error);
-        alert('Error retrieving user data. Please try again later.');
+        console.log('No user data found in localStorage.');
     }
 
 
 });
 
+// Assume 'organisationUsers' is the array received from the backend
+function populateUserTable(organisationUsers) {
+    const tableBody = document.getElementById("user-table-body");
+    tableBody.innerHTML = ""; //clear
 
-function populateUserTable(users) {
-    const tableBody = document.getElementById('user-table-body');
-    if (!tableBody) {
-        console.error('Table body element not found');
-        return;
-    }
+    organisationUsers.forEach(user => { //row per user
+        const row = document.createElement("tr");
 
-    tableBody.innerHTML = '';
-
-    users.forEach(user => {
-        const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${user.firstName || 'N/A'}</td>
-            <td>${user.lastName || 'N/A'}</td>
-            <td>${user.email || 'N/A'}</td>
-            <td>${calculateCompletedTasks(user.tasks || [])}</td>
+            <td>${user.firstName}</td>
+            <td>${user.lastName}</td>
+            <td>${user.email}</td>
+            <td>${user.tasks?.phishingtaskComplete ? "✔️" : "❌"}</td>
+            <td>${user.tasks?.passwordtaskComplete ? "✔️" : "❌"}</td>
+            <td>${user.tasks?.webtaskComplete ? "✔️" : "❌"}</td>
+            <td>${user.quizscores?.phishingCorrect ?? 0}</td>
+            <td>${user.quizscores?.passwordCorrect ?? 0}</td>
+            <td>${user.quizscores?.webCorrect ?? 0}</td>
+            <td>${user.quizscores?.percentage ?? "0"}%</td>
         `;
         tableBody.appendChild(row);
     });
 }
-
-

@@ -134,6 +134,15 @@ app.post('/login', async (req, res) => {
     expiresIn: '1h',
   });
 
+  let organisationUsers = [];
+
+  // If user is an admin, retrieve all users in the same organisation
+  if (user.role === 'admin') {
+    organisationUsers = await usersCollection
+      .find({ organisation: user.organisation }, { projection: { password: 0 } })
+      .toArray();
+  }
+
   res.status(200).json({
     message: 'Login successful',
     token,
@@ -143,6 +152,7 @@ app.post('/login', async (req, res) => {
     organisation: user.organisation,
     tasks: user.tasks || {},
     quizscores: user.quizscores || {},
+    organisationUsers, // will be kept empty unless the user is an admin
   });
 });
 
@@ -229,45 +239,6 @@ app.post('/update-profile', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
-//PROBLEM HERE
-//retrieve all users info in the same org
-app.get('/admin-dashboard', async (req, res) => {
-
-
-
-  //THIS IS THE PROBLEM - UNAUTHORISED TOKEN????
-  const token = req.headers['authorization']?.split(' ')[1];
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    //CHECK 
-    console.log('Decoded Token:', decoded);
-
-    const db = client.db('GuardPoint');
-    const usersCollection = db.collection('users');
-
-    const admin = await usersCollection.findOne({ _id: new ObjectId(decoded.userId) });
-    console.log('Admin Data:', admin);
-
-    if (!admin || admin.role !== 'admin') {
-      return res.status(403).json({ message: 'Access denied' });
-    }
-
-    const organisationUsers = await usersCollection
-      .find({ organisation: admin.organisation }, { projection: { password: 0 } })
-      .toArray();
-
-    res.status(200).json({ usersInOrganisation: organisationUsers }); //sends the data
-  } catch (error) {
-    console.error('Error verifying admin:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
 
 // Start the server
 const PORT = process.env.PORT || 5000;
