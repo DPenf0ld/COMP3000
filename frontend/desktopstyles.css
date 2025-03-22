@@ -1577,9 +1577,11 @@ label:hover {
 }
 
 #user-table{
+    margin-left: 3%;
+    margin-right: 3%;
     font-weight: bold;
     color: white;
-    width: 100%;
+    width: 94%;
     border-collapse: collapse; /* stops double boarders*/
     border: 3px solid white; /* Outer border */
 }
@@ -1601,7 +1603,7 @@ label:hover {
     flex-direction: column;
     align-items: center;
     z-index: 1;
-    margin-bottom: 3%;
+    margin-bottom: 4%;
 }
 
 .GuardPoint-icon-admin-img {
@@ -1636,4 +1638,9 @@ label:hover {
 
 .controls{
     margin-right: 30px;
+}
+
+#scrollable {
+    max-width: 100%;
+    overflow-x: auto;
 }
