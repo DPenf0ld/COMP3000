@@ -66,15 +66,15 @@ export function populateUserTable(organisationUsers) {
             <td>${user.email}</td>
             <td>
             ${user.tasks?.emailtaskComplete ? "✅" : "❌"}
-            <button class="reset">Reset</button>
+            ${user.tasks?.emailtaskComplete ? `<button class="reset">Reset</button>` : ""} 
             </td>
             <td>
             ${user.tasks?.passwordtaskComplete ? "✅" : "❌"}
-            <button class="reset">Reset</button>
+            ${user.tasks?.passwordtaskComplete ? `<button class="reset">Reset</button>` : ""} 
             </td>
             <td>
             ${user.tasks?.webtaskComplete ? "✅" : "❌"}
-            <button class="reset">Reset</button>
+            ${user.tasks?.webtaskComplete ? `<button class="reset">Reset</button>` : ""} 
             </td>
             <td>${user.quizscores?.phishingCorrect ?? 0}/5</td>
             <td>${user.quizscores?.passwordCorrect ?? 0}/5</td>
