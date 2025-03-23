@@ -64,13 +64,25 @@ export function populateUserTable(organisationUsers) {
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
             <td>${user.email}</td>
-            <td>${user.tasks?.emailtaskComplete ? "✅" : "❌"}</td>
-            <td>${user.tasks?.passwordtaskComplete ? "✅" : "❌"}</td>
-            <td>${user.tasks?.webtaskComplete ? "✅" : "❌"}</td>
+            <td>
+            ${user.tasks?.emailtaskComplete ? "✅" : "❌"}
+            <button class="reset">Reset</button>
+            </td>
+            <td>
+            ${user.tasks?.passwordtaskComplete ? "✅" : "❌"}
+            <button class="reset">Reset</button>
+            </td>
+            <td>
+            ${user.tasks?.webtaskComplete ? "✅" : "❌"}
+            <button class="reset">Reset</button>
+            </td>
             <td>${user.quizscores?.phishingCorrect ?? 0}/5</td>
             <td>${user.quizscores?.passwordCorrect ?? 0}/5</td>
             <td>${user.quizscores?.webCorrect ?? 0}/5</td>
-            <td>${user.quizscores?.percentage ?? "0"}%</td>
+            <td>
+            ${user.quizscores?.percentage ?? "0"}%
+            ${user.quizscores?.percentage > 0 ? `<button class="reset">Reset</button>` : ""} 
+            </td>
             <td class="result-pass-fail">${result}</td> 
         `;
             tableBody.appendChild(row);

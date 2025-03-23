@@ -1581,11 +1581,11 @@ label:hover {
 
 #user-table{
     font-size: 1.4rem;
-    margin-left: 3%;
-    margin-right: 3%;
+    margin-left: 2%;
+    margin-right: 2%;
     font-weight: bold;
     color: white;
-    width: 94%;
+    width: 96%;
     border-collapse: collapse; /* stops double boarders*/
     border: 3px solid white; /* Outer border */
 }
