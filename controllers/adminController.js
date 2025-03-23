@@ -28,6 +28,8 @@ export function populateUserTable(organisationUsers) {
 
     let TotalPercentage = 0.00;
     let UserCount = 0;
+    let result = "Incomplete";
+    let resultColour = "orange"
 
     const tableBody = document.getElementById("user-table-body");
     tableBody.innerHTML = ""; //clear
@@ -47,6 +49,17 @@ export function populateUserTable(organisationUsers) {
 
             const row = document.createElement("tr");
 
+            if (user.quizscores?.percentage>=70){
+                result = "Passed";
+                resultColour = "#4CAF50" //cant see normal green
+            } else if(user.quizscores?.percentage==0){
+                result = "Incomplete";
+                resultColour = "orange"
+            } else{
+                result = "Failed";
+                resultColour = "red"
+            }
+
             row.innerHTML = `
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
@@ -54,14 +67,16 @@ export function populateUserTable(organisationUsers) {
             <td>${user.tasks?.emailtaskComplete ? "✅" : "❌"}</td>
             <td>${user.tasks?.passwordtaskComplete ? "✅" : "❌"}</td>
             <td>${user.tasks?.webtaskComplete ? "✅" : "❌"}</td>
-            <td>${user.quizscores?.phishingCorrect ?? 0}</td>
-            <td>${user.quizscores?.passwordCorrect ?? 0}</td>
-            <td>${user.quizscores?.webCorrect ?? 0}</td>
+            <td>${user.quizscores?.phishingCorrect ?? 0}/5</td>
+            <td>${user.quizscores?.passwordCorrect ?? 0}/5</td>
+            <td>${user.quizscores?.webCorrect ?? 0}/5</td>
             <td>${user.quizscores?.percentage ?? "0"}%</td>
+            <td class="result-pass-fail">${result}</td> 
         `;
             tableBody.appendChild(row);
 
-
+            //change the colour
+            row.querySelector(".result-pass-fail").style.color = resultColour;
         }
     });
 
