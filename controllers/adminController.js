@@ -5,6 +5,7 @@ const desktopContainer = document.getElementById('desktop-area');
 
 const GraphButton = document.getElementById('Graph-view');
 const TableButton = document.getElementById('Table-view');
+const UserTable = document.getElementById('user-table');
 
 export function BackLogOutFunction() {
     instructionModel.style.display = 'none';
@@ -50,6 +51,8 @@ export function GraphViewFunction() {
     if (TableButton.style.display === 'none') {
         TableButton.style.display = 'block';
         GraphButton.style.display = 'none';
+
+        UserTable.style.visibility = 'hidden'; //must use visibility not display otherwise table styles are not applied
     }
 }
 
@@ -57,5 +60,7 @@ export function TableViewFunction() {
     if (GraphButton.style.display === 'none') {
         GraphButton.style.display = 'block';
         TableButton.style.display = 'none';
+
+        UserTable.style.visibility = 'visible';
     }
 }
