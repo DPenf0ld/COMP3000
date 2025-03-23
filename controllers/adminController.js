@@ -49,13 +49,13 @@ export function populateUserTable(organisationUsers) {
 
             const row = document.createElement("tr");
 
-            if (user.quizscores?.percentage>=70){
+            if (user.quizscores?.percentage >= 70) {
                 result = "Passed";
                 resultColour = "#4CAF50" //cant see normal green
-            } else if(user.quizscores?.percentage==0){
+            } else if (user.quizscores?.percentage == 0) {
                 result = "Incomplete";
                 resultColour = "orange"
-            } else{
+            } else {
                 result = "Failed";
                 resultColour = "red"
             }
@@ -65,30 +65,44 @@ export function populateUserTable(organisationUsers) {
             <td>${user.lastName}</td>
             <td>${user.email}</td>
             <td>
-            ${user.tasks?.emailtaskComplete ? "✅" : "❌"}
-            ${user.tasks?.emailtaskComplete ? `<button class="reset">Reset</button>` : ""} 
+                ${user.tasks?.emailtaskComplete ? "✅" : "❌"}
+                ${user.tasks?.emailtaskComplete ? `<button class="reset" id="reset-email-${user.email}">Reset</button>` : ""}
             </td>
             <td>
-            ${user.tasks?.passwordtaskComplete ? "✅" : "❌"}
-            ${user.tasks?.passwordtaskComplete ? `<button class="reset">Reset</button>` : ""} 
+                ${user.tasks?.passwordtaskComplete ? "✅" : "❌"}
+                ${user.tasks?.passwordtaskComplete ? `<button class="reset" id="reset-password-${user.email}">Reset</button>` : ""}
             </td>
             <td>
-            ${user.tasks?.webtaskComplete ? "✅" : "❌"}
-            ${user.tasks?.webtaskComplete ? `<button class="reset">Reset</button>` : ""} 
+                ${user.tasks?.webtaskComplete ? "✅" : "❌"}
+                ${user.tasks?.webtaskComplete ? `<button class="reset" id="reset-web-${user.email}">Reset</button>` : ""}
             </td>
             <td>${user.quizscores?.phishingCorrect ?? 0}/5</td>
             <td>${user.quizscores?.passwordCorrect ?? 0}/5</td>
             <td>${user.quizscores?.webCorrect ?? 0}/5</td>
             <td>
-            ${user.quizscores?.percentage ?? "0"}%
-            ${user.quizscores?.percentage > 0 ? `<button class="reset">Reset</button>` : ""} 
+                ${user.quizscores?.percentage ?? "0"}%
+                ${user.quizscores?.percentage > 0 ? `<button class="reset" id="reset-scores-${user.email}">Reset</button>` : ""}
             </td>
-            <td class="result-pass-fail">${result}</td> 
+            <td class="result-pass-fail">${result}</td>
         `;
             tableBody.appendChild(row);
 
             //change the colour
             row.querySelector(".result-pass-fail").style.color = resultColour;
+
+            // adding the event listeners to each reset button
+            if (user.tasks?.emailtaskComplete) {
+                document.getElementById(`reset-email-${user.email}`).addEventListener("click", () => resetTask(user.email, 'emailtaskComplete')); //passses in correct email
+            }
+            if (user.tasks?.passwordtaskComplete) {
+                document.getElementById(`reset-password-${user.email}`).addEventListener("click", () => resetTask(user.email, 'passwordtaskComplete'));
+            }
+            if (user.tasks?.webtaskComplete) {
+                document.getElementById(`reset-web-${user.email}`).addEventListener("click", () => resetTask(user.email, 'webtaskComplete'));
+            }
+            if (user.quizscores?.percentage > 0) {
+                document.getElementById(`reset-scores-${user.email}`).addEventListener("click", () => resetScores(user.email));
+            }
         }
     });
 
@@ -101,6 +115,47 @@ export function populateUserTable(organisationUsers) {
     averagePercentageID.innerText = `Organisation Average Percentage: ${AveragePercentage}%`;
 
 }
+
+//reset tasks
+function resetTask(email, taskName) {
+    try {
+        fetch('/update-tasks', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                taskName: taskName,
+                status: false // sets task to incomplete
+            })
+        })
+    } catch (error) {
+        console.log(error.message || 'Failed to update quiz scores.');
+    }
+}
+
+//reset quiz scores
+function resetScores(email) {
+    try {
+        fetch('/update-scores', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                phishingCorrect: 0,
+                passwordCorrect: 0,
+                webCorrect: 0,
+                percentage: 0 // sets all back to 0
+            })
+        })
+    } catch (error) {
+        console.log(error.message || 'Failed to update quiz scores.');
+    }
+}
+
 
 export function GraphViewFunction() {
     if (TableButton.style.display === 'none') {
