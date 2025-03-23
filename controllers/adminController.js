@@ -48,6 +48,7 @@ export function populateUserTable(organisationUsers) {
             }
 
             const row = document.createElement("tr");
+            row.setAttribute("data-email", user.email); // important to query each row later with resets
 
             if (user.quizscores?.percentage >= 70) {
                 result = "Passed";
@@ -65,24 +66,25 @@ export function populateUserTable(organisationUsers) {
             <td>${user.lastName}</td>
             <td>${user.email}</td>
             <td>
-                ${user.tasks?.emailtaskComplete ? "✅" : "❌"}
-                ${user.tasks?.emailtaskComplete ? `<button class="reset" id="reset-email-${user.email}">Reset</button>` : ""}
+            ${user.tasks?.emailtaskComplete ? `<span id="reset-text-emailtaskComplete-${user.email}"> ✅</span>` : "❌"}   
+            ${user.tasks?.emailtaskComplete ? `<button class="reset" id="reset-emailtaskComplete-${user.email}">Reset</button>` : ""}
             </td>
             <td>
-                ${user.tasks?.passwordtaskComplete ? "✅" : "❌"}
-                ${user.tasks?.passwordtaskComplete ? `<button class="reset" id="reset-password-${user.email}">Reset</button>` : ""}
+            ${user.tasks?.passwordtaskComplete ? `<span id="reset-text-passwordtaskComplete-${user.email}"> ✅</span>` : "❌"}
+            ${user.tasks?.passwordtaskComplete ? `<button class="reset" id="reset-passwordtaskComplete-${user.email}">Reset</button>` : ""}
             </td>
             <td>
-                ${user.tasks?.webtaskComplete ? "✅" : "❌"}
-                ${user.tasks?.webtaskComplete ? `<button class="reset" id="reset-web-${user.email}">Reset</button>` : ""}
+            ${user.tasks?.webtaskComplete ? `<span id="reset-text-webtaskComplete-${user.email}"> ✅</span>` : "❌"}
+            ${user.tasks?.webtaskComplete ? `<button class="reset" id="reset-webtaskComplete-${user.email}">Reset</button>` : ""}
             </td>
             <td>${user.quizscores?.phishingCorrect ?? 0}/5</td>
             <td>${user.quizscores?.passwordCorrect ?? 0}/5</td>
             <td>${user.quizscores?.webCorrect ?? 0}/5</td>
             <td>
-                ${user.quizscores?.percentage ?? "0"}%
-                ${user.quizscores?.percentage > 0 ? `<button class="reset" id="reset-scores-${user.email}">Reset</button>` : ""}
+            ${user.quizscores?.percentage ?? "0"}%
+            ${user.quizscores?.percentage > 0 ? `<button class="reset" id="reset-scores-${user.email}">Reset</button>` : ""}
             </td>
+
             <td class="result-pass-fail">${result}</td>
         `;
             tableBody.appendChild(row);
@@ -92,13 +94,14 @@ export function populateUserTable(organisationUsers) {
 
             // adding the event listeners to each reset button
             if (user.tasks?.emailtaskComplete) {
-                document.getElementById(`reset-email-${user.email}`).addEventListener("click", () => resetTask(user.email, 'emailtaskComplete')); //passses in correct email
+                console.log(`reset-emailtaskComplete-${user.email}`)
+                document.getElementById(`reset-emailtaskComplete-${user.email}`).addEventListener("click", () => resetTask(user.email, 'emailtaskComplete')); //passses in correct email
             }
             if (user.tasks?.passwordtaskComplete) {
-                document.getElementById(`reset-password-${user.email}`).addEventListener("click", () => resetTask(user.email, 'passwordtaskComplete'));
+                document.getElementById(`reset-passwordtaskComplete-${user.email}`).addEventListener("click", () => resetTask(user.email, 'passwordtaskComplete'));
             }
             if (user.tasks?.webtaskComplete) {
-                document.getElementById(`reset-web-${user.email}`).addEventListener("click", () => resetTask(user.email, 'webtaskComplete'));
+                document.getElementById(`reset-webtaskComplete-${user.email}`).addEventListener("click", () => resetTask(user.email, 'webtaskComplete'));
             }
             if (user.quizscores?.percentage > 0) {
                 document.getElementById(`reset-scores-${user.email}`).addEventListener("click", () => resetScores(user.email));
@@ -130,6 +133,25 @@ function resetTask(email, taskName) {
                 status: false // sets task to incomplete
             })
         })
+
+        // Reset the task's icon and text
+        const row = document.querySelector(`#user-table-body tr[data-email="${email}"]`); //queries the specific row 
+
+        if (row) { //check the row is present
+
+            // Hide the Reset Button based on the task and user
+            const resetButton = document.getElementById(`reset-${taskName}-${email}`); //ERROR HERE STORING LIKE #reset-emailtaskComplete-test99@gmail.com
+            if (resetButton) {
+                resetButton.style.display = "none"; // Hide the reset button
+            }
+
+            // Change the text on the task and user
+            const ResetText = document.getElementById(`reset-text-${taskName}-${email}`);
+            if (ResetText) {
+                ResetText.innerHTML = "❌"; // change back to incomplete
+            }
+        }
+
     } catch (error) {
         console.log(error.message || 'Failed to update quiz scores.');
     }
