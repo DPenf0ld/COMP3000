@@ -11,37 +11,41 @@
 </head>
 
 <body>
-    <div class="animated-background"></div>
-    <!-- Desktop Area -->
-    <div class="GuardPoint-icon-admin">
-        <h1>User Results</h1>
-        <h2>Average Quiz Percentage</h2>
-        <button id="Graph-view" class="graph-button">Graph View</button>
-    </div>
-    <div id="scrollable">
-        <table id="user-table">
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phishing Task Complete</th>
-                    <th>Password Task Complete</th>
-                    <th>Web Task Complete</th>
-                    <th>Phishing Score</th>
-                    <th>Password Score</th>
-                    <th>Web Score</th>
-                    <th>Quiz Percentage</th>
-                </tr>
-            </thead>
-            <tbody id="user-table-body"></tbody>
-        </table>
-        <div class="info">
-            <img src="assets/icons/GuardPoint-Icon.png" alt="GuardPoint-icon-admin-img"
-                class="GuardPoint-icon-admin-img">
-            <div class="controls">
-                <div class="clock" id="clock"></div>
-                <button class="reset" id="admin-LogoutButton">Log Out</button>
+    <div id="desktop-area">
+        <div class="animated-background"></div>
+        <!-- Desktop Area -->
+
+        <div class="GuardPoint-icon-admin">
+            <h1>User Results</h1>
+            <h2>Average Quiz Percentage</h2>
+            <button id="Graph-view" class="graph-button">Graph View</button>
+            <button id="Table-view" class="graph-button" style="display: none;">Table View</button>
+        </div>
+        <div id="scrollable">
+            <table id="user-table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phishing Task Complete</th>
+                        <th>Password Task Complete</th>
+                        <th>Web Task Complete</th>
+                        <th>Phishing Score</th>
+                        <th>Password Score</th>
+                        <th>Web Score</th>
+                        <th>Quiz Percentage</th>
+                    </tr>
+                </thead>
+                <tbody id="user-table-body"></tbody>
+            </table>
+            <div class="info">
+                <img src="assets/icons/GuardPoint-Icon.png" alt="GuardPoint-icon-admin-img"
+                    class="GuardPoint-icon-admin-img">
+                <div class="controls">
+                    <div class="clock" id="clock"></div>
+                    <button class="reset" id="admin-LogoutButton">Log Out</button>
+                </div>
             </div>
         </div>
     </div>

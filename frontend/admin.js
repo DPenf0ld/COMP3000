@@ -1,5 +1,6 @@
-import { adminLogOutFunction, BackLogOutFunction, ConfirmLogOut } from '../controllers/adminLogOutController.js';
+import { TableViewFunction, GraphViewFunction, populateUserTable, adminLogOutFunction, BackLogOutFunction, ConfirmLogOut } from '../controllers/adminController.js';
 import { updateClock } from '../controllers/clockController.js';
+
 document.addEventListener('DOMContentLoaded', async function () {
     const adminLogOut = document.getElementById('admin-LogoutButton');
     adminLogOut.addEventListener('click', adminLogOutFunction);
@@ -9,6 +10,12 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const confirmLogout = document.getElementById('confirmLogout-button');
     confirmLogout.addEventListener('click', ConfirmLogOut);
+
+    const GraphView = document.getElementById('Graph-view');
+    GraphView.addEventListener('click', GraphViewFunction);
+
+    const TableView = document.getElementById('Table-view');
+    TableView.addEventListener('click', TableViewFunction);
 
     const token = localStorage.getItem('token');
     console.log('Stored Token:', token); // check if there even is a token
@@ -35,28 +42,3 @@ document.addEventListener('DOMContentLoaded', async function () {
 // Call clock function and update every second
 setInterval(updateClock, 1000);
 updateClock();
-
-
-// Assume 'organisationUsers' is the array received from the backend
-function populateUserTable(organisationUsers) {
-    const tableBody = document.getElementById("user-table-body");
-    tableBody.innerHTML = ""; //clear
-
-    organisationUsers.forEach(user => { //row per user
-        const row = document.createElement("tr");
-
-        row.innerHTML = `
-            <td>${user.firstName}</td>
-            <td>${user.lastName}</td>
-            <td>${user.email}</td>
-            <td>${user.tasks?.emailtaskComplete ? "✅" : "❌"}</td>
-            <td>${user.tasks?.passwordtaskComplete ? "✅" : "❌"}</td>
-            <td>${user.tasks?.webtaskComplete ? "✅" : "❌"}</td>
-            <td>${user.quizscores?.phishingCorrect ?? 0}</td>
-            <td>${user.quizscores?.passwordCorrect ?? 0}</td>
-            <td>${user.quizscores?.webCorrect ?? 0}</td>
-            <td>${user.quizscores?.percentage ?? "0"}%</td>
-        `;
-        tableBody.appendChild(row);
-    });
-}
