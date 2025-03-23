@@ -77,15 +77,15 @@ export function populateUserTable(organisationUsers) {
             ${user.tasks?.webtaskComplete ? `<span id="reset-text-webtaskComplete-${user.email}"> ✅</span>` : "❌"}
             ${user.tasks?.webtaskComplete ? `<button class="reset" id="reset-webtaskComplete-${user.email}">Reset</button>` : ""}
             </td>
-            <td>${user.quizscores?.phishingCorrect ?? 0}/5</td>
-            <td>${user.quizscores?.passwordCorrect ?? 0}/5</td>
-            <td>${user.quizscores?.webCorrect ?? 0}/5</td>
+            <td><span id="reset-text-phishingCorrect-${user.email}">${user.quizscores?.phishingCorrect ?? 0}/5</span></td>
+            <td><span id="reset-text-passwordCorrect-${user.email}">${user.quizscores?.passwordCorrect ?? 0}/5</span></td>
+            <td><span id="reset-text-webCorrect-${user.email}">${user.quizscores?.webCorrect ?? 0}/5</span></td>
             <td>
-            ${user.quizscores?.percentage ?? "0"}%
+            <span id="reset-text-percentage-${user.email}">${user.quizscores?.percentage ?? "0"}%</span>
             ${user.quizscores?.percentage > 0 ? `<button class="reset" id="reset-scores-${user.email}">Reset</button>` : ""}
             </td>
 
-            <td class="result-pass-fail">${result}</td>
+            <td class="result-pass-fail" id="reset-text-result-${user.email}">${result}</td>
         `;
             tableBody.appendChild(row);
 
@@ -173,6 +173,51 @@ function resetScores(email) {
                 percentage: 0 // sets all back to 0
             })
         })
+
+        // Reset the task's button and text
+        const row = document.querySelector(`#user-table-body tr[data-email="${email}"]`); //queries the specific row 
+
+        if (row) { //check the row is present
+
+            // Hide the Reset Button based on the task and user
+            const resetButton = document.getElementById(`reset-scores-${email}`); //ERROR HERE STORING LIKE #reset-emailtaskComplete-test99@gmail.com
+            if (resetButton) {
+                resetButton.style.display = "none"; // Hide the reset button
+            }
+
+            // Change the text on the task and user
+            const ResetText = document.getElementById(`reset-text-percentage-${email}`);
+            if (ResetText) {
+                ResetText.innerHTML = "0%"; // change back to incomplete
+            }
+
+            // Pass/ Fail column
+            const PFcolumn = document.getElementById(`reset-text-result-${email}`);
+            if (PFcolumn) {
+                PFcolumn.innerHTML = "Incomplete"; 
+                PFcolumn.style.color = "orange";  // set the text colour to orange
+            }
+
+            // Phishing Score
+            const PhishingScore = document.getElementById(`reset-text-phishingCorrect-${email}`);
+            if (PhishingScore) {
+                PhishingScore.innerHTML = "0/5"; // change back to incomplete
+            }
+
+            // Password Score
+            const PasswordScore = document.getElementById(`reset-text-passwordCorrect-${email}`);
+            if (PasswordScore) {
+                PasswordScore.innerHTML = "0/5"; // change back to incomplete
+            }
+
+            // Web Score
+            const WebScore = document.getElementById(`reset-text-webCorrect-${email}`);
+            if (WebScore) {
+                WebScore.innerHTML = "0/5"; // change back to incomplete
+            }
+        }
+
+
     } catch (error) {
         console.log(error.message || 'Failed to update quiz scores.');
     }
