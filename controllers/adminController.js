@@ -25,10 +25,25 @@ export function adminLogOutFunction() {
 }
 
 export function populateUserTable(organisationUsers) {
+
+    let TotalPercentage = 0.00;
+    let UserCount = 0;
+
     const tableBody = document.getElementById("user-table-body");
     tableBody.innerHTML = ""; //clear
 
     organisationUsers.forEach(user => { //row per user
+
+        // make sure percentage is a valid number
+        const userPercentage = Number(user.quizscores?.percentage) || 0;
+        console.log("User Percentage:", userPercentage); //check its a valid number
+
+        //only increases if a score is above 0
+        if (user.quizscores?.percentage > 0) {
+            TotalPercentage += userPercentage;
+            UserCount++;
+        }
+
         const row = document.createElement("tr");
 
         row.innerHTML = `
@@ -44,7 +59,18 @@ export function populateUserTable(organisationUsers) {
             <td>${user.quizscores?.percentage ?? "0"}%</td>
         `;
         tableBody.appendChild(row);
+
+
     });
+
+    // this only performs if usercount is above 0
+    let AveragePercentage = UserCount > 0 ? (TotalPercentage / UserCount).toFixed(2) : "0.00";
+
+    console.log(AveragePercentage);
+
+    const averagePercentageID = document.getElementById("average-percentage");
+    averagePercentageID.innerText = `Organisation Average Percentage: ${AveragePercentage}%`;
+
 }
 
 export function GraphViewFunction() {
