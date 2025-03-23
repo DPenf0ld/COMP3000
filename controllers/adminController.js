@@ -33,20 +33,21 @@ export function populateUserTable(organisationUsers) {
     tableBody.innerHTML = ""; //clear
 
     organisationUsers.forEach(user => { //row per user
+        if (user.role === "user") {
 
-        // make sure percentage is a valid number
-        const userPercentage = Number(user.quizscores?.percentage) || 0;
-        console.log("User Percentage:", userPercentage); //check its a valid number
+            // make sure percentage is a valid number
+            const userPercentage = Number(user.quizscores?.percentage) || 0;
+            console.log("User Percentage:", userPercentage); //check its a valid number
 
-        //only increases if a score is above 0
-        if (user.quizscores?.percentage > 0) {
-            TotalPercentage += userPercentage;
-            UserCount++;
-        }
+            //only increases if a score is above 0
+            if (user.quizscores?.percentage > 0) {
+                TotalPercentage += userPercentage;
+                UserCount++;
+            }
 
-        const row = document.createElement("tr");
+            const row = document.createElement("tr");
 
-        row.innerHTML = `
+            row.innerHTML = `
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
             <td>${user.email}</td>
@@ -58,9 +59,10 @@ export function populateUserTable(organisationUsers) {
             <td>${user.quizscores?.webCorrect ?? 0}</td>
             <td>${user.quizscores?.percentage ?? "0"}%</td>
         `;
-        tableBody.appendChild(row);
+            tableBody.appendChild(row);
 
 
+        }
     });
 
     // this only performs if usercount is above 0
