@@ -1675,3 +1675,9 @@ label:hover {
     margin: 20px;
 }
 
+#barChart {
+    max-width: 900px;
+    max-height: 600px;
+}
+
+

@@ -182,6 +182,8 @@ function createBarChart(AveragePercentage) {
         },
         //change all to white
         options: {
+            responsive: true,  // makes chart responsive
+            maintainAspectRatio: false,  // MAYBE CHANGE HERE
             legend: {
                 display: true,
                 position: 'top',
@@ -210,7 +212,6 @@ function createBarChart(AveragePercentage) {
                     },
                 }]
             },
-            
         }
     });
 
