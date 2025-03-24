@@ -7,11 +7,16 @@ const GraphButton = document.getElementById('Graph-view');
 const TableButton = document.getElementById('Table-view');
 const UserTable = document.getElementById('user-table');
 const graph = document.getElementById('barChart');
+const graphPie = document.getElementById('pieChart');
 
 //global variables for bar chart
 let userNames = [];
 let quizPercentages = [];
-let AveragePercentage = 0.00;
+
+//global variables for pie chart
+let passed = 0;
+let failed = 0;
+let incomplete = 0;
 
 export function BackLogOutFunction() {
     instructionModel.style.display = 'none';
@@ -67,12 +72,15 @@ export function populateUserTable(organisationUsers) {
             if (user.quizscores?.percentage >= 70) {
                 result = "Passed";
                 resultColour = "#4CAF50" //cant see normal green
+                passed++;
             } else if (user.quizscores?.percentage == 0) {
                 result = "Incomplete";
                 resultColour = "orange"
+                incomplete++;
             } else {
                 result = "Failed";
                 resultColour = "red"
+                failed++;
             }
 
             row.innerHTML = `
@@ -140,13 +148,13 @@ function createBarChart(AveragePercentage) {
     // Create the Chart.js Bar Chart
     const BarChart = document.getElementById('barChart').getContext('2d');
 
-    const quizChart = new Chart(BarChart, {
+    const quizChartbar = new Chart(BarChart, {
         type: 'bar',
         data: {
             labels: userNames, // X-Axis Labels
             datasets: [
                 {
-                    label: 'Average Percentage', 
+                    label: 'Average Percentage',
                     data: Array(userNames.length).fill(AveragePercentage), // Creates a horizontal line
                     type: 'line',
                     borderColor: 'red',
@@ -155,24 +163,80 @@ function createBarChart(AveragePercentage) {
 
                 },
                 {
+                    label: 'Pass Mark',
+                    data: Array(userNames.length).fill(70), // Creates a horizontal line
+                    type: 'line',
+                    borderColor: 'green',
+                    borderWidth: 2,
+                    fill: false,
+
+                },
+                {
                     label: 'Quiz Percentage',
                     data: quizPercentages,
-                    backgroundColor: '#023e7e', 
-                    borderColor: 'black',
+                    backgroundColor: '#023e7e',
+                    borderColor: 'white',
                     borderWidth: 1
                 }
             ]
         },
-        plugins: [{
-            beforeDraw: (chart) => {
-                let ctx = chart.ctx;
-                ctx.fillStyle = 'white'; // Sets entire chart background to white
-                ctx.fillRect(0, 0, chart.width, chart.height);
-            }
-        }]
+        //change all to white
+        options: {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    fontColor: 'white'
+                },
+                
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        fontColor: 'white'
+                    },
+                    gridLines: {
+                        color: 'white', 
+                        lineWidth: 1,   
+                    },
+                }],
+                yAxes: [{
+                    ticks: {
+                        fontColor: 'white' 
+                    },
+                    gridLines: {
+                        color: 'white',  
+                        lineWidth: 1,   
+                    },
+                }]
+            },
+            
+        }
     });
-    
-    
+
+    // Create the Chart.js Bar Chart
+    const pieChart = document.getElementById('pieChart').getContext('2d');
+
+    const quizChartpie = new Chart(pieChart, {
+
+        type: "pie",
+        data: {
+            labels: ["Passed", "Failed", "Incomplete"],
+            datasets: [{
+                backgroundColor: ["green", "red", "orange"],
+                data: [passed, failed, incomplete]
+            }]
+        },
+        options: {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    fontColor: 'white'  // Change label color to white
+                }
+            }
+        }
+    });
 }
 
 //reset tasks
@@ -286,6 +350,7 @@ export function GraphViewFunction() {
         GraphButton.style.display = 'none';
 
         graph.style.display = 'block'; //unhide barchart
+        graphPie.style.display = 'block';
 
         UserTable.style.visibility = 'hidden'; //must use visibility not display otherwise table styles are not applied
     }
@@ -297,6 +362,7 @@ export function TableViewFunction() {
         TableButton.style.display = 'none';
 
         graph.style.display = 'none'; //hide barchart
+        graphPie.style.display = 'none';
 
         UserTable.style.visibility = 'visible';
     }
