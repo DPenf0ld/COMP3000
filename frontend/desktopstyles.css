@@ -1666,3 +1666,7 @@ label:hover {
     background-color: #002144;
     /* Darker blue when hovered */
 }
+
+#graph-styles{
+    background-color:#047777;
+}

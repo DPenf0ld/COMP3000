@@ -6,6 +6,12 @@ const desktopContainer = document.getElementById('desktop-area');
 const GraphButton = document.getElementById('Graph-view');
 const TableButton = document.getElementById('Table-view');
 const UserTable = document.getElementById('user-table');
+const graph = document.getElementById('barChart');
+
+//global variables for bar chart
+let userNames = [];
+let quizPercentages = [];
+let AveragePercentage = 0.00;
 
 export function BackLogOutFunction() {
     instructionModel.style.display = 'none';
@@ -31,6 +37,10 @@ export function populateUserTable(organisationUsers) {
     let result = "Incomplete";
     let resultColour = "orange"
 
+    //clear old barchart values
+    userNames = [];
+    quizPercentages = [];
+
     const tableBody = document.getElementById("user-table-body");
     tableBody.innerHTML = ""; //clear
 
@@ -43,6 +53,10 @@ export function populateUserTable(organisationUsers) {
 
             //only increases if a score is above 0
             if (user.quizscores?.percentage > 0) {
+                //push adds to array
+                userNames.push(user.firstName + " " + user.lastName); //combine names for username 
+                quizPercentages.push(Number(user.quizscores.percentage)); //changes to number
+
                 TotalPercentage += userPercentage;
                 UserCount++;
             }
@@ -117,6 +131,45 @@ export function populateUserTable(organisationUsers) {
     const averagePercentageID = document.getElementById("average-percentage");
     averagePercentageID.innerText = `Organisation Average Percentage: ${AveragePercentage}%`;
 
+    //create bar chart
+    createBarChart()
+
+}
+
+function createBarChart() {
+    // Create the Chart.js Bar Chart
+    const BarChart = document.getElementById('barChart').getContext('2d');
+
+    const quizChart = new Chart(BarChart, {
+        type: 'bar',
+        data: {
+            labels: userNames,
+            datasets: [
+                {
+                    label: 'Quiz Percentage',
+                    data: quizPercentages,
+                    backgroundColor: 'rgb(255, 255, 255)', // Blue bars
+                    borderColor: 'rgb(255, 255, 255)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    suggestedMax: 100, //makes graph always go to 100 NOT WORKING
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            }
+        }
+    });
 }
 
 //reset tasks
@@ -194,7 +247,7 @@ function resetScores(email) {
             // Pass/ Fail column
             const PFcolumn = document.getElementById(`reset-text-result-${email}`);
             if (PFcolumn) {
-                PFcolumn.innerHTML = "Incomplete"; 
+                PFcolumn.innerHTML = "Incomplete";
                 PFcolumn.style.color = "orange";  // set the text colour to orange
             }
 
@@ -229,6 +282,8 @@ export function GraphViewFunction() {
         TableButton.style.display = 'block';
         GraphButton.style.display = 'none';
 
+        graph.style.display = 'block'; //unhide barchart
+
         UserTable.style.visibility = 'hidden'; //must use visibility not display otherwise table styles are not applied
     }
 }
@@ -237,6 +292,8 @@ export function TableViewFunction() {
     if (GraphButton.style.display === 'none') {
         GraphButton.style.display = 'block';
         TableButton.style.display = 'none';
+
+        graph.style.display = 'none'; //hide barchart
 
         UserTable.style.visibility = 'visible';
     }
