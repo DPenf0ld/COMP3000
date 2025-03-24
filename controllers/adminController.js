@@ -132,44 +132,47 @@ export function populateUserTable(organisationUsers) {
     averagePercentageID.innerText = `Organisation Average Percentage: ${AveragePercentage}%`;
 
     //create bar chart
-    createBarChart()
+    createBarChart(AveragePercentage)
 
 }
 
-function createBarChart() {
+function createBarChart(AveragePercentage) {
     // Create the Chart.js Bar Chart
     const BarChart = document.getElementById('barChart').getContext('2d');
 
     const quizChart = new Chart(BarChart, {
         type: 'bar',
         data: {
-            labels: userNames,
+            labels: userNames, // X-Axis Labels
             datasets: [
+                {
+                    label: 'Average Percentage', 
+                    data: Array(userNames.length).fill(AveragePercentage), // Creates a horizontal line
+                    type: 'line',
+                    borderColor: 'red',
+                    borderWidth: 2,
+                    fill: false,
+
+                },
                 {
                     label: 'Quiz Percentage',
                     data: quizPercentages,
-                    backgroundColor: 'rgb(255, 255, 255)', // Blue bars
-                    borderColor: 'rgb(255, 255, 255)',
+                    backgroundColor: '#023e7e', 
+                    borderColor: 'black',
                     borderWidth: 1
                 }
             ]
         },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    suggestedMax: 100, //makes graph always go to 100 NOT WORKING
-                }
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top'
-                }
+        plugins: [{
+            beforeDraw: (chart) => {
+                let ctx = chart.ctx;
+                ctx.fillStyle = 'white'; // Sets entire chart background to white
+                ctx.fillRect(0, 0, chart.width, chart.height);
             }
-        }
+        }]
     });
+    
+    
 }
 
 //reset tasks
