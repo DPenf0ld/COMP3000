@@ -192,6 +192,10 @@ export function confirmwebFunction() {
         resetWeb.style.display = 'none';
     }
 
+    //show arrow
+    const webArrow = document.getElementById("web-arrow")
+    webArrow.style.display = 'block'
+
 
     //disable reset 
     if (profileContainer.style.display === 'block') {
@@ -299,7 +303,12 @@ function displaySearchResults() {
 
 
 export function webPreviouslyComplete() {
+    const webArrow = document.getElementById("web-arrow")
+    webArrow.style.display = 'none'
+
+
     webtaskComplete = true;
+    
     // Update the icon to show the completed status
     const webIcon = document.querySelector("#progress-web img");
     if (webIcon) { //cannot find
@@ -350,6 +359,10 @@ export function webComplete() {
         if (webIcon) {
             webIcon.src = "assets/icons/web-tick-icon.png";
         }
+
+        //remove arrow
+        const webArrow = document.getElementById("web-arrow")
+        webArrow.style.display = 'none'
 
         //enable reset since task is complete
         if (resetWeb.style.display === 'none') {

@@ -295,6 +295,10 @@ function createChart() {
         document.getElementById('reset-quiz').style.display = 'block';
     } else {
         document.getElementById('pass/fail-text').innerHTML = `<span style="color:#e97c7c; font-weight: bold;">You did not pass all tasks. Try again! 🔄</span>`;
+
+        //hide quiz arrow
+        const quizArrow = document.getElementById("quiz-arrow")
+        quizArrow.style.display = 'none'
     }
 
     //MUST CREATE ID IN HERE NOT HTML TO ALLOW THE ID TO BE DELETED AND REMADE EVERY TIME A PIE CHART IS NEEDED
@@ -318,7 +322,7 @@ function createChart() {
         },
         options: {
             legend: {
-                display: false 
+                display: false
             }
         }
     });

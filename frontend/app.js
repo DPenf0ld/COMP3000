@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const inboxContainer = document.getElementById('inbox-container');
 
     const backToDesktop = document.getElementById('close-inbox');
-    backToDesktop.addEventListener('click', closeInbox);
+    backToDesktop.addEventListener('click', toggleInbox);
 
     const backphishingbutton = document.getElementById('backphishing-button');
     backphishingbutton.addEventListener('click', backphishingFunction);
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
         profileContainer.style.display = 'none' //hides profile
         if (quizContainer.style.display === 'block') { //closes quiz
             closeQuizFunction()
-        } else {//if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
+        } else if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
             //close everything
             inboxContainer.style.display = 'none';
             passwordContainer.style.display = 'none';
@@ -213,8 +213,8 @@ document.addEventListener('DOMContentLoaded', function () {
             QuizfirstOpenFunction() //always show instructions
 
 
-       // } else if (!webtaskComplete || !passwordtaskComplete || !emailtaskComplete ){
-          //  completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
+        } else if (!webtaskComplete || !passwordtaskComplete || !emailtaskComplete) {
+            completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
         }
     }
 
@@ -222,6 +222,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function toggleInbox() {
         profileContainer.style.display = 'none' //hides profile
         if (inboxContainer.style.display === 'block') { //closes inbox
+            if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //checks if all tasks have been completed and displays quiz arrow
+                //show arrow
+                const quizArrow = document.getElementById("quiz-arrow")
+                quizArrow.style.display = 'block'
+            }
             closeInbox()
         } else if ((passwordopen != true && webtaskComplete && quizOpen != true) || (webopen != true && passwordtaskComplete && quizOpen != true) || (webtaskComplete && passwordtaskComplete && quizOpen != true) || (webopen != true && passwordopen != true && quizOpen != true)) { //opens inbox 
             initialiseEmail();
@@ -257,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function () {
     confirmpasswordbutton.addEventListener('click', confirmpasswordFunction);
 
     const backToDesktopPassword = document.getElementById('close-password');
-    backToDesktopPassword.addEventListener('click', closePassword);
+    backToDesktopPassword.addEventListener('click', togglePassword);
 
     const prevPasswordButton = document.getElementById('prev-password-button');
     prevPasswordButton.addEventListener('click', prevPasswordButtonFunction);
@@ -285,6 +290,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function togglePassword() {
         profileContainer.style.display = 'none' //hides profile
         if (passwordContainer.style.display === 'block') {
+            if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //checks if all tasks have been completed and displays quiz arrow
+                //show arrow
+                const quizArrow = document.getElementById("quiz-arrow")
+                quizArrow.style.display = 'block'
+            }
             closePassword()
         } else if ((emailopen != true && webtaskComplete && quizOpen != true) || (webopen != true && emailtaskComplete && quizOpen != true) || (webtaskComplete && emailtaskComplete && quizOpen != true) || (webopen != true && emailopen != true && quizOpen != true)) {
             initialisePassword()
@@ -314,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const webContainer = document.getElementById('web-container');
 
     const backToDesktopWeb = document.getElementById('close-web');
-    backToDesktopWeb.addEventListener('click', closeWeb);
+    backToDesktopWeb.addEventListener('click', toggleWeb);
 
     const webCompleteButton = document.getElementById('CompleteWeb');
     webCompleteButton.addEventListener('click', webCompleteFunction);
@@ -350,6 +360,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function toggleWeb() {
         profileContainer.style.display = 'none' //hides profile
         if (webContainer.style.display === 'block') {
+            if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //checks if all tasks have been completed and displays quiz arrow
+                //show arrow
+                const quizArrow = document.getElementById("quiz-arrow")
+                quizArrow.style.display = 'block'
+            }
             closeWeb()
         } else if ((passwordopen != true && emailtaskComplete && quizOpen != true) || (emailopen != true && passwordtaskComplete && quizOpen != true) || (emailtaskComplete && passwordtaskComplete && quizOpen != true) || (emailopen != true && passwordopen != true && quizOpen != true)) {
             initialiseWeb()

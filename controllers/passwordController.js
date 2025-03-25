@@ -189,6 +189,10 @@ export function confirmpasswordFunction() {
         passwordIcon.src = "assets/icons/password-icon.png";
     }
 
+    //show arrow
+    const passwordArrow = document.getElementById("password-arrow")
+    passwordArrow.style.display = 'block'
+
     //disable reset 
     if (resetPassword.style.display === 'block') {
         resetPassword.style.display = 'none';
@@ -474,6 +478,11 @@ export function encrypt(str) {
 }
 
 export function passwordPreviouslyComplete() {
+
+    const passwordArrow = document.getElementById("password-arrow")
+    passwordArrow.style.display = 'none'
+
+
     passwordtaskComplete = true;
     // Update the icon to show the completed status
     const passwordIcon = document.querySelector("#progress-password img");
@@ -499,6 +508,10 @@ export function passwordComplete() {
         if (passwordIcon) { //cannot find
             passwordIcon.src = "assets/icons/password-tick-icon.png";
         }
+
+        //remove arrow
+        const passwordArrow = document.getElementById("password-arrow")
+        passwordArrow.style.display = 'none'
 
         //enable reset since task is complete
         if (resetPassword.style.display === 'none') {

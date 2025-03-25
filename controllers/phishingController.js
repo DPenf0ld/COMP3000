@@ -293,6 +293,10 @@ export function confirmphishingFunction() {
         emailIcon.src = "assets/icons/email-icon.png";
     }
 
+    //show arrow
+    const emailArrow = document.getElementById("email-arrow")
+    emailArrow.style.display = 'block'
+
     //disable reset 
     if (resetEmail.style.display === 'block') {
         resetEmail.style.display = 'none';
@@ -398,6 +402,10 @@ export function emailComplete() {
         if (emailIcon) {
             emailIcon.src = "assets/icons/email-tick-icon.png";
         }
+
+        //remove arrow
+        const emailArrow = document.getElementById("email-arrow")
+        emailArrow.style.display = 'none'
 
         //enable reset since task is complete
         if (resetEmail.style.display === 'none') {
@@ -808,6 +816,9 @@ export function setEmailOpen(value) {
 }
 
 export function emailPreviouslyComplete() {
+    const emailArrow = document.getElementById("email-arrow")
+    emailArrow.style.display = 'none'
+
     emailtaskComplete = true;
     // Update the icon to show the completed status
     const emailIcon = document.querySelector("#progress-email img");
