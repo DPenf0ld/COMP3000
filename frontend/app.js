@@ -2,9 +2,9 @@ import { updateClock } from '../controllers/clockController.js';
 import { resetconfirmquizFunction, resetbackquizFunction, resetQuizFunction, failedTasks, quizOpen, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
-import { check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
-import { prevWebButtonFunction, nextWebButtonFunction, webPreviouslyComplete, resetWebFromDesktop, initialiseWeb, confirmwebButtonFunction, webfirstOpenFunction, confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
-import { preloademails, emailPreviouslyComplete, emailComplete, resetEmailFromDesktop, initialiseEmail, confirmphishingFunction, backphishingFunction, setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
+import { PasswordHideEnd, check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
+import { WebHideEnd, prevWebButtonFunction, nextWebButtonFunction, webPreviouslyComplete, resetWebFromDesktop, initialiseWeb, confirmwebButtonFunction, webfirstOpenFunction, confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction } from '../controllers/webController.js';
+import { PhishingHideEnd, preloademails, emailPreviouslyComplete, resetEmailFromDesktop, initialiseEmail, confirmphishingFunction, backphishingFunction, setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
 
 
 
@@ -46,6 +46,30 @@ document.addEventListener('DOMContentLoaded', function () {
         failedTasks();
         toggleWeb();
     }
+
+    //End Cards
+    //phishing end
+    const backPhishingEnd = document.getElementById('back-leave-phishing');
+    backPhishingEnd.addEventListener('click', PhishingHideEnd);
+
+    const confirmPhishingEnd = document.getElementById('confirm-leave-phishing');
+    confirmPhishingEnd.addEventListener('click', toggleInbox);
+
+    //password end
+    const backPasswordEnd = document.getElementById('back-leave-password');
+    backPasswordEnd.addEventListener('click', PasswordHideEnd);
+
+    const confirmPasswordEnd = document.getElementById('confirm-leave-password');
+    confirmPasswordEnd.addEventListener('click', togglePassword);
+
+    //web end
+    const backWebEnd = document.getElementById('back-leave-web');
+    backWebEnd.addEventListener('click', WebHideEnd);
+
+    const confirmWebEnd = document.getElementById('confirm-leave-web');
+    confirmWebEnd.addEventListener('click', toggleWeb);
+
+
 
     //Profile
     const profileInfoButton = document.getElementById('email');
@@ -201,6 +225,21 @@ document.addEventListener('DOMContentLoaded', function () {
         if (quizContainer.style.display === 'block') { //closes quiz
             closeQuizFunction()
         } else if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
+            //remove end card inbox
+            const phishingEndModel = document.getElementById('phishing-end');
+            phishingEndModel.style.display = 'none';
+
+            //remove end card password
+            const passwordEndModel = document.getElementById('password-end');
+            passwordEndModel.style.display = 'none';
+
+            //remove end card web
+            const webEndModel = document.getElementById('web-end');
+            webEndModel.style.display = 'none';
+
+            // remove any desktop blur
+            desktopArea.classList.remove('blurred');
+
             //close everything
             inboxContainer.style.display = 'none';
             passwordContainer.style.display = 'none';
@@ -229,6 +268,21 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             closeInbox()
         } else if ((passwordopen != true && webtaskComplete && quizOpen != true) || (webopen != true && passwordtaskComplete && quizOpen != true) || (webtaskComplete && passwordtaskComplete && quizOpen != true) || (webopen != true && passwordopen != true && quizOpen != true)) { //opens inbox 
+            //re-enable buttons
+            document.getElementById("reminder").disabled = false;
+            document.getElementById('submit-highlight').disabled = false;
+            
+            //remove end card password
+            const passwordEndModel = document.getElementById('password-end');
+            passwordEndModel.style.display = 'none';
+
+            //remove end card web
+            const webEndModel = document.getElementById('web-end');
+            webEndModel.style.display = 'none';
+
+            // remove any desktop blur
+            desktopArea.classList.remove('blurred');
+
             initialiseEmail();
             displayEmail();
             setEmailOpen(true);
@@ -297,6 +351,23 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             closePassword()
         } else if ((emailopen != true && webtaskComplete && quizOpen != true) || (webopen != true && emailtaskComplete && quizOpen != true) || (webtaskComplete && emailtaskComplete && quizOpen != true) || (webopen != true && emailopen != true && quizOpen != true)) {
+            //re-enable buttons
+            document.getElementById("passwordPWNED").disabled = false; 
+            document.getElementById("checkButton").disabled = false; 
+            document.getElementById("password").disabled = false; 
+            document.getElementById("Task2-Check").disabled = false; 
+
+
+            //remove end card inbox
+            const phishingEndModel = document.getElementById('phishing-end');
+            phishingEndModel.style.display = 'none';
+
+            //remove end card web
+            const webEndModel = document.getElementById('web-end');
+            webEndModel.style.display = 'none';
+
+            // remove any desktop blur
+            desktopArea.classList.remove('blurred');
             initialisePassword()
             setPasswordOpen(true); // Call function to update passwordopen
             passwordContainer.style.display = 'block';
@@ -367,6 +438,21 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             closeWeb()
         } else if ((passwordopen != true && emailtaskComplete && quizOpen != true) || (emailopen != true && passwordtaskComplete && quizOpen != true) || (emailtaskComplete && passwordtaskComplete && quizOpen != true) || (emailopen != true && passwordopen != true && quizOpen != true)) {
+            //re-enable buttons
+            document.getElementById("ask-button").disabled = false;
+            document.getElementById("user-input").disabled = false;
+            
+            //remove end card inbox
+            const phishingEndModel = document.getElementById('phishing-end');
+            phishingEndModel.style.display = 'none';
+
+            //remove end card password
+            const passwordEndModel = document.getElementById('password-end');
+            passwordEndModel.style.display = 'none';
+
+            // remove any desktop blur
+            desktopArea.classList.remove('blurred');
+
             initialiseWeb()
             setWebOpen(true);
 

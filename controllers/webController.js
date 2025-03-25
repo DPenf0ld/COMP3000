@@ -19,6 +19,7 @@ const userInput = document.getElementById('user-input');
 const responseContainer = document.getElementById('response-container');
 const leavetaskModel = document.getElementById('leave-web-task');
 const instructionModel = document.getElementById('instructions-web');
+const webEndModel = document.getElementById('web-end');
 
 // empty array for searches 
 let searches = [];
@@ -80,6 +81,17 @@ const pages = [
     }
 ];
 
+export function WebHideEnd() {
+    //remove end card + blur
+    webEndModel.style.display = 'none';
+    desktopArea.classList.remove('blurred'); // remove the blur
+
+    //re-enable buttons
+    document.getElementById("ask-button").disabled = false;
+    document.getElementById("user-input").disabled = false;
+}
+
+
 //intro code
 //update the model content based on the current page
 export function updateModelContent() {
@@ -122,8 +134,8 @@ export function confirmwebButtonFunction() {
     instructionModel.style.display = 'none';
     instructionsConfirmed = true; // listener to display instructions once user confirms
     webInterface.classList.remove('blurred'); // Remove the blur
-    document.getElementById("ask-button").disabled = false; 
-    document.getElementById("user-input").disabled = false; 
+    document.getElementById("ask-button").disabled = false;
+    document.getElementById("user-input").disabled = false;
 }
 export function webfirstOpenFunction() {
     instructionModel.style.display = 'flex'; //working
@@ -170,14 +182,14 @@ export function backwebFunction() {
     leavetaskModel.style.display = 'none';
     webContainer.classList.remove('blurred'); // remove the blur
 
-    document.getElementById("ask-button").disabled = false; 
-    document.getElementById("user-input").disabled = false; 
+    document.getElementById("ask-button").disabled = false;
+    document.getElementById("user-input").disabled = false;
 }
 
 export function confirmwebFunction() {
-    document.getElementById("ask-button").disabled = false; 
-    document.getElementById("user-input").disabled = false; 
-    
+    document.getElementById("ask-button").disabled = false;
+    document.getElementById("user-input").disabled = false;
+
     webContainer.classList.remove('blurred'); // remove the blur
     confirmClose = true;
     webopen = false;
@@ -308,7 +320,7 @@ export function webPreviouslyComplete() {
 
 
     webtaskComplete = true;
-    
+
     // Update the icon to show the completed status
     const webIcon = document.querySelector("#progress-web img");
     if (webIcon) { //cannot find
@@ -351,6 +363,14 @@ export function webComplete() {
 
     // Check if all tasks are complete
     if (webtask1 && webtask2 && webtask3 || webtaskComplete) {
+        //show end card
+        webEndModel.style.display = 'flex'; //working
+        desktopArea.classList.add('blurred'); // Apply the blur
+        //disable buttons while endcard is active
+        //web specific buttons
+        document.getElementById("ask-button").disabled = true;
+        document.getElementById("user-input").disabled = true;
+
         markTaskComplete()
         webtaskComplete = true;
 
@@ -395,6 +415,10 @@ export function webCompleteFunction() {
 
 export function closeWeb() {
     if (webtaskComplete || confirmClose) {
+        //remove end card + blur
+        webEndModel.style.display = 'none';
+        desktopArea.classList.remove('blurred'); // remove the blur
+
         confirmClose = false;
         webopen = false;
         // If inbox is currently displayed, hide it and show desktop
@@ -402,8 +426,8 @@ export function closeWeb() {
         desktopArea.style.display = 'flex';
     }
     else {
-        document.getElementById("ask-button").disabled = true; 
-        document.getElementById("user-input").disabled = true; 
+        document.getElementById("ask-button").disabled = true;
+        document.getElementById("user-input").disabled = true;
 
         leavetaskModel.style.display = 'flex'; //working
         webContainer.classList.add('blurred'); // Apply the blur

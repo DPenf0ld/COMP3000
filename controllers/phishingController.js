@@ -41,6 +41,8 @@ const instructionModel = document.getElementById('instructions-email'); // Instr
 const emailContainer = document.getElementById('email-interface');     // Inbox container
 const prevButton = document.getElementById('prev-button');
 const leavetaskModel = document.getElementById('leave-task');
+const phishingEndModel = document.getElementById('phishing-end');
+
 const submitButton = document.getElementById('submit-highlight');
 
 //suspicious words to check for highlighting
@@ -141,6 +143,16 @@ const pages = [
         `
     }
 ];
+
+export function PhishingHideEnd() {
+    //remove end card + blur
+    phishingEndModel.style.display = 'none';
+    desktopArea.classList.remove('blurred'); // remove the blur
+
+    //re-enable buttons
+    document.getElementById("reminder").disabled = false;
+    document.getElementById('submit-highlight').disabled = false;
+}
 
 
 export function initialiseEmail() {
@@ -395,6 +407,14 @@ export function firstOpenFunction() {
 export function emailComplete() {
     // Check if all tasks are complete
     if (emailtask1 && emailtask2 && emailtask3 || emailtaskComplete) {
+        //show end card
+        phishingEndModel.style.display = 'flex'; //working
+        desktopArea.classList.add('blurred'); // Apply the blur
+        //disable buttons while endcard is active
+        //phishing specific buttons
+        document.getElementById("reminder").disabled = true;
+        document.getElementById('submit-highlight').disabled = true;
+
         emailtaskComplete = true;
         markTaskComplete()
         // Update the icon to show the completed status
@@ -411,6 +431,7 @@ export function emailComplete() {
         if (resetEmail.style.display === 'none') {
             resetEmail.style.display = 'block';
         }
+
         // Add a message at the bottom for next steps
         const taskElement = document.querySelector(".Taskemail");
         taskElement.innerHTML += `
@@ -441,6 +462,7 @@ export function nextemailbutton() {
         submitButton.style.display = 'block';
     }
 }
+
 
 export function resetEmailFromDesktop() {
     leavetaskModel.style.display = 'flex'; //working
@@ -792,6 +814,10 @@ export function showNextEmail() {
 
 export function closeInbox() {
     if (emailtaskComplete || confirmClose) {
+        //remove end card + blur
+        phishingEndModel.style.display = 'none'; 
+        desktopArea.classList.remove('blurred'); // remove the blur
+
         confirmClose = false;
         emailopen = false;
         // If inbox is currently displayed, hide it and show desktop

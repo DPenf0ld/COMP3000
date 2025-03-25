@@ -26,6 +26,7 @@ const middleContainerBlur = document.getElementById('middle');
 const bottomContainerBlur = document.getElementById('bottom');
 
 const leavetaskModel = document.getElementById('leave-password-task')
+const passwordEndModel = document.getElementById('password-end');
 
 const prevPasswordButton = document.getElementById('prev-password-button');
 const nextPasswordButton = document.getElementById('next-password-button');
@@ -94,7 +95,17 @@ const pages = [
     }
 ];
 
+export function PasswordHideEnd() {
+    //remove end card + blur
+    passwordEndModel.style.display = 'none';
+    desktopArea.classList.remove('blurred'); // remove the blur
 
+    //re-enable buttons
+    document.getElementById("passwordPWNED").disabled = false; 
+    document.getElementById("checkButton").disabled = false; 
+    document.getElementById("password").disabled = false; 
+    document.getElementById("Task2-Check").disabled = false; 
+}
 
 
 
@@ -146,6 +157,10 @@ export function resetPasswordTask() {
 
 export function closePassword() {
     if (passwordtaskComplete || confirmClose) {
+        //remove end card + blur
+        passwordEndModel.style.display = 'none';
+        desktopArea.classList.remove('blurred'); // remove the blur
+
         confirmClose = false;
         passwordopen = false;
         // If inbox is currently displayed, hide it and show desktop
@@ -154,10 +169,10 @@ export function closePassword() {
     }
     else {
         //disable inputs and buttons 
-        document.getElementById("passwordPWNED").disabled = true; 
-        document.getElementById("checkButton").disabled = true; 
-        document.getElementById("password").disabled = true; 
-        document.getElementById("Task2-Check").disabled = true; 
+        document.getElementById("passwordPWNED").disabled = true;
+        document.getElementById("checkButton").disabled = true;
+        document.getElementById("password").disabled = true;
+        document.getElementById("Task2-Check").disabled = true;
 
         leavetaskModel.style.display = 'flex'; //working
         passwordContainer.classList.add('blurred'); // Apply the blur
@@ -167,17 +182,17 @@ export function closePassword() {
 export function backpasswordFunction() {
     leavetaskModel.style.display = 'none';
     passwordContainer.classList.remove('blurred'); // remove the blur
-    document.getElementById("passwordPWNED").disabled = false; 
-    document.getElementById("checkButton").disabled = false; 
-    document.getElementById("password").disabled = false; 
-    document.getElementById("Task2-Check").disabled = false; 
+    document.getElementById("passwordPWNED").disabled = false;
+    document.getElementById("checkButton").disabled = false;
+    document.getElementById("password").disabled = false;
+    document.getElementById("Task2-Check").disabled = false;
 }
 
 export function confirmpasswordFunction() {
-    document.getElementById("passwordPWNED").disabled = false; 
-    document.getElementById("checkButton").disabled = false; 
-    document.getElementById("password").disabled = false; 
-    document.getElementById("Task2-Check").disabled = false; 
+    document.getElementById("passwordPWNED").disabled = false;
+    document.getElementById("checkButton").disabled = false;
+    document.getElementById("password").disabled = false;
+    document.getElementById("Task2-Check").disabled = false;
     passwordContainer.classList.remove('blurred'); // remove the blur
     task2CheckButton.classList.add('hidden');
     confirmClose = true;
@@ -198,7 +213,7 @@ export function confirmpasswordFunction() {
         resetPassword.style.display = 'none';
     }
 
-    
+
     //disable reset 
     if (profileContainer.style.display === 'block') {
         profileContainer.style.display = 'none' //hides profile
@@ -239,8 +254,8 @@ export function confirmpasswordButtonFunction() {
     passwordContainerBlur.classList.remove('blurred'); // Remove the blur
     middleContainerBlur.classList.add('blurred'); // Apply blur to middle and bottom
     bottomContainerBlur.classList.add('blurred');
-    document.getElementById("passwordPWNED").disabled = false; 
-    document.getElementById("checkButton").disabled = false; 
+    document.getElementById("passwordPWNED").disabled = false;
+    document.getElementById("checkButton").disabled = false;
 }
 
 export function prevPasswordButtonFunction() {
@@ -500,6 +515,17 @@ export function passwordPreviouslyComplete() {
 export function passwordComplete() {
     // Check if all tasks are complete
     if (passwordtask1 && passwordtask2 && passwordtask3 || passwordtaskComplete) {
+        //show end card
+        passwordEndModel.style.display = 'flex'; //working
+        desktopArea.classList.add('blurred'); // Apply the blur
+        //disable buttons while endcard is active
+        //password specific buttons
+        document.getElementById("passwordPWNED").disabled = true;
+        document.getElementById("checkButton").disabled = true;
+        document.getElementById("password").disabled = true;
+        document.getElementById("Task2-Check").disabled = true;
+
+
         markTaskComplete()
         passwordtaskComplete = true;
 

@@ -125,13 +125,13 @@
                 <div class="sidebar-item">Sent Items 📨</div>
                 <div class="sidebar-item">Deleted Items 🗑️</div>
                 <div class="sidebar-item">Archive 📦</div>
-                            <!-- Colour meaning -->
-            <div class="colour-meaning-box">
-                <p><span class="colour-box green"></span> Correct suspicious word</p>
-                <p><span class="colour-box orange"></span> Missed suspicious word</p>
-                <p><span class="colour-box red"></span> Incorrect word identified</p>
-                <button id="reminder">Email Types Reminder</button>
-            </div>
+                <!-- Colour meaning -->
+                <div class="colour-meaning-box">
+                    <p><span class="colour-box green"></span> Correct suspicious word</p>
+                    <p><span class="colour-box orange"></span> Missed suspicious word</p>
+                    <p><span class="colour-box red"></span> Incorrect word identified</p>
+                    <button id="reminder">Email Types Reminder</button>
+                </div>
             </div>
 
             <!-- Email List -->
@@ -202,6 +202,20 @@
         </div>
     </div>
 
+    <!--End card-->
+    <div id="phishing-end" class="instructions" style="display: none;">
+        <div class="instructions-content">
+            <h2 id="page-title">Task Complete</h2>
+            <p id="page-content">
+                Leave task or continue generating emails
+            </p>
+            <div class="button-container">
+                <button id="back-leave-phishing" class="nav-button">Continue with Task</button>
+                <button id="confirm-leave-phishing" class="nav-button">Leave</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Password Tester (Hidden) -->
     <div class="password-container" id="password-container" style="display: none;">
         <!-- Instruction Model -->
@@ -246,7 +260,8 @@
                     <ul>
                         <li>✅ Use at least <strong>three random words</strong> (e.g., “PurpleCactusPiano”).</li>
                         <li>✅ Make it at least <strong>12 characters long</strong>.</li>
-                        <li>✅ Do <strong>not</strong> use <strong>common words alone</strong> or predictable phrases.</li>
+                        <li>✅ Do <strong>not</strong> use <strong>common words alone</strong> or predictable phrases.
+                        </li>
                         <li>✅ Add a mix of <strong>uppercase, lowercase, numbers, and special characters</strong> for
                             extra security.</li>
                         <li>✅ <strong>Avoid using passwords</strong> that have been previously breached.</li>
@@ -291,6 +306,20 @@
             <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
                 <button id="backpassword-button" class="nav-button">Back</button>
                 <button id="confirmpassword-button" class="nav-button">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!--End card-->
+    <div id="password-end" class="instructions" style="display: none;">
+        <div class="instructions-content">
+            <h2 id="page-title">Task Complete</h2>
+            <p id="page-content">
+                Leave task or continue testing passwords
+            </p>
+            <div class="button-container">
+                <button id="back-leave-password" class="nav-button">Continue with Task</button>
+                <button id="confirm-leave-password" class="nav-button">Leave</button>
             </div>
         </div>
     </div>
@@ -353,6 +382,21 @@
     </div>
 
 
+    <!--End card-->
+    <div id="web-end" class="instructions" style="display: none;">
+        <div class="instructions-content">
+            <h2 id="page-title">Task Complete</h2>
+            <p id="page-content">
+                Leave task or continue practicing safe web browsing
+            </p>
+            <div class="button-container">
+                <button id="back-leave-web" class="nav-button">Continue with Task</button>
+                <button id="confirm-leave-web" class="nav-button">Leave</button>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- Profile (Hidden) -->
     <div class="profile-container" id="profile-container" style="display: none;">
@@ -375,7 +419,7 @@
                 <option value="34#2lk8">34#2lk8</option>
                 <option value="2#68bh1">2#68bh1</option>
                 <option value="8d#i724">8d#i724</option>
-              </select>
+            </select>
         </li>
         <li class="profile-info" id="progress-password">
             <p>Email: </p>
@@ -429,9 +473,9 @@
         <div class="quiz-interface" id="quiz-interface">
             <div class="progress-bar-container">
                 <div class="progress-bar" id="progressBar"></div>
-              </div>
-              <h1 class="quiz-headers" id="quiz-title">Quiz!</h1>
-              <h2 class="quiz-headers" id="quiz-counter">Question Counter</h2>
+            </div>
+            <h1 class="quiz-headers" id="quiz-title">Quiz!</h1>
+            <h2 class="quiz-headers" id="quiz-counter">Question Counter</h2>
             <div class="quiz-multiplechoice-box">
                 <!--tickbox for answers -->
                 <h1>Question</h1>
