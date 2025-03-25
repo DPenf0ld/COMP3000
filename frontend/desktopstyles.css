@@ -123,6 +123,24 @@ h1 {
     height: 80px;
 }
 
+/*home arrow style s*/
+.arrow-home {
+    width: 80px;
+    text-align: center;
+    width: 120px;
+    height: 120px;
+    margin-left: 40%;
+    transition: ease-in-out;
+    animation: pulse 1s infinite alternate ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.2); }
+}
+
+
+
 /* Taskbar Icons */
 
 .taskbar-item {
