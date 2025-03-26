@@ -13,6 +13,9 @@ const desktopArea = document.getElementById('desktop-area');
 const profileArea = document.getElementById('profile-container');
 const taskbar = document.getElementById('taskbar');
 
+const emailArrow = document.getElementById('email-arrow');
+const passwordArrow = document.getElementById('password-arrow');
+const webArrow = document.getElementById('web-arrow');
 
 // Pages content
 const pages = [
@@ -52,6 +55,11 @@ export function initialiseIntro() {
 
 //update the model content based on the current page
 export function updateModelContent() {
+    //disable home arrows
+    emailArrow.style.display = 'none' //hide arrow
+    passwordArrow.style.display = 'none' //hide arrow
+    webArrow.style.display = 'none' //hide arrow
+
     console.log(currentPage)
     const titleElement = instructionModel.querySelector('h2');
     const contentElement = instructionModel.querySelector('p');
@@ -75,10 +83,23 @@ export function updateModelContent() {
 }
 
 export function confirmintroButtonFunction() {
+    //hide profile and arrow
+    closeProfileFunction()
+    profileArrow.style.display = 'none' //hide arrow
+
     instructionModel.style.display = 'none';
     desktopArea.classList.remove('blurred'); // Remove the blur
 
-    //enable buttons here
+    //enable home arrows
+    emailArrow.style.display = 'block';
+    passwordArrow.style.display = 'block';
+    webArrow.style.display = 'block';
+
+    //enable divs
+    desktopArea.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("taskbar-disabled");
+
 }
 
 export function prevIntroButtonFunction() {

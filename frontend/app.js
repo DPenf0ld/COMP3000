@@ -13,6 +13,11 @@ document.addEventListener('DOMContentLoaded', function () {
     preloademails()
     const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
 
+    //initial intro
+    if (!tasks.emailtaskComplete && !tasks.webtaskComplete && !tasks.passwordtaskComplete) {
+        initialiseIntro()
+    }
+
     if (tasks.passwordtaskComplete) {
         passwordPreviouslyComplete() //password task
     }
@@ -23,14 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
         emailPreviouslyComplete() //email task
     }
 
-    //initial intro
-    if (!tasks.emailtaskComplete && !tasks.webtaskComplete && !tasks.passwordtaskComplete) {
-        initialiseIntro()
-    }
-
     const nextIntro = document.getElementById('intro-next-button');
     nextIntro.addEventListener('click', nextIntroButtonFunction);
-    
+
     const prevIntro = document.getElementById('intro-prev-button');
     prevIntro.addEventListener('click', prevIntroButtonFunction);
 
@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function () {
             //re-enable buttons
             document.getElementById("reminder").disabled = false;
             document.getElementById('submit-highlight').disabled = false;
-            
+
             //remove end card password
             const passwordEndModel = document.getElementById('password-end');
             passwordEndModel.style.display = 'none';
@@ -367,10 +367,10 @@ document.addEventListener('DOMContentLoaded', function () {
             closePassword()
         } else if ((emailopen != true && webtaskComplete && quizOpen != true) || (webopen != true && emailtaskComplete && quizOpen != true) || (webtaskComplete && emailtaskComplete && quizOpen != true) || (webopen != true && emailopen != true && quizOpen != true)) {
             //re-enable buttons
-            document.getElementById("passwordPWNED").disabled = false; 
-            document.getElementById("checkButton").disabled = false; 
-            document.getElementById("password").disabled = false; 
-            document.getElementById("Task2-Check").disabled = false; 
+            document.getElementById("passwordPWNED").disabled = false;
+            document.getElementById("checkButton").disabled = false;
+            document.getElementById("password").disabled = false;
+            document.getElementById("Task2-Check").disabled = false;
 
 
             //remove end card inbox
@@ -456,7 +456,7 @@ document.addEventListener('DOMContentLoaded', function () {
             //re-enable buttons
             document.getElementById("ask-button").disabled = false;
             document.getElementById("user-input").disabled = false;
-            
+
             //remove end card inbox
             const phishingEndModel = document.getElementById('phishing-end');
             phishingEndModel.style.display = 'none';
