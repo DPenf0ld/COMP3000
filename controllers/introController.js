@@ -1,4 +1,5 @@
 console.log('introController.js loaded');
+import { profileInfo, closeProfileFunction } from '../controllers/profileController.js';
 
 const instructionModel = document.getElementById('instructions-intro'); // Instruction model
 let currentPage = 0; // Track the current page of the model
@@ -6,8 +7,11 @@ let currentPage = 0; // Track the current page of the model
 const prevIntroButton = document.getElementById('intro-prev-button');
 const nextIntroButton = document.getElementById('intro-next-button');
 const confirmIntroButton = document.getElementById('intro-confirm-button');
+const profileArrow = document.getElementById('profile-arrow')
 
 const desktopArea = document.getElementById('desktop-area');
+const profileArea = document.getElementById('profile-container');
+const taskbar = document.getElementById('taskbar');
 
 
 // Pages content
@@ -25,13 +29,23 @@ const pages = [
         🏗️ <strong>Create a new, strong password</strong> that follows security best practices.<br>
         ✅ <strong>Ensure your new password</strong> has not appeared in any breaches before completing the challenge.<br><br>
         `
+    },
+    {
+        title: "🎯 EDIT PROFILE HERE:",
+        content: `
+        ✅ <strong>Ensure your new password</strong> has not appeared in any breaches before completing the challenge.<br><br>
+        `
     }
 ];
 
 export function initialiseIntro() {
-        instructionModel.style.display = 'flex'; //working
-        desktopArea.classList.add('blurred'); // Apply the blur
-        updateModelContent()
+    desktopArea.classList.add("disabled");
+    profileArea.classList.add("disabled");
+    taskbar.classList.add("taskbar-disabled");
+
+    instructionModel.style.display = 'flex'; //working
+    desktopArea.classList.add('blurred'); // Apply the blur
+    updateModelContent()
 }
 
 
@@ -41,6 +55,14 @@ export function updateModelContent() {
     console.log(currentPage)
     const titleElement = instructionModel.querySelector('h2');
     const contentElement = instructionModel.querySelector('p');
+
+    if (currentPage == 2) {
+        profileArrow.style.display = 'block' //show arrow
+        profileInfo()
+    } else {
+        profileArrow.style.display = 'none' //hide arrow
+        closeProfileFunction()
+    }
 
     // Update title and content
     titleElement.textContent = pages[currentPage].title;
