@@ -44,7 +44,7 @@ const pages = [
 export function initialiseIntro() {
     desktopArea.classList.add("disabled");
     profileArea.classList.add("disabled");
-    taskbar.classList.add("taskbar-disabled");
+    taskbar.classList.add("disabled");
 
     instructionModel.style.display = 'flex'; //working
     desktopArea.classList.add('blurred'); // Apply the blur
@@ -98,7 +98,7 @@ export function confirmintroButtonFunction() {
     //enable divs
     desktopArea.classList.remove("disabled");
     profileArea.classList.remove("disabled");
-    taskbar.classList.remove("taskbar-disabled");
+    taskbar.classList.remove("disabled");
 
 }
 
