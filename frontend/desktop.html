@@ -11,6 +11,7 @@
     <script type="module" src="../controllers/passwordController.js"></script>
     <script type="module" src="../controllers/phishingController.js"></script>
     <script type="module" src="../controllers/webController.js"></script>
+    <script type="module" src="../controllers/introController.js"></script>
     <script type="module" src="app.js"></script>
     <link rel="stylesheet" href="desktopstyles.css">
 </head>
@@ -18,8 +19,29 @@
 <body>
     <div class="animated-background"></div>
 
+    <!-- Instruction Model -->
+    <div id="instructions-intro" class="instructions" style="display: none;">
+        <div class="instructions-content">
+            <h2 id="page-title">Welcome to the Email Inbox</h2>
+            <p id="page-content">
+                <!-- Manually load first info page -->
+                This exercise will teach you how to identify <strong>phishing emails</strong>—fraudulent messages
+                designed to steal sensitive information.<br><br>
+                Phishing emails often contain suspicious links or attachments meant to trick you. Let's improve your
+                detection skills!
+            </p>
+            <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
+                <button id="intro-prev-button" class="nav-button hidden">Previous</button>
+                <button id="intro-next-button" class="nav-button">Next</button>
+                <button id="intro-confirm-button" class="nav-button hidden">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
+
     <!-- Desktop Area -->
     <div class="desktop-area" id="desktop-area">
+
         <!-- Icons on the desktop -->
         <div class="icon" id="email-icon">
             <img src="assets/icons/email-icon.png" alt="Email App" class="icon-img">

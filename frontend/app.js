@@ -1,4 +1,5 @@
 import { updateClock } from '../controllers/clockController.js';
+import { initialiseIntro, confirmintroButtonFunction, prevIntroButtonFunction, nextIntroButtonFunction } from '../controllers/introController.js';
 import { resetconfirmquizFunction, resetbackquizFunction, resetQuizFunction, failedTasks, quizOpen, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
@@ -21,6 +22,20 @@ document.addEventListener('DOMContentLoaded', function () {
     if (tasks.emailtaskComplete) {
         emailPreviouslyComplete() //email task
     }
+
+    //initial intro
+    if (!tasks.emailtaskComplete && !tasks.webtaskComplete && !tasks.passwordtaskComplete) {
+        initialiseIntro()
+    }
+
+    const nextIntro = document.getElementById('intro-next-button');
+    nextIntro.addEventListener('click', nextIntroButtonFunction);
+    
+    const prevIntro = document.getElementById('intro-prev-button');
+    prevIntro.addEventListener('click', prevIntroButtonFunction);
+
+    const confirmIntro = document.getElementById('intro-confirm-button');
+    confirmIntro.addEventListener('click', confirmintroButtonFunction);
 
     //Redo Tasks
     const RedoEmail = document.getElementById('email-redo');
