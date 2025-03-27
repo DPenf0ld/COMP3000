@@ -323,6 +323,7 @@ h1 {
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
+    font-size: 1.2rem;
 }
 
 .email-header {
@@ -332,8 +333,9 @@ h1 {
 }
 
 .email-sender {
-    width: 50px;
-    height: 50px;
+    font-size: 2rem;
+    width: 65px;
+    height: 65px;
     background-color: #7f6fff;
     border-radius: 50%;
     display: flex;
@@ -349,17 +351,22 @@ h1 {
 }
 
 .email-body {
-    font-size: small;
+    font-size: 1.1rem;
     margin-top: 20px;
     flex-grow: 1;
 }
+
 
 .email-hover-text {
     position: relative;
     cursor: pointer;
     color: blue;
     text-decoration: underline;
+    font-size: 1.1rem;
 }
+
+
+
 
 /* Instructions styles */
 .instructions {
@@ -384,14 +391,17 @@ h1 {
 
 .instructions-content {
     text-align: left;
+    font-size: large; /*increase all fonts*/
 }
 
 h2 {
+    font-size: large;
     margin-bottom: 15px;
     color: #ffffff;
 }
 
 p {
+    font-size: large;
     margin-bottom: 20px;
     color: #ffffff;
 }
@@ -593,11 +603,11 @@ p {
 
 
 .instruction-box strong {
-    font-size: medium;
+    font-size: 1.5rem;
 }
 
 .instruction-box p {
-    font-size: medium;
+    font-size: 1rem;
     margin: 10px 0;
     color: black;
 }
@@ -685,9 +695,12 @@ p {
 .radio-section label {
     display: flex;
     align-items: center;
-    font-size: small;
+    font-size: large;
     color: #000000;
     cursor: pointer;
+    margin-bottom: 0%;
+    margin-top: 0%;
+    padding: 1%;
 }
 
 /* Hover effect */
@@ -719,23 +732,23 @@ p {
 
 .multiplechoice-box h1 {
     text-align: left;
-    font-size: small;
+    font-size: large;
     color: #000000;
 }
 
 .multiplechoice-box h2 {
     text-align: left;
-    font-size: small;
+    font-size: large;
     color: #000000;
 }
 
 
 .multiplechoice-box strong {
-    font-size: small;
+    font-size: large;
 }
 
 .multiplechoice-box p {
-    font-size: small;
+    font-size: large;
     margin: 10px 0;
     color: black;
 }

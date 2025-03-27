@@ -48,7 +48,7 @@ const submitButton = document.getElementById('submit-highlight');
 //suspicious words to check for highlighting
 const suspiciousWords = [
     "urgent", "customer", "earlist", "earliest", "verify", "immediately",
-    "action", "login", "failure", "restricted", "confirm", "suspended",
+    "action", "login", "failure", "restricted", "suspended",
     "validate", "dispute", "locked", "alert", "refund", "unauthorised",
     "reset", "identity", "unusual", "warning", "verrify", "custumer",
     "earliest", "logon", "loging", "failur", "restringted", "suspend",
@@ -74,6 +74,52 @@ const emails = [
                Sincerely, <br><br> 
                Billing Department <br><br>
                Secure Pay Solutions Ltd`
+    },
+    {
+        type: "Clone-Phishing",
+        hover: "support@paypal-security.com", //example email
+        sender: "PayPal Security Team",
+        subject: "Your Recent Transaction - Action Required EXAMPLE",
+        body: `Dear Valued Customer,<br><br>
+               This is a notification regarding your recent transaction on PayPal.<br><br>
+               **Transaction ID:** 7GH4321JSD<br>
+               **Amount:** $499.99<br><br>
+               If you recognize this transaction, no further action is needed. However, if you suspect unauthorized activity, please verify your account immediately.<br><br>
+               Click the link below to secure your account:<br><br>
+               <span class="email-hover-text" title="paypal-security.com">PayPal Security Center</span><br><br>
+               Thank you for choosing PayPal.<br><br>
+               Sincerely, <br><br> 
+               PayPal Security Team`
+    },
+    {
+        type: "Spear-Phishing",
+        hover: "it-admin@yourcompany-support.com", //example email
+        sender: "IT Admin - YourCompany",
+        subject: "Mandatory Security Update for Employees EXAMPLE",
+        body: `Dear [Employee Name],<br><br>
+               As part of our ongoing cybersecurity enhancements, all employees are required to update their login credentials.<br><br>
+               Failure to complete this update by [Deadline Date] may result in temporary access restrictions.<br><br>
+               Please follow the secure link below to verify and update your credentials:<br><br>
+               <span class="email-hover-text" title="yourcompany-support.com">Employee Security Portal</span><br><br>
+               Thank you for your cooperation.<br><br>
+               Sincerely, <br><br> 
+               IT Department <br><br>
+               YourCompany`
+    },
+    {
+        type: "Safe-Email",
+        hover: "customer-support@amazon.com", //example email
+        sender: "Amazon Customer Support",
+        subject: "Your Recent Order Confirmation EXAMPLE",
+        body: `Dear [Customer Name],<br><br>
+               Thank you for your recent purchase on Amazon! Your order has been successfully processed.<br><br>
+               **Order Number:** 987654321<br>
+               **Estimated Delivery:** [Delivery Date]<br><br>
+               You can track your order and manage your preferences at any time by visiting your account:<br><br>
+               <span class="email-hover-text" title="amazon.com">Your Orders</span><br><br>
+               If you have any questions, feel free to contact our support team.<br><br>
+               Best regards, <br><br> 
+               Amazon Customer Support`
     }
 ];
 
@@ -647,6 +693,7 @@ export async function addGeneratedEmail() {
 // ai generated email and add to email array PRELOADED
 export async function preloademails() {
     //pre load 20 emails SET TO 0 FOR TESTING
+    //CHANGE HERE TO PRELOAD THE EMAIS
     for (let i = 0; i < 0; i++) {
         try {
             const response = await fetch('http://localhost:3000/generate-phishing', {
@@ -809,7 +856,11 @@ export function unhideInstructionBox() {
 
 export function showNextEmail() {
     currentEmailIndex++;
-    addGeneratedEmail();
+    if (currentEmailIndex>3){
+        addGeneratedEmail();
+    } else{
+        displayEmail(currentEmailIndex);
+    }
 }
 
 export function closeInbox() {
