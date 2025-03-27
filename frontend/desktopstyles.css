@@ -48,6 +48,30 @@ html {
 }
 
 /*Progress Tracker*/
+
+#progress-arrow {
+    z-index: 50;
+    position: absolute;
+    bottom: 30%;
+    left: -40%;
+    width: 80px;
+    text-align: center;
+    width: 150px;
+    height: 150px;
+}
+
+#progress-logout-arrow {
+    z-index: 50;
+    position: absolute;
+    bottom: -15%;
+    left: -30%;
+    width: 80px;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}
+
+
 .progress {
     position: fixed;
     top: 0;

@@ -7,7 +7,11 @@ let currentPage = 0; // Track the current page of the model
 const prevIntroButton = document.getElementById('intro-prev-button');
 const nextIntroButton = document.getElementById('intro-next-button');
 const confirmIntroButton = document.getElementById('intro-confirm-button');
-const profileArrow = document.getElementById('profile-arrow')
+
+//arrows
+const profileArrow = document.getElementById('profile-arrow');
+const progressArrow = document.getElementById('progress-arrow');
+const progressLogoutArrow = document.getElementById('progress-logout-arrow');
 
 const desktopArea = document.getElementById('desktop-area');
 const profileArea = document.getElementById('profile-container');
@@ -22,21 +26,40 @@ const pages = [
     {
         title: `Welcome to GuardPoint`,
         content: `
-            🛡️ This exercise will help you improve your skills in creating strong passwords while also ensuring your current passwords are not compromised.
+            🛡️ <strong>GuardPoint</strong> is your interactive cybersecurity training platform. Complete exercises to improve your online security awareness and track your progress.<br><br>
+    
+            📌 <strong>Training Modules:</strong><br>
+            - 🔐 <strong>Password Training</strong>: Learn to create strong passwords and check their security.<br>
+            - 🎣 <strong>Phishing Identification</strong>: Identify different types of phishing attacks and spot red flags.<br>
+            - 🌐 <strong>Safe Web Browsing</strong>: Recognise dangerous links and practice secure browsing habits.<br>
         `
     },
     {
-        title: "🎯 Your Task:",
+        title: "👤 Profile Information:",
         content: `
-        🔍 <strong>Check a password you currently use</strong> to see if it has appeared in any data breaches.<br>
-        🏗️ <strong>Create a new, strong password</strong> that follows security best practices.<br>
-        ✅ <strong>Ensure your new password</strong> has not appeared in any breaches before completing the challenge.<br><br>
+            ✏️ <strong>Edit your profile</strong> to update your details and manage your account settings.<br>
+            🔑 <strong>Change your password</strong> securely and ensure it follows best security practices.<br>
         `
     },
     {
-        title: "🎯 EDIT PROFILE HERE:",
+        title: "📊 Progress Tracker:",
         content: `
-        ✅ <strong>Ensure your new password</strong> has not appeared in any breaches before completing the challenge.<br><br>
+            🚀 Your progress is saved automatically after each completed task.<br>
+            📌 You must complete all three tasks to unlock the final quiz.<br>
+        `
+    },
+    {
+        title: "🚪 Log Out:",
+        content: `
+            🔒 You can safely log out anytime and your progress will be stored for when you return.<br>
+        `
+    },
+    {
+        title: "🎯 Final Quiz:",
+        content: `
+            📝 The final quiz consists of <strong>15 questions</strong> designed to test your cybersecurity knowledge.<br>
+            🎯 You must achieve at least <strong>70%</strong> to pass.<br>
+            🔓 The quiz will only be available once you have completed all three tasks.<br>
         `
     }
 ];
@@ -64,12 +87,51 @@ export function updateModelContent() {
     const titleElement = instructionModel.querySelector('h2');
     const contentElement = instructionModel.querySelector('p');
 
-    if (currentPage == 2) {
+    if (currentPage == 1) {
         profileArrow.style.display = 'block' //show arrow
         profileInfo()
-    } else {
+
+        //hide progress and arrow
+        progressArrow.style.display = 'none' //show arrow
+        desktopArea.classList.add('blurred'); // Remove the blur
+
+        //hide progress and arrow
+        progressLogoutArrow.style.display = 'none' //show arrow
+    } else if (currentPage == 2) {
+        //hide profile and arrow
+        profileArrow.style.display = 'none'
+        closeProfileFunction()
+
+        //hide progress and arrow
+        progressLogoutArrow.style.display = 'none' //show arrow
+
+        //show progress and arrow
+        progressArrow.style.display = 'block' //show arrow
+        desktopArea.classList.remove('blurred'); // Remove the blur
+
+    } else if (currentPage == 3) {
+        //hide profile and arrow
+        profileArrow.style.display = 'none'
+        closeProfileFunction()
+
+        //hide progress and arrow
+        progressArrow.style.display = 'none' //show arrow
+
+        //show progress and arrow
+        progressLogoutArrow.style.display = 'block' //show arrow
+        desktopArea.classList.remove('blurred'); // Remove the blur
+    }
+    else {
         profileArrow.style.display = 'none' //hide arrow
         closeProfileFunction()
+
+        //hide progress and arrow
+        progressArrow.style.display = 'none' //show arrow
+        desktopArea.classList.add('blurred'); // Remove the blur
+
+        //hide progress and arrow
+        progressLogoutArrow.style.display = 'none' //show arrow
+
     }
 
     // Update title and content
