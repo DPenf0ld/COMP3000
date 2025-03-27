@@ -124,6 +124,48 @@ const emails = [
 ];
 
 // Pages content
+const feedback = [
+    {
+        title: `<strong>This is a deceptive phishing email.</strong> The main indicators are:`,
+        content: `
+• Fake email, not from a legitimate company like SecurePay.<br>
+• Generic greeting ("Dear Customer") instead of a personalized one.<br>
+• Poor grammar ("earlist convenience") and awkward phrasing.<br>
+• Suspicious email address, e.g., overly long or misleading domain.
+        `
+    },
+    {
+        title: `<strong>This is a clone phishing email.</strong> The key indicators include:`,
+        content: `
+• Mimics a real PayPal email but with a fake link.<br>
+• Urgent language pressuring immediate action.<br>
+• Suspicious sender address, e.g., paypal-security.com instead of paypal.com.<br>
+• No personalisation, unlike real PayPal emails.
+        `
+    },
+    {
+        title: `<strong>This is a spear phishing email.</strong> The warning signs include:`,
+        content: `
+• Appears from an internal source, like "IT Admin - YourCompany".<br>
+• Targets employees by name to seem authentic.<br>
+• Threatens account restrictions to create urgency.<br>
+• Fake company security link, with a similar but incorrect domain.
+        `
+    },
+    {
+        title: `<strong>This is a safe email from Amazon.</strong> The reasons include:`,
+        content: `
+• Personalised greeting, not a generic one.<br>
+• Confirms an order with no urgent pressure.<br>
+• Trusted sender email, links go to amazon.com.<br>
+• Clear, professional language with no errors.
+        `
+    }
+];
+
+
+
+// Pages content
 const pages = [
     {
         title: ` 1️⃣ Welcome to Your Inbox, ${firstName}!`, //add firstName here
@@ -496,7 +538,25 @@ export function emailComplete() {
     }
 }
 
+// Function to update feedback dynamically
+function updateFeedback() {
+    const feedbackTitle = document.getElementById('feedback-title');
+    const feedbackContent = document.getElementById('feedback-content');
+    
+    // Update the title and content based on the current email index
+    feedbackTitle.innerHTML = feedback[currentEmailIndex].title;
+    feedbackContent.innerHTML = feedback[currentEmailIndex].content;
+}
+
+
+
 export function nextemailbutton() {
+    //display feedback if example
+    if (currentEmailIndex<5){
+        updateFeedback()
+    }
+
+
     const nextEmailButton = document.getElementById('next-email');
     if (displaynextemailbutton) { //check if true
         nextEmailButton.style.display = 'block'; //enabling
@@ -856,9 +916,9 @@ export function unhideInstructionBox() {
 
 export function showNextEmail() {
     currentEmailIndex++;
-    if (currentEmailIndex>3){
+    if (currentEmailIndex > 3) {
         addGeneratedEmail();
-    } else{
+    } else {
         displayEmail(currentEmailIndex);
     }
 }
@@ -866,7 +926,7 @@ export function showNextEmail() {
 export function closeInbox() {
     if (emailtaskComplete || confirmClose) {
         //remove end card + blur
-        phishingEndModel.style.display = 'none'; 
+        phishingEndModel.style.display = 'none';
         desktopArea.classList.remove('blurred'); // remove the blur
 
         confirmClose = false;

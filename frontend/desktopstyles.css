@@ -44,7 +44,8 @@ html {
 
 /*Disabled WHOLE div*/
 .disabled {
-    pointer-events: none; /* blocks all clicks */
+    pointer-events: none;
+    /* blocks all clicks */
 }
 
 /*Progress Tracker*/
@@ -161,8 +162,13 @@ h1 {
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.2); }
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
 }
 
 
@@ -316,6 +322,29 @@ h1 {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+
+
+#example-feedback {
+    position: relative;
+    background-color: #fff;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    padding: 20px;
+    z-index: 1000;
+    text-align: center;
+    width: 60%;
+    height: 30%;
+}
+
+#feedback-title{
+    font-size: 20px;
+    color: #000;
+}
+
+#example-feedback p {
+    color: #000;
+}
+
 /* Email Content */
 .email-content {
     flex-grow: 1;
@@ -391,7 +420,8 @@ h1 {
 
 .instructions-content {
     text-align: left;
-    font-size: large; /*increase all fonts*/
+    font-size: large;
+    /*increase all fonts*/
 }
 
 h2 {
@@ -1582,7 +1612,7 @@ canvas {
     font-size: 2rem;
 }
 
-#submit-quiz{
+#submit-quiz {
     font-size: 2rem;
     padding: 1%;
     font-weight: bold;
@@ -1643,21 +1673,23 @@ label:hover {
 
 
 /*admin dashboard styles*/
-#user-table-body{
+#user-table-body {
     font-weight: bold;
     color: white;
     width: 100%;
 }
 
-#user-table{
+#user-table {
     font-size: 1.4rem;
     margin-left: 2%;
     margin-right: 2%;
     font-weight: bold;
     color: white;
     width: 96%;
-    border-collapse: collapse; /* stops double boarders*/
-    border: 3px solid white; /* Outer border */
+    border-collapse: collapse;
+    /* stops double boarders*/
+    border: 3px solid white;
+    /* Outer border */
 }
 
 /* Row Spacing */
@@ -1668,7 +1700,8 @@ label:hover {
 /* Column Spacing */
 #user-table td {
     padding: 8px 15px;
-    border: 2px solid white; /* Inner cell borders */
+    border: 2px solid white;
+    /* Inner cell borders */
 }
 
 
@@ -1710,7 +1743,7 @@ label:hover {
     align-items: center;
 }
 
-.controls{
+.controls {
     margin-right: 30px;
 }
 
@@ -1739,8 +1772,9 @@ label:hover {
 
 .graphs {
     display: flex;
-    justify-content: space-between;  /* space between bar an pie */
-    gap: 20px;  
+    justify-content: space-between;
+    /* space between bar an pie */
+    gap: 20px;
     margin: 20px;
 }
 
@@ -1748,5 +1782,3 @@ label:hover {
     max-width: 900px;
     max-height: 600px;
 }
-
-
