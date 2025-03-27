@@ -333,7 +333,7 @@ h1 {
     z-index: 1000;
     text-align: center;
     width: 60%;
-    height: 30%;
+    max-height: 30%;
 }
 
 #feedback-title{
@@ -343,6 +343,7 @@ h1 {
 
 #example-feedback p {
     color: #000;
+    padding: 2%;
 }
 
 /* Email Content */

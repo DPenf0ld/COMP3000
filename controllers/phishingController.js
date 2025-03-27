@@ -43,6 +43,8 @@ const prevButton = document.getElementById('prev-button');
 const leavetaskModel = document.getElementById('leave-task');
 const phishingEndModel = document.getElementById('phishing-end');
 
+const exampleFeedback = document.getElementById('example-feedback')
+
 const submitButton = document.getElementById('submit-highlight');
 
 //suspicious words to check for highlighting
@@ -128,40 +130,49 @@ const feedback = [
     {
         title: `<strong>This is a deceptive phishing email.</strong> The main indicators are:`,
         content: `
-• Fake email, not from a legitimate company like SecurePay.<br>
-• Generic greeting ("Dear Customer") instead of a personalized one.<br>
-• Poor grammar ("earlist convenience") and awkward phrasing.<br>
-• Suspicious email address, e.g., overly long or misleading domain.
+<ul>
+    <li>Fake email, not from a legitimate company.</li>
+    <li>Generic "Dear Customer" greeting instead of a personalised one.</li>
+    <li>Poor grammar ("earlist convenience") and awkward phrasing.</li>
+    <li>Suspicious email address - overly long or misleading domain.</li>
+</ul>
         `
     },
     {
         title: `<strong>This is a clone phishing email.</strong> The key indicators include:`,
         content: `
-• Mimics a real PayPal email but with a fake link.<br>
-• Urgent language pressuring immediate action.<br>
-• Suspicious sender address, e.g., paypal-security.com instead of paypal.com.<br>
-• No personalisation, unlike real PayPal emails.
+<ul>
+    <li>Mimics a real PayPal email but with a fake link.</li>
+    <li>Urgent language pressuring immediate action.</li>
+    <li>Suspicious sender address, e.g., paypal-security.com instead of paypal.com.</li>
+    <li>No personalisation, unlike real PayPal emails.</li>
+</ul>
         `
     },
     {
         title: `<strong>This is a spear phishing email.</strong> The warning signs include:`,
         content: `
-• Appears from an internal source, like "IT Admin - YourCompany".<br>
-• Targets employees by name to seem authentic.<br>
-• Threatens account restrictions to create urgency.<br>
-• Fake company security link, with a similar but incorrect domain.
+<ul>
+    <li>Appears from an internal source, like "IT Admin - YourCompany".</li>
+    <li>Targets employees by name to seem authentic.</li>
+    <li>Threatens account restrictions to create urgency.</li>
+    <li>Fake company security link, with a similar but incorrect domain.</li>
+</ul>
         `
     },
     {
         title: `<strong>This is a safe email from Amazon.</strong> The reasons include:`,
         content: `
-• Personalised greeting, not a generic one.<br>
-• Confirms an order with no urgent pressure.<br>
-• Trusted sender email, links go to amazon.com.<br>
-• Clear, professional language with no errors.
+<ul>
+    <li>Personalised greeting, not a generic one.</li>
+    <li>Confirms an order with no urgent pressure.</li>
+    <li>Trusted sender email, links go to amazon.com.</li>
+    <li>Clear, professional language with no errors.</li>
+</ul>
         `
     }
 ];
+
 
 
 
@@ -170,7 +181,7 @@ const pages = [
     {
         title: ` 1️⃣ Welcome to Your Inbox, ${firstName}!`, //add firstName here
         content: `
-            <strong>💡 Goal: </strong>Learn how to spot phishing emails—fake messages designed to steal your personal data.
+            <strong>💡 Goal: </strong>Learn how to spot phishing emails. These are fake messages designed to steal your personal data.
             <br><br>
             <strong>🚨 Warning: </strong>Phishing emails often contain fake links or attachments. Stay sharp!
         `
@@ -338,8 +349,10 @@ export function submitButtonFunction() {
 
 
         displaynextemailbutton = true;
-        nextemailbutton()
+        //display feedback
+        exampleFeedback.style.display = 'block';
 
+        nextemailbutton()
     }
 
     if (correctCount == 3) {
@@ -542,7 +555,7 @@ export function emailComplete() {
 function updateFeedback() {
     const feedbackTitle = document.getElementById('feedback-title');
     const feedbackContent = document.getElementById('feedback-content');
-    
+
     // Update the title and content based on the current email index
     feedbackTitle.innerHTML = feedback[currentEmailIndex].title;
     feedbackContent.innerHTML = feedback[currentEmailIndex].content;
@@ -552,7 +565,7 @@ function updateFeedback() {
 
 export function nextemailbutton() {
     //display feedback if example
-    if (currentEmailIndex<5){
+    if (currentEmailIndex < 5) {
         updateFeedback()
     }
 
@@ -884,6 +897,9 @@ export function clearTickboxSelection() {
 }
 
 export function displayEmail(index) {
+    //disable feedback
+    exampleFeedback.style.display = 'none';
+
     clearTickboxSelection()
     displaynextemailbutton = false;
     const email = emails[index];
