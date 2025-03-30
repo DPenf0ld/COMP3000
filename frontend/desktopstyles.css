@@ -578,7 +578,7 @@ p {
 
 .search-img {
     position: absolute;
-    left: 75%;
+    left: 65%;
     width: 20px;
     height: 20px;
 }
@@ -1317,6 +1317,7 @@ p {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-align: left;
 }
 
 #ask-button:hover {
@@ -1326,8 +1327,8 @@ p {
 
 #game-button {
     width: 7%;
-    right: 32%;
-    top: 22%;
+    right: 31.7%;
+    top: 14%;
     position: absolute;
     padding: 10px 20px;
     font-size: 16px;
@@ -1343,27 +1344,19 @@ p {
 }
 
 /*timer*/
-.timer {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    margin: 20px auto;
-  }
-  
   #time {
-    font-size: 2rem;
+    width: auto;
+    right: 32%;
+    top: 20%;
     position: absolute;
-    /*Current in centre*/
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    font-size: 2rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
   }
-  
-  .circle {
-    transition: stroke-dashoffset 0.3s;
-    transform: rotate(-90deg);
-    transform-origin: 50% 50%;
-  }
+
 
 #response-container {
     position: absolute;
@@ -1424,7 +1417,7 @@ p {
     z-index: 50;
     position: absolute;
     bottom: 2%;
-    left: 10%;
+    left: 15%;
     width: 80px;
     text-align: center;
     width: 100px;
@@ -1461,7 +1454,7 @@ p {
     z-index: 10;
     width: auto;
     height: auto;
-    max-height: 50%;
+    max-height: 60%;
     border-radius: 3%;
 }
 
