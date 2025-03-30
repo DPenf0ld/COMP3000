@@ -691,7 +691,8 @@ p {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: small;
+    font-size: 1.5rem;
+    font-weight: bold;
     text-align: center;
 }
 
