@@ -101,10 +101,10 @@ export function PasswordHideEnd() {
     desktopArea.classList.remove('blurred'); // remove the blur
 
     //re-enable buttons
-    document.getElementById("passwordPWNED").disabled = false; 
-    document.getElementById("checkButton").disabled = false; 
-    document.getElementById("password").disabled = false; 
-    document.getElementById("Task2-Check").disabled = false; 
+    document.getElementById("passwordPWNED").disabled = false;
+    document.getElementById("checkButton").disabled = false;
+    document.getElementById("password").disabled = false;
+    document.getElementById("Task2-Check").disabled = false;
 }
 
 
@@ -199,10 +199,18 @@ export function confirmpasswordFunction() {
     passwordopen = false;
     passwordtaskComplete = false;
     pwnedpasswords = 0;
+
     const passwordIcon = document.querySelector("#progress-password img");
+    //update home page and taskbar
+    const passwordIconHome = document.querySelector("#password-icon img");
+    const passwordIconTaskbar = document.querySelector("#taskbar-password img");
+
     if (passwordIcon) {
         passwordIcon.src = "assets/icons/password-icon.png";
+        passwordIconHome.src = "assets/icons/password-icon.png";
+        passwordIconTaskbar.src = "assets/icons/password-icon.png";
     }
+
 
     //show arrow
     const passwordArrow = document.getElementById("password-arrow")
@@ -501,8 +509,14 @@ export function passwordPreviouslyComplete() {
     passwordtaskComplete = true;
     // Update the icon to show the completed status
     const passwordIcon = document.querySelector("#progress-password img");
+    //update home page and taskbar
+    const passwordIconHome = document.querySelector("#password-icon img");
+    const passwordIconTaskbar = document.querySelector("#taskbar-password img");
+
     if (passwordIcon) { //cannot find
         passwordIcon.src = "assets/icons/password-tick-icon.png";
+        passwordIconHome.src = "assets/icons/password-tick-icon.png";
+        passwordIconTaskbar.src = "assets/icons/password-tick-icon.png";
     }
 
     //enable reset since task is complete
@@ -529,10 +543,17 @@ export function passwordComplete() {
         markTaskComplete()
         passwordtaskComplete = true;
 
-        // Update the icon to show the completed status
+
+
         const passwordIcon = document.querySelector("#progress-password img");
+        //update home page and taskbar
+        const passwordIconHome = document.querySelector("#password-icon img");
+        const passwordIconTaskbar = document.querySelector("#taskbar-password img");
+
         if (passwordIcon) { //cannot find
             passwordIcon.src = "assets/icons/password-tick-icon.png";
+            passwordIconHome.src = "assets/icons/password-tick-icon.png";
+            passwordIconTaskbar.src = "assets/icons/password-tick-icon.png";
         }
 
         //remove arrow

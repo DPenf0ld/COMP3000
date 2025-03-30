@@ -402,8 +402,15 @@ export function confirmphishingFunction() {
     instructionboxCreated = true;
 
     const emailIcon = document.querySelector("#progress-email img");
+
+                //update home page and taskbar
+    const emailIconHome = document.querySelector("#email-icon img");
+    const emailIconTaskbar = document.querySelector("#taskbar-email img");
+
     if (emailIcon) {
         emailIcon.src = "assets/icons/email-icon.png";
+        emailIconHome.src = "assets/icons/email-icon.png";
+        emailIconTaskbar.src = "assets/icons/email-icon.png";
     }
 
     //show arrow
@@ -520,8 +527,15 @@ export function emailComplete() {
         markTaskComplete()
         // Update the icon to show the completed status
         const emailIcon = document.querySelector("#progress-email img");
+
+        //update home page and taskbar
+        const emailIconHome = document.querySelector("#email-icon img");
+        const emailIconTaskbar = document.querySelector("#taskbar-email img");
+
         if (emailIcon) {
             emailIcon.src = "assets/icons/email-tick-icon.png";
+            emailIconHome.src = "assets/icons/email-tick-icon.png";
+            emailIconTaskbar.src = "assets/icons/email-tick-icon.png";
         }
 
         //remove arrow
@@ -975,8 +989,15 @@ export function emailPreviouslyComplete() {
     emailtaskComplete = true;
     // Update the icon to show the completed status
     const emailIcon = document.querySelector("#progress-email img");
-    if (emailIcon) { //cannot find
+
+    //update home page and taskbar
+    const emailIconHome = document.querySelector("#email-icon img");
+    const emailIconTaskbar = document.querySelector("#taskbar-email img");
+
+    if (emailIcon) {
         emailIcon.src = "assets/icons/email-tick-icon.png";
+        emailIconHome.src = "assets/icons/email-tick-icon.png";
+        emailIconTaskbar.src = "assets/icons/email-tick-icon.png";
     }
 
 

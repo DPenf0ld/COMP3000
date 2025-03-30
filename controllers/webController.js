@@ -225,9 +225,15 @@ export function confirmwebFunction() {
     webopen = false;
     webtaskComplete = false;
     const webIcon = document.querySelector("#progress-web img");
+    const webIconHome = document.querySelector("#web-icon img");
+    const webIconTaskbar = document.querySelector("#taskbar-web img");
+
     if (webIcon) {
         webIcon.src = "assets/icons/web-icon.png";
+        webIconHome.src = "assets/icons/web-icon.png";
+        webIconTaskbar.src = "assets/icons/web-icon.png";
     }
+
 
     //disable reset 
     if (resetWeb.style.display === 'block') {
@@ -353,9 +359,15 @@ export function webPreviouslyComplete() {
 
     // Update the icon to show the completed status
     const webIcon = document.querySelector("#progress-web img");
+    const webIconHome = document.querySelector("#web-icon img");
+    const webIconTaskbar = document.querySelector("#taskbar-web img");
+
     if (webIcon) { //cannot find
         webIcon.src = "assets/icons/web-tick-icon.png";
+        webIconHome.src = "assets/icons/web-tick-icon.png";
+        webIconTaskbar.src = "assets/icons/web-tick-icon.png";
     }
+
 
     //enable reset since task is complete
     if (resetWeb.style.display === 'none') {
@@ -404,11 +416,16 @@ export function webComplete() {
         markTaskComplete()
         webtaskComplete = true;
 
-        // Update the icon to show the completed status
-        const webIcon = document.querySelector("#progress-web img");
-        if (webIcon) {
-            webIcon.src = "assets/icons/web-tick-icon.png";
-        }
+    // Update the icon to show the completed status
+    const webIcon = document.querySelector("#progress-web img");
+    const webIconHome = document.querySelector("#web-icon img");
+    const webIconTaskbar = document.querySelector("#taskbar-web img");
+    
+    if (webIcon) { //cannot find
+        webIcon.src = "assets/icons/web-tick-icon.png";
+        webIconHome.src = "assets/icons/web-tick-icon.png";
+        webIconTaskbar.src = "assets/icons/web-tick-icon.png";
+    }
 
         //remove arrow
         const webArrow = document.getElementById("web-arrow")
