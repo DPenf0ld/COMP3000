@@ -217,6 +217,10 @@ export function backwebFunction() {
 }
 
 export function confirmwebFunction() {
+        //hide quiz arrow
+        const quizArrow = document.getElementById("quiz-arrow")
+        quizArrow.style.display = 'none'
+        
     document.getElementById("ask-button").disabled = false;
     document.getElementById("user-input").disabled = false;
 

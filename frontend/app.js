@@ -1,6 +1,6 @@
 import { updateClock } from '../controllers/clockController.js';
 import { initialiseIntro, confirmintroButtonFunction, prevIntroButtonFunction, nextIntroButtonFunction } from '../controllers/introController.js';
-import { resetconfirmquizFunction, resetbackquizFunction, resetQuizFunction, failedTasks, quizOpen, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
+import { quizPreviouslyComplete, resetconfirmquizFunction, resetbackquizFunction, resetQuizFunction, failedTasks, quizOpen, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { PasswordHideEnd, check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
@@ -11,6 +11,7 @@ import { PhishingHideEnd, preloademails, emailPreviouslyComplete, resetEmailFrom
 
 document.addEventListener('DOMContentLoaded', function () {
     preloademails()
+    const quizscores = JSON.parse(localStorage.getItem('quizscores')) || {};
     const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
 
     //initial intro
@@ -26,6 +27,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     if (tasks.emailtaskComplete) {
         emailPreviouslyComplete() //email task
+    }
+    if (quizscores.percentage >= 70) {
+        quizPreviouslyComplete()
+    }
+
+
+    if (tasks.emailtaskComplete && tasks.webtaskComplete && tasks.passwordtaskComplete && quizscores.percentage < 70) {
+        const quizArrow = document.getElementById("quiz-arrow")
+        quizArrow.style.display = 'block'
     }
 
     const nextIntro = document.getElementById('intro-next-button');

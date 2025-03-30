@@ -263,38 +263,42 @@ function createChart() {
 
     if (phishingCorrect >= 3) {
         phishingResult = true;
-        document.getElementById('phishing-result').innerHTML = `<span style="color: green; font-weight: bold;">Phishing task passed ✅</span>`;
+        document.getElementById('phishing-result').innerHTML = `<span style="color: green; font-weight: bold; font-size: 2rem;">Phishing task passed ✅</span>`;
     } else {
-        document.getElementById('phishing-result').innerHTML = `<span style="color:#e97c7c; font-weight: bold;">Phishing task failed ❌</span>`;
+        document.getElementById('phishing-result').innerHTML = `<span style="color:#e97c7c; font-weight: bold; font-size: 2rem;">Phishing task failed ❌</span>`;
         document.getElementById('email-redo').style.display = 'block';
     }
 
     if (passwordCorrect >= 3) {
         passwordResult = true;
-        document.getElementById('password-result').innerHTML = `<span style="color: green; font-weight: bold;">Password task passed ✅</span>`;
+        document.getElementById('password-result').innerHTML = `<span style="color: green; font-weight: bold; font-size: 2rem;">Password task passed ✅</span>`;
     } else {
-        document.getElementById('password-result').innerHTML = `<span style="color:#e97c7c; font-weight: bold;">Password task failed ❌</span>`;
+        document.getElementById('password-result').innerHTML = `<span style="color:#e97c7c; font-weight: bold; font-size: 2rem;">Password task failed ❌</span>`;
         document.getElementById('password-redo').style.display = 'block';
     }
 
     if (webCorrect >= 3) {
         webResult = true;
-        document.getElementById('web-result').innerHTML = `<span style="color: green; font-weight: bold;">Web task passed ✅</span>`;
+        document.getElementById('web-result').innerHTML = `<span style="color: green; font-weight: bold; font-size: 2rem;">Web task passed ✅</span>`;
     } else {
-        document.getElementById('web-result').innerHTML = `<span style="color:#e97c7c; font-weight: bold;">Web task failed ❌</span>`;
+        document.getElementById('web-result').innerHTML = `<span style="color:#e97c7c; font-weight: bold; font-size: 2rem;">Web task failed ❌</span>`;
         document.getElementById('web-redo').style.display = 'block';
     }
 
     // Check if all tasks are passed
     if (webResult && passwordResult && phishingResult) {
-        document.getElementById('pass/fail-text').innerHTML = `<span style="color: green; font-weight: bold;">Congratulations! You passed all tasks 🎉</span>`;
+        document.getElementById('pass/fail-text').innerHTML = `<span style="color: green; font-weight: bold; font-size: 2rem;">Congratulations! You passed all tasks 🎉</span>`;
         const quizIcon = document.querySelector("#Quiz img");
+        const quizIconHome = document.querySelector("#quiz-icon img");
+        const quizIconTaskbar = document.querySelector("#taskbar-quiz img");
         if (quizIcon) {
             quizIcon.src = "assets/icons/quiz-tick-icon.png";
+            quizIconHome.src = "assets/icons/quiz-tick-icon.png";
+            quizIconTaskbar.src = "assets/icons/quiz-tick-icon.png";
         }
         document.getElementById('reset-quiz').style.display = 'block';
     } else {
-        document.getElementById('pass/fail-text').innerHTML = `<span style="color:#e97c7c; font-weight: bold;">You did not pass all tasks. Try again! 🔄</span>`;
+        document.getElementById('pass/fail-text').innerHTML = `<span style="color:#e97c7c; font-weight: bold; font-size: large;">You did not pass all tasks. Try again! 🔄</span>`;
 
         //hide quiz arrow
         const quizArrow = document.getElementById("quiz-arrow")
@@ -387,10 +391,20 @@ export function resetconfirmquizFunction() {
     reset = true;
 
     const quizIcon = document.querySelector("#Quiz img");
+    const quizIconHome = document.querySelector("#quiz-icon img");
+    const quizIconTaskbar = document.querySelector("#taskbar-quiz img");
+
     if (quizIcon) {
         quizIcon.src = "assets/icons/quiz.png";
+        quizIconHome.src = "assets/icons/quiz.png";
+        quizIconTaskbar.src = "assets/icons/quiz.png";
     }
 
+    //display arrow to show quiz
+    
+    //hide quiz arrow
+    const quizArrow = document.getElementById("quiz-arrow")
+    quizArrow.style.display = 'block'
 
     QuizfirstOpenFunction()
 }
@@ -479,6 +493,16 @@ export function QuizfirstOpenFunction() {
     }
 }
 
+export function quizPreviouslyComplete(){
+    const quizIcon = document.querySelector("#Quiz img");
+    const quizIconHome = document.querySelector("#quiz-icon img");
+    const quizIconTaskbar = document.querySelector("#taskbar-quiz img");
+    if (quizIcon) {
+        quizIcon.src = "assets/icons/quiz-tick-icon.png";
+        quizIconHome.src = "assets/icons/quiz-tick-icon.png";
+        quizIconTaskbar.src = "assets/icons/quiz-tick-icon.png";
+    }
+}
 
 export async function sendQuizResults() {
 

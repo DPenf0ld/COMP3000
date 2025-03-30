@@ -1684,6 +1684,7 @@ label:hover {
 }
 
 #quiz-results-text {
+    font-size: large;
     font-weight: bold;
 }
 

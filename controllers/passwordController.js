@@ -189,6 +189,10 @@ export function backpasswordFunction() {
 }
 
 export function confirmpasswordFunction() {
+        //hide quiz arrow
+        const quizArrow = document.getElementById("quiz-arrow")
+        quizArrow.style.display = 'none'
+        
     document.getElementById("passwordPWNED").disabled = false;
     document.getElementById("checkButton").disabled = false;
     document.getElementById("password").disabled = false;

@@ -384,6 +384,10 @@ export function backphishingFunction() {
 
 
 export function confirmphishingFunction() {
+    //hide quiz arrow
+    const quizArrow = document.getElementById("quiz-arrow")
+    quizArrow.style.display = 'none'
+
     document.getElementById("reminder").disabled = false;
     if (instructionboxCreated) {
         document.getElementById("prev-slide").disabled = false; //error since element gets deleted
@@ -403,7 +407,7 @@ export function confirmphishingFunction() {
 
     const emailIcon = document.querySelector("#progress-email img");
 
-                //update home page and taskbar
+    //update home page and taskbar
     const emailIconHome = document.querySelector("#email-icon img");
     const emailIconTaskbar = document.querySelector("#taskbar-email img");
 
