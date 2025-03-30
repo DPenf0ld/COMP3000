@@ -33,11 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    if (tasks.emailtaskComplete && tasks.webtaskComplete && tasks.passwordtaskComplete && quizscores.percentage < 70) {
-        const quizArrow = document.getElementById("quiz-arrow")
-        quizArrow.style.display = 'block'
-    }
-
     const nextIntro = document.getElementById('intro-next-button');
     nextIntro.addEventListener('click', nextIntroButtonFunction);
 

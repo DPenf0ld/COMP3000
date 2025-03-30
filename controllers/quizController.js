@@ -295,6 +295,8 @@ function createChart() {
             quizIcon.src = "assets/icons/quiz-tick-icon.png";
             quizIconHome.src = "assets/icons/quiz-tick-icon.png";
             quizIconTaskbar.src = "assets/icons/quiz-tick-icon.png";
+            const quizArrow = document.getElementById("quiz-arrow")
+        quizArrow.style.display = 'none'
         }
         document.getElementById('reset-quiz').style.display = 'block';
     } else {
@@ -402,7 +404,7 @@ export function resetconfirmquizFunction() {
 
     //display arrow to show quiz
     
-    //hide quiz arrow
+    //show quiz arrow
     const quizArrow = document.getElementById("quiz-arrow")
     quizArrow.style.display = 'block'
 
@@ -414,6 +416,10 @@ export function resetconfirmquizFunction() {
 
 export function closeQuizFunction() {
     if (quizComplete) {
+            //hide quiz arrow
+    const quizArrow = document.getElementById("quiz-arrow")
+    quizArrow.style.display = 'none'
+
         confirmquizFunction()
     } else {
         leavetaskModel.style.display = 'flex'; //working
@@ -501,6 +507,9 @@ export function quizPreviouslyComplete(){
         quizIcon.src = "assets/icons/quiz-tick-icon.png";
         quizIconHome.src = "assets/icons/quiz-tick-icon.png";
         quizIconTaskbar.src = "assets/icons/quiz-tick-icon.png";
+
+        const quizArrow = document.getElementById("quiz-arrow")
+        quizArrow.style.display = 'none'
     }
 }
 
