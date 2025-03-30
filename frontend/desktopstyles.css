@@ -1324,6 +1324,46 @@ p {
 }
 
 
+#game-button {
+    width: 7%;
+    right: 32%;
+    top: 22%;
+    position: absolute;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#game-button:hover {
+    background-color: #0056b3;
+}
+
+/*timer*/
+.timer {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+  }
+  
+  #time {
+    font-size: 2rem;
+    position: absolute;
+    /*Current in centre*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .circle {
+    transition: stroke-dashoffset 0.3s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
 
 #response-container {
     position: absolute;

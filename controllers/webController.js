@@ -8,7 +8,8 @@ let webtask2 = false;
 let webtask3 = false;
 let confirmClose = false;
 let instructionsConfirmed = false; //used to display example email instructions
-
+let timer;
+let timeLeft = 30;
 
 const profileContainer = document.getElementById('profile-container');
 const resetWeb = document.getElementById('reset-web');
@@ -80,6 +81,35 @@ const pages = [
         `
     }
 ];
+
+//timer code
+
+export function startTimer() {
+    //disable button after press here to stop reset
+  clearInterval(timer);
+  timeLeft = 30; // Reset to 30 seconds
+  updateDisplay();
+
+  timer = setInterval(() => {
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      return; //call function to end game here
+    }
+    timeLeft--;
+    updateDisplay();
+  }, 1000);
+}
+
+
+
+function updateDisplay() {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  document.getElementById('time').textContent =
+    `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
+
 
 export function WebHideEnd() {
     //remove end card + blur
