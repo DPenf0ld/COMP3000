@@ -583,6 +583,12 @@ p {
     height: 20px;
 }
 
+.search-result {
+    padding: 1%;
+    border-radius: 3%;
+    background-color: #dbdada;
+    border: 2px solid #000; /* Adds a solid black border */
+}
 
 
 .GuardPoint-search-icon-img {
@@ -1226,8 +1232,8 @@ p {
 /* Styles for Web Task */
 .Taskweb {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
+    top: 20px;
+    left: 20px;
     background-color: #f8f9fa;
     border: 1px solid #ced4da;
     border-radius: 8px;
@@ -1359,10 +1365,25 @@ p {
   }
 
 
+
+#game-container {
+    position: absolute;
+    top: 30%;
+    width: 1630px;
+    height: 550px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    /* ADJUST */
+    overflow-y: auto;
+    padding: 20px;
+}
+
 #response-container {
     position: absolute;
     top: 30%;
-    width: 80%;
+    width: 90%;
     background: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -1509,19 +1530,19 @@ p {
 
 .search-title {
     margin-top: 0.5%;
-    color: lightblue;
+    color: #2a15c7;
     text-decoration: underline;
     cursor: pointer;
     margin-bottom: 0%;
 }
 
 .search-url {
-    color: grey;
+    color: #7f6fff;
     font-style: italic;
 }
 
 .search-description {
-    color: grey;
+    color: black;
     font-size: 0.9em;
     margin-bottom: 0%;
 }

@@ -10,6 +10,9 @@ let confirmClose = false;
 let instructionsConfirmed = false; //used to display example email instructions
 let timer;
 let timeLeft = 30;
+let correct = 0;
+let incorrect = 0;
+let score = 0;
 
 const profileContainer = document.getElementById('profile-container');
 const resetWeb = document.getElementById('reset-web');
@@ -18,6 +21,7 @@ const webContainer = document.getElementById('web-container');
 const webInterface = document.getElementById('web-interface');
 const userInput = document.getElementById('user-input');
 const responseContainer = document.getElementById('response-container');
+const gameContainer = document.getElementById('game-container')
 const leavetaskModel = document.getElementById('leave-web-task');
 const instructionModel = document.getElementById('instructions-web');
 const webEndModel = document.getElementById('web-end');
@@ -93,6 +97,7 @@ export function startTimer() {
     timer = setInterval(() => {
         if (timeLeft <= 0) {
             clearInterval(timer);
+            endGameFunction();
             return; //call function to end game here
         }
         timeLeft--;
@@ -176,6 +181,7 @@ export function initialiseWeb() {
     document.getElementById("user-input").value = ""; //reset input
     document.getElementById("response-container").value = ""; //reset web search results
     responseContainer.textContent = '';
+    gameContainer.textContent = '';
 
     if (webtaskComplete == false) {
         currentPage = 0;
@@ -261,6 +267,11 @@ export function confirmwebFunction() {
 
 
 export async function askButtonFunction() {
+
+    //unhide response container and hide game container
+    responseContainer.style.display = 'block' 
+    gameContainer.style.display = 'none'
+
     const question = userInput.value.trim(); //stores question
     if (!question) {
         responseContainer.textContent = 'Please enter a question.';
@@ -295,13 +306,17 @@ export async function askButtonFunction() {
 
 //game function
 export async function gameFunction() {
+
+    responseContainer.style.display = 'none' 
+    gameContainer.style.display = 'block'
+
     const question = userInput.value.trim(); //stores question
     if (!question) {
-        responseContainer.textContent = 'Please enter a question.';
+        gameContainer.textContent = 'Please enter a question.';
         return;
     }
     // Clear previous response and show loading
-    responseContainer.textContent = 'Loading...';
+    gameContainer.textContent = 'Loading...';
     try {
         const response = await fetch('http://localhost:3000/generate-game', {
             method: 'POST',
@@ -323,16 +338,17 @@ export async function gameFunction() {
 
     } catch (error) {
         console.error('Error:', error);
-        responseContainer.textContent = 'Error generating response. Please try again.';
+        gameContainer.textContent = 'Error generating response. Please try again.';
     }
 }
 
 function displayGameResults() {
+    startTimer();
     // Clear previous search
-    responseContainer.innerHTML = '';
-    let correct = 0;
-    let incorrect = 0;
-    let score = 0;
+    gameContainer.innerHTML = '';
+    correct = 0;
+    incorrect = 0;
+    score = 0;
 
     for (let i = 0; i < searches.length; i++) {
         const search = searches[i];
@@ -355,6 +371,14 @@ function displayGameResults() {
         description.textContent = search.description;
         description.classList.add('search-description');
 
+        // Position randomly
+        const randomX = Math.random() * (1500);
+        const randomY = Math.random() * (400);
+
+        searchItem.style.position = "absolute";
+        searchItem.style.left = `${randomX}px`;
+        searchItem.style.top = `${randomY}px`;
+
         // Add click event listener to reveal feedback
         searchItem.addEventListener('click', function () {
             const isSafe = searchItem.getAttribute('data-isSafe') === 'true'; // Get 'isSafe' value
@@ -371,7 +395,7 @@ function displayGameResults() {
             // Hide the search item 
             setTimeout(() => {
                 searchItem.style.display = 'none';
-            }, 500); 
+            }, 500);
 
             // Disable pointer events
             searchItem.style.pointerEvents = 'none';
@@ -383,8 +407,13 @@ function displayGameResults() {
         searchItem.appendChild(url);
         searchItem.appendChild(description);
 
-        responseContainer.appendChild(searchItem);
+        gameContainer.appendChild(searchItem);
     }
+}
+
+function endGameFunction() {
+    score = (correct * 2) - incorrect;
+    alert(score);
 }
 
 function displaySearchResults() {
