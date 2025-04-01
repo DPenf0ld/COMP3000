@@ -86,27 +86,27 @@ const pages = [
 
 export function startTimer() {
     //disable button after press here to stop reset
-  clearInterval(timer);
-  timeLeft = 30; // Reset to 30 seconds
-  updateDisplay();
-
-  timer = setInterval(() => {
-    if (timeLeft <= 0) {
-      clearInterval(timer);
-      return; //call function to end game here
-    }
-    timeLeft--;
+    clearInterval(timer);
+    timeLeft = 30; // Reset to 30 seconds
     updateDisplay();
-  }, 1000);
+
+    timer = setInterval(() => {
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            return; //call function to end game here
+        }
+        timeLeft--;
+        updateDisplay();
+    }, 1000);
 }
 
 
 
 function updateDisplay() {
-  const minutes = Math.floor(timeLeft / 60);
-  const seconds = timeLeft % 60;
-  document.getElementById('time').textContent =
-    `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    document.getElementById('time').textContent =
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
 
@@ -217,10 +217,10 @@ export function backwebFunction() {
 }
 
 export function confirmwebFunction() {
-        //hide quiz arrow
-        const quizArrow = document.getElementById("quiz-arrow")
-        quizArrow.style.display = 'none'
-        
+    //hide quiz arrow
+    const quizArrow = document.getElementById("quiz-arrow")
+    quizArrow.style.display = 'none'
+
     document.getElementById("ask-button").disabled = false;
     document.getElementById("user-input").disabled = false;
 
@@ -293,6 +293,99 @@ export async function askButtonFunction() {
     }
 }
 
+//game function
+export async function gameFunction() {
+    const question = userInput.value.trim(); //stores question
+    if (!question) {
+        responseContainer.textContent = 'Please enter a question.';
+        return;
+    }
+    // Clear previous response and show loading
+    responseContainer.textContent = 'Loading...';
+    try {
+        const response = await fetch('http://localhost:3000/generate-game', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userMessage: question }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch the response.');
+        }
+
+        const data = await response.json();
+        searches.push(...data.answer);  //triple dot allows each element to individually be added to the array
+        // Display the results CHANGE THIS SO THAT IT IS DISPLAYED IN RANDOM LOCATIONS
+        displayGameResults();
+        searches = [];  //reset after displaying
+
+    } catch (error) {
+        console.error('Error:', error);
+        responseContainer.textContent = 'Error generating response. Please try again.';
+    }
+}
+
+function displayGameResults() {
+    // Clear previous search
+    responseContainer.innerHTML = '';
+    let correct = 0;
+    let incorrect = 0;
+    let score = 0;
+
+    for (let i = 0; i < searches.length; i++) {
+        const search = searches[i];
+        const searchItem = document.createElement('div');
+        searchItem.classList.add('search-result');
+        searchItem.setAttribute('data-isSafe', search.isSafe); //use to check if the user is correct or not
+
+        // Create title
+        const title = document.createElement('h2');
+        title.textContent = search.title;
+        title.classList.add('search-title');
+
+        //create url
+        const url = document.createElement('h3');
+        url.textContent = search.url;
+        url.classList.add('search-url');
+
+        // Create description
+        const description = document.createElement('p');
+        description.textContent = search.description;
+        description.classList.add('search-description');
+
+        // Add click event listener to reveal feedback
+        searchItem.addEventListener('click', function () {
+            const isSafe = searchItem.getAttribute('data-isSafe') === 'true'; // Get 'isSafe' value
+
+            // Change background color based on safety
+            if (isSafe) {
+                searchItem.style.backgroundColor = '#66CDAA';  // Green if safe
+                correct++;
+            } else {
+                searchItem.style.backgroundColor = '#FF6F6F';    // Red if unsafe
+                incorrect++;
+            }
+
+            // Hide the search item 
+            setTimeout(() => {
+                searchItem.style.display = 'none';
+            }, 500); 
+
+            // Disable pointer events
+            searchItem.style.pointerEvents = 'none';
+        });
+
+
+
+        searchItem.appendChild(title);
+        searchItem.appendChild(url);
+        searchItem.appendChild(description);
+
+        responseContainer.appendChild(searchItem);
+    }
+}
 
 function displaySearchResults() {
     // Clear previous search
@@ -420,16 +513,16 @@ export function webComplete() {
         markTaskComplete()
         webtaskComplete = true;
 
-    // Update the icon to show the completed status
-    const webIcon = document.querySelector("#progress-web img");
-    const webIconHome = document.querySelector("#web-icon img");
-    const webIconTaskbar = document.querySelector("#taskbar-web img");
-    
-    if (webIcon) { //cannot find
-        webIcon.src = "assets/icons/web-tick-icon.png";
-        webIconHome.src = "assets/icons/web-tick-icon.png";
-        webIconTaskbar.src = "assets/icons/web-tick-icon.png";
-    }
+        // Update the icon to show the completed status
+        const webIcon = document.querySelector("#progress-web img");
+        const webIconHome = document.querySelector("#web-icon img");
+        const webIconTaskbar = document.querySelector("#taskbar-web img");
+
+        if (webIcon) { //cannot find
+            webIcon.src = "assets/icons/web-tick-icon.png";
+            webIconHome.src = "assets/icons/web-tick-icon.png";
+            webIconTaskbar.src = "assets/icons/web-tick-icon.png";
+        }
 
         //remove arrow
         const webArrow = document.getElementById("web-arrow")

@@ -16,6 +16,61 @@ const openai = new OpenAI({
 app.use(cors()); // Enable cross-origin requests
 app.use(express.json()); // Parse JSON bodies
 
+//generating GAME search engine
+app.post('/generate-game', async (req, res) => {
+    const { userMessage } = req.body; // Get user input from the request body
+
+    try {
+        const response = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages: [
+                {
+                    
+                    role: 'user',
+                    content: `I want you to generate ten search results for the query: '${userMessage}'.
+                    
+                    - Provide **ten results**: 
+                      - Produce a total of ten Results
+                      - Five should be **legitimate** websites.
+                      - Five should be **malicious** scam/phishing websites.
+                      - Put these 10 websites in a random order
+                     
+                    
+                    - Format the response as a **JSON array** with objects structured like this:
+                      {
+                        "title": "Website Name",
+                        "url": "https://example.com",
+                        "description": "A short description of what the site offers.",
+                        "isSafe": true  // or false for malicious sites
+                      }
+                    
+                    - For **malicious sites**, make them appear suspicious by:
+                      - Using **HTTP instead of HTTPS**.
+                      - Slightly misspelling well-known brand names (e.g., "PaypaI.com" instead of "Paypal.com").
+                      - Making exaggerated claims (e.g., "Win a Free iPhone! Click Now").
+                      - Using domains like ".xyz", ".info", ".top".
+                    
+                    - Return ONLY the JSON array. Do NOT include any extra text or explanations.`
+               
+                },
+            ],
+            max_tokens: 500
+        });
+
+        // turn into json (if needed)
+        const searchResults = JSON.parse(response.choices[0].message.content);
+
+        // Send array back 
+        res.json({ answer: searchResults });
+
+
+    } catch (error) {
+        console.error('Error generating answer:', error);
+        res.status(500).json({ error: 'Failed to generate answer' });
+    }
+});
+
+
 
 //generating search engine
 app.post('/generate-answer', async (req, res) => {
@@ -24,10 +79,8 @@ app.post('/generate-answer', async (req, res) => {
     try {
         const response = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
-            store: true,
             messages: [
                 {
-                    
                     role: 'user',
                     content: `I want you to generate six search results for the query: '${userMessage}'.
                     
