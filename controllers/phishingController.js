@@ -22,9 +22,8 @@ let emailtypereminder = false;
 let currentPage = 0; // Track the current page of the model
 let confirmClose = false
 let instructionboxCreated = false;
-let highlighted = false;
 
-
+let continueTask = true;
 
 
 
@@ -140,13 +139,13 @@ deliveryDate.setDate(today.getDate() + 5);
 
 //replace parts in the email with the real date
 const formatDate = (date) =>
-  date.toLocaleDateString("en-UK", { year: 'numeric', month: 'long', day: 'numeric' }); //read in this format: 8 April 2025
+    date.toLocaleDateString("en-UK", { year: 'numeric', month: 'long', day: 'numeric' }); //read in this format: 8 April 2025
 
 emails.forEach(email => {
-  email.body = email.body
-    .replace("[Date]", formatDate(today))
-    .replace("[Deadline Date]", formatDate(deadlineDate))
-    .replace("[Delivery Date]", formatDate(deliveryDate));
+    email.body = email.body
+        .replace("[Date]", formatDate(today))
+        .replace("[Deadline Date]", formatDate(deadlineDate))
+        .replace("[Delivery Date]", formatDate(deliveryDate));
 });
 
 // Pages content
@@ -267,6 +266,14 @@ const pages = [
     }
 ];
 
+export function removeOpenAIFunction(){
+    exampleEndModel.style.display = 'none'; //working
+    emailContainer.classList.remove('blurred'); // Apply the blur
+}
+
+
+
+
 export function PhishingHideEnd() {
     //remove end card + blur
     phishingEndModel.style.display = 'none';
@@ -279,6 +286,7 @@ export function PhishingHideEnd() {
 
 
 export function initialiseEmail() {
+    continueTask = true;
     instructionboxCreated = false,
         emailopen = false,
         correctCount = 0,
@@ -556,54 +564,57 @@ export function firstOpenFunction() {
 }
 
 export function emailComplete() {
-    // Check if all tasks are complete
-    if (emailtask1 && emailtask2 && emailtask3 || emailtaskComplete) {
-        //show end card
-        phishingEndModel.style.display = 'flex'; //working
-        desktopArea.classList.add('blurred'); // Apply the blur
-        //disable buttons while endcard is active
-        //phishing specific buttons
-        document.getElementById("reminder").disabled = true;
-        document.getElementById('submit-highlight').disabled = true;
+    if (continueTask) {
+        // Check if all tasks are complete
+        if (emailtask1 && emailtask2 && emailtask3 || emailtaskComplete) {
+            //show end card
+            phishingEndModel.style.display = 'flex'; //working
+            desktopArea.classList.add('blurred'); // Apply the blur
+            //disable buttons while endcard is active
+            //phishing specific buttons
+            document.getElementById("reminder").disabled = true;
+            document.getElementById('submit-highlight').disabled = true;
 
-        emailtaskComplete = true;
-        markTaskComplete()
-        // Update the icon to show the completed status
-        const emailIcon = document.querySelector("#progress-email img");
+            emailtaskComplete = true;
+            markTaskComplete()
+            // Update the icon to show the completed status
+            const emailIcon = document.querySelector("#progress-email img");
 
-        //update home page and taskbar
-        const emailIconHome = document.querySelector("#email-icon img");
-        const emailIconTaskbar = document.querySelector("#taskbar-email img");
+            //update home page and taskbar
+            const emailIconHome = document.querySelector("#email-icon img");
+            const emailIconTaskbar = document.querySelector("#taskbar-email img");
 
-        if (emailIcon) {
-            emailIcon.src = "assets/icons/email-tick-icon.png";
-            emailIconHome.src = "assets/icons/email-tick-icon.png";
-            emailIconTaskbar.src = "assets/icons/email-tick-icon.png";
-        }
+            if (emailIcon) {
+                emailIcon.src = "assets/icons/email-tick-icon.png";
+                emailIconHome.src = "assets/icons/email-tick-icon.png";
+                emailIconTaskbar.src = "assets/icons/email-tick-icon.png";
+            }
 
-        //remove arrow
-        const emailArrow = document.getElementById("email-arrow")
-        emailArrow.style.display = 'none'
+            //remove arrow
+            const emailArrow = document.getElementById("email-arrow")
+            emailArrow.style.display = 'none'
 
-        //enable reset since task is complete
-        if (resetEmail.style.display === 'none') {
-            resetEmail.style.display = 'block';
-        }
+            //enable reset since task is complete
+            if (resetEmail.style.display === 'none') {
+                resetEmail.style.display = 'block';
+            }
 
-        // Add a message at the bottom for next steps
-        const taskElement = document.querySelector(".Taskemail");
-        taskElement.innerHTML += `
-        <div class="next-steps">
-            <p>Task Complete</p>
-        </div>
-    `;
-        emailopen = false;
-    } else {
-        console.log("Not all tasks are complete yet.");
-        const taskEmailElement = document.querySelector(".Taskemail");
-        const nextStepsDiv = taskEmailElement.querySelector(".next-steps");
-        if (nextStepsDiv) {
-            nextStepsDiv.remove();
+            // Add a message at the bottom for next steps
+            const taskElement = document.querySelector(".Taskemail");
+            taskElement.innerHTML += `
+    <div class="next-steps">
+        <p>Task Complete</p>
+    </div>
+`;
+            emailopen = false;
+            continueTask = false;
+        } else {
+            console.log("Not all tasks are complete yet.");
+            const taskEmailElement = document.querySelector(".Taskemail");
+            const nextStepsDiv = taskEmailElement.querySelector(".next-steps");
+            if (nextStepsDiv) {
+                nextStepsDiv.remove();
+            }
         }
     }
 }
@@ -992,7 +1003,7 @@ export function unhideInstructionBox() {
 export function showNextEmail() {
     currentEmailIndex++;
     if (currentEmailIndex > 3) {
-        if (currentEmailIndex==4){
+        if (currentEmailIndex == 4) {
             exampleEndModel.style.display = 'flex'; //working
             emailContainer.classList.add('blurred'); // Apply the blur
         }

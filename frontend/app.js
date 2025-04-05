@@ -5,7 +5,7 @@ import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeP
 import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { PasswordHideEnd, check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
 import { WebHideEnd, prevWebButtonFunction, nextWebButtonFunction, webPreviouslyComplete, resetWebFromDesktop, initialiseWeb, confirmwebButtonFunction, webfirstOpenFunction, confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction, gameFunction } from '../controllers/webController.js';
-import { PhishingHideEnd, preloademails, emailPreviouslyComplete, resetEmailFromDesktop, initialiseEmail, confirmphishingFunction, backphishingFunction, setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
+import { removeOpenAIFunction, PhishingHideEnd, preloademails, emailPreviouslyComplete, resetEmailFromDesktop, initialiseEmail, confirmphishingFunction, backphishingFunction, setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
 
 
 
@@ -188,6 +188,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const nextButton = document.getElementById('next-button');
     nextButton.addEventListener('click', nextButtonFunction);
+
+    const OpenAIEmails = document.getElementById('openai-inbox');
+    OpenAIEmails.addEventListener('click', removeOpenAIFunction);
 
     const confirmButton = document.getElementById('confirm-button');
     confirmButton.addEventListener('click', confirmButtonFunction);
