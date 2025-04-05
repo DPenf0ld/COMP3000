@@ -26,6 +26,9 @@ const leavetaskModel = document.getElementById('leave-web-task');
 const instructionModel = document.getElementById('instructions-web');
 const webEndModel = document.getElementById('web-end');
 
+const playButton = document.getElementById('game-button');
+const timerDisplay = document.getElementById('time');
+
 // empty array for searches 
 let searches = [];
 let currentPage = 0;
@@ -223,6 +226,10 @@ export function backwebFunction() {
 }
 
 export function confirmwebFunction() {
+    //hide play button and timer
+    playButton.style.display = 'none'
+    timerDisplay.style.display = 'none'
+
     //hide quiz arrow
     const quizArrow = document.getElementById("quiz-arrow")
     quizArrow.style.display = 'none'
@@ -420,6 +427,9 @@ function displaySearchResults() {
     // Clear previous search
     responseContainer.innerHTML = '';
 
+    //clear search counter
+    let feedbackAmount = 0;
+
     for (let i = 0; i < searches.length; i++) {
         const search = searches[i];
         const searchItem = document.createElement('div');
@@ -450,6 +460,7 @@ function displaySearchResults() {
         // Add click event listener to reveal feedback
         searchItem.addEventListener('click', function () {
             const isSafe = searchItem.getAttribute('data-isSafe') === 'true'; // Get 'isSafe' value
+            feedbackAmount++; //this is instantly set to 6
 
             // Change background color based on safety
             if (isSafe) {
@@ -462,6 +473,10 @@ function displaySearchResults() {
             feedback.style.display = 'block';  // Show feedback
 
             searchItem.style.pointerEvents = 'none';  // Disable pointer once clicked
+            if (feedbackAmount===6) {
+                playButton.style.display = 'block' 
+                timerDisplay.style.display = 'block' 
+            }
         });
 
 
