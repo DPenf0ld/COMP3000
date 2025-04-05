@@ -9,10 +9,12 @@ let webtask3 = false;
 let confirmClose = false;
 let instructionsConfirmed = false; //used to display example email instructions
 let timer;
-let timeLeft = 30;
+let timeLeft = 20;
 let correct = 0;
 let incorrect = 0;
 let score = 0;
+
+let continueTask = true;
 
 const profileContainer = document.getElementById('profile-container');
 const resetWeb = document.getElementById('reset-web');
@@ -32,6 +34,7 @@ const webEndModel = document.getElementById('web-end');
 
 const playButton = document.getElementById('game-button');
 const timerDisplay = document.getElementById('time');
+const scoreDisplay = document.getElementById('score');
 
 // empty array for searches 
 let searches = [];
@@ -97,7 +100,7 @@ const pages = [
 export function startTimer() {
     //disable button after press here to stop reset
     clearInterval(timer);
-    timeLeft = 30; // Reset to 30 seconds
+    timeLeft = 20; // Reset to 20 seconds
     updateDisplay();
 
     timer = setInterval(() => {
@@ -125,8 +128,7 @@ function updateDisplay() {
 export function WebHideEnd() {
     //remove end card + blur
     webEndModel.style.display = 'none';
-    desktopArea.classList.remove('blurred'); // remove the blur
-
+    webInterface.classList.remove('blurred'); // remove the blur
     //re-enable buttons
     document.getElementById("ask-button").disabled = false;
     document.getElementById("user-input").disabled = false;
@@ -186,6 +188,7 @@ export function webfirstOpenFunction() {
 }
 
 export function initialiseWeb() {
+    continueTask = true;
     document.getElementById("user-input").value = ""; //reset input
     document.getElementById("response-container").value = ""; //reset web search results
     document.getElementById("game-container").value = ""; //reset web search results
@@ -235,6 +238,7 @@ export function confirmwebFunction() {
     //hide play button and timer
     playButton.style.display = 'none'
     timerDisplay.style.display = 'none'
+    scoreDisplay.style.display = 'none'
 
     //hide quiz arrow
     const quizArrow = document.getElementById("quiz-arrow")
@@ -288,7 +292,7 @@ export async function askButtonFunction() {
     feedbackInfo.style.display = 'block'
 
     //unhide response container and hide game container
-    responseContainer.style.display = 'block' 
+    responseContainer.style.display = 'block'
     gameContainer.style.display = 'none'
 
     const question = userInput.value.trim(); //stores question
@@ -335,7 +339,7 @@ export async function gameFunction() {
     webComplete()
 
 
-    responseContainer.style.display = 'none' 
+    responseContainer.style.display = 'none'
     gameContainer.style.display = 'block'
 
     const question = userInput.value.trim(); //stores question
@@ -402,7 +406,7 @@ function displayGameResults() {
         description.classList.add('search-description');
 
         // Position randomly
-        const randomX = Math.random() * (1500);
+        const randomX = Math.random() * (1200);
         const randomY = Math.random() * (400);
 
         searchItem.style.position = "absolute";
@@ -417,9 +421,14 @@ function displayGameResults() {
             if (isSafe) {
                 searchItem.style.backgroundColor = '#66CDAA';  // Green if safe
                 correct++;
+                score = correct - incorrect;
+                document.getElementById("score").textContent = `Score: ${score}`;
+
             } else {
                 searchItem.style.backgroundColor = '#FF6F6F';    // Red if unsafe
                 incorrect++;
+                score = correct - incorrect;
+                document.getElementById("score").textContent = `Score: ${score}`;
             }
 
             // Hide the search item 
@@ -442,16 +451,19 @@ function displayGameResults() {
 }
 
 function endGameFunction() {
-    score = (correct * 2) - incorrect;
-    alert(score);
+    if (score >= 6) {
+        webtask3 = true;
+        webComplete();
+    }
 }
 
-function gameInstructions(){
+
+function gameInstructions() {
     webInterface.classList.add('blurred'); // Apply the blur
     gameInstructionsModel.style.display = 'block';
 }
 
-export function confirmGameInstructions(){
+export function confirmGameInstructions() {
     webInterface.classList.remove('blurred'); // remove the blur
     gameInstructionsModel.style.display = 'none';
 
@@ -511,9 +523,10 @@ function displaySearchResults() {
             feedback.style.display = 'block';  // Show feedback
 
             searchItem.style.pointerEvents = 'none';  // Disable pointer once clicked
-            if (feedbackAmount===6) {
-                playButton.style.display = 'block' 
-                timerDisplay.style.display = 'block' 
+            if (feedbackAmount === 6) {
+                playButton.style.display = 'block'
+                timerDisplay.style.display = 'block'
+                scoreDisplay.style.display = 'block'
 
                 //hide info
                 feedbackInfo.style.display = 'none'
@@ -566,77 +579,81 @@ export function webPreviouslyComplete() {
 
 // Function to mark all web tasks as complete
 export function webComplete() {
-    // Update the task list status for Task 1
-    if (webtask1) {
-        const webtask1Status = document.querySelector("#web-task-1-status");
-        webtask1Status.textContent = "Complete";
-        webtask1Status.classList.remove("incomplete");
-        webtask1Status.classList.add("complete");
-    }
-
-
-    if (webtask2) {
-        // Update the task list status for Task 2
-        const webtask2Status = document.querySelector("#web-task-2-status");
-        webtask2Status.textContent = "Complete";
-        webtask2Status.classList.remove("incomplete");
-        webtask2Status.classList.add("complete");
-    }
-    if (webtask3) {
-        // Update the task list status for Task 3
-        const webtask3Status = document.querySelector("#web-task-3-status");
-        webtask3Status.textContent = "Complete";
-        webtask3Status.classList.remove("incomplete");
-        webtask3Status.classList.add("complete");
-    }
-
-    // Check if all tasks are complete
-    if (webtask1 && webtask2 && webtask3 || webtaskComplete) {
-        //show end card
-        webEndModel.style.display = 'flex'; //working
-        desktopArea.classList.add('blurred'); // Apply the blur
-        //disable buttons while endcard is active
-        //web specific buttons
-        document.getElementById("ask-button").disabled = true;
-        document.getElementById("user-input").disabled = true;
-
-        markTaskComplete()
-        webtaskComplete = true;
-
-        // Update the icon to show the completed status
-        const webIcon = document.querySelector("#progress-web img");
-        const webIconHome = document.querySelector("#web-icon img");
-        const webIconTaskbar = document.querySelector("#taskbar-web img");
-
-        if (webIcon) { //cannot find
-            webIcon.src = "assets/icons/web-tick-icon.png";
-            webIconHome.src = "assets/icons/web-tick-icon.png";
-            webIconTaskbar.src = "assets/icons/web-tick-icon.png";
+    if (continueTask) {
+        // Update the task list status for Task 1
+        if (webtask1) {
+            const webtask1Status = document.querySelector("#web-task-1-status");
+            webtask1Status.textContent = "Complete";
+            webtask1Status.classList.remove("incomplete");
+            webtask1Status.classList.add("complete");
         }
 
-        //remove arrow
-        const webArrow = document.getElementById("web-arrow")
-        webArrow.style.display = 'none'
 
-        //enable reset since task is complete
-        if (resetWeb.style.display === 'none') {
-            resetWeb.style.display = 'block';
+        if (webtask2) {
+            // Update the task list status for Task 2
+            const webtask2Status = document.querySelector("#web-task-2-status");
+            webtask2Status.textContent = "Complete";
+            webtask2Status.classList.remove("incomplete");
+            webtask2Status.classList.add("complete");
+        }
+        if (webtask3) {
+            // Update the task list status for Task 3
+            const webtask3Status = document.querySelector("#web-task-3-status");
+            webtask3Status.textContent = "Complete";
+            webtask3Status.classList.remove("incomplete");
+            webtask3Status.classList.add("complete");
         }
 
-        // Add a message at the bottom for next steps
-        const taskWebElement = document.querySelector(".Taskweb");
-        taskWebElement.innerHTML += `
+        // Check if all tasks are complete
+        if (webtask1 && webtask2 && webtask3 || webtaskComplete) {
+            //show end card
+            webEndModel.style.display = 'flex'; //working
+            webInterface.classList.add('blurred'); // Apply the blur
+            //disable buttons while endcard is active
+            //web specific buttons
+            document.getElementById("ask-button").disabled = true;
+            document.getElementById("user-input").disabled = true;
+
+            markTaskComplete()
+            webtaskComplete = true;
+
+            // Update the icon to show the completed status
+            const webIcon = document.querySelector("#progress-web img");
+            const webIconHome = document.querySelector("#web-icon img");
+            const webIconTaskbar = document.querySelector("#taskbar-web img");
+
+            if (webIcon) { //cannot find
+                webIcon.src = "assets/icons/web-tick-icon.png";
+                webIconHome.src = "assets/icons/web-tick-icon.png";
+                webIconTaskbar.src = "assets/icons/web-tick-icon.png";
+            }
+
+            //remove arrow
+            const webArrow = document.getElementById("web-arrow")
+            webArrow.style.display = 'none'
+
+            //enable reset since task is complete
+            if (resetWeb.style.display === 'none') {
+                resetWeb.style.display = 'block';
+            }
+
+            // Add a message at the bottom for next steps
+            const taskWebElement = document.querySelector(".Taskweb");
+            taskWebElement.innerHTML += `
         <div class="next-steps">
             <p>COMPLETE</p>
         </div>
     `;
-    } else {
-        const taskWebElement = document.querySelector(".Taskweb");
-        const nextStepsDiv = taskWebElement.querySelector(".next-steps");
-        if (nextStepsDiv) {
-            nextStepsDiv.remove();
+            webopen = false;
+            continueTask = false;
+        } else {
+            const taskWebElement = document.querySelector(".Taskweb");
+            const nextStepsDiv = taskWebElement.querySelector(".next-steps");
+            if (nextStepsDiv) {
+                nextStepsDiv.remove();
+            }
+            console.log("Not all tasks are complete yet.");
         }
-        console.log("Not all tasks are complete yet.");
     }
 }
 
@@ -651,7 +668,7 @@ export function closeWeb() {
     if (webtaskComplete || confirmClose) {
         //remove end card + blur
         webEndModel.style.display = 'none';
-        desktopArea.classList.remove('blurred'); // remove the blur
+        webInterface.classList.remove('blurred'); // remove the blur
 
         confirmClose = false;
         webopen = false;

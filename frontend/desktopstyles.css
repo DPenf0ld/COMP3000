@@ -1395,7 +1395,18 @@ p {
     border-radius: 5px;
   }
 
-
+  #score {
+    width: auto;
+    right: 15%;
+    top: 22%;
+    position: absolute;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
 
 #game-container {
     position: absolute;

@@ -13,6 +13,8 @@ let passwordtask2 = false;
 let passwordtask3 = false;
 let passwordStrengths = document.querySelectorAll('.password-strength')
 
+let continueTask = true;
+
 
 const profileContainer = document.getElementById('profile-container');
 const task2CheckButton = document.getElementById('Task2-Check');
@@ -98,7 +100,7 @@ const pages = [
 export function PasswordHideEnd() {
     //remove end card + blur
     passwordEndModel.style.display = 'none';
-    desktopArea.classList.remove('blurred'); // remove the blur
+    passwordContainer.classList.remove('blurred'); // remove the blur
 
     //re-enable buttons
     document.getElementById("passwordPWNED").disabled = false;
@@ -111,6 +113,7 @@ export function PasswordHideEnd() {
 
 
 export function initialisePassword() {
+    continueTask = true;
 
     document.getElementById("passwordPWNED").value = "";
     document.getElementById("password").value = "";
@@ -159,7 +162,7 @@ export function closePassword() {
     if (passwordtaskComplete || confirmClose) {
         //remove end card + blur
         passwordEndModel.style.display = 'none';
-        desktopArea.classList.remove('blurred'); // remove the blur
+        passwordContainer.classList.remove('blurred'); // remove the blur
 
         confirmClose = false;
         passwordopen = false;
@@ -189,10 +192,10 @@ export function backpasswordFunction() {
 }
 
 export function confirmpasswordFunction() {
-        //hide quiz arrow
-        const quizArrow = document.getElementById("quiz-arrow")
-        quizArrow.style.display = 'none'
-        
+    //hide quiz arrow
+    const quizArrow = document.getElementById("quiz-arrow")
+    quizArrow.style.display = 'none'
+
     document.getElementById("passwordPWNED").disabled = false;
     document.getElementById("checkButton").disabled = false;
     document.getElementById("password").disabled = false;
@@ -531,64 +534,66 @@ export function passwordPreviouslyComplete() {
 
 // Function to mark all password tasks as complete
 export function passwordComplete() {
-    // Check if all tasks are complete
-    if (passwordtask1 && passwordtask2 && passwordtask3 || passwordtaskComplete) {
-        //show end card
-        passwordEndModel.style.display = 'flex'; //working
-        desktopArea.classList.add('blurred'); // Apply the blur
-        //disable buttons while endcard is active
-        //password specific buttons
-        document.getElementById("passwordPWNED").disabled = true;
-        document.getElementById("checkButton").disabled = true;
-        document.getElementById("password").disabled = true;
-        document.getElementById("Task2-Check").disabled = true;
+    if (continueTask) {
+        // Check if all tasks are complete
+        if (passwordtask1 && passwordtask2 && passwordtask3 || passwordtaskComplete) {
+            //show end card
+            passwordEndModel.style.display = 'flex'; //working
+            passwordContainer.classList.add('blurred'); // apply the blur
+            //disable buttons while endcard is active
+            //password specific buttons
+            document.getElementById("passwordPWNED").disabled = true;
+            document.getElementById("checkButton").disabled = true;
+            document.getElementById("password").disabled = true;
+            document.getElementById("Task2-Check").disabled = true;
 
 
-        markTaskComplete()
-        passwordtaskComplete = true;
+            markTaskComplete()
+            passwordtaskComplete = true;
 
 
 
-        const passwordIcon = document.querySelector("#progress-password img");
-        //update home page and taskbar
-        const passwordIconHome = document.querySelector("#password-icon img");
-        const passwordIconTaskbar = document.querySelector("#taskbar-password img");
+            const passwordIcon = document.querySelector("#progress-password img");
+            //update home page and taskbar
+            const passwordIconHome = document.querySelector("#password-icon img");
+            const passwordIconTaskbar = document.querySelector("#taskbar-password img");
 
-        if (passwordIcon) { //cannot find
-            passwordIcon.src = "assets/icons/password-tick-icon.png";
-            passwordIconHome.src = "assets/icons/password-tick-icon.png";
-            passwordIconTaskbar.src = "assets/icons/password-tick-icon.png";
-        }
+            if (passwordIcon) { //cannot find
+                passwordIcon.src = "assets/icons/password-tick-icon.png";
+                passwordIconHome.src = "assets/icons/password-tick-icon.png";
+                passwordIconTaskbar.src = "assets/icons/password-tick-icon.png";
+            }
 
-        //remove arrow
-        const passwordArrow = document.getElementById("password-arrow")
-        passwordArrow.style.display = 'none'
+            //remove arrow
+            const passwordArrow = document.getElementById("password-arrow")
+            passwordArrow.style.display = 'none'
 
-        //enable reset since task is complete
-        if (resetPassword.style.display === 'none') {
-            resetPassword.style.display = 'block';
-        }
+            //enable reset since task is complete
+            if (resetPassword.style.display === 'none') {
+                resetPassword.style.display = 'block';
+            }
 
-        if (feedback == false) {
-            // Add a message at the bottom for next steps
-            const taskPasswordElement = document.querySelector(".Taskpassword");
-            taskPasswordElement.innerHTML += `
+            if (feedback == false) {
+                // Add a message at the bottom for next steps
+                const taskPasswordElement = document.querySelector(".Taskpassword");
+                taskPasswordElement.innerHTML += `
         <div class="next-steps">
             <p>You can test more passwords or minimise this tab and move on to the next task.</p>
         </div>
     `;
-            feedback = true;
-        }
+                feedback = true;
+            }
+            continueTask = false;
+            passwordopen = false;
+        } else {
 
-        passwordopen = false;
-    } else {
-
-        console.log("Not all tasks are complete yet.");
-        // remove next steps
-        const taskPasswordElement = document.querySelector(".Taskpassword");
-        const nextStepsDiv = taskPasswordElement.querySelector(".next-steps");
-        if (nextStepsDiv) {
-            nextStepsDiv.remove();
+            console.log("Not all tasks are complete yet.");
+            // remove next steps
+            const taskPasswordElement = document.querySelector(".Taskpassword");
+            const nextStepsDiv = taskPasswordElement.querySelector(".next-steps");
+            if (nextStepsDiv) {
+                nextStepsDiv.remove();
+            }
         }
     }
 }

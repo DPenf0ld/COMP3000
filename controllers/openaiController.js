@@ -29,11 +29,10 @@ app.post('/generate-game', async (req, res) => {
                     role: 'user',
                     content: `I want you to generate ten search results for the query: '${userMessage}'.
                     
-                    - Provide **ten results**: 
-                      - Produce a total of ten Results
-                      - Five should be **legitimate** websites.
-                      - Five should be **malicious** scam/phishing websites.
-                      - Put these 10 websites in a random order
+                    - Provide **twenty results**: 
+                      - Produce a total of twenty Results
+                      - Ten should be **legitimate** websites.
+                      - Ten should be **malicious** scam/phishing websites.
                      
                     
                     - Format the response as a **JSON array** with objects structured like this:

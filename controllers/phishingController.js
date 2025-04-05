@@ -277,7 +277,7 @@ export function removeOpenAIFunction(){
 export function PhishingHideEnd() {
     //remove end card + blur
     phishingEndModel.style.display = 'none';
-    desktopArea.classList.remove('blurred'); // remove the blur
+    inboxContainer.classList.remove('blurred'); // remove the blur
 
     //re-enable buttons
     document.getElementById("reminder").disabled = false;
@@ -569,7 +569,7 @@ export function emailComplete() {
         if (emailtask1 && emailtask2 && emailtask3 || emailtaskComplete) {
             //show end card
             phishingEndModel.style.display = 'flex'; //working
-            desktopArea.classList.add('blurred'); // Apply the blur
+            inboxContainer.classList.add('blurred'); // Apply the blur
             //disable buttons while endcard is active
             //phishing specific buttons
             document.getElementById("reminder").disabled = true;
@@ -1017,7 +1017,7 @@ export function closeInbox() {
     if (emailtaskComplete || confirmClose) {
         //remove end card + blur
         phishingEndModel.style.display = 'none';
-        desktopArea.classList.remove('blurred'); // remove the blur
+        inboxContainer.classList.remove('blurred'); // remove the blur
 
         confirmClose = false;
         emailopen = false;
