@@ -330,6 +330,9 @@ export async function askButtonFunction() {
 
 //game function
 export async function gameFunction() {
+    //reset score
+    score = 0;
+    document.getElementById("score").textContent = `Score: ${score}`;
 
     //hide arrow to play game
     gameArrow.style.display = 'none';
@@ -405,13 +408,118 @@ function displayGameResults() {
         description.textContent = search.description;
         description.classList.add('search-description');
 
-        // Position randomly
-        const randomX = Math.random() * (1200);
-        const randomY = Math.random() * (400);
+        // 'Random' position - split the box into 12
+        //width in 4
+        //height in 3
+        //size of square: x=407.5, y=183.3
 
-        searchItem.style.position = "absolute";
-        searchItem.style.left = `${randomX}px`;
-        searchItem.style.top = `${randomY}px`;
+        if (i === 0) {
+            // Position randomly (within alocated square)
+            const randomX = Math.random() * (407.5);
+            const randomY = Math.random() * (183.3);
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        } else if (i === 1) {
+            // Position randomly (within alocated square)
+            const randomX = 407.5 + (Math.random() * (407.5));
+            const randomY = (Math.random() * (183.3));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        }
+        else if (i === 2) {
+            // Position randomly (within alocated square)
+            const randomX = (407.5*2) + (Math.random() * (407.5));
+            const randomY = (Math.random() * (183.3));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        }
+        else if (i === 3) {
+            // Position randomly (within alocated square)
+            const randomX = (407.5*3) + (Math.random() * (407.5));
+            const randomY = (Math.random() * (183.3));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        }
+        else if (i === 4) {
+            // Position randomly (within alocated square)
+            const randomX = Math.random() * (407.5);
+            const randomY = 183.3 + (Math.random() * (183.3));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        }
+        else if (i === 5) {
+            // Position randomly (within alocated square)
+            const randomX = 407.5 + (Math.random() * (407.5));
+            const randomY = 183.3 + (Math.random() * (183.3));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        }
+        else if (i === 6) {
+            // Position randomly (within alocated square)
+            const randomX = (407.5*2) + (Math.random() * (407.5));
+            const randomY = 183.3 + (Math.random() * (183.3));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        }
+        else if (i === 7) {
+            // Position randomly (within alocated square)
+            const randomX = (407.5*3) + (Math.random() * (407.5));
+            const randomY = 183.3 + (Math.random() * (183.3));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        }
+        else if (i === 8) {
+            // Position randomly (within alocated square)
+            const randomX = (Math.random() * (407.5));
+            const randomY = (183.3*2) + (Math.random() * (183.3));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        }
+        else if (i === 9) {
+            // Position randomly (within alocated square)
+            const randomX = 407.5 + (Math.random() * (407.5));
+            const randomY = (183.3*2) + (Math.random() * (183.3));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        }
+        else if (i === 10) {
+            // Position randomly (within alocated square)
+            const randomX = (407.5*2) + (Math.random() * (407.5));
+            const randomY = (183.3*2) + (Math.random() * (183.3));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        }
+        else if (i === 11) {
+            // Position randomly (within alocated square)
+            const randomX = (407.5*3) + (Math.random() * (407.5));
+            const randomY = (183.3*2) + (Math.random() * (183.3));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        }
 
         // Add click event listener to reveal feedback
         searchItem.addEventListener('click', function () {
@@ -451,7 +559,7 @@ function displayGameResults() {
 }
 
 function endGameFunction() {
-    gameContainer.innerHTML = `<h1>Game Complete! You achieved a score of ${score}. Keep trying until all tasks are complete!</h1>`;
+    gameContainer.innerHTML = `<h1 style="color: black;">Game Complete! You achieved a score of ${score}. Keep trying until all tasks are complete!</h1>`;
     if (score >= 6) {
         webtask3 = true;
         webComplete();
@@ -460,9 +568,15 @@ function endGameFunction() {
 
 
 function gameInstructions() {
-    webInterface.classList.add('blurred'); // Apply the blur
-    gameInstructionsModel.style.display = 'block';
+
+
+    // Add delay so user can read last feedback
+    setTimeout(() => {
+        webInterface.classList.add('blurred'); // Apply the blur
+        gameInstructionsModel.style.display = 'block';
+    }, 2000);
 }
+
 
 export function confirmGameInstructions() {
     webInterface.classList.remove('blurred'); // remove the blur
