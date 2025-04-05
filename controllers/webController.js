@@ -451,6 +451,7 @@ function displayGameResults() {
 }
 
 function endGameFunction() {
+    gameContainer.innerHTML = `<h1>Game Complete! You achieved a score of ${score}. Keep trying until all tasks are complete!</h1>`;
     if (score >= 6) {
         webtask3 = true;
         webComplete();
