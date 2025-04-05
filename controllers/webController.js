@@ -409,117 +409,108 @@ function displayGameResults() {
         description.classList.add('search-description');
 
         // 'Random' position - split the box into 12
-        //width in 4
-        //height in 3
-        //size of square: x=407.5, y=183.3
+        // width in 4
+        // height in 3
+        // size of square: x=370, y=160
 
         if (i === 0) {
-            // Position randomly (within alocated square)
-            const randomX = Math.random() * (407.5);
-            const randomY = Math.random() * (183.3);
+            // Position randomly (within allocated square)
+            const randomX = Math.random() * (370);
+            const randomY = Math.random() * (160);
 
             searchItem.style.position = "absolute";
             searchItem.style.left = `${randomX}px`;
             searchItem.style.top = `${randomY}px`;
         } else if (i === 1) {
-            // Position randomly (within alocated square)
-            const randomX = 407.5 + (Math.random() * (407.5));
-            const randomY = (Math.random() * (183.3));
+            // Position randomly (within allocated square)
+            const randomX = 370 + (Math.random() * (370));
+            const randomY = (Math.random() * (160));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        } else if (i === 2) {
+            // Position randomly (within allocated square)
+            const randomX = (370 * 2) + (Math.random() * (370));
+            const randomY = (Math.random() * (160));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        } else if (i === 3) {
+            // Position randomly (within allocated square)
+            const randomX = (370 * 3) + (Math.random() * (370));
+            const randomY = (Math.random() * (160));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        } else if (i === 4) {
+            // Position randomly (within allocated square)
+            const randomX = Math.random() * (370);
+            const randomY = 160 + (Math.random() * (160));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        } else if (i === 5) {
+            // Position randomly (within allocated square)
+            const randomX = 370 + (Math.random() * (370));
+            const randomY = 160 + (Math.random() * (160));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        } else if (i === 6) {
+            // Position randomly (within allocated square)
+            const randomX = (370 * 2) + (Math.random() * (370));
+            const randomY = 160 + (Math.random() * (160));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        } else if (i === 7) {
+            // Position randomly (within allocated square)
+            const randomX = (370 * 3) + (Math.random() * (370));
+            const randomY = 160 + (Math.random() * (160));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        } else if (i === 8) {
+            // Position randomly (within allocated square)
+            const randomX = (Math.random() * (370));
+            const randomY = (160 * 2) + (Math.random() * (160));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        } else if (i === 9) {
+            // Position randomly (within allocated square)
+            const randomX = 370 + (Math.random() * (370));
+            const randomY = (160 * 2) + (Math.random() * (160));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        } else if (i === 10) {
+            // Position randomly (within allocated square)
+            const randomX = (370 * 2) + (Math.random() * (370));
+            const randomY = (160 * 2) + (Math.random() * (160));
+
+            searchItem.style.position = "absolute";
+            searchItem.style.left = `${randomX}px`;
+            searchItem.style.top = `${randomY}px`;
+        } else if (i === 11) {
+            // Position randomly (within allocated square)
+            const randomX = (370 * 3) + (Math.random() * (370));
+            const randomY = (160 * 2) + (Math.random() * (160));
 
             searchItem.style.position = "absolute";
             searchItem.style.left = `${randomX}px`;
             searchItem.style.top = `${randomY}px`;
         }
-        else if (i === 2) {
-            // Position randomly (within alocated square)
-            const randomX = (407.5*2) + (Math.random() * (407.5));
-            const randomY = (Math.random() * (183.3));
 
-            searchItem.style.position = "absolute";
-            searchItem.style.left = `${randomX}px`;
-            searchItem.style.top = `${randomY}px`;
-        }
-        else if (i === 3) {
-            // Position randomly (within alocated square)
-            const randomX = (407.5*3) + (Math.random() * (407.5));
-            const randomY = (Math.random() * (183.3));
-
-            searchItem.style.position = "absolute";
-            searchItem.style.left = `${randomX}px`;
-            searchItem.style.top = `${randomY}px`;
-        }
-        else if (i === 4) {
-            // Position randomly (within alocated square)
-            const randomX = Math.random() * (407.5);
-            const randomY = 183.3 + (Math.random() * (183.3));
-
-            searchItem.style.position = "absolute";
-            searchItem.style.left = `${randomX}px`;
-            searchItem.style.top = `${randomY}px`;
-        }
-        else if (i === 5) {
-            // Position randomly (within alocated square)
-            const randomX = 407.5 + (Math.random() * (407.5));
-            const randomY = 183.3 + (Math.random() * (183.3));
-
-            searchItem.style.position = "absolute";
-            searchItem.style.left = `${randomX}px`;
-            searchItem.style.top = `${randomY}px`;
-        }
-        else if (i === 6) {
-            // Position randomly (within alocated square)
-            const randomX = (407.5*2) + (Math.random() * (407.5));
-            const randomY = 183.3 + (Math.random() * (183.3));
-
-            searchItem.style.position = "absolute";
-            searchItem.style.left = `${randomX}px`;
-            searchItem.style.top = `${randomY}px`;
-        }
-        else if (i === 7) {
-            // Position randomly (within alocated square)
-            const randomX = (407.5*3) + (Math.random() * (407.5));
-            const randomY = 183.3 + (Math.random() * (183.3));
-
-            searchItem.style.position = "absolute";
-            searchItem.style.left = `${randomX}px`;
-            searchItem.style.top = `${randomY}px`;
-        }
-        else if (i === 8) {
-            // Position randomly (within alocated square)
-            const randomX = (Math.random() * (407.5));
-            const randomY = (183.3*2) + (Math.random() * (183.3));
-
-            searchItem.style.position = "absolute";
-            searchItem.style.left = `${randomX}px`;
-            searchItem.style.top = `${randomY}px`;
-        }
-        else if (i === 9) {
-            // Position randomly (within alocated square)
-            const randomX = 407.5 + (Math.random() * (407.5));
-            const randomY = (183.3*2) + (Math.random() * (183.3));
-
-            searchItem.style.position = "absolute";
-            searchItem.style.left = `${randomX}px`;
-            searchItem.style.top = `${randomY}px`;
-        }
-        else if (i === 10) {
-            // Position randomly (within alocated square)
-            const randomX = (407.5*2) + (Math.random() * (407.5));
-            const randomY = (183.3*2) + (Math.random() * (183.3));
-
-            searchItem.style.position = "absolute";
-            searchItem.style.left = `${randomX}px`;
-            searchItem.style.top = `${randomY}px`;
-        }
-        else if (i === 11) {
-            // Position randomly (within alocated square)
-            const randomX = (407.5*3) + (Math.random() * (407.5));
-            const randomY = (183.3*2) + (Math.random() * (183.3));
-
-            searchItem.style.position = "absolute";
-            searchItem.style.left = `${randomX}px`;
-            searchItem.style.top = `${randomY}px`;
-        }
 
         // Add click event listener to reveal feedback
         searchItem.addEventListener('click', function () {
