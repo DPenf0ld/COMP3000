@@ -26,6 +26,8 @@ let highlighted = false;
 
 
 
+
+
 //const emailContentContainer = document.querySelector('.email-content');
 
 const profileContainer = document.getElementById('profile-container');
@@ -38,6 +40,7 @@ const nextButton = document.getElementById('next-button');
 const confirmButton = document.getElementById('confirm-button');
 const emailBodyElement = document.querySelector('.email-body');
 const emailSubjectElement = document.querySelector('.email-subject-line')
+const exampleEndModel = document.getElementById('example-end'); // Instruction model
 const instructionModel = document.getElementById('instructions-email'); // Instruction model
 const emailContainer = document.getElementById('email-interface');     // Inbox container
 const prevButton = document.getElementById('prev-button');
@@ -69,7 +72,7 @@ const emails = [
         body: `Dear Customer,<br><br>
                Your invoice #12345 is now ready.<br><br>
                Please find the attached invoice for your review. Kindly make the payment at your earlist convenience to avoid service disruptions.<br><br>
-               Invoice Amount: $2,540.00 <br><br>
+               Invoice Amount: £2,540.00 <br><br>
                Due Date: [Date] <br><br>                 
                To view your invoice, click the link below:<br><br>
                <span class="email-hover-text" title="securepaysolutions-support.com">SecurePay Solutions</span><br><br>
@@ -86,7 +89,7 @@ const emails = [
         body: `Dear Valued Customer,<br><br>
                This is a notification regarding your recent transaction on PayPal.<br><br>
                Transaction ID: 7GH4321JSD<br>
-               Amount: $499.99<br><br>
+               Amount: £499.99<br><br>
                If you recognize this transaction, no further action is needed. However, if you suspect unauthorized activity, please verify your account immediately.<br><br>
                Click the link below to secure your account:<br><br>
                <span class="email-hover-text" title="paypal-security.com">PayPal Security Center</span><br><br>
@@ -794,7 +797,7 @@ export function exampleInstructions() {
 
 // ai generated email and add to email array
 export async function addGeneratedEmail() {
-    if (currentEmailIndex >= 0) { //SET TO 0 FOR TESTING
+    if (currentEmailIndex >= 0) { //SET TO 0 FOR TESTING MATCH TO PRELOAD AMOUNT + 3
         try {
             const response = await fetch('http://localhost:3000/generate-phishing', {
                 method: 'POST',
@@ -989,6 +992,10 @@ export function unhideInstructionBox() {
 export function showNextEmail() {
     currentEmailIndex++;
     if (currentEmailIndex > 3) {
+        if (currentEmailIndex==4){
+            exampleEndModel.style.display = 'flex'; //working
+            emailContainer.classList.add('blurred'); // Apply the blur
+        }
         addGeneratedEmail();
     } else {
         displayEmail(currentEmailIndex);
