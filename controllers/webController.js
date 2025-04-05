@@ -24,6 +24,10 @@ const responseContainer = document.getElementById('response-container');
 const gameContainer = document.getElementById('game-container')
 const leavetaskModel = document.getElementById('leave-web-task');
 const instructionModel = document.getElementById('instructions-web');
+const gameInstructionsModel = document.getElementById('game-instructions');
+const searchArrow = document.getElementById('search-arrow');
+const gameArrow = document.getElementById('game-arrow');
+const feedbackInfo = document.getElementById('feedback-info');
 const webEndModel = document.getElementById('web-end');
 
 const playButton = document.getElementById('game-button');
@@ -45,15 +49,6 @@ const pages = [
             🔍 This exercise will help you improve your ability to identify <strong>unsafe links</strong> in online search results.<br><br>
             🚨 Cybercriminals create deceptive websites to steal data or infect devices. Your task is to analyse search results and identify which links are unsafe.<br><br>
             🔓 <strong>Click Next to learn more before starting the challenge!</strong>
-        `
-    },
-    {
-        title: "🎯 Your Task:",
-        content: `
-            🔎 You will see simulated search results containing a mix of <strong>safe</strong> and <strong>unsafe</strong> links.<br>
-            ❌ Your goal is to <strong>identify the 3 unsafe links</strong> in each round.<br>
-            ✅ Click on a link to classify it, and receive immediate feedback.<br><br>
-            🏆 The challenge gets harder as you progress. Stay alert!
         `
     },
     {
@@ -85,6 +80,14 @@ const pages = [
             🚫 Never enter personal details on sites you don’t trust.<br><br>
             If still unsure: Search for reviews or reports about the site online before visiting.<br><br>
             <strong>💡 Now, let’s begin the challenge!</strong>
+        `
+    },
+    {
+        title: "🎯 Your Task:",
+        content: `
+            🔎 You will see simulated search results containing a mix of <strong>safe</strong> and <strong>unsafe</strong> links.<br>
+            ✅ Click on each article to gain immediate feedback about how safe the article is.<br><br>
+            🏆 After reading the feedback for each link, the game will be availble to play - more info to come. Stay alert!
         `
     }
 ];
@@ -174,6 +177,8 @@ export function confirmwebButtonFunction() {
     webInterface.classList.remove('blurred'); // Remove the blur
     document.getElementById("ask-button").disabled = false;
     document.getElementById("user-input").disabled = false;
+    //display search arrow
+    searchArrow.style.display = 'block';
 }
 export function webfirstOpenFunction() {
     instructionModel.style.display = 'flex'; //working
@@ -183,6 +188,7 @@ export function webfirstOpenFunction() {
 export function initialiseWeb() {
     document.getElementById("user-input").value = ""; //reset input
     document.getElementById("response-container").value = ""; //reset web search results
+    document.getElementById("game-container").value = ""; //reset web search results
     responseContainer.textContent = '';
     gameContainer.textContent = '';
 
@@ -275,17 +281,24 @@ export function confirmwebFunction() {
 
 export async function askButtonFunction() {
 
+    //remove arrow
+    searchArrow.style.display = 'none'
+
+    //show info on what to do 
+    feedbackInfo.style.display = 'block'
+
     //unhide response container and hide game container
     responseContainer.style.display = 'block' 
     gameContainer.style.display = 'none'
 
     const question = userInput.value.trim(); //stores question
     if (!question) {
-        responseContainer.textContent = 'Please enter a question.';
+        responseContainer.textContent = 'Please enter a search.';
         return;
     }
     // Clear previous response and show loading
     responseContainer.textContent = 'Loading...';
+
     try {
         const response = await fetch('http://localhost:3000/generate-answer', {
             method: 'POST',
@@ -313,6 +326,14 @@ export async function askButtonFunction() {
 
 //game function
 export async function gameFunction() {
+
+    //hide arrow to play game
+    gameArrow.style.display = 'none';
+
+    //complete  task 2
+    webtask2 = true;
+    webComplete()
+
 
     responseContainer.style.display = 'none' 
     gameContainer.style.display = 'block'
@@ -353,6 +374,8 @@ function displayGameResults() {
     startTimer();
     // Clear previous search
     gameContainer.innerHTML = '';
+    // Clear previous search
+    responseContainer.innerHTML = '';
     correct = 0;
     incorrect = 0;
     score = 0;
@@ -423,7 +446,22 @@ function endGameFunction() {
     alert(score);
 }
 
+function gameInstructions(){
+    webInterface.classList.add('blurred'); // Apply the blur
+    gameInstructionsModel.style.display = 'block';
+}
+
+export function confirmGameInstructions(){
+    webInterface.classList.remove('blurred'); // remove the blur
+    gameInstructionsModel.style.display = 'none';
+
+    //add arrow to play game
+    gameArrow.style.display = 'block';
+}
+
 function displaySearchResults() {
+    // Clear previous search
+    gameContainer.innerHTML = '';
     // Clear previous search
     responseContainer.innerHTML = '';
 
@@ -476,6 +514,14 @@ function displaySearchResults() {
             if (feedbackAmount===6) {
                 playButton.style.display = 'block' 
                 timerDisplay.style.display = 'block' 
+
+                //hide info
+                feedbackInfo.style.display = 'none'
+
+                //task 1 complete 
+                webtask1 = true;
+                webComplete()
+                gameInstructions()
             }
         });
 

@@ -2,14 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: "Verdana";
 }
 
 body,
 html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Verdana";
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -202,7 +202,7 @@ h1 {
 
 /* Style for the taskbar email */
 .taskbar-user-name {
-    font-family: Arial, sans-serif;
+    font-family: "Verdana";
     font-size: 14px;
     font-weight: bold;
     color: #fff;
@@ -583,6 +583,37 @@ p {
     height: 20px;
 }
 
+#search-arrow {
+    z-index: 50;
+    position: absolute;
+    bottom: 73%;
+    left: 61%;
+    width: 80px;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}
+
+#game-arrow {
+    z-index: 50;
+    position: absolute;
+    bottom: 81%;
+    left: 69%;
+    width: 80px;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}
+
+#feedback-info{
+    font-style: italic;
+    color: yellow;
+    position: absolute;
+    top: 27%;
+    left: 60%;
+    width: 100%;
+}
+
 .search-result {
     padding: 1%;
     border-radius: 3%;
@@ -656,7 +687,7 @@ p {
     padding: 10px;
     width: 300px;
     font-size: small;
-    font-family: Arial, sans-serif;
+    font-family: "Verdana";
     font-weight: bold;
 }
 
@@ -1353,7 +1384,7 @@ p {
 /*timer*/
   #time {
     width: auto;
-    right: 32%;
+    right: 31%;
     top: 20%;
     position: absolute;
     padding: 10px 20px;
@@ -1490,7 +1521,7 @@ p {
 
 /* Style for the taskbar email */
 .profile-info {
-    font-family: Arial, sans-serif;
+    font-family: "Verdana";
     margin-bottom: 10px;
     font-size: 14px;
     font-weight: bold;
