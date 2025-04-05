@@ -67,7 +67,7 @@ const emails = [
         sender: "SecurePay Solutions",
         subject: "Urgent Account Update Required EXAMPLE",
         body: `Dear Customer,<br><br>
-               Your invoice #[12345] is now ready.<br><br>
+               Your invoice #12345 is now ready.<br><br>
                Please find the attached invoice for your review. Kindly make the payment at your earlist convenience to avoid service disruptions.<br><br>
                Invoice Amount: $2,540.00 <br><br>
                Due Date: [Date] <br><br>                 
@@ -82,11 +82,11 @@ const emails = [
         type: "Clone-Phishing",
         hover: "support@paypal-security.com", //example email
         sender: "PayPal Security Team",
-        subject: "Your Recent Transaction - Action Required EXAMPLE",
+        subject: "Your Recent Transaction - Action Required",
         body: `Dear Valued Customer,<br><br>
                This is a notification regarding your recent transaction on PayPal.<br><br>
-               **Transaction ID:** 7GH4321JSD<br>
-               **Amount:** $499.99<br><br>
+               Transaction ID: 7GH4321JSD<br>
+               Amount: $499.99<br><br>
                If you recognize this transaction, no further action is needed. However, if you suspect unauthorized activity, please verify your account immediately.<br><br>
                Click the link below to secure your account:<br><br>
                <span class="email-hover-text" title="paypal-security.com">PayPal Security Center</span><br><br>
@@ -98,8 +98,8 @@ const emails = [
         type: "Spear-Phishing",
         hover: "it-admin@yourcompany-support.com", //example email
         sender: "IT Admin - YourCompany",
-        subject: "Mandatory Security Update for Employees EXAMPLE",
-        body: `Dear [Employee Name],<br><br>
+        subject: "Mandatory Security Update for Employees",
+        body: `Dear ${firstName},<br><br>
                As part of our ongoing cybersecurity enhancements, all employees are required to update their login credentials.<br><br>
                Failure to complete this update by [Deadline Date] may result in temporary access restrictions.<br><br>
                Please follow the secure link below to verify and update your credentials:<br><br>
@@ -113,11 +113,11 @@ const emails = [
         type: "Safe-Email",
         hover: "customer-support@amazon.com", //example email
         sender: "Amazon Customer Support",
-        subject: "Your Recent Order Confirmation EXAMPLE",
-        body: `Dear [Customer Name],<br><br>
+        subject: "Your Recent Order Confirmation",
+        body: `Dear ${firstName},<br><br>
                Thank you for your recent purchase on Amazon! Your order has been successfully processed.<br><br>
-               **Order Number:** 987654321<br>
-               **Estimated Delivery:** [Delivery Date]<br><br>
+               Order Number: 987654321<br>
+               Estimated Delivery: [Delivery Date]<br><br>
                You can track your order and manage your preferences at any time by visiting your account:<br><br>
                <span class="email-hover-text" title="amazon.com">Your Orders</span><br><br>
                If you have any questions, feel free to contact our support team.<br><br>
@@ -125,6 +125,26 @@ const emails = [
                Amazon Customer Support`
     }
 ];
+
+//todays date
+const today = new Date();
+//deadline
+const deadlineDate = new Date(today);
+deadlineDate.setDate(today.getDate() + 3);
+//delivery
+const deliveryDate = new Date(today);
+deliveryDate.setDate(today.getDate() + 5);
+
+//replace parts in the email with the real date
+const formatDate = (date) =>
+  date.toLocaleDateString("en-UK", { year: 'numeric', month: 'long', day: 'numeric' }); //read in this format: 8 April 2025
+
+emails.forEach(email => {
+  email.body = email.body
+    .replace("[Date]", formatDate(today))
+    .replace("[Deadline Date]", formatDate(deadlineDate))
+    .replace("[Delivery Date]", formatDate(deliveryDate));
+});
 
 // Pages content
 const feedback = [
@@ -316,7 +336,7 @@ export function submitButtonFunction() {
 
     // Combine the highlighted elements from body and subject
     const allHighlightedElements = [...highlightedBodyElements, ...highlightedSubjectElements];
-    
+
     const currentEmailType = emails[currentEmailIndex].type; // Fetch type from the emails array
     //check to see if words have been highlighted
     if (allHighlightedElements.length > 0 || currentEmailType === 'Safe-Email') {
