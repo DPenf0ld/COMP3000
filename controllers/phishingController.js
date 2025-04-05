@@ -22,6 +22,7 @@ let emailtypereminder = false;
 let currentPage = 0; // Track the current page of the model
 let confirmClose = false
 let instructionboxCreated = false;
+let highlighted = false;
 
 
 
@@ -306,67 +307,82 @@ export function initialiseEmail() {
 }
 
 export function submitButtonFunction() {
-    tickboxanswer(currentEmailIndex)
-    if (selectedoption) {
+    // Feedback container
+    const feedbackElement = document.getElementById("feedback");
 
+    // Get all highlighted elements from both body and subject
+    const highlightedBodyElements = emailBodyElement.querySelectorAll('.highlighted');
+    const highlightedSubjectElements = emailSubjectElement.querySelectorAll('.highlighted');
 
-        // Get all highlighted elements from both body and subject
-        const highlightedBodyElements = emailBodyElement.querySelectorAll('.highlighted');
-        const highlightedSubjectElements = emailSubjectElement.querySelectorAll('.highlighted');
+    // Combine the highlighted elements from body and subject
+    const allHighlightedElements = [...highlightedBodyElements, ...highlightedSubjectElements];
+    
+    const currentEmailType = emails[currentEmailIndex].type; // Fetch type from the emails array
+    //check to see if words have been highlighted
+    if (allHighlightedElements.length > 0 || currentEmailType === 'Safe-Email') {
+        tickboxanswer(currentEmailIndex)
+        if (selectedoption) {
+            // Get all highlighted elements from both body and subject
+            const highlightedBodyElements = emailBodyElement.querySelectorAll('.highlighted');
+            const highlightedSubjectElements = emailSubjectElement.querySelectorAll('.highlighted');
 
-        // Combine the highlighted elements from body and subject
-        const allHighlightedElements = [...highlightedBodyElements, ...highlightedSubjectElements];
+            // Combine the highlighted elements from body and subject
+            const allHighlightedElements = [...highlightedBodyElements, ...highlightedSubjectElements];
 
-        // Check each highlighted element to see if it matches a suspicious word
-        allHighlightedElements.forEach(span => {
-            const word = span.textContent.trim().toLowerCase();
-            if (suspiciousWords.includes(word)) {
-                span.style.backgroundColor = 'green';  // Correct word - green
-                correctCount++;
-            } else {
-                span.style.backgroundColor = 'red';  // Incorrect word - red
-            }
-        });
-
-        // Check for any suspicious words that were not highlighted
-        suspiciousWords.forEach(word => {
-            const wordFoundInBody = emailBodyElement.innerText.toLowerCase().includes(word);
-            const wordFoundInSubject = emailSubjectElement.innerText.toLowerCase().includes(word);
-
-            // If the word was found but not highlighted
-            if (!Array.from(allHighlightedElements).some(span => span.textContent.trim().toLowerCase() === word)) {
-                missedCount++;
-                if (wordFoundInBody) {
-                    highlightMissedWord(word, emailBodyElement);  // Highlight missed word in body
+            // Check each highlighted element to see if it matches a suspicious word
+            allHighlightedElements.forEach(span => {
+                const word = span.textContent.trim().toLowerCase();
+                if (suspiciousWords.includes(word)) {
+                    span.style.backgroundColor = 'green';  // Correct word - green
+                    correctCount++;
+                } else {
+                    span.style.backgroundColor = 'red';  // Incorrect word - red
                 }
-                if (wordFoundInSubject) {
-                    highlightMissedWord(word, emailSubjectElement);  // Highlight missed word in subject
+            });
+
+            // Check for any suspicious words that were not highlighted
+            suspiciousWords.forEach(word => {
+                const wordFoundInBody = emailBodyElement.innerText.toLowerCase().includes(word);
+                const wordFoundInSubject = emailSubjectElement.innerText.toLowerCase().includes(word);
+
+                // If the word was found but not highlighted
+                if (!Array.from(allHighlightedElements).some(span => span.textContent.trim().toLowerCase() === word)) {
+                    missedCount++;
+                    if (wordFoundInBody) {
+                        highlightMissedWord(word, emailBodyElement);  // Highlight missed word in body
+                    }
+                    if (wordFoundInSubject) {
+                        highlightMissedWord(word, emailSubjectElement);  // Highlight missed word in subject
+                    }
                 }
-            }
-        });
+            });
 
-        console.log(`Correct: ${correctCount}, Missed: ${missedCount}`);
+            console.log(`Correct: ${correctCount}, Missed: ${missedCount}`);
 
 
-        displaynextemailbutton = true;
-        //display feedback
-        exampleFeedback.style.display = 'block';
+            displaynextemailbutton = true;
+            //display feedback
+            exampleFeedback.style.display = 'block';
 
-        nextemailbutton()
-    }
+            nextemailbutton()
+        }
 
-    if (correctCount == 3) {
-        emailtask3 = true;
-        console.log("Task 3 correct")
+        if (correctCount == 3) {
+            emailtask3 = true;
+            console.log("Task 3 correct")
 
-        // Update the task list status for Task 3
-        const task3Status = document.querySelector("#email-task-3-status");
-        task3Status.textContent = "Complete";
-        task3Status.classList.remove("incomplete");
-        task3Status.classList.add("complete");
+            // Update the task list status for Task 3
+            const task3Status = document.querySelector("#email-task-3-status");
+            task3Status.textContent = "Complete";
+            task3Status.classList.remove("incomplete");
+            task3Status.classList.add("complete");
 
-        // Call emailComplete to check all tasks
-        emailComplete();
+            // Call emailComplete to check all tasks
+            emailComplete();
+        }
+    } else {
+        feedbackElement.textContent = "Please highlight suspicious words before submitting.";
+        feedbackElement.style.color = "orange"; // Change feedback text color for no selection
     }
 }
 
@@ -902,6 +918,8 @@ export function tickboxanswer(currentEmailIndex) {
         feedbackElement.textContent = "Please select an option before submitting.";
         feedbackElement.style.color = "orange"; // Change feedback text color for no selection
     }
+
+
 }
 
 export function clearTickboxSelection() {
