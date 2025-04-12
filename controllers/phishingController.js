@@ -33,7 +33,6 @@ const profileContainer = document.getElementById('profile-container');
 const resetEmail = document.getElementById('reset-email');
 const firstName = localStorage.getItem('firstName');
 const desktopArea = document.getElementById('desktop-area');
-const inboxContainer = document.getElementById('inbox-container');
 const emailListContainer = document.querySelector('.email-list');
 const nextButton = document.getElementById('next-button');
 const confirmButton = document.getElementById('confirm-button');
@@ -49,6 +48,10 @@ const phishingEndModel = document.getElementById('phishing-end');
 const exampleFeedback = document.getElementById('example-feedback')
 
 const submitButton = document.getElementById('submit-highlight');
+
+const inboxContainer = document.getElementById('inbox-container');
+const profileArea = document.getElementById('profile-container');
+const taskbar = document.getElementById('taskbar');
 
 //suspicious words to check for highlighting
 const suspiciousWords = [
@@ -275,6 +278,10 @@ export function removeOpenAIFunction(){
 
 
 export function PhishingHideEnd() {
+        //enable all buttons 
+        inboxContainer.classList.remove("disabled");
+        profileArea.classList.remove("disabled");
+        taskbar.classList.remove("disabled");
     //remove end card + blur
     phishingEndModel.style.display = 'none';
     inboxContainer.classList.remove('blurred'); // remove the blur
@@ -419,8 +426,15 @@ export function submitButtonFunction() {
 
 
 export function backphishingFunction() {
+
+    //enable all buttons 
+    inboxContainer.classList.remove("disabled");
+    desktopArea.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
+
     leavetaskModel.style.display = 'none';
-    desktopArea.classList.remove('blurred'); // remove the blur
+    inboxContainer.classList.remove('blurred'); // remove the blur
 
     document.getElementById("reminder").disabled = false;
     document.getElementById("prev-slide").disabled = false;
@@ -431,6 +445,12 @@ export function backphishingFunction() {
 
 
 export function confirmphishingFunction() {
+    //enable all buttons 
+    inboxContainer.classList.remove("disabled");
+    desktopArea.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
+
     //hide quiz arrow
     const quizArrow = document.getElementById("quiz-arrow")
     quizArrow.style.display = 'none'
@@ -551,6 +571,12 @@ export function nextButtonFunction() {
 }
 
 export function confirmButtonFunction() {
+    //enable all buttons 
+    inboxContainer.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
+
+
     document.getElementById("reminder").disabled = false;
     instructionModel.style.display = 'none';
     instructionsConfirmed = true; // listener to display instructions once user confirms
@@ -559,6 +585,11 @@ export function confirmButtonFunction() {
 }
 
 export function firstOpenFunction() {
+    //disable all buttons 
+    inboxContainer.classList.add("disabled");
+    profileArea.classList.add("disabled");
+    taskbar.classList.add("disabled");
+
     instructionModel.style.display = 'flex'; //working
     emailContainer.classList.add('blurred'); // Apply the blur
 }
@@ -567,6 +598,10 @@ export function emailComplete() {
     if (continueTask) {
         // Check if all tasks are complete
         if (emailtask1 && emailtask2 && emailtask3 || emailtaskComplete) {
+                //disable all buttons 
+    inboxContainer.classList.add("disabled");
+    profileArea.classList.add("disabled");
+    taskbar.classList.add("disabled");
             //show end card
             phishingEndModel.style.display = 'flex'; //working
             inboxContainer.classList.add('blurred'); // Apply the blur
@@ -652,6 +687,13 @@ export function nextemailbutton() {
 
 
 export function resetEmailFromDesktop() {
+        //disable all buttons 
+        inboxContainer.classList.add("disabled");
+        profileArea.classList.add("disabled");
+        taskbar.classList.add("disabled");
+
+        //reenable button if cancelled 
+
     leavetaskModel.style.display = 'flex'; //working
     desktopArea.classList.add('blurred'); // Apply the blur
 }
@@ -1015,6 +1057,11 @@ export function showNextEmail() {
 
 export function closeInbox() {
     if (emailtaskComplete || confirmClose) {
+                    //enable all buttons 
+                    inboxContainer.classList.remove("disabled");
+                    profileArea.classList.remove("disabled");
+                    taskbar.classList.remove("disabled");
+                    
         //remove end card + blur
         phishingEndModel.style.display = 'none';
         inboxContainer.classList.remove('blurred'); // remove the blur
@@ -1028,6 +1075,13 @@ export function closeInbox() {
     else {
         leavetaskModel.style.display = 'flex'; //working
         inboxContainer.classList.add('blurred'); // Apply the blur
+
+
+        //disable all buttons 
+        inboxContainer.classList.add("disabled");
+        profileArea.classList.add("disabled");
+        taskbar.classList.add("disabled");
+        
 
         document.getElementById("reminder").disabled = true;
         if (instructionboxCreated) {

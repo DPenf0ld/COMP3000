@@ -763,7 +763,7 @@ p {
     /* Blue background */
     color: white;
     /* White text */
-    padding: 10px 20px;
+    padding: 10px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -880,7 +880,7 @@ p {
     border: 2px solid #007BFF;
     border-radius: 8px;
     padding: 20px;
-    width: 400px;
+    width: 385px;
     z-index: 1000;
     text-align: center;
 }

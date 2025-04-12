@@ -20,8 +20,7 @@ const profileContainer = document.getElementById('profile-container');
 const task2CheckButton = document.getElementById('Task2-Check');
 const desktopArea = document.getElementById('desktop-area');
 const instructionPasswordModel = document.getElementById('instructions-password'); // Instruction model
-const passwordContainer = document.getElementById('password-container');
-const passwordContainerBlur = document.getElementById('password-interface');
+
 
 
 const middleContainerBlur = document.getElementById('middle');
@@ -39,6 +38,12 @@ const instructionModel = document.getElementById('instructions-password'); // In
 
 const resultElement = document.getElementById('result');
 const resulttask2Element = document.getElementById('resulttask2');
+
+const passwordContainerBlur = document.getElementById('password-interface');
+
+const passwordContainer = document.getElementById('password-container');
+const profileArea = document.getElementById('profile-container');
+const taskbar = document.getElementById('taskbar');
 
 // Pages content
 const pages = [
@@ -97,7 +102,24 @@ const pages = [
     }
 ];
 
+export function firstOpenPasswordFunction(){
+    instructionPasswordModel.style.display = 'flex'; //working
+    passwordContainerBlur.classList.add('blurred'); // Apply the blur
+
+    //disable all buttons 
+    passwordContainer.classList.add("disabled");
+    profileArea.classList.add("disabled");
+    taskbar.classList.add("disabled");
+    togglePasswordInput();
+}
+
+
 export function PasswordHideEnd() {
+        //enable all buttons 
+        passwordContainer.classList.remove("disabled");
+        profileArea.classList.remove("disabled");
+        taskbar.classList.remove("disabled");
+
     //remove end card + blur
     passwordEndModel.style.display = 'none';
     passwordContainer.classList.remove('blurred'); // remove the blur
@@ -108,9 +130,6 @@ export function PasswordHideEnd() {
     document.getElementById("password").disabled = false;
     document.getElementById("Task2-Check").disabled = false;
 }
-
-
-
 
 export function initialisePassword() {
     continueTask = true;
@@ -160,6 +179,11 @@ export function resetPasswordTask() {
 
 export function closePassword() {
     if (passwordtaskComplete || confirmClose) {
+            //enable all buttons 
+    passwordContainer.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
+
         //remove end card + blur
         passwordEndModel.style.display = 'none';
         passwordContainer.classList.remove('blurred'); // remove the blur
@@ -171,6 +195,11 @@ export function closePassword() {
         desktopArea.style.display = 'flex';
     }
     else {
+    //disable all buttons 
+    passwordContainer.classList.add("disabled");
+    profileArea.classList.add("disabled");
+    taskbar.classList.add("disabled");
+
         //disable inputs and buttons 
         document.getElementById("passwordPWNED").disabled = true;
         document.getElementById("checkButton").disabled = true;
@@ -183,7 +212,14 @@ export function closePassword() {
 }
 
 export function backpasswordFunction() {
+        //enable all buttons 
+        passwordContainer.classList.remove("disabled");
+        desktopArea.classList.remove("disabled");
+        profileArea.classList.remove("disabled");
+        taskbar.classList.remove("disabled");
+
     leavetaskModel.style.display = 'none';
+    passwordContainer.classList.remove('blurred'); // remove the blur
     desktopArea.classList.remove('blurred'); // remove the blur
     document.getElementById("passwordPWNED").disabled = false;
     document.getElementById("checkButton").disabled = false;
@@ -192,6 +228,12 @@ export function backpasswordFunction() {
 }
 
 export function confirmpasswordFunction() {
+    //enable all buttons 
+    passwordContainer.classList.remove("disabled");
+    desktopArea.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
+
     //hide quiz arrow
     const quizArrow = document.getElementById("quiz-arrow")
     quizArrow.style.display = 'none'
@@ -244,6 +286,11 @@ export function confirmpasswordFunction() {
 }
 
 export function resetPasswordFromDesktop() {
+            //disable all buttons 
+            desktopArea.classList.add("disabled");
+            profileArea.classList.add("disabled");
+            taskbar.classList.add("disabled");
+
     leavetaskModel.style.display = 'flex'; //working
     desktopArea.classList.add('blurred'); // Apply the blur
 }
@@ -265,6 +312,11 @@ export function updateModelContent() {
 }
 
 export function confirmpasswordButtonFunction() {
+    //enable all buttons 
+    passwordContainer.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
+
     instructionPasswordModel.style.display = 'none';
     passwordContainerBlur.classList.remove('blurred'); // Remove the blur
     middleContainerBlur.classList.add('blurred'); // Apply blur to middle and bottom
@@ -494,7 +546,6 @@ export function togglePasswordInput() {
         passwordblur = true;
         passwordInput.disabled = true; // disable
     }
-
 }
 
 // SHA-1 Hashing Function (to hash the password)
@@ -537,6 +588,11 @@ export function passwordComplete() {
     if (continueTask) {
         // Check if all tasks are complete
         if (passwordtask1 && passwordtask2 && passwordtask3 || passwordtaskComplete) {
+                //disable all buttons 
+    passwordContainer.classList.add("disabled");
+    profileArea.classList.add("disabled");
+    taskbar.classList.add("disabled");
+
             //show end card
             passwordEndModel.style.display = 'flex'; //working
             passwordContainer.classList.add('blurred'); // apply the blur

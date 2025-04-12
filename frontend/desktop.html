@@ -131,28 +131,21 @@
     </div>
 
 
+    <!-- Instruction Model EMAIL-->
+    <div id="instructions-email" class="instructions" style="display: none;">
+        <div class="instructions-content">
+            <h2 id="page-title">Welcome to the Email Inbox</h2>
+            <p id="page-content"> </p>
+            <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
+                <button id="prev-button" class="nav-button hidden">Previous</button>
+                <button id="next-button" class="nav-button">Next</button>
+                <button id="confirm-button" class="nav-button hidden">Confirm</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Email Inbox (Hidden) -->
     <div class="inbox-container" id="inbox-container" style="display: none;">
-        <!-- Instruction Model -->
-        <div id="instructions-email" class="instructions" style="display: none;">
-            <div class="instructions-content">
-                <h2 id="page-title">Welcome to the Email Inbox</h2>
-                <p id="page-content">
-                    <!-- Manually load first info page -->
-                    This exercise will teach you how to identify <strong>phishing emails</strong>—fraudulent messages
-                    designed to steal sensitive information.<br><br>
-                    Phishing emails often contain suspicious links or attachments meant to trick you. Let's improve your
-                    detection skills!
-                </p>
-                <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
-                    <button id="prev-button" class="nav-button hidden">Previous</button>
-                    <button id="next-button" class="nav-button">Next</button>
-                    <button id="confirm-button" class="nav-button hidden">Confirm</button>
-                </div>
-            </div>
-        </div>
-
         <!--Examples compelete-->
         <div id="example-end" class="instructions" style="display: none;">
             <div class="instructions-content">
@@ -246,6 +239,7 @@
             </ul>
         </div>
     </div>
+
     <div id="leave-task" class="instructions" style="display: none;">
         <div class="instructions-content">
             <h2 id="page-title">Are you sure you want to reset the phishing task?</h2>
@@ -273,25 +267,25 @@
         </div>
     </div>
 
-    <!-- Password Tester (Hidden) -->
-    <div class="password-container" id="password-container" style="display: none;">
-        <!-- Instruction Model -->
-        <div id="instructions-password" class="instructions" style="display: none;">
-            <div class="instructions-content">
-                <h2 id="page-title">Welcome to the Password Security Challenge!</h2>
-                <p id="page-content">
-                    <!-- Manually load first info page -->
-                    This exercise will help you improve your skills in creating strong passwords while also ensuring
-                    your current passwords are not compromised.
-                </p>
-                <div class="button-container">
-                    <button id="prev-password-button" class="nav-button hidden">Previous</button>
-                    <button id="next-password-button" class="nav-button">Next</button>
-                    <button id="confirm-password-button" class="nav-button hidden">Confirm</button>
-                </div>
+    <!-- Instruction Model PASSWORD -->
+    <div id="instructions-password" class="instructions" style="display: none;">
+        <div class="instructions-content">
+            <h2 id="page-title">Welcome to the Password Security Challenge!</h2>
+            <p id="page-content">
+                <!-- Manually load first info page -->
+                This exercise will help you improve your skills in creating strong passwords while also ensuring
+                your current passwords are not compromised.
+            </p>
+            <div class="button-container">
+                <button id="prev-password-button" class="nav-button hidden">Previous</button>
+                <button id="next-password-button" class="nav-button">Next</button>
+                <button id="confirm-password-button" class="nav-button hidden">Confirm</button>
             </div>
         </div>
+    </div>
 
+    <!-- Password Tester (Hidden) -->
+    <div class="password-container" id="password-container" style="display: none;">
         <button id="close-password" aria-label="Close Password">&times;</button> <!-- Close button -->
         <div class="password-interface" id="password-interface">
             <div class="Pwned" id="Pwned">
@@ -381,21 +375,21 @@
         </div>
     </div>
 
-    <!-- Safe Web Browsing (Hidden) -->
-    <div class="web-container" id="web-container" style="display: none;">
-        <!-- Instruction Model -->
-        <div id="instructions-web" class="instructions" style="display: none;">
-            <div class="instructions-content">
-                <h2 id="page-title">Welcome to the Safe Web Browsing Task</h2>
-                <p id="page-content"></p>
-                <div class="button-container">
-                    <button id="prev-web-button" class="nav-button hidden">Previous</button>
-                    <button id="next-web-button" class="nav-button">Next</button>
-                    <button id="confirm-web-button" class="nav-button hidden">Confirm</button>
-                </div>
+    <!-- Instruction Model WEB-->
+    <div id="instructions-web" class="instructions" style="display: none;">
+        <div class="instructions-content">
+            <h2 id="page-title">Welcome to the Safe Web Browsing Task</h2>
+            <p id="page-content"></p>
+            <div class="button-container">
+                <button id="prev-web-button" class="nav-button hidden">Previous</button>
+                <button id="next-web-button" class="nav-button">Next</button>
+                <button id="confirm-web-button" class="nav-button hidden">Confirm</button>
             </div>
         </div>
+    </div>
 
+    <!-- Safe Web Browsing (Hidden) -->
+    <div class="web-container" id="web-container" style="display: none;">
         <!-- Game Instructions -->
         <div id="game-instructions" class="instructions" style="display: none;">
             <div class="instructions-content">
@@ -541,6 +535,19 @@
             </ul>
         </div>
     </div>
+    <!-- Leave Quiz-->
+    <div id="leave-quiz" class="instructions" style="display: none;">
+        <div class="instructions-content">
+            <h2 id="page-title">Are you sure you want to reset and leave the Quiz?</h2>
+            <p id="page-content">
+                All progress will be lost.
+            </p>
+            <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
+                <button id="backquiz-button" class="nav-button">Back</button>
+                <button id="confirmquiz-button" class="nav-button">Confirm</button>
+            </div>
+        </div>
+    </div>
     <!-- Quiz (Hidden) -->
     <div class="quiz-container" id="quiz-container" style="display: none;">
         <!-- Instruction Model -->
@@ -605,28 +612,16 @@
             </div>
         </div>
         <button id="close-quiz" aria-label="Close Quiz">&times;</button> <!-- Close button -->
-        <div id="leave-quiz" class="instructions" style="display: none;">
-            <div class="instructions-content">
-                <h2 id="page-title">Are you sure you want to reset and leave the Quiz?</h2>
-                <p id="page-content">
-                    All progress will be lost.
-                </p>
-                <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
-                    <button id="backquiz-button" class="nav-button">Back</button>
-                    <button id="confirmquiz-button" class="nav-button">Confirm</button>
-                </div>
-            </div>
-        </div>
-        <div id="reset-quiz-model" class="instructions" style="display: none;">
-            <div class="instructions-content">
-                <h2 id="page-title">Are you sure you want to reset the Quiz?</h2>
-                <p id="page-content">
-                    Previous score will be stored, unless a better score is achieved.
-                </p>
-                <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
-                    <button id="reset-backquiz-button" class="nav-button">Back</button>
-                    <button id="reset-confirmquiz-button" class="nav-button">Confirm</button>
-                </div>
+    </div>
+    <div id="reset-quiz-model" class="instructions" style="display: none;">
+        <div class="instructions-content">
+            <h2 id="page-title">Are you sure you want to reset the Quiz?</h2>
+            <p id="page-content">
+                Previous score will be stored, unless a better score is achieved.
+            </p>
+            <div class="button-container"> <!-- orignally hide confirm and previous button on page 1-->
+                <button id="reset-backquiz-button" class="nav-button">Back</button>
+                <button id="reset-confirmquiz-button" class="nav-button">Confirm</button>
             </div>
         </div>
     </div>

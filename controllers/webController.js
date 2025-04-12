@@ -19,7 +19,6 @@ let continueTask = true;
 const profileContainer = document.getElementById('profile-container');
 const resetWeb = document.getElementById('reset-web');
 const desktopArea = document.getElementById('desktop-area');
-const webContainer = document.getElementById('web-container');
 const webInterface = document.getElementById('web-interface');
 const userInput = document.getElementById('user-input');
 const responseContainer = document.getElementById('response-container');
@@ -43,6 +42,9 @@ const prevWebButton = document.getElementById('prev-web-button');
 const nextWebButton = document.getElementById('next-web-button');
 const confirmWebButton = document.getElementById('confirm-web-button');
 
+const webContainer = document.getElementById('web-container');
+const profileArea = document.getElementById('profile-container');
+const taskbar = document.getElementById('taskbar');
 
 // Pages content
 const pages = [
@@ -126,6 +128,11 @@ function updateDisplay() {
 
 
 export function WebHideEnd() {
+    
+                //enable all buttons 
+                webContainer.classList.remove("disabled");
+                profileArea.classList.remove("disabled");
+                taskbar.classList.remove("disabled");
     //remove end card + blur
     webEndModel.style.display = 'none';
     webInterface.classList.remove('blurred'); // remove the blur
@@ -169,11 +176,23 @@ export function nextWebButtonFunction() {
 //end of intro slides
 
 export function resetWebFromDesktop() {
+            //disable all buttons 
+            desktopArea.classList.add("disabled");
+            profileArea.classList.add("disabled");
+            taskbar.classList.add("disabled");
+
     leavetaskModel.style.display = 'flex'; //working
     desktopArea.classList.add('blurred'); // Apply the blur
 }
 
 export function confirmwebButtonFunction() {
+
+    //enable all buttons 
+    webContainer.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
+
+
     instructionModel.style.display = 'none';
     instructionsConfirmed = true; // listener to display instructions once user confirms
     webInterface.classList.remove('blurred'); // Remove the blur
@@ -183,6 +202,11 @@ export function confirmwebButtonFunction() {
     searchArrow.style.display = 'block';
 }
 export function webfirstOpenFunction() {
+    //disable all buttons 
+    webContainer.classList.add("disabled");
+    profileArea.classList.add("disabled");
+    taskbar.classList.add("disabled");
+
     instructionModel.style.display = 'flex'; //working
     webInterface.classList.add('blurred'); // Apply the blur
 }
@@ -227,14 +251,27 @@ function resetWebTask() {
 }
 
 export function backwebFunction() {
+        //enable all buttons 
+        webContainer.classList.remove("disabled");
+        desktopArea.classList.remove("disabled");
+        profileArea.classList.remove("disabled");
+        taskbar.classList.remove("disabled");
+
     leavetaskModel.style.display = 'none';
     desktopArea.classList.remove('blurred'); // remove the blur
+    webContainer.classList.remove('blurred');
 
     document.getElementById("ask-button").disabled = false;
     document.getElementById("user-input").disabled = false;
 }
 
 export function confirmwebFunction() {
+        //enable all buttons 
+        webContainer.classList.remove("disabled");
+        desktopArea.classList.remove("disabled");
+        profileArea.classList.remove("disabled");
+        taskbar.classList.remove("disabled");
+
     //hide play button and timer
     playButton.style.display = 'none'
     timerDisplay.style.display = 'none'
@@ -712,6 +749,11 @@ export function webComplete() {
 
         // Check if all tasks are complete
         if (webtask1 && webtask2 && webtask3 || webtaskComplete) {
+            
+                //disable all buttons 
+                webContainer.classList.add("disabled");
+                profileArea.classList.add("disabled");
+                taskbar.classList.add("disabled");
             //show end card
             webEndModel.style.display = 'flex'; //working
             webInterface.classList.add('blurred'); // Apply the blur
@@ -772,6 +814,11 @@ export function webCompleteFunction() {
 
 export function closeWeb() {
     if (webtaskComplete || confirmClose) {
+        
+                //enable all buttons 
+                webContainer.classList.remove("disabled");
+                profileArea.classList.remove("disabled");
+                taskbar.classList.remove("disabled");
         //remove end card + blur
         webEndModel.style.display = 'none';
         webInterface.classList.remove('blurred'); // remove the blur
@@ -783,6 +830,11 @@ export function closeWeb() {
         desktopArea.style.display = 'flex';
     }
     else {
+                //disable all buttons 
+                webContainer.classList.add("disabled");
+                profileArea.classList.add("disabled");
+                taskbar.classList.add("disabled");
+
         document.getElementById("ask-button").disabled = true;
         document.getElementById("user-input").disabled = true;
 

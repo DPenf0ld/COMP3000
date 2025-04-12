@@ -8,7 +8,6 @@ export let quizOpen = false;
 const desktopArea = document.getElementById('desktop-area');
 const leavetaskModel = document.getElementById('leave-quiz')
 const resetModel = document.getElementById('reset-quiz-model')
-const quizContainer = document.getElementById('quiz-container');
 const quizInterface = document.getElementById('quiz-interface')
 const instructionModel = document.getElementById('instructions-quiz');
 const resultsInfo = document.getElementById('result-info');
@@ -24,6 +23,9 @@ let pieCreated = false;
 let quizComplete = false;
 let reset = false;
 
+const quizContainer = document.getElementById('quiz-container');
+const profileArea = document.getElementById('profile-container');
+const taskbar = document.getElementById('taskbar');
 
 // Quiz Questions 
 const Questions = [
@@ -380,16 +382,32 @@ function nextQuestion() {
 
 //reset quiz
 export function resetQuizFunction() {
+        //disable all buttons 
+        quizContainer.classList.add("disabled");
+        profileArea.classList.add("disabled");
+        taskbar.classList.add("disabled");
+
+
     resetModel.style.display = 'flex'; //working
     quizInterface.classList.add('blurred'); // Apply the blur
 }
 
 export function resetbackquizFunction() {
+        //enable all buttons 
+        quizContainer.classList.remove("disabled");
+        profileArea.classList.remove("disabled");
+        taskbar.classList.remove("disabled");
     resetModel.style.display = 'none';
     quizInterface.classList.remove('blurred'); // remove the blur
 }
 
 export function resetconfirmquizFunction() {
+
+    //enable all buttons 
+    desktopArea.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
+
     quizInterface.classList.remove('blurred'); // remove the blur
     resetModel.style.display = 'none';
 
@@ -426,6 +444,11 @@ export function closeQuizFunction() {
 
         confirmquizFunction()
     } else {
+    //disable all buttons 
+    quizContainer.classList.add("disabled");
+    profileArea.classList.add("disabled");
+    taskbar.classList.add("disabled");
+
         leavetaskModel.style.display = 'flex'; //working
         quizInterface.classList.add('blurred'); // Apply the blur
     }

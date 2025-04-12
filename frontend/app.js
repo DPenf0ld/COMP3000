@@ -3,7 +3,7 @@ import { initialiseIntro, confirmintroButtonFunction, prevIntroButtonFunction, n
 import { quizPreviouslyComplete, resetconfirmquizFunction, resetbackquizFunction, resetQuizFunction, failedTasks, quizOpen, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
 import { confirmDeleteFunction, BackdeleteProfileFunction, deleteProfileFunction, ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
-import { PasswordHideEnd, check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
+import { firstOpenPasswordFunction, PasswordHideEnd, check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
 import { confirmGameInstructions, WebHideEnd, prevWebButtonFunction, nextWebButtonFunction, webPreviouslyComplete, resetWebFromDesktop, initialiseWeb, confirmwebButtonFunction, webfirstOpenFunction, confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction, gameFunction } from '../controllers/webController.js';
 import { removeOpenAIFunction, PhishingHideEnd, preloademails, emailPreviouslyComplete, resetEmailFromDesktop, initialiseEmail, confirmphishingFunction, backphishingFunction, setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
 
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function () {
         profileContainer.style.display = 'none' //hides profile
         if (quizContainer.style.display === 'block') { //closes quiz
             closeQuizFunction()
-        } else {//if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
+        } else if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
             //remove end card inbox
             const phishingEndModel = document.getElementById('phishing-end');
             phishingEndModel.style.display = 'none';
@@ -285,8 +285,8 @@ document.addEventListener('DOMContentLoaded', function () {
             QuizfirstOpenFunction() //always show instructions
 
 
-      //  } else if (!webtaskComplete || !passwordtaskComplete || !emailtaskComplete) {
-       //     completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
+        } else if (!webtaskComplete || !passwordtaskComplete || !emailtaskComplete) {
+            completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
         }
     }
 
@@ -338,9 +338,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let passwordInput = document.getElementById('password');
 
-    const instructionPasswordModel = document.getElementById('instructions-password');
     const passwordContainer = document.getElementById('password-container');
-    const passwordContainerBlur = document.getElementById('password-interface');
 
     const backpasswordbutton = document.getElementById('backpassword-button');
     backpasswordbutton.addEventListener('click', backpasswordFunction);
@@ -410,10 +408,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         // Show instructions if it's the first time opening
         if (FirstOpenPassword) {
-            instructionPasswordModel.style.display = 'flex'; //working
-            passwordContainerBlur.classList.add('blurred'); // Apply the blur
             FirstOpenPassword = false;
-            togglePasswordInput();
+            firstOpenPasswordFunction();
+
         }
     }
 
