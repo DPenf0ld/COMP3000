@@ -1,4 +1,45 @@
-// Handle Signup form submission
+const privacyPolicyButton = document.getElementById('privacy')
+privacyPolicyButton.addEventListener('click', privacyFunction);
+
+const termsButton = document.getElementById('tandc')
+termsButton.addEventListener('click', termsFunction);
+
+const terms = document.getElementById('termsDisplay')
+const privacyPolicy = document.getElementById('privacyPolicyDisplay')
+
+const disableNav = document.getElementById('Topnav')
+const MainDisplay = document.getElementById('main')
+
+const exitTerms = document.getElementById('close-terms')
+exitTerms.addEventListener('click', exitPolicy);
+
+const exitPrivacy = document.getElementById('close-privacy')
+exitPrivacy.addEventListener('click', exitPolicy);
+
+function privacyFunction() {
+  privacyPolicy.style.display = 'block'
+  //disable all buttons 
+  disableNav.classList.add("disabled");
+  MainDisplay.classList.add("disabled");
+}
+
+function termsFunction() {
+  terms.style.display = 'block'
+  //disable all buttons 
+  disableNav.classList.add("disabled");
+  MainDisplay.classList.add("disabled");
+}
+
+function exitPolicy() {
+  terms.style.display = 'none'
+  privacyPolicy.style.display = 'none'
+  //enable all buttons 
+  disableNav.classList.remove("disabled");
+  MainDisplay.classList.remove("disabled");
+}
+
+
+
 // Handle Signup form submission
 document.getElementById('signup-form')?.addEventListener('submit', async (event) => {
   event.preventDefault();

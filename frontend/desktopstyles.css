@@ -332,18 +332,21 @@ h1 {
     padding: 20px;
     z-index: 1000;
     text-align: center;
-    width: 60%;
+    max-width: 56%;
     max-height: 30%;
 }
 
 #feedback-title {
-    font-size: 20px;
+    font-size: 18px;
     color: #000;
 }
 
 #example-feedback p {
+    font-size: 17px;
     color: #000;
-    padding: 2%;
+    text-align: left;
+    padding: 1%;
+    margin-bottom: 0;
 }
 
 /* Email Content */

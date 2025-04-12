@@ -12,7 +12,7 @@
   <div class="animated-background"></div>
   <!-- Navigation -->
   <nav>
-    <div class="container">
+    <div class="container" id="Topnav">
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="login.html">Login</a></li>
@@ -21,8 +21,41 @@
     </div>
   </nav>
 
+<div id="privacyPolicyDisplay" class="instructions policy" style="display: none;">
+  <div class="instructions-content">
+    <button id="close-privacy" aria-label="Close Privacy Policy">&times;</button> <!-- Close button -->
+    <h2>Privacy Policy</h2>
+    <p>
+      Your privacy is important to us. This privacy policy explains how we collect, use, and protect your information.
+    </p>
+    <p>
+      We may collect personal information such as your name, email address, and preferences when you use our services. This information is used only to improve our service and is never sold to third parties.
+    </p>
+    <p>
+      By using our site, you agree to the terms outlined in this policy. If you have any questions, feel free to contact us.
+    </p>
+  </div>
+</div>
+
+<div id="termsDisplay" class="instructions policy" style="display: none;">
+  <div class="instructions-content">
+    <button id="close-terms" aria-label="Close Terms and Conditions">&times;</button> <!-- Close button -->
+    <h2>Terms and Conditions</h2>
+    <p>
+      Your privacy is important to us. This privacy policy explains how we collect, use, and protect your information.
+    </p>
+    <p>
+      We may collect personal information such as your name, email address, and preferences when you use our services. This information is used only to improve our service and is never sold to third parties.
+    </p>
+    <p>
+      By using our site, you agree to the terms outlined in this policy. If you have any questions, feel free to contact us.
+    </p>
+  </div>
+</div>
+
+
   <!-- Main Content -->
-  <main>
+  <main id="main">
     <section class="auth-form common-box">
       <div class="form-container">
         <h2>Create a New Account</h2>
@@ -50,8 +83,13 @@
           <input type="password" id="confirmPassword" placeholder="Confirm your password" required><br>
           
           <div>
-            <label for="terms">By creating an account, you agree to the <a href="#">Terms and Conditions</a> and our <a
-                href="#">Privacy Policy</a>.<input type="checkbox" id="terms" required></label>
+            <label for="terms">
+              By creating an account, you agree to the
+              <button type="button" id="tandc">Terms and Conditions</button> 
+              and our
+              <button type="button" id="privacy">Privacy Policy</button>.
+              <input type="checkbox" id="terms" required>
+            </label>
           </div>
 
           <button type="submit" class="btn">Sign Up</button>

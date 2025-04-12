@@ -6,6 +6,77 @@
     overflow: hidden; /*disable scroll*/
 }
 
+#tandc{
+    width: auto;
+}
+#privacy{
+    width: auto;
+    margin-bottom: 2%;
+}
+
+/*Disabled WHOLE div*/
+.disabled {
+    pointer-events: none;
+    /* blocks all clicks */
+}
+
+/* Styles for the close button */
+#close-terms {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+    color: #888;
+}
+
+#close-terms:hover {
+    color: #e74c3c;
+    /* Red Hover Colour*/
+}
+
+/* Styles for the close button */
+#close-privacy {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+    color: #888;
+}
+
+#close-privacy:hover {
+    color: #e74c3c;
+    /* Red Hover Colour*/
+}
+
+
+/*styles for privacy and terms pop up*/
+.instructions-content {
+    text-align: left;
+    font-size: large;
+}
+
+.instructions {
+    font-size: medium;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    background-color: #ffffff;
+    border-style: solid;
+    border-color: #333;
+    border-width: 5px;
+    border-radius: 15px;
+    padding: 20px;
+    z-index: 3000;
+}
+
 
 /* Main content layout */
 main {
@@ -19,6 +90,7 @@ main {
     max-width: 80%;
     height: 80%;
 }
+
 
 body {
     background-color: #f4f4f4;
