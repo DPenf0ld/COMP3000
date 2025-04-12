@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
     if (!token) {
-        alert('Unauthorised access');
+        console.log('Unauthorised access');
         window.location.href = 'login.html';
         return;
     }

@@ -420,7 +420,7 @@ export function submitButtonFunction() {
 
 export function backphishingFunction() {
     leavetaskModel.style.display = 'none';
-    inboxContainer.classList.remove('blurred'); // remove the blur
+    desktopArea.classList.remove('blurred'); // remove the blur
 
     document.getElementById("reminder").disabled = false;
     document.getElementById("prev-slide").disabled = false;

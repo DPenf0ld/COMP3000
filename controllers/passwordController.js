@@ -184,7 +184,7 @@ export function closePassword() {
 
 export function backpasswordFunction() {
     leavetaskModel.style.display = 'none';
-    passwordContainer.classList.remove('blurred'); // remove the blur
+    desktopArea.classList.remove('blurred'); // remove the blur
     document.getElementById("passwordPWNED").disabled = false;
     document.getElementById("checkButton").disabled = false;
     document.getElementById("password").disabled = false;

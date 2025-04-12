@@ -401,7 +401,8 @@
             <div class="instructions-content">
                 <h2 id="page-title">Time to test your knowledge in a gamified activity</h2>
                 <p id="page-content">
-                    <strong>Your Task:</strong> Click on as many Safe Articles as you can within 20 Seconds. You will lose points if you click on a dangerous article!
+                    <strong>Your Task:</strong> Click on as many Safe Articles as you can within 20 Seconds. You will
+                    lose points if you click on a dangerous article!
                 </p>
                 <div class="button-container">
                     <button id="play-game-button" class="nav-button">Understood</button>
@@ -418,16 +419,16 @@
                 <button id="ask-button">
                     <img src="assets/icons/glass-icon.png" class="search-img">
                     Search</button>
-                    <div>
-                        <img src="assets/icons/arrow-down-icon.png" id="search-arrow" style="display: none;">
-                    </div>
+                <div>
+                    <img src="assets/icons/arrow-down-icon.png" id="search-arrow" style="display: none;">
+                </div>
                 <button id="game-button" style="display: none;">Play Game</button>
                 <div>
                     <img src="assets/icons/arrow-down-icon.png" id="game-arrow" style="display: none;">
                 </div>
                 <h2 id="time" style="display: none;">20:00</h2>
                 <h3 id="score" style="display: none;">Score: 0</h2>
-                <h2 id="feedback-info" style="display: none;">Click on each article to gain feedback</h2>
+                    <h2 id="feedback-info" style="display: none;">Click on each article to gain feedback</h2>
             </div>
             <div class="searches" id="response-container" style="display: none;"></div> <!-- openai response -->
             <div class="searches" id="game-container" style="display: none;"></div> <!-- openai response -->
@@ -503,36 +504,42 @@
             <p>Email: </p>
             <div id="Profile-email"> ProfileEmail</div>
         </li>
+        <div class="profile-inline">
+            <button id="edit-profile-btn" class="reset progress-button">
+                <strong>Edit Profile</strong>
+            </button>
+            <button id="save-profile-btn" class="reset progress-button" style="display: none;">Save Changes</button>
+            <button id="delete-profile-btn" class="resetRED progress-button">
+                <strong>Delete Profile</strong>
+            </button>
+        </div>
+        <p id="profile-feedback" style="display: none;">Test</p>
 
-        <button id="edit-profile-btn" class="reset progress-button">
-            <strong>Edit Profile</strong>
-        </button>
-        <button id="delete-profile-btn" class="resetRED progress-button">
-            <strong>Delete Profile</strong>
-        </button>
-        <button id="save-profile-btn" class="reset progress-button" style="display: none;">Save Changes</button>
+
         <button id="cancel-profile-btn" class="reset progress-button" style="display: none;">Cancel</button>
-        <ul class="Reset-list">
-            <li class="progress-item">
-                <button class="reset progress-button" id="reset-email" style="display: none;">
-                    <img src="assets/icons/email-icon.png" alt="Email" class="taskbar-icon">
-                    <strong class="reset-text">Reset Phishing Task</strong>
-                </button>
-            </li>
+        <div id="reset-items">
+            <ul class="Reset-list">
+                <li class="progress-item">
+                    <button class="reset progress-button" id="reset-email" style="display: none;">
+                        <img src="assets/icons/email-icon.png" alt="Email" class="taskbar-icon">
+                        <strong class="reset-text">Reset Phishing Task</strong>
+                    </button>
+                </li>
 
-            <li class="progress-item">
-                <button class="reset progress-button" id="reset-password" style="display: none;">
-                    <img src="assets/icons/password-icon.png" alt="Password Tester" class="taskbar-icon">
-                    <strong class="reset-text">Reset Password Task</strong>
-                </button>
-            </li>
-            <li class="progress-item">
-                <button class="reset progress-button" id="reset-web" style="display: none;">
-                    <img src="assets/icons/web-icon.png" alt="Browser" class="taskbar-icon">
-                    <strong class="reset-text">Reset Web Task</strong>
-                </button>
-            </li>
-        </ul>
+                <li class="progress-item">
+                    <button class="reset progress-button" id="reset-password" style="display: none;">
+                        <img src="assets/icons/password-icon.png" alt="Password Tester" class="taskbar-icon">
+                        <strong class="reset-text">Reset Password Task</strong>
+                    </button>
+                </li>
+                <li class="progress-item">
+                    <button class="reset progress-button" id="reset-web" style="display: none;">
+                        <img src="assets/icons/web-icon.png" alt="Browser" class="taskbar-icon">
+                        <strong class="reset-text">Reset Web Task</strong>
+                    </button>
+                </li>
+            </ul>
+        </div>
     </div>
     <!-- Quiz (Hidden) -->
     <div class="quiz-container" id="quiz-container" style="display: none;">

@@ -1,6 +1,9 @@
 console.log('profileController.js loaded');
 const profileContainer = document.getElementById('profile-container');
 const desktopArea = document.getElementById('desktop-area');
+const feedback = document.getElementById('profile-feedback');
+
+
 
 
 export function profileInfo(){
@@ -13,6 +16,9 @@ export function profileInfo(){
 }
 
 export function cancelProfileFunction(){
+    //hide feedback
+    feedback.style.display = 'none' 
+
     document.getElementById('edit-profile-btn').style.display = 'block';
     document.getElementById('save-profile-btn').style.display = 'none';
 
@@ -29,6 +35,9 @@ export function cancelProfileFunction(){
     document.getElementById('edit-organisation').value = localStorage.getItem('organisation') || '';
 
     document.getElementById('cancel-profile-btn').style.display = 'none'; //disable
+
+    //show reset buttons
+    document.getElementById('reset-items').style.display = 'block';
 }
 
 export function closeProfileFunction(){
@@ -53,6 +62,9 @@ export function editProfileFunction(){
     document.getElementById('organisation').style.display = 'none';
     document.getElementById('edit-organisation').style.display = 'block';
     document.getElementById('edit-organisation').value = localStorage.getItem('organisation') || '';
+
+    //hide reset buttons
+    document.getElementById('reset-items').style.display = 'none';
 }
 
 export async function saveProfileFunction(){
@@ -62,7 +74,9 @@ export async function saveProfileFunction(){
     const userEmail = localStorage.getItem('userEmail');
 
     if (!updatedFirstName || !updatedLastName || !organisation) {
-        alert('All fields must be filled out.');
+        feedback.style.display = 'block' //shows feedback
+        feedback.innerHTML = 'All fields must be filled out.';
+        feedback.style.color = 'red';
         return;
     }
 
@@ -98,10 +112,17 @@ export async function saveProfileFunction(){
 
         document.getElementById('edit-profile-btn').style.display = 'block';
         document.getElementById('save-profile-btn').style.display = 'none';
+        document.getElementById('cancel-profile-btn').style.display = 'none';
+        //show reset buttons
+        document.getElementById('reset-items').style.display = 'block';
 
-        alert('Profile updated successfully!');
+        feedback.style.display = 'block' //shows feedback
+        feedback.innerHTML = 'Profile updated successfully!';
+        feedback.style.color = 'green';
     } catch (error) {
-        alert(error.message || 'Failed to update profile.');
+        feedback.style.display = 'block' //shows feedback
+        feedback.innerHTML = 'Failed to update profile.';
+        feedback.style.color = 'red';
     }
 }
 

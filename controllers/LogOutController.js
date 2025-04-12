@@ -69,15 +69,15 @@ export async function confirmDeleteFunction() {
           const result = await response.json();
       
           if (response.ok) {
-            alert('Profile deleted successfully.');
+            console.log('Profile deleted successfully.');
             localStorage.clear();
             ConfirmLogOut(); // log out
           } else {
-            alert(`Error: ${result.message}`);
+                console.log(`Error: ${result.message}`);
           }
         } catch (error) {
           console.error('Deletion error:', error);
-          alert('An error occurred while trying to delete your profile.');
+          console.log('An error occurred while trying to delete your profile.');
         }
 
         ConfirmLogOut()

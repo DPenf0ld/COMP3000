@@ -228,7 +228,7 @@ function resetWebTask() {
 
 export function backwebFunction() {
     leavetaskModel.style.display = 'none';
-    webContainer.classList.remove('blurred'); // remove the blur
+    desktopArea.classList.remove('blurred'); // remove the blur
 
     document.getElementById("ask-button").disabled = false;
     document.getElementById("user-input").disabled = false;
