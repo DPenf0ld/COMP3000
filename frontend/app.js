@@ -253,10 +253,11 @@ document.addEventListener('DOMContentLoaded', function () {
     confirmquizbutton.addEventListener('click', confirmquizFunction);
 
     function toggleQuiz() {
+        document.getElementById('quiz-feedback').style.display = 'none'; //hide any old feedback
         profileContainer.style.display = 'none' //hides profile
         if (quizContainer.style.display === 'block') { //closes quiz
             closeQuizFunction()
-        } else if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
+        } else {//if (webtaskComplete && passwordtaskComplete && emailtaskComplete) { //make sure everything else is complete
             //remove end card inbox
             const phishingEndModel = document.getElementById('phishing-end');
             phishingEndModel.style.display = 'none';
@@ -284,8 +285,8 @@ document.addEventListener('DOMContentLoaded', function () {
             QuizfirstOpenFunction() //always show instructions
 
 
-        } else if (!webtaskComplete || !passwordtaskComplete || !emailtaskComplete) {
-            completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
+      //  } else if (!webtaskComplete || !passwordtaskComplete || !emailtaskComplete) {
+       //     completeTasks.innerHTML = `<p class="error">Complete Remaining Tasks before accessing Quiz!</p>`; // Show error message
         }
     }
 

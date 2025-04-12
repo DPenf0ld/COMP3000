@@ -1668,6 +1668,17 @@ p {
     z-index: 10;
 }
 
+#quiz-feedback{
+    font-weight: bold;
+    border: none;
+    color: orange;
+    font-size: 1.3rem;
+    min-width: 100px;
+    text-align: center;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
 .quiz-interface {
     display: flex;
     width: 100%;

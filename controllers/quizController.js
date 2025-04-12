@@ -200,7 +200,8 @@ export function checkAnswer() {
     let selectedOption = document.querySelector('input[name="option"]:checked');
 
     if (!selectedOption) {
-        alert("Please select an answer!"); //change to text feedback
+        //changed to text instead of alert
+        document.getElementById('quiz-feedback').style.display = 'block';
         return;
     }
 
@@ -296,7 +297,7 @@ function createChart() {
             quizIconHome.src = "assets/icons/quiz-tick-icon.png";
             quizIconTaskbar.src = "assets/icons/quiz-tick-icon.png";
             const quizArrow = document.getElementById("quiz-arrow")
-        quizArrow.style.display = 'none'
+            quizArrow.style.display = 'none'
         }
         document.getElementById('reset-quiz').style.display = 'block';
     } else {
@@ -362,6 +363,9 @@ export function failedTasks() {
 
 // Function to load the next question
 function nextQuestion() {
+    //hide feedback
+    document.getElementById('quiz-feedback').style.display = 'none';
+
     currentQuestionIndex++;
 
     // update progress bar
@@ -403,7 +407,7 @@ export function resetconfirmquizFunction() {
     }
 
     //display arrow to show quiz
-    
+
     //show quiz arrow
     const quizArrow = document.getElementById("quiz-arrow")
     quizArrow.style.display = 'block'
@@ -416,9 +420,9 @@ export function resetconfirmquizFunction() {
 
 export function closeQuizFunction() {
     if (quizComplete) {
-            //hide quiz arrow
-    const quizArrow = document.getElementById("quiz-arrow")
-    quizArrow.style.display = 'none'
+        //hide quiz arrow
+        const quizArrow = document.getElementById("quiz-arrow")
+        quizArrow.style.display = 'none'
 
         confirmquizFunction()
     } else {
@@ -499,7 +503,7 @@ export function QuizfirstOpenFunction() {
     }
 }
 
-export function quizPreviouslyComplete(){
+export function quizPreviouslyComplete() {
     const quizIcon = document.querySelector("#Quiz img");
     const quizIconHome = document.querySelector("#quiz-icon img");
     const quizIconTaskbar = document.querySelector("#taskbar-quiz img");
