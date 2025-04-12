@@ -461,6 +461,24 @@ p {
     align-items: center;
 }
 
+.resetRED {
+    padding: 10px 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #cc2929;
+    color: white;
+    font-size: 20px;
+    min-width: 100px;
+    text-align: center;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.resetRED:hover {
+    background-color: #750a0a;
+}
+
 .reset {
     padding: 10px 10px;
     border: none;
@@ -488,7 +506,27 @@ p {
     margin-left: auto;
 }
 
+.nav-button-del {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #cc2929;
+    color: white;
+    font-size: 14px;
+    min-width: 100px;
+    text-align: center;
+    font-weight: bold;
+}
 
+.nav-button-del:hover {
+    background-color: #750a0a;
+    /* Darker blue when hovered */
+}
+
+.nav-button-del.hidden {
+    display: none;
+}
 
 
 .nav-button {

@@ -78,7 +78,7 @@ app.post('/generate-answer', async (req, res) => {
 
     try {
         const response = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo',
+            model: ' ',
             messages: [
                 {
                     role: 'user',

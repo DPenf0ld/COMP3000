@@ -2,7 +2,7 @@ import { updateClock } from '../controllers/clockController.js';
 import { initialiseIntro, confirmintroButtonFunction, prevIntroButtonFunction, nextIntroButtonFunction } from '../controllers/introController.js';
 import { quizPreviouslyComplete, resetconfirmquizFunction, resetbackquizFunction, resetQuizFunction, failedTasks, quizOpen, checkAnswer, loadQuestion, QuizfirstOpenFunction, confirmquizButtonFunction, closeQuizFunction, backquizFunction, confirmquizFunction } from '../controllers/quizController.js';
 import { cancelProfileFunction, saveProfileFunction, editProfileFunction, closeProfileFunction, profileInfo } from '../controllers/profileController.js';
-import { ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
+import { BackdeleteProfileFunction, deleteProfileFunction, ConfirmLogOut, BackLogOutFunction, LogOutFunction } from '../controllers/LogOutController.js';
 import { PasswordHideEnd, check2Function, prevPasswordButtonFunction, nextPasswordButtonFunction, passwordPreviouslyComplete, passwordComplete, resetPasswordFromDesktop, initialisePassword, confirmpasswordFunction, backpasswordFunction, setPasswordOpen, passwordopen, passwordtaskComplete, closePassword, passwordCompleteFunction, checkPasswordStrength, togglePasswordInput, checkButtonFunction, confirmpasswordButtonFunction } from '../controllers/passwordController.js';
 import { confirmGameInstructions, WebHideEnd, prevWebButtonFunction, nextWebButtonFunction, webPreviouslyComplete, resetWebFromDesktop, initialiseWeb, confirmwebButtonFunction, webfirstOpenFunction, confirmwebFunction, backwebFunction, setWebOpen, webtaskComplete, webopen, closeWeb, askButtonFunction, webComplete, webCompleteFunction, gameFunction } from '../controllers/webController.js';
 import { removeOpenAIFunction, PhishingHideEnd, preloademails, emailPreviouslyComplete, resetEmailFromDesktop, initialiseEmail, confirmphishingFunction, backphishingFunction, setEmailOpen, emailtaskComplete, emailopen, closeInbox, submitButtonFunction, enableHighlighting, reminder, displayEmail, confirmButtonFunction, firstOpenFunction, prevButtonFunction, nextButtonFunction } from '../controllers/phishingController.js';
@@ -102,6 +102,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const editProfile = document.getElementById('edit-profile-btn');
     editProfile.addEventListener('click', editProfileFunction);
+
+    const deleteProfile = document.getElementById('delete-profile-btn');
+    deleteProfile.addEventListener('click', deleteProfileFunction);
+
+    const BackdeleteProfile = document.getElementById('back-delete');
+    BackdeleteProfile.addEventListener('click', BackdeleteProfileFunction);
 
     const cancelProfile = document.getElementById('cancel-profile-btn');
     cancelProfile.addEventListener('click', cancelProfileFunction);

@@ -1,15 +1,30 @@
 console.log('LogOutController.js loaded');
 const instructionModel = document.getElementById('instructions-logout'); // Instruction model
 const desktopContainer = document.getElementById('desktop-area');
+const deleteModel = document.getElementById('delete-warning'); // Instruction model
+
+const desktopArea = document.getElementById('desktop-area');
+const profileArea = document.getElementById('profile-container');
+const taskbar = document.getElementById('taskbar');
 
 export function LogOutFunction() {
         instructionModel.style.display = 'flex'; //working
         desktopContainer.classList.add('blurred'); // Apply the blur
+
+                //disable all buttons 
+                desktopArea.classList.add("disabled");
+                profileArea.classList.add("disabled");
+                taskbar.classList.add("disabled");
 }
 
 export function BackLogOutFunction(){
     instructionModel.style.display = 'none'; 
     desktopContainer.classList.remove('blurred'); // remove the blur
+
+            //enable all buttons 
+            desktopArea.classList.remove("disabled");
+            profileArea.classList.remove("disabled");
+            taskbar.classList.remove("disabled");
 }
 
 export function ConfirmLogOut(){
@@ -18,3 +33,24 @@ export function ConfirmLogOut(){
         localStorage.clear();
         window.location.replace("/index.html");
 }
+
+export function deleteProfileFunction(){
+        deleteModel.style.display = 'flex'; //working
+        desktopContainer.classList.add('blurred'); // Apply the blur
+
+        //disable all buttons 
+        desktopArea.classList.add("disabled");
+        profileArea.classList.add("disabled");
+        taskbar.classList.add("disabled");
+}
+
+export function BackdeleteProfileFunction(){
+        deleteModel.style.display = 'none'; 
+        desktopContainer.classList.remove('blurred'); // remove the blur
+
+        //enable all buttons 
+        desktopArea.classList.remove("disabled");
+        profileArea.classList.remove("disabled");
+        taskbar.classList.remove("disabled");
+}
+
