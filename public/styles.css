@@ -75,6 +75,8 @@
     border-radius: 15px;
     padding: 20px;
     z-index: 3000;
+    max-height: 90%;
+    overflow-y: auto;
 }
 
 
