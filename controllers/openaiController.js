@@ -78,7 +78,7 @@ app.post('/generate-answer', async (req, res) => {
 
     try {
         const response = await openai.chat.completions.create({
-            model: ' ',
+            model: 'gpt-3.5-turbo',
             messages: [
                 {
                     role: 'user',
@@ -171,7 +171,7 @@ app.post('/generate-phishing', async (req, res) => {
                     - **Clone Phishing**: The email **closely mimics a real email** the user might have received before but contains **malicious changes**, such as altered links or attachments. The **email address has small changes** (e.g., "admin@paypa1.com" instead of "admin@paypal.com").
 
                     ### **Suspicious Words for Phishing Emails:**
-                    Include a maximum of 3 suspicious words from this list, use at least one which is misspelt:
+                    Include a maximum of 3 suspicious words from this list, USE MISSPELT ONES:
                     ["urgent", "verify", "update", "login", "failure", "restricted", "confirm", "suspended", "validate",
 "alert", "unauthorised", "review", "security", "credentials", "customer", "earlist", "earliest", "immediately",
 "action", "unauthorized", "disruptions", "mandatory", "access", "locked",
