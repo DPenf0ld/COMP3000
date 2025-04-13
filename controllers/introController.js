@@ -38,7 +38,6 @@ const pages = [
         title: "👤 Profile Information:",
         content: `
             ✏️ <strong>Edit your profile</strong> to update your details and manage your account settings.<br>
-            🔑 <strong>Change your password</strong> securely and ensure it follows best security practices.<br>
         `
     },
     {

@@ -637,7 +637,7 @@ export function emailComplete() {
             const taskElement = document.querySelector(".Taskemail");
             taskElement.innerHTML += `
     <div class="next-steps">
-        <p>Task Complete</p>
+        <p>You can practice with more generated emails or minimise this tab and move on to the next task.</p>
     </div>
 `;
             emailopen = false;

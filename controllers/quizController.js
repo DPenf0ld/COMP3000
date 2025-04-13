@@ -32,7 +32,7 @@ const Questions = [
     {
         type: "password",
         value: "1",
-        question: "What is one of the most important aspects of creating a strong password according to NCSE guidelines?",
+        question: "What is one of the most important aspects of creating a strong password according to NCSC guidelines?",
         Answer1: "Using at least three random words.",
         Answer2: "Using a single, easily memorable word.",
         Answer3: "Choosing the longest possible password.",
@@ -85,7 +85,7 @@ const Questions = [
     },
     {
         type: "password",
-        value: "4",
+        value: "3",
         question: "Why is it risky to use the same password across multiple accounts?",
         Answer1: "It makes the password easier to remember.",
         Answer2: "It ensures you don’t forget the password.",
@@ -266,7 +266,7 @@ function createChart() {
 
     if (phishingCorrect >= 3) {
         phishingResult = true;
-        document.getElementById('phishing-result').innerHTML = `<span style="color: green; font-weight: bold; font-size: 2rem;">Phishing task passed ✅</span>`;
+        document.getElementById('phishing-result').innerHTML = `<span style="color: white; font-weight: bold; font-size: 2rem;">Phishing task passed ✅</span>`;
     } else {
         document.getElementById('phishing-result').innerHTML = `<span style="color:#e97c7c; font-weight: bold; font-size: 2rem;">Phishing task failed ❌</span>`;
         document.getElementById('email-redo').style.display = 'block';
@@ -274,7 +274,7 @@ function createChart() {
 
     if (passwordCorrect >= 3) {
         passwordResult = true;
-        document.getElementById('password-result').innerHTML = `<span style="color: green; font-weight: bold; font-size: 2rem;">Password task passed ✅</span>`;
+        document.getElementById('password-result').innerHTML = `<span style="color: white; font-weight: bold; font-size: 2rem;">Password task passed ✅</span>`;
     } else {
         document.getElementById('password-result').innerHTML = `<span style="color:#e97c7c; font-weight: bold; font-size: 2rem;">Password task failed ❌</span>`;
         document.getElementById('password-redo').style.display = 'block';
@@ -282,7 +282,7 @@ function createChart() {
 
     if (webCorrect >= 3) {
         webResult = true;
-        document.getElementById('web-result').innerHTML = `<span style="color: green; font-weight: bold; font-size: 2rem;">Web task passed ✅</span>`;
+        document.getElementById('web-result').innerHTML = `<span style="color: white; font-weight: bold; font-size: 2rem;">Web task passed ✅</span>`;
     } else {
         document.getElementById('web-result').innerHTML = `<span style="color:#e97c7c; font-weight: bold; font-size: 2rem;">Web task failed ❌</span>`;
         document.getElementById('web-redo').style.display = 'block';

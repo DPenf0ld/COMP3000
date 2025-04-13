@@ -789,7 +789,7 @@ export function webComplete() {
             const taskWebElement = document.querySelector(".Taskweb");
             taskWebElement.innerHTML += `
         <div class="next-steps">
-            <p>COMPLETE</p>
+            <p>You can continue to play the game or minimise this tab and move on to the next task.</p>
         </div>
     `;
             webopen = false;
