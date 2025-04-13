@@ -1636,6 +1636,11 @@ p {
 }
 
 .search-url {
+
+    word-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
     color: #7f6fff;
     font-style: italic;
 }

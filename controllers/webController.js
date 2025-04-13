@@ -432,6 +432,8 @@ function displayGameResults() {
         searchItem.classList.add('search-result');
         searchItem.setAttribute('data-isSafe', search.isSafe); //use to check if the user is correct or not
 
+        searchItem.style.maxWidth = '370px'; // Max width for each search item
+
         // Create title
         const title = document.createElement('h2');
         title.textContent = search.title;
@@ -612,7 +614,7 @@ function displayGameResults() {
 
 function endGameFunction() {
     gameContainer.innerHTML = `<h1 style="color: black;">Game Complete! You achieved a score of ${score}. Keep trying until all tasks are complete!</h1>`;
-    if (score >= 6) {
+    if (score >= 4) {
         webtask3 = true;
         webComplete();
     }

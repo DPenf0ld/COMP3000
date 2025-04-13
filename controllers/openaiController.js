@@ -25,16 +25,14 @@ app.post('/generate-game', async (req, res) => {
             model: 'gpt-3.5-turbo',
             messages: [
                 {
-                    
+
                     role: 'user',
                     content: `I want you to generate twelve search results for the query: '${userMessage}'.
-                    
+
                     - Provide **twelve results**: 
-                      - Produce a total of Twelve Results
                       - Six should be **legitimate** websites.
                       - Six should be **malicious** scam/phishing websites.
-                      - Put these 12 websites in a random order
-                     
+                      - Mix them in a **random order** to make them hard to differentiate.
                     
                     - Format the response as a **JSON array** with objects structured like this:
                       {
@@ -44,17 +42,22 @@ app.post('/generate-game', async (req, res) => {
                         "isSafe": true  // or false for malicious sites
                       }
                     
-                    - For **malicious sites**, make them appear suspicious by:
-                      - Using **HTTP instead of HTTPS**.
-                      - Slightly misspelling well-known brand names (e.g., "PaypaI.com" instead of "Paypal.com").
-                      - Making exaggerated claims (e.g., "Win a Free iPhone! Click Now").
-                      - Using domains like ".xyz", ".info", ".top".
+                    - For **malicious websites**, make them look **convincing but subtly off**:
+                      - Use realistic-looking domains with **small changes** (e.g., extra letters, swapped characters, use of zero instead of "o").
+                      - Use **HTTPS** occasionally to appear more trustworthy.
+                      - Slightly **exaggerated language**, but not too obvious (e.g., “Special deal just for you” instead of “Win free iPhone!”).
+                      - Use uncommon but real-looking TLDs (e.g., ".support", ".store", ".site").
+                      - Make the descriptions sound helpful or professional to increase believability.
+                      
+                    - For **legitimate sites**, use accurate and trustworthy sources relevant to the query.
+                    - Make **all titles and descriptions** sound plausible and professional to increase the challenge.
+                    - Avoid obvious giveaways like broken English, all caps, or spammy punctuation.
                     
                     - Return ONLY the JSON array. Do NOT include any extra text or explanations.`
-               
+
                 },
             ],
-            max_tokens: 700
+            max_tokens: 1000
         });
 
         // turn into json (if needed)
@@ -82,38 +85,47 @@ app.post('/generate-answer', async (req, res) => {
             messages: [
                 {
                     role: 'user',
-                    content: `You are a search engine simulator and safe browsing advisor.
+                    content: `You are a simulated search engine and safe browsing advisor.
 
-Generate six **realistic and contextually relevant search results** for the user's query: '${userMessage}'.
-
-Format the response as a **JSON array of six objects**, where:
-- Three results are from **legitimate and trustworthy** websites.
-- Three results are from **unsafe or malicious** websites that mimic real ones but should not be trusted.
-- Randomize the order of all six results.
-
-Each object must follow this structure:
-{
-  "title": "Website Title",
-  "url": "https://example.com",
-  "description": "Brief explanation of what the website offers",
-  "isSafe": true,  // or false for dangerous/malicious sites
-  "feedback": "Explain clearly why this website is safe or not. For safe sites, mention HTTPS, reputation, or credible source. For unsafe sites, highlight suspicious features like HTTP, misspellings, misleading content, or unsafe domains like .xyz/.top/.info"
-}
-
-Guidelines:
-- Ensure **realism**. Use domain names and titles that reflect actual types of content related to the query.
-- Safe websites should resemble real search results from sources like news, government, education, or verified organizations.
-- Malicious websites should appear **slightly suspicious**, such as:
-  - Misspelled brand names (e.g., "Amaz0n" or "Go0gle-login")
-  - Using **HTTP instead of HTTPS**
-  - Suspicious TLDs (e.g., ".xyz", ".top", ".info")
-  - Overly promotional or clickbait-style descriptions
-- Ensure all entries are **plausible responses** to the user’s search query.
-
-Return **only** the JSON array. Do **not** include any extra commentary or explanation.`
+                    Generate six highly realistic and contextually relevant search results for the query: '${userMessage}'.
+                    
+                    Requirements:
+                    - Return a **JSON array** of six objects.
+                    - Exactly **three should be legitimate** and **three should be unsafe** (e.g., phishing, scams, fake support sites).
+                    - Randomize the order to avoid any patterns.
+                    
+                    Each object must follow this structure:
+                    {
+                      "title": "Website Title",
+                      "url": "https://example.com",
+                      "description": "What the site appears to offer",
+                      "isSafe": true,  // or false
+                      "feedback": "A brief explanation of why this site is either trustworthy or dangerous"
+                    }
+                    
+                    Detailed Guidelines:
+                    
+                    Safe websites:
+                    - Use real and recognizable domains (.gov, .org, .edu, major .com sites).
+                    - Always use HTTPS.
+                    - Provide accurate, helpful, and professional-sounding descriptions.
+                    - Titles should match what a real search engine would display.
+                    
+                    Unsafe websites:
+                    - Mimic real sites using **minor domain tricks**:
+                      - Character swaps (e.g., "go0gle", "micr0soft", "amaz0n-pay").
+                      - Extra or missing characters (e.g., "netfl1x-help.com", "facebok-login.xyz").
+                    - May use HTTPS to **appear trustworthy**, but not always.
+                    - Use **less common or suspicious TLDs** (e.g., .xyz, .top, .support, .store, .online).
+                    - Descriptions should sound **plausible or helpful**, but subtly sketchy (e.g., “Reset your account access now”, “Quick support chat for billing issues”).
+                    - Avoid overly obvious spam language; make the deception subtle and realistic.
+                    - Feedback should **explain the red flag(s)** (e.g., unusual domain, urgency, imitation).
+                    
+                    Return only the **raw JSON array** — no extra text or comments.
+                    `                    
                 },
             ],
-            max_tokens: 500
+            max_tokens: 800
         });
 
         // turn into json (if needed)
