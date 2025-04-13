@@ -82,32 +82,35 @@ app.post('/generate-answer', async (req, res) => {
             messages: [
                 {
                     role: 'user',
-                    content: `I want you to generate six search results for the query: '${userMessage}'.
-                    
-                    - Provide **six results**: 
-                      - Produce a total of 6 Results
-                      - Three should be **legitimate** websites.
-                      - Three should be **malicious** scam/phishing websites.
-                      - Put these 6 websites in a random order
-                     
-                    
-                    - Format the response as a **JSON array** with objects structured like this:
-                      {
-                        "title": "Website Name",
-                        "url": "https://example.com",
-                        "description": "A short description of what the site offers.",
-                        "isSafe": true  // or false for malicious sites
-                        "feedback": Explain why the information is safe or not
-                      }
-                    
-                    - For **malicious sites**, make them appear suspicious by:
-                      - Using **HTTP instead of HTTPS**.
-                      - Slightly misspelling well-known brand names (e.g., "PaypaI.com" instead of "Paypal.com").
-                      - Making exaggerated claims (e.g., "Win a Free iPhone! Click Now").
-                      - Using domains like ".xyz", ".info", ".top".
-                    
-                    - Return ONLY the JSON array. Do NOT include any extra text or explanations.`
-               
+                    content: `You are a search engine simulator and safe browsing advisor.
+
+Generate six **realistic and contextually relevant search results** for the user's query: '${userMessage}'.
+
+Format the response as a **JSON array of six objects**, where:
+- Three results are from **legitimate and trustworthy** websites.
+- Three results are from **unsafe or malicious** websites that mimic real ones but should not be trusted.
+- Randomize the order of all six results.
+
+Each object must follow this structure:
+{
+  "title": "Website Title",
+  "url": "https://example.com",
+  "description": "Brief explanation of what the website offers",
+  "isSafe": true,  // or false for dangerous/malicious sites
+  "feedback": "Explain clearly why this website is safe or not. For safe sites, mention HTTPS, reputation, or credible source. For unsafe sites, highlight suspicious features like HTTP, misspellings, misleading content, or unsafe domains like .xyz/.top/.info"
+}
+
+Guidelines:
+- Ensure **realism**. Use domain names and titles that reflect actual types of content related to the query.
+- Safe websites should resemble real search results from sources like news, government, education, or verified organizations.
+- Malicious websites should appear **slightly suspicious**, such as:
+  - Misspelled brand names (e.g., "Amaz0n" or "Go0gle-login")
+  - Using **HTTP instead of HTTPS**
+  - Suspicious TLDs (e.g., ".xyz", ".top", ".info")
+  - Overly promotional or clickbait-style descriptions
+- Ensure all entries are **plausible responses** to the user’s search query.
+
+Return **only** the JSON array. Do **not** include any extra commentary or explanation.`
                 },
             ],
             max_tokens: 500

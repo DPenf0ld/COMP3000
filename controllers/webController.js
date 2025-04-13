@@ -9,7 +9,7 @@ let webtask3 = false;
 let confirmClose = false;
 let instructionsConfirmed = false; //used to display example email instructions
 let timer;
-let timeLeft = 20;
+let timeLeft = 30;
 let correct = 0;
 let incorrect = 0;
 let score = 0;
@@ -102,7 +102,7 @@ const pages = [
 export function startTimer() {
     //disable button after press here to stop reset
     clearInterval(timer);
-    timeLeft = 20; // Reset to 20 seconds
+    timeLeft = 30; // Reset to 30 seconds
     updateDisplay();
 
     timer = setInterval(() => {
@@ -128,11 +128,11 @@ function updateDisplay() {
 
 
 export function WebHideEnd() {
-    
-                //enable all buttons 
-                webContainer.classList.remove("disabled");
-                profileArea.classList.remove("disabled");
-                taskbar.classList.remove("disabled");
+
+    //enable all buttons 
+    webContainer.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
     //remove end card + blur
     webEndModel.style.display = 'none';
     webInterface.classList.remove('blurred'); // remove the blur
@@ -176,10 +176,10 @@ export function nextWebButtonFunction() {
 //end of intro slides
 
 export function resetWebFromDesktop() {
-            //disable all buttons 
-            desktopArea.classList.add("disabled");
-            profileArea.classList.add("disabled");
-            taskbar.classList.add("disabled");
+    //disable all buttons 
+    desktopArea.classList.add("disabled");
+    profileArea.classList.add("disabled");
+    taskbar.classList.add("disabled");
 
     leavetaskModel.style.display = 'flex'; //working
     desktopArea.classList.add('blurred'); // Apply the blur
@@ -251,11 +251,11 @@ function resetWebTask() {
 }
 
 export function backwebFunction() {
-        //enable all buttons 
-        webContainer.classList.remove("disabled");
-        desktopArea.classList.remove("disabled");
-        profileArea.classList.remove("disabled");
-        taskbar.classList.remove("disabled");
+    //enable all buttons 
+    webContainer.classList.remove("disabled");
+    desktopArea.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
 
     leavetaskModel.style.display = 'none';
     desktopArea.classList.remove('blurred'); // remove the blur
@@ -266,11 +266,11 @@ export function backwebFunction() {
 }
 
 export function confirmwebFunction() {
-        //enable all buttons 
-        webContainer.classList.remove("disabled");
-        desktopArea.classList.remove("disabled");
-        profileArea.classList.remove("disabled");
-        taskbar.classList.remove("disabled");
+    //enable all buttons 
+    webContainer.classList.remove("disabled");
+    desktopArea.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
 
     //hide play button and timer
     playButton.style.display = 'none'
@@ -424,6 +424,8 @@ function displayGameResults() {
     incorrect = 0;
     score = 0;
 
+    //STOP OVERLAPPING
+
     for (let i = 0; i < searches.length; i++) {
         const search = searches[i];
         const searchItem = document.createElement('div');
@@ -450,103 +452,122 @@ function displayGameResults() {
         // height in 3
         // size of square: x=370, y=160
 
+        //fix since too much overlap
+        //decrease possible size
+
         if (i === 0) {
-            // Position randomly (within allocated square)
-            const randomX = Math.random() * (370);
-            const randomY = Math.random() * (160);
-
+            const randomX = 20 + Math.floor(Math.random() * 41) - 20;
+            const randomY = 20 + Math.floor(Math.random() * 51) - 25;
+            searchItem.style.margin = '30px';
             searchItem.style.position = "absolute";
             searchItem.style.left = `${randomX}px`;
             searchItem.style.top = `${randomY}px`;
+            console.log(randomX);
+            console.log(randomY);
         } else if (i === 1) {
-            // Position randomly (within allocated square)
-            const randomX = 370 + (Math.random() * (370));
-            const randomY = (Math.random() * (160));
-
+            const randomX = 407 + Math.floor(Math.random() * 41) - 20;
+            const randomY = 20 + Math.floor(Math.random() * 51) - 25;
+            searchItem.style.margin = '30px';
             searchItem.style.position = "absolute";
             searchItem.style.left = `${randomX}px`;
             searchItem.style.top = `${randomY}px`;
+            console.log(randomX);
+            console.log(randomY);
         } else if (i === 2) {
-            // Position randomly (within allocated square)
-            const randomX = (370 * 2) + (Math.random() * (370));
-            const randomY = (Math.random() * (160));
-
+            const randomX = 794 + Math.floor(Math.random() * 41) - 20;
+            const randomY = 20 + Math.floor(Math.random() * 51) - 25;
+            searchItem.style.margin = '30px';
             searchItem.style.position = "absolute";
             searchItem.style.left = `${randomX}px`;
             searchItem.style.top = `${randomY}px`;
+            console.log(randomX);
+            console.log(randomY);
         } else if (i === 3) {
-            // Position randomly (within allocated square)
-            const randomX = (370 * 3) + (Math.random() * (370));
-            const randomY = (Math.random() * (160));
-
+            const randomX = 1181 + Math.floor(Math.random() * 41) - 20;
+            const randomY = 20 + Math.floor(Math.random() * 51) - 25;
+            searchItem.style.margin = '30px';
             searchItem.style.position = "absolute";
             searchItem.style.left = `${randomX}px`;
             searchItem.style.top = `${randomY}px`;
+            console.log(randomX);
+            console.log(randomY);
         } else if (i === 4) {
-            // Position randomly (within allocated square)
-            const randomX = Math.random() * (370);
-            const randomY = 160 + (Math.random() * (160));
-
+            const randomX = 20 + Math.floor(Math.random() * 41) - 20;
+            const randomY = 186 + Math.floor(Math.random() * 51) - 25;
+            searchItem.style.margin = '30px';
             searchItem.style.position = "absolute";
             searchItem.style.left = `${randomX}px`;
             searchItem.style.top = `${randomY}px`;
+            console.log(randomX);
+            console.log(randomY);
         } else if (i === 5) {
-            // Position randomly (within allocated square)
-            const randomX = 370 + (Math.random() * (370));
-            const randomY = 160 + (Math.random() * (160));
-
+            const randomX = 407 + Math.floor(Math.random() * 41) - 20;
+            const randomY = 186 + Math.floor(Math.random() * 51) - 25;
+            searchItem.style.margin = '30px';
             searchItem.style.position = "absolute";
             searchItem.style.left = `${randomX}px`;
             searchItem.style.top = `${randomY}px`;
+            console.log(randomX);
+            console.log(randomY);
         } else if (i === 6) {
-            // Position randomly (within allocated square)
-            const randomX = (370 * 2) + (Math.random() * (370));
-            const randomY = 160 + (Math.random() * (160));
-
+            const randomX = 794 + Math.floor(Math.random() * 41) - 20
+            const randomY = 186 + Math.floor(Math.random() * 51) - 25;
+            searchItem.style.margin = '30px';
             searchItem.style.position = "absolute";
             searchItem.style.left = `${randomX}px`;
             searchItem.style.top = `${randomY}px`;
+            console.log(randomX);
+            console.log(randomY);
         } else if (i === 7) {
-            // Position randomly (within allocated square)
-            const randomX = (370 * 3) + (Math.random() * (370));
-            const randomY = 160 + (Math.random() * (160));
-
+            const randomX = 1181 + Math.floor(Math.random() * 41) - 20;
+            const randomY = 186 + Math.floor(Math.random() * 51) - 25;
+            searchItem.style.margin = '30px';
             searchItem.style.position = "absolute";
             searchItem.style.left = `${randomX}px`;
             searchItem.style.top = `${randomY}px`;
+            console.log(randomX);
+            console.log(randomY);
         } else if (i === 8) {
-            // Position randomly (within allocated square)
-            const randomX = (Math.random() * (370));
-            const randomY = (160 * 2) + (Math.random() * (160));
-
+            const randomX = 20 + Math.floor(Math.random() * 41) - 20;
+            const randomY = 352 + Math.floor(Math.random() * 51) - 25;
+            searchItem.style.margin = '30px';
             searchItem.style.position = "absolute";
             searchItem.style.left = `${randomX}px`;
             searchItem.style.top = `${randomY}px`;
+            console.log(randomX);
+            console.log(randomY);
         } else if (i === 9) {
-            // Position randomly (within allocated square)
-            const randomX = 370 + (Math.random() * (370));
-            const randomY = (160 * 2) + (Math.random() * (160));
-
+            const randomX = 407 + Math.floor(Math.random() * 41) - 20;
+            const randomY = 352 + Math.floor(Math.random() * 51) - 25;
+            searchItem.style.margin = '30px';
             searchItem.style.position = "absolute";
             searchItem.style.left = `${randomX}px`;
             searchItem.style.top = `${randomY}px`;
+            console.log(randomX);
+            console.log(randomY);
         } else if (i === 10) {
-            // Position randomly (within allocated square)
-            const randomX = (370 * 2) + (Math.random() * (370));
-            const randomY = (160 * 2) + (Math.random() * (160));
-
+            const randomX = 794 + Math.floor(Math.random() * 41) - 20;
+            const randomY = 352 + Math.floor(Math.random() * 51) - 25;
+            searchItem.style.margin = '30px';
             searchItem.style.position = "absolute";
             searchItem.style.left = `${randomX}px`;
             searchItem.style.top = `${randomY}px`;
+            console.log(randomX);
+            console.log(randomY);
         } else if (i === 11) {
-            // Position randomly (within allocated square)
-            const randomX = (370 * 3) + (Math.random() * (370));
-            const randomY = (160 * 2) + (Math.random() * (160));
-
+            const randomX = 1181 + Math.floor(Math.random() * 41) - 20;
+            const randomY = 352 + Math.floor(Math.random() * 51) - 25;
+            searchItem.style.margin = '30px';
             searchItem.style.position = "absolute";
             searchItem.style.left = `${randomX}px`;
             searchItem.style.top = `${randomY}px`;
+            console.log(randomX);
+            console.log(randomY);
         }
+        
+        
+        
+        
 
 
         // Add click event listener to reveal feedback
@@ -585,6 +606,9 @@ function displayGameResults() {
         gameContainer.appendChild(searchItem);
     }
 }
+
+
+
 
 function endGameFunction() {
     gameContainer.innerHTML = `<h1 style="color: black;">Game Complete! You achieved a score of ${score}. Keep trying until all tasks are complete!</h1>`;
@@ -749,11 +773,11 @@ export function webComplete() {
 
         // Check if all tasks are complete
         if (webtask1 && webtask2 && webtask3 || webtaskComplete) {
-            
-                //disable all buttons 
-                webContainer.classList.add("disabled");
-                profileArea.classList.add("disabled");
-                taskbar.classList.add("disabled");
+
+            //disable all buttons 
+            webContainer.classList.add("disabled");
+            profileArea.classList.add("disabled");
+            taskbar.classList.add("disabled");
             //show end card
             webEndModel.style.display = 'flex'; //working
             webInterface.classList.add('blurred'); // Apply the blur
@@ -814,11 +838,11 @@ export function webCompleteFunction() {
 
 export function closeWeb() {
     if (webtaskComplete || confirmClose) {
-        
-                //enable all buttons 
-                webContainer.classList.remove("disabled");
-                profileArea.classList.remove("disabled");
-                taskbar.classList.remove("disabled");
+
+        //enable all buttons 
+        webContainer.classList.remove("disabled");
+        profileArea.classList.remove("disabled");
+        taskbar.classList.remove("disabled");
         //remove end card + blur
         webEndModel.style.display = 'none';
         webInterface.classList.remove('blurred'); // remove the blur
@@ -830,10 +854,10 @@ export function closeWeb() {
         desktopArea.style.display = 'flex';
     }
     else {
-                //disable all buttons 
-                webContainer.classList.add("disabled");
-                profileArea.classList.add("disabled");
-                taskbar.classList.add("disabled");
+        //disable all buttons 
+        webContainer.classList.add("disabled");
+        profileArea.classList.add("disabled");
+        taskbar.classList.add("disabled");
 
         document.getElementById("ask-button").disabled = true;
         document.getElementById("user-input").disabled = true;

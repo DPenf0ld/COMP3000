@@ -429,10 +429,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const playGame = document.getElementById('play-game-button');
     playGame.addEventListener('click', confirmGameInstructions);
-    
-
-    const webCompleteButton = document.getElementById('CompleteWeb');
-    webCompleteButton.addEventListener('click', webCompleteFunction);
 
     const prevwebButton = document.getElementById('prev-web-button');
     prevwebButton.addEventListener('click', prevWebButtonFunction);
