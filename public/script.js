@@ -1,8 +1,13 @@
-const privacyPolicyButton = document.getElementById('privacy')
-privacyPolicyButton.addEventListener('click', privacyFunction);
+//if statement stops error of not finding the elements when using other pages
+const privacyPolicyButton = document.getElementById('privacy');
+if (privacyPolicyButton) {
+  privacyPolicyButton.addEventListener('click', privacyFunction);
+}
 
-const termsButton = document.getElementById('tandc')
-termsButton.addEventListener('click', termsFunction);
+const termsButton = document.getElementById('tandc');
+if (termsButton) {
+  termsButton.addEventListener('click', termsFunction);
+}
 
 const terms = document.getElementById('termsDisplay')
 const privacyPolicy = document.getElementById('privacyPolicyDisplay')
@@ -10,11 +15,15 @@ const privacyPolicy = document.getElementById('privacyPolicyDisplay')
 const disableNav = document.getElementById('Topnav')
 const MainDisplay = document.getElementById('main')
 
-const exitTerms = document.getElementById('close-terms')
-exitTerms.addEventListener('click', exitPolicy);
+const exitTerms = document.getElementById('close-terms');
+if (exitTerms) {
+  exitTerms.addEventListener('click', exitPolicy);
+}
 
-const exitPrivacy = document.getElementById('close-privacy')
-exitPrivacy.addEventListener('click', exitPolicy);
+const exitPrivacy = document.getElementById('close-privacy');
+if (exitPrivacy) {
+  exitPrivacy.addEventListener('click', exitPolicy);
+}
 
 function privacyFunction() {
   privacyPolicy.style.display = 'block'
