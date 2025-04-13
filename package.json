@@ -5,7 +5,7 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
     "start": "concurrently \"nodemon --experimental-specifier-resolution=node server.js\" \"cd controllers && nodemon --experimental-specifier-resolution=node openaiController.js\""
   },
   "author": "David Penfold",
@@ -22,7 +22,8 @@
   "keywords": [],
   "devDependencies": {
     "concurrently": "^9.1.2",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "vitest": "^3.1.1"
   },
   "repository": {
     "type": "git",
