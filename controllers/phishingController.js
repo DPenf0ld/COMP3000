@@ -55,13 +55,13 @@ const taskbar = document.getElementById('taskbar');
 
 //suspicious words to check for highlighting
 const suspiciousWords = [
-    "urgent", "customer", "earlist", "earliest", "verify", "immediately",
-    "action", "login", "failure", "restricted", "suspended",
-    "validate", "dispute", "locked", "alert", "refund", "unauthorised",
-    "reset", "identity", "unusual", "warning", "verrify", "custumer",
-    "earliest", "logon", "loging", "failur", "restringted", "suspend",
-    "confrm", "valdate", "disput", "alrt", "unautherised", "idnetity",
-    "warnning"
+    "urgent", "verify", "update", "login", "failure", "restricted", "confirm", "suspended", "validate",
+    "alert", "unauthorised", "review", "security", "credentials", "customer", "earlist", "earliest", "immediately",
+    "action", "unauthorized", "disruptions", "mandatory", "failure", "access", "locked",
+
+    // common misspellings
+    "verrify", "custumer", "logon", "loging", "failur", "restringted", "suspend", 
+    "confrm", "valdate", "disput", "alrt", "unautherised", "idnetity", "warnning"
 ];
 
 // Email content
@@ -92,7 +92,7 @@ const emails = [
                This is a notification regarding your recent transaction on PayPal.<br><br>
                Transaction ID: 7GH4321JSD<br>
                Amount: £499.99<br><br>
-               If you recognize this transaction, no further action is needed. However, if you suspect unauthorized activity, please verify your account immediately.<br><br>
+               If you recognise this transaction, no further action is needed. However, if you suspect unauthorised activity, please verify your account immediately.<br><br>
                Click the link below to secure your account:<br><br>
                <span class="email-hover-text" title="paypal-security.com">PayPal Security Center</span><br><br>
                Thank you for choosing PayPal.<br><br>
@@ -111,8 +111,7 @@ const emails = [
                <span class="email-hover-text" title="yourcompany-support.com">Employee Security Portal</span><br><br>
                Thank you for your cooperation.<br><br>
                Sincerely, <br><br> 
-               IT Department <br><br>
-               YourCompany`
+               IT Department`
     },
     {
         type: "Safe-Email",
@@ -668,7 +667,7 @@ function updateFeedback() {
 
 export function nextemailbutton() {
     //display feedback if example
-    if (currentEmailIndex < 5) {
+    if (currentEmailIndex < 4) {
         updateFeedback()
     }
 

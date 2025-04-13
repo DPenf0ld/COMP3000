@@ -147,6 +147,13 @@ app.post('/generate-phishing', async (req, res) => {
                     content: `Complete this task with UK spelling:
                     Generate an email of type ${randomType} (Deceptive-Phishing, Clone-Phishing, Spear-Phishing, or Safe-Email). The email must be coherent, long, and follow a realistic pattern. Include no more than 3 suspicious words in phishing emails. The emails should not be easily identifiable as phishing, and the user should have to investigate the hover text, sender, subject, and body to find the clues.
 
+                    The email structure must match the email type e.g.:
+                    Deceptive Phishing - A fake email that impersonates a trusted company to steal personal details.
+
+                    Clone Phishing - A copy of a real email but with dangerous changes (links and attachments).
+                    
+                    Spear Phishing - A targeted scam using your personal details to seem more convincing.
+
                     ### **Email Structure:**
                     - **type**: The type of email (e.g., "Deceptive-Phishing", "Clone-Phishing", "Spear-Phishing", "Safe-Email").
                     - **hover**: The email address displayed when hovering over a link. Phishing emails should have subtle discrepancies (e.g., domain mismatches, small typos).
@@ -164,8 +171,12 @@ app.post('/generate-phishing', async (req, res) => {
                     - **Clone Phishing**: The email **closely mimics a real email** the user might have received before but contains **malicious changes**, such as altered links or attachments. The **email address has small changes** (e.g., "admin@paypa1.com" instead of "admin@paypal.com").
 
                     ### **Suspicious Words for Phishing Emails:**
-                    Include a maximum of 3 suspicious words (misspelled or otherwise) from this list:
-                    ["urgent", "verify", "action", "login", "failure", "restricted", "confirm", "suspended", "validate", "alert", "refund", "unauthorised", "reset"].
+                    Include a maximum of 3 suspicious words from this list, use at least one which is misspelt:
+                    ["urgent", "verify", "update", "login", "failure", "restricted", "confirm", "suspended", "validate",
+"alert", "unauthorised", "review", "security", "credentials", "customer", "earlist", "earliest", "immediately",
+"action", "unauthorized", "disruptions", "mandatory", "access", "locked",
+"verrify", "custumer", "logon", "loging", "failur", "restringted", "suspend", 
+"confrm", "valdate", "disput", "alrt", "unautherised", "idnetity", "warnning"]
 
                     ### **Output Format:**
                     Output the response in valid JSON format only. Example:
