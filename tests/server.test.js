@@ -31,30 +31,40 @@ vi.mock('mongodb', () => ({
   }
 }));
 
-//COPY ALL CODE IN SERVER.JS - ALLOWS TESTING IN A SAFE ENVIRONMENT
+//copy routes - ALLOWS TESTING IN A SAFE ENVIRONMENT
 
-// Signup Route
+// Routes
 app.post('/signup', async (req, res) => {
   const { firstName, lastName, email, password, organisation } = req.body;
+
+  // Validate input
   if (!firstName || !lastName || !email || !password || !organisation) {
     return res.status(400).send('All fields are required');
   }
 
+  // Email validation
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailPattern.test(email)) {
     return res.status(400).send('Invalid email format');
   }
 
+  // Password validation: At least 5 characters, 1 capital letter, 1 number, 1 special character
   const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d)[A-Za-z\d!@#$%^&*]{5,}$/;
   if (!passwordPattern.test(password)) {
     return res.status(400).send('Password must contain a capital letter, a number, a special character, and be at least 5 characters long');
   }
 
-  const existingUser = await mockFindOne({ email });
+  if (!organisation) {
+    return res.status(400).send('Organisation is required');
+  }
+
+  // Check if user already exists by email
+  const existingUser = await usersCollection.findOne({ email });
   if (existingUser) {
     return res.status(400).send('User with this email already exists');
   }
 
+  // Hash password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -62,18 +72,22 @@ app.post('/signup', async (req, res) => {
   res.status(201).send('User registered successfully');
 });
 
+
 // Login Route
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
+
   if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required' });
   }
 
+  // Find user by email
   const user = await mockFindOne({ email });
   if (!user) {
     return res.status(400).json({ message: 'User not found' });
   }
 
+  // Compare password
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
     return res.status(400).json({ message: 'Invalid credentials' });
@@ -82,6 +96,8 @@ app.post('/login', async (req, res) => {
   const token = 'fake-jwt-token'; // Mock JWT token
 
   let organisationUsers = [];
+
+  // If user is an admin, retrieve all users in the same organisation
   if (user.role === 'admin') {
     organisationUsers = await mockToArray();
   }
@@ -95,7 +111,7 @@ app.post('/login', async (req, res) => {
     organisation: user.organisation,
     tasks: user.tasks || {},
     quizscores: user.quizscores || {},
-    organisationUsers
+    organisationUsers, // will be kept empty unless the user is an admin
   });
 });
 
