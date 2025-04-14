@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import request from 'supertest'; //used for HTTP requests and check responses
+import request from 'supertest'; //used for HTTP requests and check 
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
@@ -9,30 +9,33 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-// MOCK FUNCTIONS
+// Mocked database functions
 const mockFindOne = vi.fn();
 const mockInsertOne = vi.fn();
+const mockUpdateOne = vi.fn();
+const mockDeleteOne = vi.fn();
+const mockToArray = vi.fn();
 
 // Mock MongoClient
-vi.mock('mongodb', () => {
-  return {
-    MongoClient: {
-      db: () => ({
-        collection: () => ({
-          findOne: mockFindOne,
-          insertOne: mockInsertOne,
-          updateOne: vi.fn(),
-          deleteOne: vi.fn()
-        })
+vi.mock('mongodb', () => ({
+  MongoClient: {
+    db: () => ({
+      collection: () => ({
+        findOne: mockFindOne,
+        insertOne: mockInsertOne,
+        updateOne: mockUpdateOne,
+        deleteOne: mockDeleteOne,
+        find: () => ({ toArray: mockToArray })
       })
-    }
-  };
-});
+    })
+  }
+}));
 
-// Route for signup
+//COPY ALL CODE IN SERVER.JS - ALLOWS TESTING IN A SAFE ENVIRONMENT
+
+// Signup Route
 app.post('/signup', async (req, res) => {
   const { firstName, lastName, email, password, organisation } = req.body;
-
   if (!firstName || !lastName || !email || !password || !organisation) {
     return res.status(400).send('All fields are required');
   }
@@ -59,65 +62,248 @@ app.post('/signup', async (req, res) => {
   res.status(201).send('User registered successfully');
 });
 
-// Tests
-describe('POST /signup', () => {
-    //clear the previous test data
-  beforeEach(() => {
-    mockFindOne.mockReset();
-    mockInsertOne.mockReset();
-  });
+// Login Route
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required' });
+  }
 
-  //Sign Up Test 1
-  it('should create a new user with valid input', async () => {
-    mockFindOne.mockResolvedValue(null); // no existing user
-    mockInsertOne.mockResolvedValue({}); // simulate insert
+  const user = await mockFindOne({ email });
+  if (!user) {
+    return res.status(400).json({ message: 'User not found' });
+  }
 
-    const response = await request(app)
-      .post('/signup')
-      .send({
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
-        password: 'Password1!',
-        organisation: 'TestOrg'
-      });
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return res.status(400).json({ message: 'Invalid credentials' });
+  }
 
-    expect(response.status).toBe(201);
-    expect(response.text).toBe('User registered successfully');
-  });
+  const token = 'fake-jwt-token'; // Mock JWT token
 
-  //Sign Up Test 2
-  it('should return 400 if fields are missing', async () => {
-    const response = await request(app)
-      .post('/signup')
-      .send({
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
-        password: '',
-        organisation: 'TestOrg'
-      });
+  let organisationUsers = [];
+  if (user.role === 'admin') {
+    organisationUsers = await mockToArray();
+  }
 
-    expect(response.status).toBe(400);
-    expect(response.text).toBe('All fields are required');
-  });
-
-  //Sign Up Test 3
-  it('should return 400 if user already exists', async () => {
-    mockFindOne.mockResolvedValue({ email: 'john.doe@example.com' }); // simulate existing user
-
-    const response = await request(app)
-      .post('/signup')
-      .send({
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com', //use same email as existing user
-        password: 'Password1!',
-        organisation: 'TestOrg'
-      });
-
-    expect(response.status).toBe(400);
-    expect(response.text).toBe('User with this email already exists');
+  res.status(200).json({
+    message: 'Login successful',
+    token,
+    role: user.role,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    organisation: user.organisation,
+    tasks: user.tasks || {},
+    quizscores: user.quizscores || {},
+    organisationUsers
   });
 });
+
+// Task Update Route
+app.post('/update-tasks', async (req, res) => {
+  const { email, taskName, status } = req.body;
+  if (!email || !taskName || status === undefined) {
+    return res.status(400).json({ message: 'Invalid request' });
+  }
+
+  const result = await mockUpdateOne();
+  if (result.modifiedCount > 0) {
+    return res.status(200).json({ message: 'Task updated successfully' });
+  } else {
+    return res.status(400).json({ message: 'Task update failed' });
+  }
+});
+
+// Score Update Route
+app.post('/update-scores', async (req, res) => {
+  const result = await mockUpdateOne();
+  if (result.modifiedCount > 0) {
+    return res.status(200).json({ message: 'Scores updated successfully' });
+  } else {
+    return res.status(400).json({ message: 'Score update failed' });
+  }
+});
+
+// Profile Update Route
+app.post('/update-profile', async (req, res) => {
+  const { email, firstName, lastName, organisation } = req.body;
+  if (!email || !firstName || !lastName || !organisation) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
+
+  const result = await mockUpdateOne();
+  if (result.modifiedCount > 0) {
+    return res.status(200).json({ message: 'Profile updated successfully' });
+  } else {
+    return res.status(400).json({ message: 'No changes made or user not found' });
+  }
+});
+
+// Delete User Route
+app.delete('/delete-user', async (req, res) => {
+  const { email } = req.body;
+  if (!email) {
+    return res.status(400).json({ message: 'Email is required for deletion' });
+  }
+
+  const result = await mockDeleteOne();
+  if (result.deletedCount === 1) {
+    return res.status(200).json({ message: 'User deleted successfully' });
+  } else {
+    return res.status(404).json({ message: 'User not found or already deleted' });
+  }
+});
+
+
+// ====================== TESTS =========================
+
+beforeEach(() => {
+  mockFindOne.mockReset();
+  mockInsertOne.mockReset();
+  mockUpdateOne.mockReset();
+  mockDeleteOne.mockReset();
+  mockToArray.mockReset();
+});
+
+describe('POST /signup', () => {
+  it('should reject invalid email format', async () => {
+    const res = await request(app).post('/signup').send({
+      firstName: 'A',
+      lastName: 'B',
+      email: 'invalidemail',
+      password: 'Password1!',
+      organisation: 'Org'
+    });
+    expect(res.status).toBe(400);
+    expect(res.text).toBe('Invalid email format');
+  });
+
+  it('should reject weak passwords', async () => {
+    const res = await request(app).post('/signup').send({
+      firstName: 'A',
+      lastName: 'B',
+      email: 'user@example.com',
+      password: 'weak',
+      organisation: 'Org'
+    });
+    expect(res.status).toBe(400);
+    expect(res.text).toMatch(/Password must contain/);
+  });
+});
+
+describe('POST /login', () => {
+  it('should fail when email or password is missing', async () => {
+    const res = await request(app).post('/login').send({ email: '' });
+    expect(res.status).toBe(400);
+    expect(res.body.message).toBe('Email and password are required');
+  });
+
+  it('should fail when user not found', async () => {
+    mockFindOne.mockResolvedValue(null);
+    const res = await request(app).post('/login').send({
+      email: 'missing@example.com',
+      password: 'Password1!'
+    });
+    expect(res.status).toBe(400);
+    expect(res.body.message).toBe('User not found');
+  });
+
+  it('should fail with invalid credentials', async () => {
+    const hashed = await bcrypt.hash('Password1!', 10);
+    mockFindOne.mockResolvedValue({ email: 'user@example.com', password: hashed });
+    const res = await request(app).post('/login').send({
+      email: 'user@example.com',
+      password: 'WrongPass!'
+    });
+    expect(res.status).toBe(400);
+    expect(res.body.message).toBe('Invalid credentials');    
+  });
+});
+
+describe('POST /update-tasks', () => {
+  it('should reject invalid task update request', async () => {
+    const res = await request(app).post('/update-tasks').send({
+      email: 'user@example.com',
+      taskName: '',
+      status: true
+    });
+    expect(res.status).toBe(400);
+  });
+
+  it('should confirm successful task update', async () => {
+    mockUpdateOne.mockResolvedValue({ modifiedCount: 1 });
+    const res = await request(app).post('/update-tasks').send({
+      email: 'user@example.com',
+      taskName: 'emailtaskComplete',
+      status: true
+    });
+    expect(res.status).toBe(200);
+    expect(res.body.message).toBe('Task updated successfully');
+  });
+});
+
+describe('POST /update-scores', () => {
+  it('should confirm score update', async () => {
+    mockUpdateOne.mockResolvedValue({ modifiedCount: 1 });
+    const res = await request(app).post('/update-scores').send({
+      email: 'user@example.com',
+      phishingCorrect: 3,
+      passwordCorrect: 3,
+      webCorrect: 3,
+      percentage: 100
+    });
+    expect(res.status).toBe(200);
+    expect(res.body.message).toBe('Scores updated successfully');
+  });
+});
+
+describe('POST /update-profile', () => {
+  it('should reject missing profile fields', async () => {
+    const res = await request(app).post('/update-profile').send({
+      email: '',
+      firstName: 'A',
+      lastName: 'B',
+      organisation: 'Org'
+    });
+    expect(res.status).toBe(400);
+  });
+
+  it('should confirm profile update', async () => {
+    mockUpdateOne.mockResolvedValue({ modifiedCount: 1 });
+    const res = await request(app).post('/update-profile').send({
+      email: 'user@example.com',
+      firstName: 'New',
+      lastName: 'Name',
+      organisation: 'Org'
+    });
+    expect(res.status).toBe(200);
+    expect(res.body.message).toBe('Profile updated successfully');
+  });
+});
+
+describe('DELETE /delete-user', () => {
+  it('should reject when email is missing', async () => {
+    const res = await request(app).delete('/delete-user').send({});
+    expect(res.status).toBe(400);
+  });
+
+  it('should confirm successful deletion', async () => {
+    mockDeleteOne.mockResolvedValue({ deletedCount: 1 });
+    const res = await request(app).delete('/delete-user').send({
+      email: 'user@example.com'
+    });
+    expect(res.status).toBe(200);
+    expect(res.body.message).toBe('User deleted successfully');
+  });
+
+  it('should handle already deleted user', async () => {
+    mockDeleteOne.mockResolvedValue({ deletedCount: 0 });
+    const res = await request(app).delete('/delete-user').send({
+      email: 'user@example.com'
+    });
+    expect(res.status).toBe(404);
+    expect(res.body.message).toBe('User not found or already deleted');
+  });
+});
+
 
