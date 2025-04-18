@@ -126,7 +126,7 @@ app.post('/login', async (req, res) => {
   // Compare password
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return res.status(400).json({ message: 'Invalid credentials' });
+    return res.status(400).json("Invalid credentials");
   }
 
   // Generate JWT token
@@ -265,6 +265,36 @@ app.delete('/delete-user', async (req, res) => {
   }
 });
 
+app.post('/change-password', async (req, res) => {
+  const { email, currentPassword, newPassword } = req.body;
+
+  if (!email || !currentPassword || !newPassword) {
+      return res.status(400).json({ message: 'Missing fields' });
+  }
+
+  const db = client.db('GuardPoint');
+  const usersCollection = db.collection('users');
+
+  try {
+      const user = await usersCollection.findOne({ email });
+      if (!user) return res.status(404).json({ message: 'User not found' });
+
+      const isMatch = await bcrypt.compare(currentPassword, user.password);
+      if (!isMatch) return res.status(401).json({ message: 'Current password incorrect' });
+
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      await usersCollection.updateOne(
+          { email },
+          { $set: { password: hashedPassword } }
+      );
+
+      res.status(200).json({ message: 'Password changed successfully' });
+  } catch (error) {
+      console.error('Error changing password:', error);
+      res.status(500).json({ message: 'Server error' });
+  }
+});
 
 // Start the server
 const PORT = process.env.PORT || 5000;
