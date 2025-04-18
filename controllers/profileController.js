@@ -148,6 +148,7 @@ export async function saveProfileFunction() {
     const currentPassword = document.getElementById('current-password').value.trim();
     const newPassword = document.getElementById('new-password').value.trim();
     const confirmPassword = document.getElementById('confirm-password').value.trim();
+    const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d)[A-Za-z\d!@#$%^&*]{12,}$/;
 
     if (newPassword || confirmPassword || currentPassword) {
         if (!currentPassword || !newPassword || !confirmPassword) {
@@ -160,6 +161,13 @@ export async function saveProfileFunction() {
         if (newPassword !== confirmPassword) {
             feedback.style.display = 'block';
             feedback.innerHTML = 'New passwords do not match.';
+            feedback.style.color = 'red';
+            return;
+        }
+
+        if (!passwordPattern.test(newPassword)) {
+            feedback.style.display = 'block';
+            feedback.innerHTML = 'Password must be at least 12 characters long, contain a capital letter, a number, and a special character.';
             feedback.style.color = 'red';
             return;
         }
