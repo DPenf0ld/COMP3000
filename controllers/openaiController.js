@@ -32,7 +32,7 @@ app.post('/generate-game', async (req, res) => {
                     - Provide **twelve results**: 
                       - Six should be **legitimate** websites.
                       - Six should be **malicious** scam/phishing websites.
-                      - Mix them in a **random order** to make them hard to differentiate.
+                      - Put the 12 results in a random order. NOT 6 SAFE AND 6 UNSAFE. THEY SHOULD ALL BE SHUFFLED
                     
                     - Format the response as a **JSON array** with objects structured like this:
                       {
