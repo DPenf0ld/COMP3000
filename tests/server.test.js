@@ -170,6 +170,31 @@ app.delete('/delete-user', async (req, res) => {
   }
 });
 
+// Route logic
+app.post('/change-password', async (req, res) => {
+  const { email, currentPassword, newPassword } = req.body;
+
+  if (!email || !currentPassword || !newPassword) {
+    return res.status(400).json({ message: 'Missing fields' });
+  }
+
+  try {
+    const user = await mockFindOne({ email });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) return res.status(401).json({ message: 'Current password incorrect' });
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const updateResult = await mockUpdateOne({ email }, { $set: { password: hashedPassword } });
+
+    res.status(200).json({ message: 'Password changed successfully' });
+  } catch (error) {
+    console.error('Error changing password:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 // ====================== TESTS =========================
 
@@ -319,6 +344,52 @@ describe('DELETE /delete-user', () => {
     });
     expect(res.status).toBe(404);
     expect(res.body.message).toBe('User not found or already deleted');
+  });
+});
+
+// Tests
+describe('POST /change-password', () => {
+  const userEmail = 'user@example.com';
+  const currentPassword = 'Current1!';
+  const newPassword = 'NewPass1!';
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('should return 400 if required fields are missing', async () => {
+    const res = await request(app).post('/change-password').send({ email: userEmail });
+    expect(res.status).toBe(400);
+    expect(res.body.message).toBe('Missing fields');
+  });
+
+  it('should return 404 if user is not found', async () => {
+    mockFindOne.mockResolvedValue(null);
+
+    const res = await request(app).post('/change-password').send({ email: userEmail, currentPassword, newPassword });
+    expect(res.status).toBe(404);
+    expect(res.body.message).toBe('User not found');
+  });
+
+  it('should return 401 if current password is incorrect', async () => {
+    const fakeUser = { email: userEmail, password: await bcrypt.hash('WrongPass1!', 10) };
+    mockFindOne.mockResolvedValue(fakeUser);
+
+    const res = await request(app).post('/change-password').send({ email: userEmail, currentPassword, newPassword });
+    expect(res.status).toBe(401);
+    expect(res.body.message).toBe('Current password incorrect');
+  });
+
+  it('should return 200 if password is changed successfully', async () => {
+    const hashedCurrent = await bcrypt.hash(currentPassword, 10);
+    const fakeUser = { email: userEmail, password: hashedCurrent };
+
+    mockFindOne.mockResolvedValue(fakeUser);
+    mockUpdateOne.mockResolvedValue({ modifiedCount: 1 });
+
+    const res = await request(app).post('/change-password').send({ email: userEmail, currentPassword, newPassword });
+    expect(res.status).toBe(200);
+    expect(res.body.message).toBe('Password changed successfully');
   });
 });
 
