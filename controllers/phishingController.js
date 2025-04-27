@@ -60,7 +60,7 @@ const suspiciousWords = [
     "action", "unauthorized", "disruptions", "mandatory", "failure", "access", "locked",
 
     // common misspellings
-    "verrify", "custumer", "logon", "loging", "failur", "restringted", "suspend", 
+    "verrify", "custumer", "logon", "loging", "failur", "restringted", "suspend",
     "confrm", "valdate", "disput", "alrt", "unautherised", "idnetity", "warnning"
 ];
 
@@ -268,7 +268,7 @@ const pages = [
     }
 ];
 
-export function removeOpenAIFunction(){
+export function removeOpenAIFunction() {
     exampleEndModel.style.display = 'none'; //working
     emailContainer.classList.remove('blurred'); // Apply the blur
 }
@@ -277,10 +277,10 @@ export function removeOpenAIFunction(){
 
 
 export function PhishingHideEnd() {
-        //enable all buttons 
-        inboxContainer.classList.remove("disabled");
-        profileArea.classList.remove("disabled");
-        taskbar.classList.remove("disabled");
+    //enable all buttons 
+    inboxContainer.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
     //remove end card + blur
     phishingEndModel.style.display = 'none';
     inboxContainer.classList.remove('blurred'); // remove the blur
@@ -398,8 +398,11 @@ export function submitButtonFunction() {
 
 
             displaynextemailbutton = true;
-            //display feedback
-            exampleFeedback.style.display = 'block';
+            if (currentEmailIndex < 4) {
+                //display feedback
+                exampleFeedback.style.display = 'block';
+            }
+
 
             nextemailbutton()
         }
@@ -597,10 +600,10 @@ export function emailComplete() {
     if (continueTask) {
         // Check if all tasks are complete
         if (emailtask1 && emailtask2 && emailtask3 || emailtaskComplete) {
-                //disable all buttons 
-    inboxContainer.classList.add("disabled");
-    profileArea.classList.add("disabled");
-    taskbar.classList.add("disabled");
+            //disable all buttons 
+            inboxContainer.classList.add("disabled");
+            profileArea.classList.add("disabled");
+            taskbar.classList.add("disabled");
             //show end card
             phishingEndModel.style.display = 'flex'; //working
             inboxContainer.classList.add('blurred'); // Apply the blur
@@ -686,12 +689,12 @@ export function nextemailbutton() {
 
 
 export function resetEmailFromDesktop() {
-        //disable all buttons 
-        inboxContainer.classList.add("disabled");
-        profileArea.classList.add("disabled");
-        taskbar.classList.add("disabled");
+    //disable all buttons 
+    inboxContainer.classList.add("disabled");
+    profileArea.classList.add("disabled");
+    taskbar.classList.add("disabled");
 
-        //reenable button if cancelled 
+    //reenable button if cancelled 
 
     leavetaskModel.style.display = 'flex'; //working
     desktopArea.classList.add('blurred'); // Apply the blur
@@ -849,7 +852,7 @@ export function exampleInstructions() {
 
 // ai generated email and add to email array
 export async function addGeneratedEmail() {
-    if (currentEmailIndex >= 5) { //SET TO 0 FOR TESTING MATCH TO PRELOAD AMOUNT + 3
+    if (currentEmailIndex >= 0) { //SET TO 0 FOR TESTING MATCH TO PRELOAD AMOUNT + 3
         try {
             const response = await fetch('http://localhost:3000/generate-phishing', {
                 method: 'POST',
@@ -877,7 +880,7 @@ export async function preloademails() {
     //SET TO 0 FOR TESTING
     //CHANGE HERE TO PRELOAD THE EMAIS
     //preload 2
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 0; i++) {
         try {
             const response = await fetch('http://localhost:3000/generate-phishing', {
                 method: 'POST',
@@ -1057,11 +1060,11 @@ export function showNextEmail() {
 
 export function closeInbox() {
     if (emailtaskComplete || confirmClose) {
-                    //enable all buttons 
-                    inboxContainer.classList.remove("disabled");
-                    profileArea.classList.remove("disabled");
-                    taskbar.classList.remove("disabled");
-                    
+        //enable all buttons 
+        inboxContainer.classList.remove("disabled");
+        profileArea.classList.remove("disabled");
+        taskbar.classList.remove("disabled");
+
         //remove end card + blur
         phishingEndModel.style.display = 'none';
         inboxContainer.classList.remove('blurred'); // remove the blur
@@ -1081,7 +1084,7 @@ export function closeInbox() {
         inboxContainer.classList.add("disabled");
         profileArea.classList.add("disabled");
         taskbar.classList.add("disabled");
-        
+
 
         document.getElementById("reminder").disabled = true;
         if (instructionboxCreated) {
