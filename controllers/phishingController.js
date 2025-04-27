@@ -404,7 +404,7 @@ export function submitButtonFunction() {
             nextemailbutton()
         }
 
-        if (correctCount == 3) {
+        if (correctCount == 10) {
             emailtask3 = true;
             console.log("Task 3 correct")
 
@@ -849,7 +849,7 @@ export function exampleInstructions() {
 
 // ai generated email and add to email array
 export async function addGeneratedEmail() {
-    if (currentEmailIndex >= 0) { //SET TO 0 FOR TESTING MATCH TO PRELOAD AMOUNT + 3
+    if (currentEmailIndex >= 5) { //SET TO 0 FOR TESTING MATCH TO PRELOAD AMOUNT + 3
         try {
             const response = await fetch('http://localhost:3000/generate-phishing', {
                 method: 'POST',
@@ -874,9 +874,10 @@ export async function addGeneratedEmail() {
 
 // ai generated email and add to email array PRELOADED
 export async function preloademails() {
-    //pre load 20 emails SET TO 0 FOR TESTING
+    //SET TO 0 FOR TESTING
     //CHANGE HERE TO PRELOAD THE EMAIS
-    for (let i = 0; i < 0; i++) {
+    //preload 2
+    for (let i = 0; i < 2; i++) {
         try {
             const response = await fetch('http://localhost:3000/generate-phishing', {
                 method: 'POST',
@@ -969,7 +970,7 @@ export function tickboxanswer(currentEmailIndex) {
             // Call email Complete to check all tasks
             emailComplete();
         }
-        if (phishingcount == 1) { //CHNAGE BACK TO 5
+        if (phishingcount == 5) { //CHNAGE BACK TO 5
             emailtask2 = true;
             console.log("Task 2 correct")
             // Update the task list status for Task 2
@@ -991,7 +992,7 @@ export function tickboxanswer(currentEmailIndex) {
         selectedoption = false;
         correctselectedoption = false;
         feedbackElement.textContent = "Please select an option before submitting.";
-        feedbackElement.style.color = "orange"; // Change feedback text color for no selection
+        feedbackElement.style.color = "orange"; // Change feedback text colour for no selection
     }
 
 
