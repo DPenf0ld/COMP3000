@@ -57,7 +57,7 @@ app.post('/generate-game', async (req, res) => {
 
                 },
             ],
-            max_tokens: 1000
+            max_tokens: 1500
         });
 
         // turn into json (if needed)

@@ -22,7 +22,7 @@ let emailtypereminder = false;
 let currentPage = 0; // Track the current page of the model
 let confirmClose = false
 let instructionboxCreated = false;
-
+let task3complete = false;
 let continueTask = true;
 
 
@@ -311,6 +311,7 @@ export function initialiseEmail() {
         emailtypereminder = false,
         currentPage = 0,
         confirmClose = false
+        task3complete = false;
 
     prevButton.classList.add('hidden'); // Hide previous button on reset
     nextButton.classList.remove('hidden'); // Show next button on reset
@@ -407,18 +408,22 @@ export function submitButtonFunction() {
             nextemailbutton()
         }
 
-        if (correctCount == 10) {
-            emailtask3 = true;
-            console.log("Task 3 correct")
+        if (correctCount >= 10) {
+            if (!task3complete) {
+                task3complete = true;
+                emailtask3 = true;
+                console.log("Task 3 correct")
 
-            // Update the task list status for Task 3
-            const task3Status = document.querySelector("#email-task-3-status");
-            task3Status.textContent = "Complete";
-            task3Status.classList.remove("incomplete");
-            task3Status.classList.add("complete");
+                // Update the task list status for Task 3
+                const task3Status = document.querySelector("#email-task-3-status");
+                task3Status.textContent = "Complete";
+                task3Status.classList.remove("incomplete");
+                task3Status.classList.add("complete");
 
-            // Call emailComplete to check all tasks
-            emailComplete();
+                // Call emailComplete to check all tasks
+                emailComplete();
+
+            }
         }
     } else {
         feedbackElement.textContent = "Please highlight suspicious words before submitting.";
@@ -879,7 +884,6 @@ export async function addGeneratedEmail() {
 export async function preloademails() {
     //SET TO 0 FOR TESTING
     //CHANGE HERE TO PRELOAD THE EMAIS
-    //preload 2
     for (let i = 0; i < 0; i++) {
         try {
             const response = await fetch('http://localhost:3000/generate-phishing', {
