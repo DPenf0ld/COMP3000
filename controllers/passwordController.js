@@ -68,7 +68,6 @@ const pages = [
         🚫 <strong>Avoid common words</strong> (e.g., “password” or “123456”).<br>
         🔢 Use a mix of <strong>uppercase, lowercase, numbers, and special characters.</strong><br>
         🔄 <strong>Never reuse passwords</strong> across different accounts.<br><br>
-        🔓 <strong>Click Confirm to start the challenge!</strong><br><br>
         `
     },
     {
