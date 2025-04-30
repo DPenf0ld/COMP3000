@@ -382,10 +382,10 @@ function nextQuestion() {
 
 //reset quiz
 export function resetQuizFunction() {
-        //disable all buttons 
-        quizContainer.classList.add("disabled");
-        profileArea.classList.add("disabled");
-        taskbar.classList.add("disabled");
+    //disable all buttons 
+    quizContainer.classList.add("disabled");
+    profileArea.classList.add("disabled");
+    taskbar.classList.add("disabled");
 
 
     resetModel.style.display = 'flex'; //working
@@ -393,10 +393,10 @@ export function resetQuizFunction() {
 }
 
 export function resetbackquizFunction() {
-        //enable all buttons 
-        quizContainer.classList.remove("disabled");
-        profileArea.classList.remove("disabled");
-        taskbar.classList.remove("disabled");
+    //enable all buttons 
+    quizContainer.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
     resetModel.style.display = 'none';
     quizInterface.classList.remove('blurred'); // remove the blur
 }
@@ -407,6 +407,8 @@ export function resetconfirmquizFunction() {
     desktopArea.classList.remove("disabled");
     profileArea.classList.remove("disabled");
     taskbar.classList.remove("disabled");
+    quizContainer.classList.remove("disabled");
+
 
     quizInterface.classList.remove('blurred'); // remove the blur
     resetModel.style.display = 'none';
@@ -444,10 +446,10 @@ export function closeQuizFunction() {
 
         confirmquizFunction()
     } else {
-    //disable all buttons 
-    quizContainer.classList.add("disabled");
-    profileArea.classList.add("disabled");
-    taskbar.classList.add("disabled");
+        //disable all buttons 
+        quizContainer.classList.add("disabled");
+        profileArea.classList.add("disabled");
+        taskbar.classList.add("disabled");
 
         leavetaskModel.style.display = 'flex'; //working
         quizInterface.classList.add('blurred'); // Apply the blur
@@ -455,11 +457,22 @@ export function closeQuizFunction() {
 }
 
 export function backquizFunction() {
+
+    //enable all buttons 
+    quizContainer.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
+
     leavetaskModel.style.display = 'none';
     quizInterface.classList.remove('blurred'); // remove the blur
 }
 
 export function confirmquizFunction() {
+    //enable all buttons 
+    quizContainer.classList.remove("disabled");
+    profileArea.classList.remove("disabled");
+    taskbar.classList.remove("disabled");
+
     quizOpen = false;
     quizInterface.classList.remove('blurred'); // remove the blur
     leavetaskModel.style.display = 'none';

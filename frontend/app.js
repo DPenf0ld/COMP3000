@@ -448,11 +448,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //openai code - web Task
     const askButton = document.getElementById('ask-button');
-    askButton.addEventListener('click', askButtonFunction);
+    askButton.addEventListener('click', () => {
+        askButton.disabled = true; //disable button
+        askButton.textContent = 'Loading'; //change button text
+
+        askButtonFunction();
+
+        setTimeout(() => {  //wait 5 seconds before enabling button again
+            askButton.disabled = false;
+            askButton.textContent = 'Search';
+        }, 5000);
+    });
+
 
     //game function
     const gameButton = document.getElementById('game-button');
-    gameButton.addEventListener('click', gameFunction);
+    gameButton.addEventListener('click', () => {
+        gameButton.disabled = true; //disable button
+        gameButton.textContent = 'Loading'; //change button text
+
+        gameFunction();
+
+        setTimeout(() => {  //wait 5 seconds before enabling button again
+            gameButton.disabled = false;
+            gameButton.textContent = 'Play Game';
+        }, 5000);
+    });
 
     document.getElementById("user-input").addEventListener("keypress", function (event) {
         if (event.key === "Enter") {

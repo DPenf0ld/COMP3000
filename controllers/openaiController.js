@@ -20,6 +20,13 @@ app.use(express.json()); // Parse JSON bodies
 app.post('/generate-game', async (req, res) => {
     const { userMessage } = req.body; // Get user input from the request body
 
+    // shuffle array with math.random
+    // set value between -0.5 and 0.5
+    // anything negative goes in first half of array, positive in second half
+    function shuffleArray(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
+
     try {
         const response = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
@@ -29,10 +36,9 @@ app.post('/generate-game', async (req, res) => {
                     role: 'user',
                     content: `I want you to generate twelve search results for the query: '${userMessage}'.
 
-                    - Provide **twelve results**: 
+                    - Provide **twelve results** all in a random order - legitimate searches should be mixed in with malicious searches: 
                       - Six should be **legitimate** websites.
                       - Six should be **malicious** scam/phishing websites.
-                      - Put the 12 results in a random order. NOT 6 SAFE AND 6 UNSAFE. THEY SHOULD ALL BE SHUFFLED
                     
                     - Format the response as a **JSON array** with objects structured like this:
                       {
@@ -60,8 +66,8 @@ app.post('/generate-game', async (req, res) => {
             max_tokens: 1500
         });
 
-        // turn into json (if needed)
-        const searchResults = JSON.parse(response.choices[0].message.content);
+        // turn into json (if needed) and shuffle
+        const searchResults = shuffleArray(JSON.parse(response.choices[0].message.content));
 
         // Send array back 
         res.json({ answer: searchResults });
@@ -79,6 +85,10 @@ app.post('/generate-game', async (req, res) => {
 app.post('/generate-answer', async (req, res) => {
     const { userMessage } = req.body; // Get user input from the request body
 
+    function shuffleArray(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
+
     try {
         const response = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
@@ -92,7 +102,7 @@ app.post('/generate-answer', async (req, res) => {
                     Requirements:
                     - Return a **JSON array** of six objects.
                     - Exactly **three should be legitimate** and **three should be unsafe** (e.g., phishing, scams, fake support sites).
-                    - Randomize the order to avoid any patterns.
+                    - Legitimate searches should be mixed in with malicious searches: 
                     
                     Each object must follow this structure:
                     {
@@ -128,10 +138,8 @@ app.post('/generate-answer', async (req, res) => {
             max_tokens: 800
         });
 
-        // turn into json (if needed)
-        const searchResults = JSON.parse(response.choices[0].message.content);
-
-        // Send array back 
+        // turn into json and shuffle
+        const searchResults = shuffleArray(JSON.parse(response.choices[0].message.content));
         res.json({ answer: searchResults });
 
 
