@@ -857,7 +857,7 @@ export function exampleInstructions() {
 
 // ai generated email and add to email array
 export async function addGeneratedEmail() {
-    if (currentEmailIndex >= 0) { //SET TO 0 FOR TESTING MATCH TO PRELOAD AMOUNT + 3
+    if (currentEmailIndex >= 5) { //SET TO 0 FOR TESTING MATCH TO PRELOAD AMOUNT + 3
         try {
             const response = await fetch('http://localhost:3000/generate-phishing', {
                 method: 'POST',
@@ -884,7 +884,7 @@ export async function addGeneratedEmail() {
 export async function preloademails() {
     //SET TO 0 FOR TESTING
     //CHANGE HERE TO PRELOAD THE EMAIS
-    for (let i = 0; i < 0; i++) {
+    for (let i = 0; i < 2; i++) {
         try {
             const response = await fetch('http://localhost:3000/generate-phishing', {
                 method: 'POST',
